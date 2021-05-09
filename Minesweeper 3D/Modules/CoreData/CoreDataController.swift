@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SettingKey: String {
+enum SettingKey: String, CaseIterable {
     case username
     case language
     case autosaveRanks
@@ -21,7 +21,7 @@ enum CoreDataKey {
     var key: String {
         switch self {
         case .settings(let key): return key.rawValue
-        case .ranks: return "ranks"
+        default: return "\(self)"
         }
     }
 }
@@ -34,7 +34,29 @@ class CoreDataController {
     }
     
     func getValkue(for key: CoreDataKey) -> Any {
-        return 6
+        switch key {
+        case .settings(key: let innerKey):
+            var model = SettingsModel()
+            model.key = innerKey
+            
+            switch innerKey {
+            case .username:
+                model.title = Texts.username.localized
+                model.description = "Alpha Dvlpr"
+            case .language:
+                model.title = Texts.language.localized
+                model.description = "es"
+            case .autosaveRanks:
+                model.title = Texts.autosaveRanks.localized
+                model.description = true
+            case .maxNumberOfRanks:
+                model.title = Texts.maxRanks.localized
+                model.description = 15
+            }
+            
+            return model
+        case .ranks: return "all ranks saved: ^_^"
+        }
     }
     
     func deleteAllData() {

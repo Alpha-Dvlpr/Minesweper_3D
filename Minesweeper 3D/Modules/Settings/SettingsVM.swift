@@ -9,39 +9,46 @@ import SwiftUI
 
 class SettingsVM {
     
-    var listElements: [SettingsModel] = [
-        SettingsModel(
-            id: 1,
-            title: "user name",
-            description: "Alpha Dvlpr"
-        ),
-        SettingsModel(
-            id: 2,
-            title: "language",
-            description: "Spanish"
-        ),
-        SettingsModel(
-            id: 3,
-            title: "auto save ranks",
-            description: true
-        ),
-        SettingsModel(
-            id: 4,
-            title: "max ranks",
-            description: 10
-        )
-    ]
+    var listElements: [SettingsModel] = []
+    
+    var coreDataController = CoreDataController.shared
     
     init() {
-        // get elements from core data + save
+        self.getAllData()
+    }
+    
+    private func getAllData() {
+        self.listElements = []
+        
+        SettingKey.allCases.forEach {
+            let key = CoreDataKey.settings(key: $0)
+            if let model = self.coreDataController.getValkue(for: key) as? SettingsModel {
+                self.listElements.append(model)
+            }
+            
+            var count = 1
+            self.listElements = self.listElements.map {
+                var newElement = $0
+                newElement.id = count
+                count += 1
+                return newElement
+            }
+        }
+    }
+    
+    func modify(value: Any, for key: SettingKey) {
+        if let index = self.listElements.firstIndex(where: { $0.key == key }) {
+            self.listElements[index].description = value
+        }
     }
     
     func deleteData() {
-        
+        self.coreDataController.deleteAllData()
+        self.getAllData()
     }
     
-    func openSettings() {
-        let url = URL(string: UIApplication.openSettingsURLString)
-        UIApplication.shared.open(url!)
-    }
+//    func openSettings() {
+//        let url = URL(string: UIApplication.openSettingsURLString)
+//        UIApplication.shared.open(url!)
+//    }
 }

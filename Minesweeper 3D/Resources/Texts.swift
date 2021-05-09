@@ -17,6 +17,10 @@ enum Texts {
     case delete
     case deleteTitle
     case deleteDisclaimer
+    case username
+    case language
+    case autosaveRanks
+    case maxRanks
     
     var localized: String {
         switch self {
@@ -29,6 +33,10 @@ enum Texts {
         case .delete: return "Eliminar"
         case .deleteTitle: return "Eliminar datos"
         case .deleteDisclaimer: return "¿Desea eliminar todos los datos de la aplicación?\nLa aplicación se reiniciará para que los cambios surtan efecto"
+        case .username: return "Nombre de usuario"
+        case .language: return "Idioma de la aplicación"
+        case .autosaveRanks: return "Auto guardado de puntuaciones"
+        case .maxRanks: return "Número máximo de puntuaciones"
         }
     }
 }

@@ -16,7 +16,7 @@ struct SettingsVC: View {
         VStack {
             List(self.viewModel.listElements, id: \.id) {
                 SettingsListCell(data: $0)
-                    .onTapGesture { self.viewModel.openSettings() }
+                    .onTapGesture {  }
             }
             Spacer()
         }

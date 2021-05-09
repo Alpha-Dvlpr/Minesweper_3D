@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SettingsModel {
-    var id: Int
-    var title: String
-    var description: Any
+    var id: Int = 0
+    var title: String = ""
+    var key: SettingKey = .username
+    var description: Any = "nya"
 }

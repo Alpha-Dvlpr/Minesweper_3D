@@ -30,7 +30,6 @@ struct SettingsListCell: View {
             } else if let boolValue = self.data.description as? Bool {
                 Toggle("", isOn: Binding<Bool>.constant(boolValue))
                     .frame(width: 60)
-                    .allowsHitTesting(false)
             } else {
                 Text("")
             }
