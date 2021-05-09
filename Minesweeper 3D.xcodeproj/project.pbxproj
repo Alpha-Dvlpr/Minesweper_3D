@@ -8,18 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9392D57F264817CC000C858B /* Minesweeper_3DApp.swift */; };
-		9392D582264817CC000C858B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9392D581264817CC000C858B /* ContentView.swift */; };
 		9392D584264817D1000C858B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9392D583264817D1000C858B /* Assets.xcassets */; };
 		9392D587264817D1000C858B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9392D586264817D1000C858B /* Preview Assets.xcassets */; };
+		9392D59526481B13000C858B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9392D59426481B13000C858B /* MainVC.swift */; };
+		93F0DB7226481FB90022F976 /* Image_Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB7126481FB90022F976 /* Image_Button.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9392D57C264817CC000C858B /* Minesweeper 3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minesweeper 3D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9392D57F264817CC000C858B /* Minesweeper_3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minesweeper_3DApp.swift; sourceTree = "<group>"; };
-		9392D581264817CC000C858B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9392D583264817D1000C858B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9392D586264817D1000C858B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9392D588264817D1000C858B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9392D59426481B13000C858B /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		93F0DB7126481FB90022F976 /* Image_Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image_Button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,10 +54,9 @@
 		9392D57E264817CC000C858B /* Minesweeper 3D */ = {
 			isa = PBXGroup;
 			children = (
-				9392D57F264817CC000C858B /* Minesweeper_3DApp.swift */,
-				9392D581264817CC000C858B /* ContentView.swift */,
-				9392D583264817D1000C858B /* Assets.xcassets */,
-				9392D588264817D1000C858B /* Info.plist */,
+				9392D59126481ABA000C858B /* App */,
+				93F0DB7026481F9E0022F976 /* Custom_Views */,
+				9392D59226481ADE000C858B /* Modules */,
 				9392D585264817D1000C858B /* Preview Content */,
 			);
 			path = "Minesweeper 3D";
@@ -67,6 +68,40 @@
 				9392D586264817D1000C858B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9392D59126481ABA000C858B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				9392D57F264817CC000C858B /* Minesweeper_3DApp.swift */,
+				9392D583264817D1000C858B /* Assets.xcassets */,
+				9392D588264817D1000C858B /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		9392D59226481ADE000C858B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				9392D59326481AEB000C858B /* Main_Screen */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		9392D59326481AEB000C858B /* Main_Screen */ = {
+			isa = PBXGroup;
+			children = (
+				9392D59426481B13000C858B /* MainVC.swift */,
+			);
+			path = Main_Screen;
+			sourceTree = "<group>";
+		};
+		93F0DB7026481F9E0022F976 /* Custom_Views */ = {
+			isa = PBXGroup;
+			children = (
+				93F0DB7126481FB90022F976 /* Image_Button.swift */,
+			);
+			path = Custom_Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +173,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9392D582264817CC000C858B /* ContentView.swift in Sources */,
+				93F0DB7226481FB90022F976 /* Image_Button.swift in Sources */,
 				9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */,
+				9392D59526481B13000C858B /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +307,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Minesweeper 3D/Preview Content\"";
 				DEVELOPMENT_TEAM = FLYLZ94A58;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Minesweeper 3D/Info.plist";
+				INFOPLIST_FILE = "Minesweeper 3D/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -293,7 +329,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Minesweeper 3D/Preview Content\"";
 				DEVELOPMENT_TEAM = FLYLZ94A58;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Minesweeper 3D/Info.plist";
+				INFOPLIST_FILE = "Minesweeper 3D/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
