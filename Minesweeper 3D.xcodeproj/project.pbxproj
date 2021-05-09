@@ -12,6 +12,7 @@
 		9392D587264817D1000C858B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9392D586264817D1000C858B /* Preview Assets.xcassets */; };
 		9392D59526481B13000C858B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9392D59426481B13000C858B /* MainVC.swift */; };
 		93F0DB7226481FB90022F976 /* Image_Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB7126481FB90022F976 /* Image_Button.swift */; };
+		93F0DB7C26483C310022F976 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB7B26483C310022F976 /* Texts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		9392D588264817D1000C858B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9392D59426481B13000C858B /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		93F0DB7126481FB90022F976 /* Image_Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image_Button.swift; sourceTree = "<group>"; };
+		93F0DB7B26483C310022F976 /* Texts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				93F0DB7026481F9E0022F976 /* Custom_Views */,
 				9392D59226481ADE000C858B /* Modules */,
 				9392D585264817D1000C858B /* Preview Content */,
+				93F0DB7A26483C110022F976 /* Resources */,
 			);
 			path = "Minesweeper 3D";
 			sourceTree = "<group>";
@@ -74,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				9392D57F264817CC000C858B /* Minesweeper_3DApp.swift */,
-				9392D583264817D1000C858B /* Assets.xcassets */,
 				9392D588264817D1000C858B /* Info.plist */,
 			);
 			path = App;
@@ -102,6 +104,15 @@
 				93F0DB7126481FB90022F976 /* Image_Button.swift */,
 			);
 			path = Custom_Views;
+			sourceTree = "<group>";
+		};
+		93F0DB7A26483C110022F976 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9392D583264817D1000C858B /* Assets.xcassets */,
+				93F0DB7B26483C310022F976 /* Texts.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,6 +186,7 @@
 			files = (
 				93F0DB7226481FB90022F976 /* Image_Button.swift in Sources */,
 				9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */,
+				93F0DB7C26483C310022F976 /* Texts.swift in Sources */,
 				9392D59526481B13000C858B /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

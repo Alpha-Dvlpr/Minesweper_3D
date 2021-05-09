@@ -26,14 +26,14 @@ struct MainVC: View {
             Spacer()
             VStack(spacing: 10) {
                 Image_Button(
-                    title: "Nueva partida",
+                    title: Texts.newGame.localized,
                     imageName: "play",
                     callback: {
                         print("new game button tapped")
                     }
                 )
                 Image_Button(
-                    title: "Mejores puntuaciones",
+                    title: Texts.bestMarks.localized,
                     imageName: "list.star",
                     callback: {
                         print("rank button tapped")
