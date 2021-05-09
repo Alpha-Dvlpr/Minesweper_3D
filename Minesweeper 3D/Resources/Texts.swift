@@ -14,6 +14,7 @@ enum Texts {
     case settings
     case accept
     case cancel
+    case save
     case delete
     case deleteTitle
     case deleteDisclaimer
@@ -21,6 +22,9 @@ enum Texts {
     case language
     case autosaveRanks
     case maxRanks
+    case boolToString(value: Bool)
+    case typeNewValue
+    case currentValueDisclaimer
     
     var localized: String {
         switch self {
@@ -30,6 +34,7 @@ enum Texts {
         case .settings: return "Ajustes"
         case .accept: return "Aceptar"
         case .cancel: return "Cancelar"
+        case .save: return "Guardar"
         case .delete: return "Eliminar"
         case .deleteTitle: return "Eliminar datos"
         case .deleteDisclaimer: return "¿Desea eliminar todos los datos de la aplicación?\nLa aplicación se reiniciará para que los cambios surtan efecto"
@@ -37,6 +42,9 @@ enum Texts {
         case .language: return "Idioma de la aplicación"
         case .autosaveRanks: return "Auto guardado de puntuaciones"
         case .maxRanks: return "Número máximo de puntuaciones"
+        case .boolToString(let value): return value ? "SI" : "NO"
+        case .typeNewValue: return "Introduce el nuevo valor"
+        case .currentValueDisclaimer: return "El valor actual es '%@', ¿desea cambiarlo a '%@'?"
         }
     }
 }

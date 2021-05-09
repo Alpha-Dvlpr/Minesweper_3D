@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct SettingsModel {
+struct SettingsModel: Identifiable {
     var id: Int = 0
     var title: String = ""
     var key: SettingKey = .username
-    var description: Any = "nya"
+    var value: Any = "nya"
 }

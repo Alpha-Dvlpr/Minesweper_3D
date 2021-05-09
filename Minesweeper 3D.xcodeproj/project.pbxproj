@@ -68,7 +68,6 @@
 				C09E57D4C7D10CF86D2E73F6 /* Pods-Minesweeper 3D.debug.xcconfig */,
 				B2D993DEE2D6D76A9E5221D5 /* Pods-Minesweeper 3D.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

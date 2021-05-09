@@ -7,14 +7,102 @@
 
 import SwiftUI
 
-class SettingsVM {
-    
-    var listElements: [SettingsModel] = []
-    
+class SettingsVM: ObservableObject {
+        
+    @Published var listElements = [SettingsModel]()
     var coreDataController = CoreDataController.shared
     
     init() {
         self.getAllData()
+    }
+    
+    func showDeleteAlert() {
+        let alert = UIAlertController(
+            title: Texts.deleteTitle.localized.uppercased(),
+            message: Texts.deleteDisclaimer.localized,
+            preferredStyle: .alert
+        )
+        let firstAction = UIAlertAction(
+            title: Texts.delete.localized,
+            style: .destructive,
+            handler: { _ in self.deleteData() }
+        )
+        let secondAction = UIAlertAction(
+            title: Texts.cancel.localized,
+            style: .cancel
+        )
+        
+        alert.addAction(firstAction)
+        alert.addAction(secondAction)
+        
+        let controller = UIApplication.shared.windows.first?.rootViewController
+        controller?.present(alert, animated: true, completion: nil)
+    }
+    
+    func showInputAlert(for data: SettingsModel) {
+        var message: String? = nil
+        let addTextField: Bool = data.key != .autosaveRanks
+        
+        if data.key != .autosaveRanks { message = Texts.typeNewValue.localized }
+        else {
+            if let bool = data.value as? Bool {
+                let actual = Texts.boolToString(value: bool).localized
+                let next = Texts.boolToString(value: !bool).localized
+                
+                message = String.init(
+                    format: Texts.currentValueDisclaimer.localized,
+                    arguments: [actual, next]
+                )
+            }
+        }
+        
+        let alert = UIAlertController(
+            title: data.title.uppercased(),
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let firstAction = UIAlertAction(
+            title: Texts.save.localized,
+            style: .default,
+            handler: { _ in
+                self.modify(
+                    value: alert.textFields?.first?.text,
+                    for: data.key
+                )
+            }
+        )
+        
+        let secondAction = UIAlertAction(
+            title: Texts.cancel.localized,
+            style: .cancel
+        )
+        
+        if addTextField {
+            alert.addTextField { (field) in
+                switch data.key {
+                case .username, .language:
+                    field.text = data.value as? String
+                    field.keyboardType = .default
+                case .maxNumberOfRanks:
+                    if let integerValue = data.value as? Int {
+                        field.text = "\(integerValue)"
+                    }
+                    
+                    field.keyboardType = .numberPad
+                default: break
+                }
+                
+                field.placeholder = data.title
+                field.clearButtonMode = .whileEditing
+            }
+        }
+        
+        alert.addAction(firstAction)
+        alert.addAction(secondAction)
+        
+        let controller = UIApplication.shared.windows.first?.rootViewController
+        controller?.present(alert, animated: true, completion: nil)
     }
     
     private func getAllData() {
@@ -36,19 +124,26 @@ class SettingsVM {
         }
     }
     
-    func modify(value: Any, for key: SettingKey) {
-        if let index = self.listElements.firstIndex(where: { $0.key == key }) {
-            self.listElements[index].description = value
+    private func modify(value: Any?, for key: SettingKey) {
+        guard let value = value else { return }
+        
+        var items: [SettingsModel] = []
+        
+        self.listElements.forEach {
+            if $0.key == key {
+                var newItem = $0
+                newItem.value = value
+                items.append(newItem)
+            } else {
+                items.append($0)
+            }
         }
+        
+        self.listElements = items
     }
     
-    func deleteData() {
+    private func deleteData() {
         self.coreDataController.deleteAllData()
         self.getAllData()
     }
-    
-//    func openSettings() {
-//        let url = URL(string: UIApplication.openSettingsURLString)
-//        UIApplication.shared.open(url!)
-//    }
 }

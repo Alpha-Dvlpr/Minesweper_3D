@@ -42,16 +42,16 @@ class CoreDataController {
             switch innerKey {
             case .username:
                 model.title = Texts.username.localized
-                model.description = "Alpha Dvlpr"
+                model.value = "Alpha Dvlpr"
             case .language:
                 model.title = Texts.language.localized
-                model.description = "es"
+                model.value = "es"
             case .autosaveRanks:
                 model.title = Texts.autosaveRanks.localized
-                model.description = true
+                model.value = true
             case .maxNumberOfRanks:
                 model.title = Texts.maxRanks.localized
-                model.description = 15
+                model.value = 15
             }
             
             return model

@@ -19,15 +19,15 @@ struct SettingsListCell: View {
                 .font(.callout)
             Spacer()
             
-            if let stringValue = self.data.description as? String {
+            if let stringValue = self.data.value as? String {
                 Text(stringValue.uppercased())
                     .multilineTextAlignment(.trailing)
                     .font(.caption)
-            } else if let integerValue = self.data.description as? Int {
+            } else if let integerValue = self.data.value as? Int {
                 Text("\(integerValue)")
                     .multilineTextAlignment(.trailing)
                     .font(.caption)
-            } else if let boolValue = self.data.description as? Bool {
+            } else if let boolValue = self.data.value as? Bool {
                 Toggle("", isOn: Binding<Bool>.constant(boolValue))
                     .frame(width: 60)
             } else {
@@ -50,7 +50,7 @@ struct SettingsListCell_Previews: PreviewProvider {
             data: SettingsModel(
                 id: 54,
                 title: "cell title",
-                description: "^_^"
+                value: "^_^"
             )
         )
     }
