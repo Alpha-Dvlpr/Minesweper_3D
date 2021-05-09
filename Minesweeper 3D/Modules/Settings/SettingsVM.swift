@@ -66,10 +66,18 @@ class SettingsVM: ObservableObject {
             title: Texts.save.localized,
             style: .default,
             handler: { _ in
-                self.modify(
-                    value: alert.textFields?.first?.text,
-                    for: data.key
-                )
+                if !addTextField {
+                    let actual = data.value as? Bool ?? false
+                    self.modify(
+                        value: !actual,
+                        for: data.key
+                    )
+                } else {
+                    self.modify(
+                        value: alert.textFields?.first?.text,
+                        for: data.key
+                    )
+                }
             }
         )
         
