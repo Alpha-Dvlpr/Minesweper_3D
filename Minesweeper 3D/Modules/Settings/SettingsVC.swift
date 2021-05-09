@@ -10,11 +10,12 @@ import SwiftUI
 struct SettingsVC: View {
     
     @State private var viewModel = SettingsVM()
+    @State private var alertVisible: Bool = false
     
     var body: some View {
         VStack {
-            List(self.viewModel.listElements, id: \.id) { data in
-                SettingsListCell(data: data)
+            List(self.viewModel.listElements, id: \.id) {
+                SettingsListCell(data: $0)
                     .onTapGesture { self.viewModel.openSettings() }
             }
             Spacer()
@@ -27,19 +28,22 @@ struct SettingsVC: View {
             trailing:
                 Images.trash.system
                 .foregroundColor(.red)
-                .onTapGesture { self.viewModel.alertVisible = true }
+                .onTapGesture { self.alertVisible = true }
         )
-        .alert(isPresented: self.viewModel.$alertVisible) {
+        .alert(isPresented: self.$alertVisible) {
             Alert(
                 title: Text(Texts.deleteTitle.localized.uppercased()),
                 message: Text(Texts.deleteDisclaimer.localized),
                 primaryButton: .destructive(
                     Text(Texts.delete.localized),
-                    action: { self.viewModel.alertVisible = false }
+                    action: {
+                        self.alertVisible = false
+                        self.viewModel.deleteData()
+                    }
                 ),
                 secondaryButton: .cancel(
                     Text(Texts.cancel.localized),
-                    action: { self.viewModel.alertVisible = false }
+                    action: { self.alertVisible = false }
                 )
             )
         }

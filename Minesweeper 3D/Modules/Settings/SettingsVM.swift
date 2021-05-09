@@ -31,14 +31,13 @@ class SettingsVM {
             description: 10
         )
     ]
-    @State var alertVisible: Bool = false
     
     init() {
         // get elements from core data + save
     }
     
     func deleteData() {
-        self.alertVisible = false
+        
     }
     
     func openSettings() {
