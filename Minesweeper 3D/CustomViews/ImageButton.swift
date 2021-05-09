@@ -1,5 +1,5 @@
 //
-//  Image_Button.swift
+//  ImageButton.swift
 //  Minesweeper 3D
 //
 //  Created by Aaron Granado Amores on 09/05/2021.
@@ -7,25 +7,25 @@
 
 import SwiftUI
 
-struct Image_Button: View {
+struct ImageButton: View {
 
     var title: String = ""
-    var imageName: String
+    var image: Images
     var cornerRadius: CGFloat = 12
     var callback: (() -> Void)? = nil
     
     var body: some View {
         HStack(spacing: 10) {
             Spacer().frame(width: 1)
-            Image(systemName: self.imageName)
+            self.image.system
                 .resizable()
                 .padding(1)
                 .frame(width: 28, height: 28)
-                .foregroundColor(Color.white)
+                .foregroundColor(.white)
             Spacer().frame(width: 4)
             Text(self.title.uppercased())
                 .bold()
-                .foregroundColor(Color.white)
+                .foregroundColor(.white)
                 .frame(alignment: .leading)
             Spacer()
         }
@@ -36,11 +36,11 @@ struct Image_Button: View {
     }
 }
 
-struct Image_Button_Previews: PreviewProvider {
+struct ImageButton_Previews: PreviewProvider {
     static var previews: some View {
-        Image_Button(
+        ImageButton(
             title: "button title",
-            imageName: "plus.circle.fill",
+            image: .play,
             cornerRadius: 25,
             callback: { }
         )

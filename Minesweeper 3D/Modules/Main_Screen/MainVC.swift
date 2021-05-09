@@ -12,37 +12,40 @@ struct MainVC: View {
     var screenEdges = EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
     
     var body: some View {
-        VStack {
-            HStack {
+        NavigationView {
+            VStack {
+                HStack {
+                    Spacer()
+                    NavigationLink(destination: SettingsVC()) {
+                        Images.settings.system
+                            .resizable()
+                            .padding(1)
+                            .frame(width: 32, height: 32)
+                    }
+                }
                 Spacer()
-                Image(systemName: "gear")
-                    .resizable()
-                    .padding(1)
-                    .frame(width: 32, height: 32)
-                    .onTapGesture {
-                        print("settings button tapped")
-                    }
+                VStack(spacing: 10) {
+                    ImageButton(
+                        title: Texts.newGame.localized,
+                        image: .play,
+                        callback: {
+                            print("new game button tapped")
+                        }
+                    )
+                    ImageButton(
+                        title: Texts.bestMarks.localized,
+                        image: .rank,
+                        callback: {
+                            print("rank button tapped")
+                        }
+                    )
+                }
+                Spacer()
             }
-            Spacer()
-            VStack(spacing: 10) {
-                Image_Button(
-                    title: Texts.newGame.localized,
-                    imageName: "play",
-                    callback: {
-                        print("new game button tapped")
-                    }
-                )
-                Image_Button(
-                    title: Texts.bestMarks.localized,
-                    imageName: "list.star",
-                    callback: {
-                        print("rank button tapped")
-                    }
-                )
-            }
-            Spacer()
+            .padding(self.screenEdges)
+            .navigationTitle(Texts.main.localized)
+            .navigationBarHidden(true)
         }
-        .padding(self.screenEdges)
     }
 }
 
