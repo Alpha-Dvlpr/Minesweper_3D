@@ -63,6 +63,7 @@ class CoreDataController {
     
     func saveSetting(language: Language) {
         self.saveToCoreData(value: language.setting, for: .settings(key: .language))
+        self.restart()
     }
     
     private func saveToCoreData(value: Any, for key: CoreDataKey) {
@@ -101,5 +102,12 @@ class CoreDataController {
     func deleteAllData() {
         SettingKey.allCases.forEach { UserDefaults.standard.removeObject(forKey: $0.rawValue) }
         UserDefaults.standard.removeSuite(named: CoreDataKey.ranks.key)
+        self.restart()
+    }
+    
+    func restart() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            AppState.shared.gameID = UUID()
+        }
     }
 }
