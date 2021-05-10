@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SettingsModel: Identifiable {
-    var id: Int = 0
-    var title: String = ""
+    var id: Int { return self.key.id }
+    var title: String { return self.key.title }
     var key: SettingKey = .username
     var value: Any = "nya"
 }

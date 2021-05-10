@@ -1,0 +1,26 @@
+/* 
+  Localized.strings
+  Minesweeper 3D
+
+  Created by Aaron Granado Amores on 10/05/2021.
+  
+*/
+
+"main" = "Inici";
+"newGame" = "Joc nou";
+"bestMarks" = "Millors notes";
+"settings" = "Configuració";
+"accept" = "D'acord";
+"cancel" = "Cancel·la";
+"save" = "Desa";
+"delete" = "Suprimeix";
+"deleteTitle" = "Eliminar dades";
+"deleteDisclaimer" = "Voleu eliminar totes les dades de l'aplicació?\nL'aplicació es reiniciarà per aplicar els canvis.";
+"username" = "Nom d'usuari";
+"language" = "idioma de l'APP";
+"autosaveRanks" = "Desa automàticament els rangs";
+"maxRanks" = "Nombre màxim de files";
+"yes" = "SÍ";
+"no" = "NO";
+"typeNewValue" = "Escriviu un valor nou";
+"currentValueDisclaimer" = "El valor actual és '% @', voleu canviar-lo a '% @'?";

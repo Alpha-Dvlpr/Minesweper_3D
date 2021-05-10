@@ -19,19 +19,23 @@ struct SettingsListCell: View {
                 .font(.callout)
             Spacer()
             
-            if let stringValue = self.data.value as? String {
-                Text(stringValue.uppercased())
+            switch self.data.key {
+            case .username:
+                Text((self.data.value as? String ?? "").uppercased())
                     .multilineTextAlignment(.trailing)
                     .font(.caption)
-            } else if let integerValue = self.data.value as? Int {
-                Text("\(integerValue)")
+            case .language:
+                let language = self.data.value as? Language ?? .spanish(.es)
+                Text(language.name.uppercased())
                     .multilineTextAlignment(.trailing)
                     .font(.caption)
-            } else if let boolValue = self.data.value as? Bool {
-                Toggle("", isOn: Binding<Bool>.constant(boolValue))
+            case .maxNumberOfRanks:
+                Text("\(self.data.value as? Int ?? 0)")
+                    .multilineTextAlignment(.trailing)
+                    .font(.caption)
+            case .autosaveRanks:
+                Toggle("", isOn: Binding<Bool>.constant(self.data.value as? Bool ?? false))
                     .frame(width: 60)
-            } else {
-                Text("")
             }
             
             Spacer()
@@ -47,11 +51,7 @@ struct SettingsListCell: View {
 struct SettingsListCell_Previews: PreviewProvider {
     static var previews: some View {
         SettingsListCell(
-            data: SettingsModel(
-                id: 54,
-                title: "cell title",
-                value: "^_^"
-            )
+            data: SettingsModel(value: "^_^")
         )
     }
 }

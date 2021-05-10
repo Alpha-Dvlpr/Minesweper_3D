@@ -1,0 +1,26 @@
+/* 
+  Localized.strings
+  Minesweeper 3D
+
+  Created by Aaron Granado Amores on 10/05/2021.
+  
+*/
+
+"main" = "Home";
+"newGame" = "New game";
+"bestMarks" = "Best marks";
+"settings" = "Settings";
+"accept" = "OK";
+"cancel" = "Cancel";
+"save" = "Save";
+"delete" = "Delete";
+"deleteTitle" = "Delete data";
+"deleteDisclaimer" = "Do you want to delete all APP data?\nAPP will restart to apply changes.";
+"username" = "Username";
+"language" = "APP language";
+"autosaveRanks" = "Auto save ranks";
+"maxRanks" = "Max number of ranks";
+"yes" = "YES";
+"no" = "NO";
+"typeNewValue" = "Type new value";
+"currentValueDisclaimer" = "Current value is '%@', do you want to change it to '%@'?";

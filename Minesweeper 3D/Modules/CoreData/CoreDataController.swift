@@ -12,6 +12,24 @@ enum SettingKey: String, CaseIterable {
     case language
     case autosaveRanks
     case maxNumberOfRanks
+    
+    var title: String {
+        switch self {
+        case .username: return Texts.username.localized
+        case .language: return Texts.language.localized
+        case .autosaveRanks: return Texts.autosaveRanks.localized
+        case .maxNumberOfRanks: return Texts.maxRanks.localized
+        }
+    }
+    
+    var id: Int {
+        switch self {
+        case .username: return 1
+        case .language: return 2
+        case .autosaveRanks: return 3
+        case .maxNumberOfRanks: return 4
+        }
+    }
 }
 
 enum CoreDataKey {
@@ -29,37 +47,59 @@ enum CoreDataKey {
 class CoreDataController {
     static let shared = CoreDataController()
     
-    func save(value: Any, for key: CoreDataKey) {
-        
+    // MARK: Saving
+    // ============
+    func saveSetting(bool: Bool, for key: SettingKey) {
+        self.saveToCoreData(value: bool, for: .settings(key: key))
     }
     
-    func getValkue(for key: CoreDataKey) -> Any {
-        switch key {
-        case .settings(key: let innerKey):
-            var model = SettingsModel()
-            model.key = innerKey
-            
-            switch innerKey {
-            case .username:
-                model.title = Texts.username.localized
-                model.value = "Alpha Dvlpr"
-            case .language:
-                model.title = Texts.language.localized
-                model.value = "es"
-            case .autosaveRanks:
-                model.title = Texts.autosaveRanks.localized
-                model.value = true
-            case .maxNumberOfRanks:
-                model.title = Texts.maxRanks.localized
-                model.value = 15
-            }
-            
-            return model
-        case .ranks: return "all ranks saved: ^_^"
+    func saveSetting(string: String, for key: SettingKey) {
+        self.saveToCoreData(value: string, for: .settings(key: key))
+    }
+    
+    func saveSetting(integer: Int, for key: SettingKey) {
+        self.saveToCoreData(value: integer, for: .settings(key: key))
+    }
+    
+    func saveSetting(language: Language) {
+        self.saveToCoreData(value: language.setting, for: .settings(key: .language))
+    }
+    
+    private func saveToCoreData(value: Any, for key: CoreDataKey) {
+        UserDefaults.standard.setValue(value, forKey: key.key)
+    }
+    
+    // MARK: Retrieving
+    // ================
+    func getLanguage() -> Language? {
+        let savedLanguageCode = UserDefaults.standard.string(forKey: SettingKey.language.rawValue)
+        return Language.init(languageSetting: savedLanguageCode)
+    }
+    
+    func getSettingModel(for settingKey: SettingKey) -> SettingsModel {
+        let value = UserDefaults.standard.value(forKey: settingKey.rawValue)
+        var model = SettingsModel()
+        model.key = settingKey
+        
+        switch settingKey {
+        case .username: model.value = value as? String ?? ""
+        case .language: model.value = Language.init(languageSetting: value as? String) ?? .spanish(.es)
+        case .autosaveRanks: model.value = value as? Bool ?? false
+        case .maxNumberOfRanks: model.value = value as? Int ?? 15
         }
+
+        return model
     }
     
+    func getRanks(for value: Any?) -> String {
+        guard let stringValue = value as? String else { return "" }
+        return stringValue
+    }
+    
+    // MARK: Deletion
+    // ==============
     func deleteAllData() {
-        
+        SettingKey.allCases.forEach { UserDefaults.standard.removeObject(forKey: $0.rawValue) }
+        UserDefaults.standard.removeSuite(named: CoreDataKey.ranks.key)
     }
 }

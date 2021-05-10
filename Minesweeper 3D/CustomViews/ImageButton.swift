@@ -12,7 +12,7 @@ struct ImageButton: View {
     var title: String = ""
     var image: Images
     var cornerRadius: CGFloat = 12
-    var callback: (() -> Void)? = nil
+    var callback: (() -> Void)?
     
     var body: some View {
         HStack(spacing: 10) {
