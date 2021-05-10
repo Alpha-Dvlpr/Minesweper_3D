@@ -17,6 +17,8 @@ struct SettingsListCell: View {
                 .bold()
                 .multilineTextAlignment(.leading)
                 .font(.callout)
+                .foregroundColor(self.data.colorTitle ? Color.red : nil)
+            
             Spacer()
             
             switch self.data.key {

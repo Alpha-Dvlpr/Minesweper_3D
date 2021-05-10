@@ -12,4 +12,5 @@ struct SettingsModel: Identifiable {
     var title: String { return self.key.title }
     var key: SettingKey = .username
     var value: Any = "nya"
+    var colorTitle: Bool { return self.key == .username ? (self.value as? String ?? "").isEmpty : false }
 }
