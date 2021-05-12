@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7F41235C772FD882170B5F34 /* Pods_Minesweeper_3D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A15E5E4F34C4D1F6AD6812 /* Pods_Minesweeper_3D.framework */; };
+		934C6862264C54FC00099424 /* GameBoardVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C6861264C54FC00099424 /* GameBoardVM.swift */; };
+		934C6865264C567C00099424 /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C6864264C567B00099424 /* Face.swift */; };
 		9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9392D57F264817CC000C858B /* Minesweeper_3DApp.swift */; };
 		9392D584264817D1000C858B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9392D583264817D1000C858B /* Assets.xcassets */; };
 		9392D587264817D1000C858B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9392D586264817D1000C858B /* Preview Assets.xcassets */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		934C6861264C54FC00099424 /* GameBoardVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardVM.swift; sourceTree = "<group>"; };
+		934C6864264C567B00099424 /* Face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 		9392D57C264817CC000C858B /* Minesweeper 3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minesweeper 3D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9392D57F264817CC000C858B /* Minesweeper_3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minesweeper_3DApp.swift; sourceTree = "<group>"; };
 		9392D583264817D1000C858B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -202,10 +206,12 @@
 		E4CF5184264BF4520058FED5 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				E4CF5185264BF4780058FED5 /* GameBoardVC.swift */,
-				E4CF5187264BF6820058FED5 /* VerticalHintCell.swift */,
-				E4CF5189264BF9DE0058FED5 /* HorizontalHintCell.swift */,
+				934C6864264C567B00099424 /* Face.swift */,
 				E4CF518B264BFF330058FED5 /* GameBoardCell.swift */,
+				E4CF5185264BF4780058FED5 /* GameBoardVC.swift */,
+				934C6861264C54FC00099424 /* GameBoardVM.swift */,
+				E4CF5189264BF9DE0058FED5 /* HorizontalHintCell.swift */,
+				E4CF5187264BF6820058FED5 /* VerticalHintCell.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -348,6 +354,7 @@
 				E4CF518A264BF9DE0058FED5 /* HorizontalHintCell.swift in Sources */,
 				93F0DB8C264850750022F976 /* SettingsModel.swift in Sources */,
 				93CBB0CC2649EF89009A8E53 /* AppSate.swift in Sources */,
+				934C6862264C54FC00099424 /* GameBoardVM.swift in Sources */,
 				E4CF5188264BF6820058FED5 /* VerticalHintCell.swift in Sources */,
 				93F0DB8926484E6A0022F976 /* SettingsListCell.swift in Sources */,
 				93F0DB96264868070022F976 /* CoreDataController.swift in Sources */,
@@ -356,6 +363,7 @@
 				93F0DB7226481FB90022F976 /* ImageButton.swift in Sources */,
 				9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */,
 				93F0DB7C26483C310022F976 /* Texts.swift in Sources */,
+				934C6865264C567C00099424 /* Face.swift in Sources */,
 				E4CF518E264C12DD0058FED5 /* Utils.swift in Sources */,
 				9392D59526481B13000C858B /* MainVC.swift in Sources */,
 				93F0DB91264865F40022F976 /* SettingsVM.swift in Sources */,

@@ -13,6 +13,7 @@ enum Images {
     case rank
     case cellArrow
     case trash
+    case menu
     
     var system: Image {
         switch self {
@@ -21,6 +22,7 @@ enum Images {
         case .rank: return Image(systemName: "list.star")
         case .cellArrow: return Image(systemName: "chevron.right")
         case .trash: return Image(systemName: "trash")
+        case .menu: return Image(systemName: "text.justify")
         }
     }
 }

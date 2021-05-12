@@ -9,21 +9,20 @@ import SwiftUI
 
 struct GameBoardCell: View {
     
-    var rows: [Int] = [0, 1, 2, 3, 4, 5]
-    var columns: [String] = ["A", "B", "C", "D", "E", "F"]
+    var faceNumber: Int
     
     var body: some View {
         HStack(
             alignment: .center,
             spacing: 5,
             content: {
-                ForEach(self.columns, id: \.self) { column in
+                ForEach((1...6), id: \.self) { _ in
                     VStack(
                         alignment: .center,
                         spacing: 5,
                         content: {
-                            ForEach(self.rows, id: \.self) { row in
-                                Text("[\(column),\(row)]")
+                            ForEach((1...6), id: \.self) { _ in
+                                Text("\(self.faceNumber)")
                                     .bold()
                                     .multilineTextAlignment(.center)
                                     .frame(width: 40, height: 40)
@@ -41,6 +40,6 @@ struct GameBoardCell: View {
 
 struct GameBoardCell_Previews: PreviewProvider {
     static var previews: some View {
-        GameBoardCell()
+        GameBoardCell(faceNumber: 4)
     }
 }

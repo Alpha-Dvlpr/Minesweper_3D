@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HorizontalHintCell: View {
     
-    var items: [Int]
     var sideScreen: Int
     
     var body: some View {
@@ -17,8 +16,8 @@ struct HorizontalHintCell: View {
             alignment: .center,
             spacing: 5,
             content: {
-                ForEach(self.items, id: \.self) { value in
-                    Text("[\(self.sideScreen),\(value)]")
+                ForEach((1...6), id: \.self) { _ in
+                    Text("\(self.sideScreen)")
                         .bold()
                         .multilineTextAlignment(.center)
                         .frame(width: 40, height: 40, alignment: .center)
@@ -32,6 +31,6 @@ struct HorizontalHintCell: View {
 
 struct HorizontalHintCell_Previews: PreviewProvider {
     static var previews: some View {
-        HorizontalHintCell(items: [0, 1, 2, 3, 4, 5], sideScreen: 4)
+        HorizontalHintCell(sideScreen: 4)
     }
 }
