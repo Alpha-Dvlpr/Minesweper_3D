@@ -7,17 +7,15 @@
 
 import SwiftUI
 
-enum Direction {
-    case up
-    case down
-    case left
-    case right
-}
-
 class GameBoardVM: ObservableObject {
     
     @Published var visibleFace: Face!
+    @Published var actionBarButton: Image = Images.pause.system
+    @Published var stringTime: String = Utils.getStringTime(seconds: 0)
     
+    var gameStatus: GameStatus = .running
+    
+    private var gameTime: Int = 0
     private var faces = [Face]()
     
     init() {
@@ -25,6 +23,8 @@ class GameBoardVM: ObservableObject {
     }
     
     func rotate(_ direction: Direction) {
+        guard self.gameStatus == .running else { return }
+        
         if let linkedFace = self.faces.first(where: { $0.number == self.getReference(for: direction) }) {
             let aux = linkedFace
             
@@ -64,6 +64,27 @@ class GameBoardVM: ObservableObject {
         }
     }
     
+    func pauseResumeGame() {
+        switch self.gameStatus {
+        case .running: self.gameStatus = .paused
+        case .paused: self.gameStatus = .running
+        default: break
+        }
+        
+        self.updateImage()
+    }
+    
+    func updateTime() {
+        if self.gameStatus == .running {
+            self.gameTime += 1
+            self.stringTime = Utils.getStringTime(seconds: self.gameTime)
+        }
+    }
+    
+    func closeButtonTapped() {
+        AppState.shared.gameID = UUID()
+    }
+    
     private func generateFaceNumbers() {
         let face1 = Face(number: 1)
         face1.topReference = 5
@@ -80,5 +101,13 @@ class GameBoardVM: ObservableObject {
         self.faces = [face1, face2, face3, face4, face5, face6]
         
         self.visibleFace = face1
+    }
+    
+    private func updateImage() {
+        switch self.gameStatus {
+        case .running: self.actionBarButton = Images.pause.system
+        case .paused: self.actionBarButton = Images.play.system
+        case .won, .lost: self.actionBarButton = Images.restart.system
+        }
     }
 }

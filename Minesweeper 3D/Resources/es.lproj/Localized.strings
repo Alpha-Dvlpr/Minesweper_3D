@@ -24,3 +24,6 @@
 "no" = "NO";
 "typeNewValue" = "Introduce el nuevo valor";
 "currentValueDisclaimer" = "El valor actual es '%@', ¿desea cambiarlo a '%@'?";
+"gamePaused" = "Juego en pausa";
+"gameLost" = "Has perdido :(";
+"gameWon" = "Has ganado!!";

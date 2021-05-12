@@ -26,6 +26,9 @@ enum Texts: String {
     case no
     case typeNewValue
     case currentValueDisclaimer
+    case gamePaused
+    case gameLost
+    case gameWon
     
     var localized: String {
         return self.local()

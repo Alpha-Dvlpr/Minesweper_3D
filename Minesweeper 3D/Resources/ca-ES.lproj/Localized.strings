@@ -24,3 +24,6 @@
 "no" = "NO";
 "typeNewValue" = "Escriviu un valor nou";
 "currentValueDisclaimer" = "El valor actual és '% @', voleu canviar-lo a '% @'?";
+"gamePaused" = "Joc en pausa";
+"gameLost" = "Heu perdut :(";
+"gameWon" = "Has guanyat !!";

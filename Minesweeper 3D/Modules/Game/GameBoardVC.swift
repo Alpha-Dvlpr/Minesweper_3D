@@ -9,14 +9,17 @@ import SwiftUI
 
 struct GameBoardVC: View {
     
-    @State var gameTime: Int = 0
     @ObservedObject private var viewModel = GameBoardVM()
     
-    var items: [Int] = [0, 1, 2, 3, 4, 5]
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
+            Text(self.viewModel.gameStatus.text.uppercased())
+                .bold()
+                .foregroundColor(Color.blue)
+                .padding()
+                .font(.title)
             Spacer()
             HorizontalHintCell(sideScreen: self.viewModel.visibleFace.topReference)
                 .onTapGesture { self.viewModel.rotate(.up) }
@@ -32,15 +35,19 @@ struct GameBoardVC: View {
                 .onTapGesture { self.viewModel.rotate(.down) }
             Spacer()
         }
-        .onReceive(self.timer) { _ in self.gameTime += 1 }
+        .onReceive(self.timer) { _ in self.viewModel.updateTime() }
         .navigationBarTitle(
-            Utils.getStringTime(seconds: self.gameTime),
+            self.viewModel.stringTime,
             displayMode: .inline
         )
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(
+            leading: Images.close.system.onTapGesture { self.viewModel.closeButtonTapped() },
             trailing:
-                Images.menu.system
-                .onTapGesture { }
+                HStack(spacing: 15) {
+                    self.viewModel.actionBarButton.onTapGesture { self.viewModel.pauseResumeGame() }
+                    Images.menu.system.onTapGesture { }
+                }
         )
     }
 }
