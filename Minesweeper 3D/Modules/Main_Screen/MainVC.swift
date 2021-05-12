@@ -25,20 +25,18 @@ struct MainVC: View {
                 }
                 Spacer()
                 VStack(spacing: 10) {
-                    ImageButton(
-                        title: Texts.newGame.localized,
-                        image: .play,
-                        callback: {
-                            print("new game button tapped")
-                        }
-                    )
-                    ImageButton(
-                        title: Texts.bestMarks.localized,
-                        image: .rank,
-                        callback: {
-                            print("rank button tapped")
-                        }
-                    )
+                    NavigationLink(destination: GameBoardVC()) {
+                        ImageButton(
+                            title: Texts.newGame.localized,
+                            image: .play
+                        )
+                    }
+                    NavigationLink(destination: Text("Destination")) {
+                        ImageButton(
+                            title: Texts.bestMarks.localized,
+                            image: .rank
+                        )
+                    }
                 }
                 Spacer()
             }

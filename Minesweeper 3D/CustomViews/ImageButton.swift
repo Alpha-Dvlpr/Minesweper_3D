@@ -12,7 +12,6 @@ struct ImageButton: View {
     var title: String = ""
     var image: Images
     var cornerRadius: CGFloat = 12
-    var callback: (() -> Void)?
     
     var body: some View {
         HStack(spacing: 10) {
@@ -32,7 +31,6 @@ struct ImageButton: View {
         .padding()
         .background(Color.blue)
         .cornerRadius(self.cornerRadius)
-        .onTapGesture { self.callback?() }
     }
 }
 
@@ -41,8 +39,7 @@ struct ImageButton_Previews: PreviewProvider {
         ImageButton(
             title: "button title",
             image: .play,
-            cornerRadius: 25,
-            callback: { }
+            cornerRadius: 25
         )
     }
 }
