@@ -28,6 +28,7 @@
 		E4CF5188264BF6820058FED5 /* VerticalHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF5187264BF6820058FED5 /* VerticalHintCell.swift */; };
 		E4CF518A264BF9DE0058FED5 /* HorizontalHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF5189264BF9DE0058FED5 /* HorizontalHintCell.swift */; };
 		E4CF518C264BFF330058FED5 /* GameBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF518B264BFF330058FED5 /* GameBoardCell.swift */; };
+		E4CF518E264C12DD0058FED5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF518D264C12DD0058FED5 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		E4CF5187264BF6820058FED5 /* VerticalHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalHintCell.swift; sourceTree = "<group>"; };
 		E4CF5189264BF9DE0058FED5 /* HorizontalHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalHintCell.swift; sourceTree = "<group>"; };
 		E4CF518B264BFF330058FED5 /* GameBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardCell.swift; sourceTree = "<group>"; };
+		E4CF518D264C12DD0058FED5 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 				93F0DB85264847AF0022F976 /* Images.swift */,
 				93FE38D12649B84D00A78B84 /* Language.swift */,
 				93F0DB7B26483C310022F976 /* Texts.swift */,
+				E4CF518D264C12DD0058FED5 /* Utils.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				93F0DB7226481FB90022F976 /* ImageButton.swift in Sources */,
 				9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */,
 				93F0DB7C26483C310022F976 /* Texts.swift in Sources */,
+				E4CF518E264C12DD0058FED5 /* Utils.swift in Sources */,
 				9392D59526481B13000C858B /* MainVC.swift in Sources */,
 				93F0DB91264865F40022F976 /* SettingsVM.swift in Sources */,
 				E4CF518C264BFF330058FED5 /* GameBoardCell.swift in Sources */,
