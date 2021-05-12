@@ -14,18 +14,18 @@ struct GameBoardCell: View {
     var body: some View {
         HStack(
             alignment: .center,
-            spacing: 5,
+            spacing: Constants.cellSpacing,
             content: {
-                ForEach((1...6), id: \.self) { _ in
+                ForEach(Constants.boardCells, id: \.self) { _ in
                     VStack(
                         alignment: .center,
-                        spacing: 5,
+                        spacing: Constants.cellSpacing,
                         content: {
-                            ForEach((1...6), id: \.self) { _ in
+                            ForEach(Constants.boardCells, id: \.self) { _ in
                                 Text("\(self.faceNumber)")
                                     .bold()
                                     .multilineTextAlignment(.center)
-                                    .frame(width: 40, height: 40)
+                                    .frame(width: Constants.cellSide, height: Constants.cellSide)
                                     .background(Color.green)
                                     .border(Color.gray, width: 1)
                                     .font(.caption)

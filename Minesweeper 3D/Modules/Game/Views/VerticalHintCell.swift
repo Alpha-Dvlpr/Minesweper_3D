@@ -14,13 +14,13 @@ struct VerticalHintCell: View {
     var body: some View {
         VStack(
             alignment: .center,
-            spacing: 5,
+            spacing: Constants.cellSpacing,
             content: {
-                ForEach((1...6), id: \.self) { _ in
+                ForEach(Constants.boardCells, id: \.self) { _ in
                     Text("\(self.sideScreen)")
                         .bold()
                         .multilineTextAlignment(.center)
-                        .frame(width: 40, height: 40, alignment: .center)
+                        .frame(width: Constants.cellSide, height: Constants.cellSide)
                         .background(Color.green)
                         .border(Color.gray, width: 1)
                 }

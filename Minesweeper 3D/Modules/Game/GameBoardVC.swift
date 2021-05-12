@@ -21,18 +21,19 @@ struct GameBoardVC: View {
                 .padding()
                 .font(.title)
             Spacer()
-            HorizontalHintCell(sideScreen: self.viewModel.visibleFace.topReference)
-                .onTapGesture { self.viewModel.rotate(.up) }
-            HStack(spacing: 5) {
-                VerticalHintCell(sideScreen: self.viewModel.visibleFace.leftReference)
-                    .onTapGesture { self.viewModel.rotate(.left) }
-                GameBoardCell(faceNumber: self.viewModel.visibleFace.number)
-                VerticalHintCell(sideScreen: self.viewModel.visibleFace.rightReference)
-                    .onTapGesture { self.viewModel.rotate(.right) }
+            VStack(spacing: Constants.boardSpacing) {
+                HorizontalHintCell(sideScreen: self.viewModel.visibleFace.topReference)
+                    .onTapGesture { self.viewModel.rotate(.up) }
+                HStack(spacing: Constants.boardSpacing) {
+                    VerticalHintCell(sideScreen: self.viewModel.visibleFace.leftReference)
+                        .onTapGesture { self.viewModel.rotate(.left) }
+                    GameBoardCell(faceNumber: self.viewModel.visibleFace.number)
+                    VerticalHintCell(sideScreen: self.viewModel.visibleFace.rightReference)
+                        .onTapGesture { self.viewModel.rotate(.right) }
+                }
+                HorizontalHintCell(sideScreen: self.viewModel.visibleFace.bottomReference)
+                    .onTapGesture { self.viewModel.rotate(.down) }
             }
-            .padding()
-            HorizontalHintCell(sideScreen: self.viewModel.visibleFace.bottomReference)
-                .onTapGesture { self.viewModel.rotate(.down) }
             Spacer()
         }
         .onReceive(self.timer) { _ in self.viewModel.updateTime() }
