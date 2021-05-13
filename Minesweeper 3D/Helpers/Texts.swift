@@ -10,6 +10,7 @@ import SwiftUI
 enum Texts: String {
     case main
     case newGame
+    case restartGame
     case bestMarks
     case settings
     case accept

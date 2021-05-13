@@ -8,6 +8,7 @@
 
 "main" = "Home";
 "newGame" = "New game";
+"restartGame" = "Restart game";
 "bestMarks" = "Best marks";
 "settings" = "Settings";
 "accept" = "OK";

@@ -22,6 +22,8 @@ class GameBoardVM: ObservableObject {
         self.generateFaceNumbers()
     }
     
+    // MARK: Game functions
+    // ====================
     func rotate(_ direction: Direction) {
         guard self.gameStatus == .running else { return }
         
@@ -64,7 +66,16 @@ class GameBoardVM: ObservableObject {
         }
     }
     
-    func pauseResumeGame() {
+    func updateTime() {
+        if self.gameStatus == .running {
+            self.gameTime += 1
+            self.stringTime = Utils.getStringTime(seconds: self.gameTime)
+        }
+    }
+    
+    // MARK: TabBar Items Actions
+    // ==========================
+    func pauseResumeButtonTapped() {
         switch self.gameStatus {
         case .running: self.gameStatus = .paused
         case .paused: self.gameStatus = .running
@@ -74,17 +85,23 @@ class GameBoardVM: ObservableObject {
         self.updateImage()
     }
     
-    func updateTime() {
-        if self.gameStatus == .running {
-            self.gameTime += 1
-            self.stringTime = Utils.getStringTime(seconds: self.gameTime)
-        }
-    }
-    
     func closeButtonTapped() {
         AppState.shared.gameID = UUID()
     }
     
+    func menuButtonTapped() {
+        CustomAlerts.shared.showOptionsMenu(
+            newGameButtonAction: {
+                
+            },
+            restartButtonAction: {
+                
+            }
+        )
+    }
+    
+    // MARK: Private Functions
+    // =======================
     private func generateFaceNumbers() {
         let face1 = Face(number: 1)
         face1.topReference = 5

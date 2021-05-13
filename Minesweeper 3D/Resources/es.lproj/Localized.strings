@@ -8,6 +8,7 @@
 
 "main" = "Inicio";
 "newGame" = "Nueva partida";
+"restartGame" = "Reiniciar partida";
 "bestMarks" = "Mejores puntuaciones";
 "settings" = "Ajustes";
 "accept" = "Aceptar";

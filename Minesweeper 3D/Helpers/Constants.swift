@@ -11,7 +11,7 @@ class Constants {
     
     static var numberOfItems: Int = 10
     static var edge: CGFloat = 16
-    static var cellSpacing: CGFloat = 5
+    static var cellSpacing: CGFloat = 1
     static var boardSpacing: CGFloat = 10
     static var boardCells: ClosedRange = (1...Constants.numberOfItems)
     static var cellSide: CGFloat {

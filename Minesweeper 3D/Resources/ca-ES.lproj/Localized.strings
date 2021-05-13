@@ -8,6 +8,7 @@
 
 "main" = "Inici";
 "newGame" = "Joc nou";
+"restartGame" = "Reiniciar partida";
 "bestMarks" = "Millors notes";
 "settings" = "Configuració";
 "accept" = "D'acord";

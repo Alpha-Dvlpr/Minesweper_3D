@@ -46,8 +46,8 @@ struct GameBoardVC: View {
             leading: Images.close.system.onTapGesture { self.viewModel.closeButtonTapped() },
             trailing:
                 HStack(spacing: 15) {
-                    self.viewModel.actionBarButton.onTapGesture { self.viewModel.pauseResumeGame() }
-                    Images.menu.system.onTapGesture { }
+                    self.viewModel.actionBarButton.onTapGesture { self.viewModel.pauseResumeButtonTapped() }
+                    Images.menu.system.onTapGesture { self.viewModel.menuButtonTapped() }
                 }
         )
     }
