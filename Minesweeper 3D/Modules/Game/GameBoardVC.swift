@@ -27,7 +27,10 @@ struct GameBoardVC: View {
                 HStack(spacing: Constants.boardSpacing) {
                     VerticalHintCell(sideScreen: self.viewModel.visibleFace.leftReference)
                         .onTapGesture { self.viewModel.rotate(.left) }
-                    GameBoardCell(faceNumber: self.viewModel.visibleFace.number)
+                    GameBoardCell(
+                        face: self.viewModel.visibleFace,
+                        boardCallback: { self.viewModel.rotateFace(degrees: .negativeQuart) }
+                    )
                     VerticalHintCell(sideScreen: self.viewModel.visibleFace.rightReference)
                         .onTapGesture { self.viewModel.rotate(.right) }
                 }

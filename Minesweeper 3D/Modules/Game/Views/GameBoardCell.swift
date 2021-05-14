@@ -9,24 +9,24 @@ import SwiftUI
 
 struct GameBoardCell: View {
     
-    var faceNumber: Int
+    var face: Face
+    var boardCallback: (() -> Void)
     
     var body: some View {
-        HStack(
+        VStack(
             alignment: .center,
             spacing: Constants.cellSpacing,
             content: {
-                ForEach(Constants.boardCells, id: \.self) { _ in
-                    VStack(
+                ForEach(self.face.cells, id: \.self) { line in
+                    HStack(
                         alignment: .center,
                         spacing: Constants.cellSpacing,
                         content: {
-                            ForEach(Constants.boardCells, id: \.self) { _ in
-                                Text("\(self.faceNumber)")
-                                    .bold()
+                            ForEach(line, id: \.self) { cell in
+                                Text("\(cell.xCor),\(cell.yCor)")
                                     .multilineTextAlignment(.center)
                                     .frame(width: Constants.cellSide, height: Constants.cellSide)
-                                    .background(Color.green)
+                                    .background(cell.type.color)
                                     .border(Color.gray, width: 1)
                                     .font(.caption)
                             }
@@ -35,11 +35,12 @@ struct GameBoardCell: View {
                 }
             }
         )
+        .onTapGesture { self.boardCallback() }
     }
 }
 
 struct GameBoardCell_Previews: PreviewProvider {
     static var previews: some View {
-        GameBoardCell(faceNumber: 4)
+        GameBoardCell(face: Face(number: 4), boardCallback: { })
     }
 }

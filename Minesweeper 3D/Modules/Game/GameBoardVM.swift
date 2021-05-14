@@ -56,6 +56,10 @@ class GameBoardVM: ObservableObject {
             self.visibleFace = aux
         }
     }
+
+    func rotateFace(degrees: Degrees) {
+        self.visibleFace = self.visibleFace.rotated(degrees: degrees)
+    }
     
     func getReference(for direction: Direction) -> Int {
         switch direction {

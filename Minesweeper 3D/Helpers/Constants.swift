@@ -13,7 +13,7 @@ class Constants {
     static var edge: CGFloat = 16
     static var cellSpacing: CGFloat = 1
     static var boardSpacing: CGFloat = 10
-    static var boardCells: ClosedRange = (1...Constants.numberOfItems)
+    static var boardCells = (0..<Constants.numberOfItems)
     static var cellSide: CGFloat {
         let innerBoardWidth: CGFloat = (CGFloat(Constants.numberOfItems) * Constants.cellSpacing)
         let edgeWidth: CGFloat = (2 * Constants.edge)
