@@ -63,8 +63,9 @@ class CoreDataController {
     }
     
     func restart() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            AppState.shared.gameID = UUID()
-        }
+        AppState.shared.gameID = UUID()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//
+//        }
     }
 }

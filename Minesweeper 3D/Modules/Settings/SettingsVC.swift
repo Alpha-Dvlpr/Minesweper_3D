@@ -14,12 +14,10 @@ struct SettingsVC: View {
     
     var body: some View {
         Form {
-            Section(
-                header: Text(Texts.general.localized)
-                    .foregroundColor(self.viewModel.settings.invalidData ? Color.red : nil)
-            ) {
+            Section(header: Text(Texts.general.localized)) {
                 HStack(spacing: 15) {
                     Text(Texts.username.localized.uppercased())
+                        .foregroundColor(self.viewModel.settings.invalidData ? Color.red : nil)
                     TextField(
                         Texts.username.localized.uppercased(),
                         text: self.$viewModel.settings.username
