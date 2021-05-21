@@ -16,7 +16,7 @@ struct ImageButton: View {
     var body: some View {
         HStack(spacing: 10) {
             Spacer().frame(width: 1)
-            self.image.system
+            self.image.image
                 .resizable()
                 .padding(1)
                 .frame(width: 28, height: 28)
@@ -38,7 +38,7 @@ struct ImageButton_Previews: PreviewProvider {
     static var previews: some View {
         ImageButton(
             title: "button title",
-            image: .play,
+            image: .system(.play),
             cornerRadius: 25
         )
     }

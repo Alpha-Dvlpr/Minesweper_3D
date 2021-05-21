@@ -12,47 +12,41 @@ class CoreDataController {
     
     // MARK: Saving
     // ============
-    func saveSetting(bool: Bool, for key: SettingKey) {
-        self.saveToCoreData(value: bool, for: .settings(key: key))
+    func save(settings: Settings) {
+        do {
+            let encodedData = try NSKeyedArchiver.archivedData(withRootObject: settings, requiringSecureCoding: false)
+            UserDefaults.standard.set(encodedData, forKey: CoreDataKey.settings.key)
+            if settings.languageChanged { self.restart() }
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
     
-    func saveSetting(string: String, for key: SettingKey) {
-        self.saveToCoreData(value: string, for: .settings(key: key))
-    }
-    
-    func saveSetting(integer: Int, for key: SettingKey) {
-        self.saveToCoreData(value: integer, for: .settings(key: key))
-    }
-    
-    func saveSetting(language: Language) {
-        self.saveToCoreData(value: language.setting, for: .settings(key: .language))
-        self.restart()
-    }
-    
-    private func saveToCoreData(value: Any, for key: CoreDataKey) {
-        UserDefaults.standard.setValue(value, forKey: key.key)
+    func save(ranks: [Any]) {
+        UserDefaults.standard.set(ranks, forKey: CoreDataKey.ranks.key)
     }
     
     // MARK: Retrieving
     // ================
-    func getLanguage() -> Language? {
-        let savedLanguageCode = UserDefaults.standard.string(forKey: SettingKey.language.rawValue)
-        return Language.init(languageSetting: savedLanguageCode)
-    }
-    
-    func getSettingModel(for settingKey: SettingKey) -> SettingsModel {
-        let value = UserDefaults.standard.value(forKey: settingKey.rawValue)
-        var model = SettingsModel()
-        model.key = settingKey
+    func getSettingModel(iteration: Int) -> Settings {
+        if iteration == 3 { fatalError("Could not get settings") }
         
-        switch settingKey {
-        case .username: model.value = value as? String ?? ""
-        case .language: model.value = Language.init(languageSetting: value as? String) ?? .spanish(.es)
-        case .autosaveRanks: model.value = value as? Bool ?? false
-        case .maxNumberOfRanks: model.value = value as? Int ?? 15
+        let model = Settings(
+            username: "",
+            appLanguage: nil,
+            autosaveRanks: false,
+            maxRanks: 15
+        )
+        
+        if let decoded = UserDefaults.standard.object(forKey: CoreDataKey.settings.key) as? Data {
+            do {
+                let decodedSettings = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as? Settings
+                return decodedSettings!
+            } catch { fatalError(error.localizedDescription) }
+        } else {
+            self.save(settings: model)
+            return self.getSettingModel(iteration: iteration + 1)
         }
-
-        return model
     }
     
     func getRanks(for value: Any?) -> String {
@@ -63,8 +57,8 @@ class CoreDataController {
     // MARK: Deletion
     // ==============
     func deleteAllData() {
-        SettingKey.allCases.forEach { UserDefaults.standard.removeObject(forKey: $0.rawValue) }
-        UserDefaults.standard.removeSuite(named: CoreDataKey.ranks.key)
+        UserDefaults.standard.removeObject(forKey: CoreDataKey.settings.key)
+        UserDefaults.standard.removeObject(forKey: CoreDataKey.ranks.key)
         self.restart()
     }
     

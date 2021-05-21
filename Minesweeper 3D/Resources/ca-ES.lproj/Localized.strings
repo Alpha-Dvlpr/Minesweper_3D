@@ -28,3 +28,6 @@
 "gamePaused" = "Joc en pausa";
 "gameLost" = "Heu perdut :(";
 "gameWon" = "Has guanyat !!";
+"general" = "General";
+"advanced" = "Avançat";
+"termsOfUse" = "Condicions d'ús";

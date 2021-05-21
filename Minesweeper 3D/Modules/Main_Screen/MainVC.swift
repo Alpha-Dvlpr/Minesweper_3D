@@ -17,7 +17,7 @@ struct MainVC: View {
                 HStack {
                     Spacer()
                     NavigationLink(destination: SettingsVC()) {
-                        Images.settings.system
+                        Images.system(.settings).image
                             .resizable()
                             .padding(1)
                             .frame(width: 32, height: 32)
@@ -28,13 +28,13 @@ struct MainVC: View {
                     NavigationLink(destination: GameBoardVC()) {
                         ImageButton(
                             title: Texts.newGame.localized,
-                            image: .play
+                            image: .system(.play)
                         )
                     }
                     NavigationLink(destination: Text("Destination")) {
                         ImageButton(
                             title: Texts.bestMarks.localized,
-                            image: .rank
+                            image: .system(.rank)
                         )
                     }
                 }

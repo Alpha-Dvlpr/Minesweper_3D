@@ -10,7 +10,7 @@ import SwiftUI
 class GameBoardVM: ObservableObject {
     
     @Published var visibleFace: Face!
-    @Published var actionBarButton: Image = Images.pause.system
+    @Published var actionBarButton: Image = Images.system(.pause).image
     @Published var stringTime: String = Utils.getStringTime(seconds: 0)
     
     var gameStatus: GameStatus = .running
@@ -126,9 +126,9 @@ class GameBoardVM: ObservableObject {
     
     private func updateImage() {
         switch self.gameStatus {
-        case .running: self.actionBarButton = Images.pause.system
-        case .paused: self.actionBarButton = Images.play.system
-        case .won, .lost: self.actionBarButton = Images.restart.system
+        case .running: self.actionBarButton = Images.system(.pause).image
+        case .paused: self.actionBarButton = Images.system(.play).image
+        case .won, .lost: self.actionBarButton = Images.system(.restart).image
         }
     }
 }

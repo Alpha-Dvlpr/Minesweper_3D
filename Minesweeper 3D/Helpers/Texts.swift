@@ -30,21 +30,21 @@ enum Texts: String {
     case gamePaused
     case gameLost
     case gameWon
+    case general
+    case advanced
+    case termsOfUse
     
     var localized: String {
         return self.local()
     }
     
     private func local(comment: String = "") -> String {
+        let coreData = CoreDataController.shared
         var lang: String!
         
-        if let savedLanguage = CoreDataController.shared.getLanguage() {
-            lang = savedLanguage.code
-        } else {
-            CoreDataController.shared.saveSetting(language: .spanish(.es))
-            lang = Language.spanish(.es).code
-        }
-        
+        let savedLanguage = coreData.getSettingModel(iteration: 0).appLanguage.code
+        lang = savedLanguage
+
         let path = Bundle.main.path(forResource: lang, ofType: "lproj")
         let result = NSLocalizedString(
             self.rawValue,

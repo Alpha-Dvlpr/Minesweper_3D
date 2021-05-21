@@ -22,12 +22,12 @@
 		9392D587264817D1000C858B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9392D586264817D1000C858B /* Preview Assets.xcassets */; };
 		9392D59526481B13000C858B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9392D59426481B13000C858B /* MainVC.swift */; };
 		93CBB0CC2649EF89009A8E53 /* AppSate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CBB0CB2649EF89009A8E53 /* AppSate.swift */; };
+		93DE280626580AF9007444E3 /* View_EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DE280526580AF9007444E3 /* View_EXT.swift */; };
+		93DE280B26580FE3007444E3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DE280A26580FE3007444E3 /* Settings.swift */; };
 		93F0DB7226481FB90022F976 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB7126481FB90022F976 /* ImageButton.swift */; };
 		93F0DB7C26483C310022F976 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB7B26483C310022F976 /* Texts.swift */; };
 		93F0DB8126483D2B0022F976 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB8026483D2B0022F976 /* SettingsVC.swift */; };
 		93F0DB86264847AF0022F976 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB85264847AF0022F976 /* Images.swift */; };
-		93F0DB8926484E6A0022F976 /* SettingsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB8826484E6A0022F976 /* SettingsListCell.swift */; };
-		93F0DB8C264850750022F976 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB8B264850750022F976 /* SettingsModel.swift */; };
 		93F0DB91264865F40022F976 /* SettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB90264865F40022F976 /* SettingsVM.swift */; };
 		93F0DB96264868070022F976 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB95264868070022F976 /* CoreDataController.swift */; };
 		93FE38CB2649B45700A78B84 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93FE38CD2649B45700A78B84 /* Localized.strings */; };
@@ -57,12 +57,12 @@
 		9392D588264817D1000C858B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9392D59426481B13000C858B /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		93CBB0CB2649EF89009A8E53 /* AppSate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSate.swift; sourceTree = "<group>"; };
+		93DE280526580AF9007444E3 /* View_EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View_EXT.swift; sourceTree = "<group>"; };
+		93DE280A26580FE3007444E3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		93F0DB7126481FB90022F976 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		93F0DB7B26483C310022F976 /* Texts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
 		93F0DB8026483D2B0022F976 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		93F0DB85264847AF0022F976 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
-		93F0DB8826484E6A0022F976 /* SettingsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListCell.swift; sourceTree = "<group>"; };
-		93F0DB8B264850750022F976 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		93F0DB90264865F40022F976 /* SettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVM.swift; sourceTree = "<group>"; };
 		93F0DB95264868070022F976 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		93FE38CC2649B45700A78B84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localized.strings; sourceTree = "<group>"; };
@@ -131,18 +131,10 @@
 			path = Objects;
 			sourceTree = "<group>";
 		};
-		934C6875264C75FF00099424 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				93F0DB8826484E6A0022F976 /* SettingsListCell.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		934C6876264C760800099424 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				93F0DB8B264850750022F976 /* SettingsModel.swift */,
+				93DE280A26580FE3007444E3 /* Settings.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -150,8 +142,8 @@
 		934C6877264C762100099424 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				93DE280426580ADD007444E3 /* Extensions */,
 				93CBB0CB2649EF89009A8E53 /* AppSate.swift */,
-				933A4588264EEC6600BDE2AA /* Collection_EXT.swift */,
 				934C687A264C783500099424 /* Constants.swift */,
 				93F0DB85264847AF0022F976 /* Images.swift */,
 				93FE38D12649B84D00A78B84 /* Language.swift */,
@@ -228,6 +220,15 @@
 			path = Main_Screen;
 			sourceTree = "<group>";
 		};
+		93DE280426580ADD007444E3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				933A4588264EEC6600BDE2AA /* Collection_EXT.swift */,
+				93DE280526580AF9007444E3 /* View_EXT.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		93F0DB7026481F9E0022F976 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,7 +251,6 @@
 			isa = PBXGroup;
 			children = (
 				934C6876264C760800099424 /* Objects */,
-				934C6875264C75FF00099424 /* Views */,
 				93F0DB8026483D2B0022F976 /* SettingsVC.swift */,
 				93F0DB90264865F40022F976 /* SettingsVM.swift */,
 			);
@@ -412,13 +412,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93DE280626580AF9007444E3 /* View_EXT.swift in Sources */,
 				E4CF518A264BF9DE0058FED5 /* HorizontalHintCell.swift in Sources */,
-				93F0DB8C264850750022F976 /* SettingsModel.swift in Sources */,
 				93CBB0CC2649EF89009A8E53 /* AppSate.swift in Sources */,
 				934C6862264C54FC00099424 /* GameBoardVM.swift in Sources */,
 				E4CF5188264BF6820058FED5 /* VerticalHintCell.swift in Sources */,
 				933A4586264ED73900BDE2AA /* Cell.swift in Sources */,
-				93F0DB8926484E6A0022F976 /* SettingsListCell.swift in Sources */,
 				93F0DB96264868070022F976 /* CoreDataController.swift in Sources */,
 				934C6870264C75B800099424 /* GameStatus.swift in Sources */,
 				93F0DB8126483D2B0022F976 /* SettingsVC.swift in Sources */,
@@ -429,6 +428,7 @@
 				934C6865264C567C00099424 /* Face.swift in Sources */,
 				E4CF518E264C12DD0058FED5 /* Utils.swift in Sources */,
 				934C686C264C75A000099424 /* Direction.swift in Sources */,
+				93DE280B26580FE3007444E3 /* Settings.swift in Sources */,
 				933A4583264ED71100BDE2AA /* CellType.swift in Sources */,
 				934C6873264C75E200099424 /* CoreDataKeys.swift in Sources */,
 				9392D59526481B13000C858B /* MainVC.swift in Sources */,

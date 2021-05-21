@@ -7,15 +7,30 @@
 
 import Foundation
 
-enum Language: Equatable {
-    case spanish(Spanish)
-    case english
+enum Language: Equatable, Identifiable, CaseIterable, Hashable {
+    
+    // MARK: Protocols stuff
+    // =====================
+    static var allCases: [Language] { return [.spanish(.es), .spanish(.ca), .english] }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.code)
+        hasher.combine(self.name)
+        hasher.combine(self.setting)
+    }
     
     enum Spanish {
         case es
         case ca
     }
-
+    
+    // MARK: Types
+    // ===========
+    case spanish(Spanish)
+    case english
+    
+    // MARK: Variables
+    // ===============
     var code: String {
         switch self {
         case .spanish(let spanish):
@@ -49,6 +64,10 @@ enum Language: Equatable {
         }
     }
     
+    var id: String { self.code }
+    
+    // MARK: Inits
+    // ===========
     init?(languageCode: String?) {
         guard let languageCode = languageCode else { return nil }
         switch languageCode {

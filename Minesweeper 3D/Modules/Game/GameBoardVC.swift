@@ -46,11 +46,11 @@ struct GameBoardVC: View {
         )
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(
-            leading: Images.close.system.onTapGesture { self.viewModel.closeButtonTapped() },
+            leading: Images.system(.close).image.onTapGesture { self.viewModel.closeButtonTapped() },
             trailing:
                 HStack(spacing: 15) {
                     self.viewModel.actionBarButton.onTapGesture { self.viewModel.pauseResumeButtonTapped() }
-                    Images.menu.system.onTapGesture { self.viewModel.menuButtonTapped() }
+                    Images.system(.menu).image.onTapGesture { self.viewModel.menuButtonTapped() }
                 }
         )
     }
