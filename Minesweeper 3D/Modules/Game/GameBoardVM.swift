@@ -19,7 +19,7 @@ class GameBoardVM: ObservableObject {
     private var faces = [Face]()
     
     init() {
-        self.generateFaceNumbers()
+        self.newGame()
     }
     
     // MARK: Game functions
@@ -29,6 +29,13 @@ class GameBoardVM: ObservableObject {
         
         if let linkedFace = self.faces.first(where: { $0.number == self.getReference(for: direction) }) {
             let aux = linkedFace
+            
+            aux.updateLastPosition(
+                top: aux.topReference,
+                bottom: aux.bottomReference,
+                left: aux.leftReference,
+                right: aux.rightReference
+            )
             
             switch direction {
             case .up:
@@ -53,12 +60,8 @@ class GameBoardVM: ObservableObject {
                 aux.rightReference = (7 - self.visibleFace.number)
             }
             
-            self.visibleFace = aux
+            self.visibleFace = aux.rotated()
         }
-    }
-
-    func rotateFace(degrees: Degrees) {
-        self.visibleFace = self.visibleFace.rotated(degrees: degrees)
     }
     
     func getReference(for direction: Direction) -> Int {
@@ -98,7 +101,7 @@ class GameBoardVM: ObservableObject {
     }
     
     func newGame() {
-        
+        self.generateFaceNumbers()
     }
     
     // MARK: Private Functions

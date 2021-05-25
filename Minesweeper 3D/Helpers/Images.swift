@@ -18,7 +18,6 @@ enum Images {
         case menu
         case close
         case closeKeyboard
-        case save
     }
     
     case system(SysImg)
@@ -37,7 +36,6 @@ enum Images {
             case .menu: return Image(systemName: "text.justify")
             case .close: return Image(systemName: "xmark")
             case .closeKeyboard: return Image(systemName: "keyboard.chevron.compact.down")
-            case .save: return Image(systemName: "")
             }
         case .custom:
             return Image(systemName: "xmark.circle")

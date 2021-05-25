@@ -30,7 +30,7 @@ struct GameBoardVC: View {
                         .onTapGesture { self.viewModel.rotate(.left) }
                     GameBoardCell(
                         face: self.viewModel.visibleFace,
-                        boardCallback: { self.viewModel.rotateFace(degrees: .negativeQuart) }
+                        boardCallback: { }
                     )
                     VerticalHintCell(sideScreen: self.viewModel.visibleFace.rightReference)
                         .onTapGesture { self.viewModel.rotate(.right) }
