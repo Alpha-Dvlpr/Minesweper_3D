@@ -10,6 +10,7 @@ import SwiftUI
 struct GameBoardVC: View {
     
     @ObservedObject private var viewModel = GameBoardVM()
+    @State private var menuShown: Bool = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -45,13 +46,29 @@ struct GameBoardVC: View {
             displayMode: .inline
         )
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(
-            leading: Images.system(.close).image.onTapGesture { self.viewModel.closeButtonTapped() },
-            trailing:
-                HStack(spacing: 15) {
-                    self.viewModel.actionBarButton.onTapGesture { self.viewModel.pauseResumeButtonTapped() }
-                    Images.system(.menu).image.onTapGesture { self.viewModel.menuButtonTapped() }
-                }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                Images.system(.close).image.onTapGesture { self.viewModel.closeButtonTapped() }
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                self.viewModel.actionBarButton.onTapGesture { self.viewModel.pauseResumeButtonTapped() }
+                Images.system(.menu).image.onTapGesture { self.menuShown.toggle() }
+            }
+        }
+        .actionSheet(
+            isPresented: self.$menuShown,
+            content: {
+                ActionSheet(
+                    title: Text(""),
+                    buttons: [
+                        .default(Text(Texts.restartGame.localized), action: { self.viewModel.restartGame() }),
+                        .default(Text(Texts.newGame.localized), action: { self.viewModel.newGame() }),
+                        .cancel(Text(Texts.cancel.localized))
+                    ]
+                )
+            }
         )
     }
 }

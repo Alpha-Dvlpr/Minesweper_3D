@@ -93,15 +93,12 @@ class GameBoardVM: ObservableObject {
         AppState.shared.gameID = UUID()
     }
     
-    func menuButtonTapped() {
-        CustomAlerts.shared.showOptionsMenu(
-            newGameButtonAction: {
-                
-            },
-            restartButtonAction: {
-                
-            }
-        )
+    func restartGame() {
+        
+    }
+    
+    func newGame() {
+        
     }
     
     // MARK: Private Functions
