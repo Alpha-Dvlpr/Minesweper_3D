@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct SettingsVC: View {
+struct SettingsVC: View, KeyboardListener {
     
     @ObservedObject private var viewModel = SettingsVM()
     @State private var showDeleteAlert: Bool = false
+    @State private var isKeyboardVisible: Bool = false
     
     var body: some View {
         Form {
@@ -23,6 +24,10 @@ struct SettingsVC: View {
                         text: self.$viewModel.settings.username
                     )
                     .multilineTextAlignment(.trailing)
+                    .onReceive(
+                        self.publisher,
+                        perform: { self.isKeyboardVisible = $0 }
+                    )
                 }
                 HStack(spacing: 15) {
                     Text(Texts.language.localized.uppercased())
@@ -41,10 +46,6 @@ struct SettingsVC: View {
                 }
             }
             Section(header: Text(Texts.advanced.localized)) {
-                Link(
-                    Texts.termsOfUse.localized,
-                    destination: URL(fileURLWithPath: "https://www.google.com")
-                )
                 Button(
                     action: { self.showDeleteAlert = true  },
                     label: { Text(Texts.deleteTitle.localized) }
@@ -59,14 +60,18 @@ struct SettingsVC: View {
         )
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(
-                    action: { self.hideKeyboard() },
-                    label: { Images.system(.closeKeyboard).image }
-                )
-                Button(
-                    action: { self.viewModel.saveData() },
-                    label: { Text(Texts.save.localized) }
-                )
+                if self.isKeyboardVisible {
+                    Button(
+                        action: { self.hideKeyboard() },
+                        label: { Images.system(.closeKeyboard).image }
+                    )
+                }
+                if self.viewModel.settingsChanged {
+                    Button(
+                        action: { self.viewModel.saveData() },
+                        label: { Text(Texts.save.localized) }
+                    )
+                }
             }
         }
         .alert(

@@ -12,11 +12,11 @@ class CoreDataController {
     
     // MARK: Saving
     // ============
-    func save(settings: Settings) {
+    func save(settings: Settings, reset: Bool) {
         do {
             let encodedData = try NSKeyedArchiver.archivedData(withRootObject: settings, requiringSecureCoding: false)
             UserDefaults.standard.set(encodedData, forKey: CoreDataKey.settings.key)
-            if settings.languageChanged { self.restart() }
+            if reset { self.restart() }
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -44,7 +44,7 @@ class CoreDataController {
                 return decodedSettings!
             } catch { fatalError(error.localizedDescription) }
         } else {
-            self.save(settings: model)
+            self.save(settings: model, reset: false)
             return self.getSettingModel(iteration: iteration + 1)
         }
     }
@@ -64,8 +64,5 @@ class CoreDataController {
     
     func restart() {
         AppState.shared.gameID = UUID()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//
-//        }
     }
 }

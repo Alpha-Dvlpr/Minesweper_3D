@@ -10,6 +10,8 @@ import SwiftUI
 class SettingsVM: ObservableObject {
     
     @Published var settings: Settings!
+    var originalSettings: Settings!
+    var settingsChanged: Bool { return !self.settings.equals(settings: self.originalSettings) }
         
     private var coreData = CoreDataController.shared
     
@@ -18,7 +20,11 @@ class SettingsVM: ObservableObject {
     }
     
     func saveData() {
-        self.coreData.save(settings: self.settings)
+        self.coreData.save(
+            settings: self.settings,
+            reset: self.settings.appLanguage != self.originalSettings.appLanguage
+        )
+        self.getAllData()
     }
     
     func deleteData() {
@@ -28,5 +34,6 @@ class SettingsVM: ObservableObject {
     
     private func getAllData() {
         self.settings = self.coreData.getSettingModel(iteration: 0)
+        self.originalSettings = self.coreData.getSettingModel(iteration: 0)
     }
 }

@@ -10,11 +10,9 @@ import Foundation
 class Settings: NSObject, NSCoding {
     var username: String
     var appLanguage: Language
-    private var originalLanguage: Language
     var autosaveRanks: Bool
     var maxRanks: Int
     var invalidData: Bool { return self.username.isEmpty || self.username.count < 5 }
-    var languageChanged: Bool { return appLanguage != originalLanguage }
     
     init(
         username: String,
@@ -24,7 +22,6 @@ class Settings: NSObject, NSCoding {
     ) {
         self.username = username
         self.appLanguage = appLanguage ?? .spanish(.es)
-        self.originalLanguage = appLanguage ?? .spanish(.es)
         self.autosaveRanks = autosaveRanks
         self.maxRanks = maxRanks
     }
@@ -35,7 +32,6 @@ class Settings: NSObject, NSCoding {
         
         self.username = aDecoder.decodeObject(forKey: "username") as? String ?? ""
         self.appLanguage = lang
-        self.originalLanguage = lang
         self.autosaveRanks = aDecoder.decodeBool(forKey: "autosaveRanks")
         self.maxRanks = aDecoder.decodeInteger(forKey: "maxRanks")
     }
@@ -45,5 +41,12 @@ class Settings: NSObject, NSCoding {
         aCoder.encode(self.appLanguage.setting, forKey: "language")
         aCoder.encode(self.autosaveRanks, forKey: "autosaveRanks")
         aCoder.encode(self.maxRanks, forKey: "maxRanks")
+    }
+    
+    func equals(settings: Settings) -> Bool {
+        return self.username == settings.username
+            && self.appLanguage.code == settings.appLanguage.code
+            && self.autosaveRanks == settings.autosaveRanks
+            && self.maxRanks == settings.maxRanks
     }
 }
