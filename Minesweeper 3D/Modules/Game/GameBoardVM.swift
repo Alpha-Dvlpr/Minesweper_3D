@@ -29,47 +29,19 @@ class GameBoardVM: ObservableObject {
         
         if let linkedFace = self.faces.first(where: { $0.number == self.getReference(for: direction) }) {
             let aux = linkedFace
+            aux.updateLastReferences()
+            aux.updateNewReferences(from: self.visibleFace, to: direction)
             
-            aux.updateLastPosition(
-                top: aux.topReference,
-                bottom: aux.bottomReference,
-                left: aux.leftReference,
-                right: aux.rightReference
-            )
-            
-            switch direction {
-            case .up:
-                aux.topReference = (7 - self.visibleFace.number)
-                aux.bottomReference = self.visibleFace.number
-                aux.leftReference = self.visibleFace.leftReference
-                aux.rightReference = self.visibleFace.rightReference
-            case .down:
-                aux.topReference = self.visibleFace.number
-                aux.bottomReference = (7 - self.visibleFace.number)
-                aux.leftReference = self.visibleFace.leftReference
-                aux.rightReference = self.visibleFace.rightReference
-            case .left:
-                aux.topReference = self.visibleFace.topReference
-                aux.bottomReference = self.visibleFace.bottomReference
-                aux.leftReference = (7 - self.visibleFace.number)
-                aux.rightReference = self.visibleFace.number
-            case .right:
-                aux.topReference = self.visibleFace.topReference
-                aux.bottomReference = self.visibleFace.bottomReference
-                aux.leftReference = self.visibleFace.number
-                aux.rightReference = (7 - self.visibleFace.number)
-            }
-            
-            self.visibleFace = aux.rotated()
+            self.visibleFace = aux.rotated
         }
     }
     
     func getReference(for direction: Direction) -> Int {
         switch direction {
-        case .up: return self.visibleFace.topReference
-        case .down: return self.visibleFace.bottomReference
-        case .left: return self.visibleFace.leftReference
-        case .right: return self.visibleFace.rightReference
+        case .up: return self.visibleFace.references.top
+        case .down: return self.visibleFace.references.bottom
+        case .left: return self.visibleFace.references.left
+        case .right: return self.visibleFace.references.right
         }
     }
     
@@ -108,10 +80,10 @@ class GameBoardVM: ObservableObject {
     // =======================
     private func generateFaceNumbers() {
         let face1 = Face(number: 1)
-        face1.topReference = 5
-        face1.bottomReference = 2
-        face1.leftReference = 3
-        face1.rightReference = 4
+        face1.references.top = 5
+        face1.references.bottom = 2
+        face1.references.left = 3
+        face1.references.right = 4
         
         let face2 = Face(number: 2)
         let face3 = Face(number: 3)

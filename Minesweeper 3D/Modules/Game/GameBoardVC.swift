@@ -23,19 +23,19 @@ struct GameBoardVC: View {
                 .font(.title)
             Spacer()
             VStack(spacing: Constants.boardSpacing) {
-                HorizontalHintCell(sideScreen: self.viewModel.visibleFace.topReference)
+                HorizontalHintCell(sideScreen: self.viewModel.visibleFace.references.top)
                     .onTapGesture { self.viewModel.rotate(.up) }
                 HStack(spacing: Constants.boardSpacing) {
-                    VerticalHintCell(sideScreen: self.viewModel.visibleFace.leftReference)
+                    VerticalHintCell(sideScreen: self.viewModel.visibleFace.references.left)
                         .onTapGesture { self.viewModel.rotate(.left) }
                     GameBoardCell(
                         face: self.viewModel.visibleFace,
                         boardCallback: { }
                     )
-                    VerticalHintCell(sideScreen: self.viewModel.visibleFace.rightReference)
+                    VerticalHintCell(sideScreen: self.viewModel.visibleFace.references.right)
                         .onTapGesture { self.viewModel.rotate(.right) }
                 }
-                HorizontalHintCell(sideScreen: self.viewModel.visibleFace.bottomReference)
+                HorizontalHintCell(sideScreen: self.viewModel.visibleFace.references.bottom)
                     .onTapGesture { self.viewModel.rotate(.down) }
             }
             Spacer()
