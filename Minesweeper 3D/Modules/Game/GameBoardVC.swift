@@ -48,13 +48,22 @@ struct GameBoardVC: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
-                Images.system(.close).image.onTapGesture { self.viewModel.closeButtonTapped() }
+                Button(
+                    action: { self.viewModel.closeButtonTapped() },
+                    label: { Images.system(.close).image }
+                )
             }
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                self.viewModel.actionBarButton.onTapGesture { self.viewModel.pauseResumeButtonTapped() }
-                Images.system(.menu).image.onTapGesture { self.menuShown.toggle() }
+                Button(
+                    action: { self.viewModel.pauseResumeButtonTapped() },
+                    label: { self.viewModel.actionBarButton }
+                )
+                Button(
+                    action: { self.menuShown.toggle() },
+                    label: { Images.system(.menu).image }
+                )
             }
         }
         .actionSheet(
