@@ -11,6 +11,7 @@ struct GameBoardVC: View {
     
     @ObservedObject private var viewModel = GameBoardVM()
     @State private var menuShown: Bool = false
+    var closeCallback: (() -> Void)?
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -49,7 +50,7 @@ struct GameBoardVC: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button(
-                    action: { self.viewModel.closeButtonTapped() },
+                    action: { self.closeCallback?() },
                     label: { Images.system(.close).image }
                 )
             }
@@ -84,6 +85,6 @@ struct GameBoardVC: View {
 
 struct GameBoardVC_Previews: PreviewProvider {
     static var previews: some View {
-        GameBoardVC()
+        GameBoardVC(closeCallback: { })
     }
 }

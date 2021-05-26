@@ -9,39 +9,57 @@ import SwiftUI
 
 struct MainVC: View {
     
-    var screenEdges = EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
+    private var screenEdges = EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
+    @State private var selection: String?
     
     var body: some View {
         NavigationView {
             VStack {
+                NavigationLink(
+                    destination: SettingsVC(),
+                    tag: "settings",
+                    selection: self.$selection
+                ) { EmptyView() }
+                NavigationLink(
+                    destination: GameBoardVC(closeCallback: { self.selection = nil }),
+                    tag: "game",
+                    selection: self.$selection
+                ) { EmptyView() }
+                NavigationLink(
+                    destination: Text("Ranks"),
+                    tag: "ranks",
+                    selection: self.$selection
+                ) { EmptyView() }
+                
                 HStack {
                     Spacer()
-                    NavigationLink(destination: SettingsVC()) {
-                        Images.system(.settings).image
-                            .resizable()
-                            .padding(1)
-                            .frame(width: 32, height: 32)
-                    }
+                    Button(
+                        action: { self.selection = "settings" },
+                        label: {
+                            Images.system(.settings).image
+                                .resizable()
+                                .frame(width: 32, height: 32)
+                        }
+                    )
                 }
                 Spacer()
-                VStack(spacing: 10) {
-                    NavigationLink(destination: GameBoardVC()) {
-                        ImageButton(
-                            title: Texts.newGame.localized,
-                            image: .system(.play)
-                        )
-                    }
-                    NavigationLink(destination: Text("Destination")) {
-                        ImageButton(
-                            title: Texts.bestMarks.localized,
-                            image: .system(.rank)
-                        )
-                    }
-                }
+                ImageButton(
+                    title: Texts.newGame.localized,
+                    image: .system(.play)
+                )
+                .onTapGesture { self.selection = "game" }
+                ImageButton(
+                    title: Texts.bestMarks.localized,
+                    image: .system(.rank)
+                )
+                .onTapGesture { self.selection = "ranks" }
                 Spacer()
             }
             .padding(self.screenEdges)
-            .navigationTitle(Texts.main.localized)
+            .navigationBarTitle(
+                Text(Texts.main.localized.uppercased()),
+                displayMode: .inline
+            )
             .navigationBarHidden(true)
         }
     }

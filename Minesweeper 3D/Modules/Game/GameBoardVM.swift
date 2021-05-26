@@ -64,10 +64,6 @@ class GameBoardVM: ObservableObject {
         self.updateImage()
     }
     
-    func closeButtonTapped() {
-        AppState.shared.gameID = UUID()
-    }
-    
     func restartGame() {
         
     }
