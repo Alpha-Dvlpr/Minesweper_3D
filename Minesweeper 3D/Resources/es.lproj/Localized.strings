@@ -21,8 +21,8 @@
 "language" = "Idioma de la aplicación";
 "autosaveRanks" = "Auto guardado de puntuaciones";
 "maxRanks" = "Número máximo de puntuaciones";
-"yes" = "SI";
-"no" = "NO";
+"yes" = "Si";
+"no" = "No";
 "typeNewValue" = "Introduce el nuevo valor";
 "currentValueDisclaimer" = "El valor actual es '%@', ¿desea cambiarlo a '%@'?";
 "gamePaused" = "Juego en pausa";
@@ -31,3 +31,6 @@
 "general" = "General";
 "advanced" = "Avanzado";
 "termsOfUse" = "Términos de uso";
+"menu" = "Menú";
+"finishGame" = "Finalizar partida";
+"finishGameDisclaimer" = "¿Desea guardar la partida actual para continuar más tarde?";

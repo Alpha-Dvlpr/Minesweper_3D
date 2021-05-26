@@ -21,8 +21,8 @@
 "language" = "idioma de l'APP";
 "autosaveRanks" = "Desa automàticament els rangs";
 "maxRanks" = "Nombre màxim de files";
-"yes" = "SÍ";
-"no" = "NO";
+"yes" = "Sí";
+"no" = "No";
 "typeNewValue" = "Escriviu un valor nou";
 "currentValueDisclaimer" = "El valor actual és '% @', voleu canviar-lo a '% @'?";
 "gamePaused" = "Joc en pausa";
@@ -31,3 +31,6 @@
 "general" = "General";
 "advanced" = "Avançat";
 "termsOfUse" = "Condicions d'ús";
+"menu" = "Menú";
+"finishGame" = "Finalitza el joc";
+"finishGameDisclaimer" = "Voleu desar el joc actual per continuar més tard?";

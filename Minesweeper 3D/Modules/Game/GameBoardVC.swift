@@ -11,6 +11,7 @@ struct GameBoardVC: View {
     
     @ObservedObject private var viewModel = GameBoardVM()
     @State private var menuShown: Bool = false
+    @State private var dismissAlertShown: Bool = false
     var closeCallback: (() -> Void)?
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -50,7 +51,7 @@ struct GameBoardVC: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button(
-                    action: { self.closeCallback?() },
+                    action: { self.dismissAlertShown.toggle() },
                     label: { Images.system(.close).image }
                 )
             }
@@ -67,14 +68,40 @@ struct GameBoardVC: View {
                 )
             }
         }
+        .alert(
+            isPresented: self.$dismissAlertShown,
+            content: {
+                Alert(
+                    title: Text(Texts.finishGame.localized),
+                    message: Text(Texts.finishGameDisclaimer.localized),
+                    primaryButton: .default(
+                        Text(Texts.yes.localized),
+                        action: {
+                            // TODO: Call viewmodel to save current game stuff then dismiss
+                            self.closeCallback?()
+                        }
+                    ),
+                    secondaryButton: .default(
+                        Text(Texts.no.localized),
+                        action: { self.closeCallback?() }
+                    )
+                )
+            }
+        )
         .actionSheet(
             isPresented: self.$menuShown,
             content: {
                 ActionSheet(
-                    title: Text(""),
+                    title: Text(Texts.menu.localized.uppercased()),
                     buttons: [
-                        .default(Text(Texts.restartGame.localized), action: { self.viewModel.restartGame() }),
-                        .default(Text(Texts.newGame.localized), action: { self.viewModel.newGame() }),
+                        .default(
+                            Text(Texts.restartGame.localized),
+                            action: { self.viewModel.restartGame() }
+                        ),
+                        .default(
+                            Text(Texts.newGame.localized),
+                            action: { self.viewModel.newGame() }
+                        ),
                         .cancel(Text(Texts.cancel.localized))
                     ]
                 )

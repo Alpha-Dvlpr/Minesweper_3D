@@ -21,8 +21,8 @@
 "language" = "APP language";
 "autosaveRanks" = "Auto save ranks";
 "maxRanks" = "Max number of ranks";
-"yes" = "YES";
-"no" = "NO";
+"yes" = "Yes";
+"no" = "No";
 "typeNewValue" = "Type new value";
 "currentValueDisclaimer" = "Current value is '%@', do you want to change it to '%@'?";
 "gamePaused" = "Game paused";
@@ -31,3 +31,6 @@
 "general" = "General";
 "advanced" = "Advanced";
 "termsOfUse" = "Terms of use";
+"menu" = "Menu";
+"finishGame" = "Finish game";
+"finishGameDisclaimer" = "Do you want to save the current game to continue later?";

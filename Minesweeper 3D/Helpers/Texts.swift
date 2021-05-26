@@ -33,6 +33,9 @@ enum Texts: String {
     case general
     case advanced
     case termsOfUse
+    case menu
+    case finishGame
+    case finishGameDisclaimer
     
     var localized: String {
         return self.local()
