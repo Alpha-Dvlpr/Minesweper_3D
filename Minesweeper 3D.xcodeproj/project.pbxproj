@@ -38,6 +38,9 @@
 		E4CF518A264BF9DE0058FED5 /* HorizontalHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF5189264BF9DE0058FED5 /* HorizontalHintCell.swift */; };
 		E4CF518C264BFF330058FED5 /* GameBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF518B264BFF330058FED5 /* GameBoardCell.swift */; };
 		E4CF518E264C12DD0058FED5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF518D264C12DD0058FED5 /* Utils.swift */; };
+		E4EDDEB0265EA33B00588428 /* Degrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDDEAF265EA33B00588428 /* Degrees.swift */; };
+		E4EDDEB2265EA35D00588428 /* References.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDDEB1265EA35D00588428 /* References.swift */; };
+		E4EDDEB4265EA3D700588428 /* CellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDDEB3265EA3D700588428 /* CellContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +81,9 @@
 		E4CF5189264BF9DE0058FED5 /* HorizontalHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalHintCell.swift; sourceTree = "<group>"; };
 		E4CF518B264BFF330058FED5 /* GameBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardCell.swift; sourceTree = "<group>"; };
 		E4CF518D264C12DD0058FED5 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		E4EDDEAF265EA33B00588428 /* Degrees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degrees.swift; sourceTree = "<group>"; };
+		E4EDDEB1265EA35D00588428 /* References.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = References.swift; sourceTree = "<group>"; };
+		E4EDDEB3265EA3D700588428 /* CellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,10 +129,13 @@
 			isa = PBXGroup;
 			children = (
 				933A4585264ED73900BDE2AA /* Cell.swift */,
+				E4EDDEB3265EA3D700588428 /* CellContent.swift */,
 				933A4582264ED71100BDE2AA /* CellType.swift */,
+				E4EDDEAF265EA33B00588428 /* Degrees.swift */,
 				934C686B264C75A000099424 /* Direction.swift */,
 				934C6864264C567B00099424 /* Face.swift */,
 				934C686F264C75B700099424 /* GameStatus.swift */,
+				E4EDDEB1265EA35D00588428 /* References.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -421,12 +430,15 @@
 				933A4586264ED73900BDE2AA /* Cell.swift in Sources */,
 				93F0DB96264868070022F976 /* CoreDataController.swift in Sources */,
 				934C6870264C75B800099424 /* GameStatus.swift in Sources */,
+				E4EDDEB2265EA35D00588428 /* References.swift in Sources */,
 				93F0DB8126483D2B0022F976 /* SettingsVC.swift in Sources */,
 				93F0DB86264847AF0022F976 /* Images.swift in Sources */,
+				E4EDDEB0265EA33B00588428 /* Degrees.swift in Sources */,
 				93F0DB7226481FB90022F976 /* ImageButton.swift in Sources */,
 				9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */,
 				93F0DB7C26483C310022F976 /* Texts.swift in Sources */,
 				934C6865264C567C00099424 /* Face.swift in Sources */,
+				E4EDDEB4265EA3D700588428 /* CellContent.swift in Sources */,
 				E4CF518E264C12DD0058FED5 /* Utils.swift in Sources */,
 				934C686C264C75A000099424 /* Direction.swift in Sources */,
 				93DE280B26580FE3007444E3 /* Settings.swift in Sources */,

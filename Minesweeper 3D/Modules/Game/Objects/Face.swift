@@ -7,20 +7,6 @@
 
 import Foundation
 
-enum Degrees {
-    case positiveQuart
-    case negativeQuart
-    case half
-    case none
-}
-
-struct References {
-    var top: Int = 0
-    var bottom: Int = 0
-    var left: Int = 0
-    var right: Int = 0
-}
-
 class Face: Identifiable {
     var id: UUID = UUID()
     var number: Int
