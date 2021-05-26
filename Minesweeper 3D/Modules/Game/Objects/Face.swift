@@ -35,9 +35,9 @@ class Face: Identifiable {
     private var lastReferences = References()
     private var rotatedFromLastPosition: Degrees {
         switch self.references.top {
-        case self.references.left: return .positiveQuart
-        case self.references.right: return .negativeQuart
-        case self.references.bottom: return .half
+        case self.lastReferences.left: return .positiveQuart
+        case self.lastReferences.right: return .negativeQuart
+        case self.lastReferences.bottom: return .half
         default: return .none
         }
     }
