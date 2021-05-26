@@ -27,20 +27,19 @@ class Settings: NSObject, NSCoding {
     }
     
     required init(coder aDecoder: NSCoder) {
-        let code = aDecoder.decodeObject(forKey: "language") as? String
-        let lang = Language(languageSetting: code) ?? .spanish(.es)
+        let code = aDecoder.decodeObject(forKey: CoreDataKey.appLanguage.key) as? String
         
-        self.username = aDecoder.decodeObject(forKey: "username") as? String ?? ""
-        self.appLanguage = lang
-        self.autosaveRanks = aDecoder.decodeBool(forKey: "autosaveRanks")
-        self.maxRanks = aDecoder.decodeInteger(forKey: "maxRanks")
+        self.username = aDecoder.decodeObject(forKey: CoreDataKey.username.key) as? String ?? ""
+        self.appLanguage = Language(languageSetting: code) ?? .spanish(.es)
+        self.autosaveRanks = aDecoder.decodeBool(forKey: CoreDataKey.autoSaveRanks.key)
+        self.maxRanks = aDecoder.decodeInteger(forKey: CoreDataKey.maxNumberOfRanks.key)
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.username, forKey: "username")
-        aCoder.encode(self.appLanguage.setting, forKey: "language")
-        aCoder.encode(self.autosaveRanks, forKey: "autosaveRanks")
-        aCoder.encode(self.maxRanks, forKey: "maxRanks")
+        aCoder.encode(self.username, forKey: CoreDataKey.username.key)
+        aCoder.encode(self.appLanguage.setting, forKey: CoreDataKey.appLanguage.key)
+        aCoder.encode(self.autosaveRanks, forKey: CoreDataKey.autoSaveRanks.key)
+        aCoder.encode(self.maxRanks, forKey: CoreDataKey.maxNumberOfRanks.key)
     }
     
     func equals(settings: Settings) -> Bool {
