@@ -26,7 +26,7 @@ import Foundation
 import ReactiveKit
 
 /// A type that contains or wraps a changeset.
-public protocol ChangesetContainerProtocol: class {
+public protocol ChangesetContainerProtocol: AnyObject {
 
     associatedtype Changeset: ChangesetProtocol
 

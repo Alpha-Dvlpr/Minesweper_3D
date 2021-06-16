@@ -353,7 +353,7 @@ extension SignalProtocol {
 }
 
 /// A consumer of ObservedLoadingState. For example, a view what updates its appearance based on loading state.
-public protocol LoadingStateListener: class {
+public protocol LoadingStateListener: AnyObject {
     
     /// Consume observed loading state.
     func setLoadingState<LoadingValue, LoadingError>(_ state: ObservedLoadingState<LoadingValue, LoadingError>)

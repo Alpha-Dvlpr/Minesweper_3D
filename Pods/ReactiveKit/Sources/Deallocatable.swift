@@ -19,7 +19,7 @@
 ///     signal.bind(to: view) { view, number in
 ///       view.display(number)
 ///     }
-public protocol Deallocatable: class {
+public protocol Deallocatable: AnyObject {
     
     /// A signal that fires `completed` event when the receiver is deallocated.
     var deallocated: SafeSignal<Void> { get }

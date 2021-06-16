@@ -46,7 +46,7 @@ public struct Reactive<Base>: ReactiveExtensions {
     }
 }
 
-public protocol ReactiveExtensionsProvider: class {}
+public protocol ReactiveExtensionsProvider: AnyObject {}
 
 extension ReactiveExtensionsProvider {
     

@@ -121,7 +121,7 @@ private extension ViewControllerLifecycle {
     }
 }
 
-public protocol ViewControllerLifecycleProvider: class {
+public protocol ViewControllerLifecycleProvider: AnyObject {
     var viewControllerLifecycle: ViewControllerLifecycle { get }
 }
 
