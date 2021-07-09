@@ -36,6 +36,16 @@ class GameBoardVM: ObservableObject {
         }
     }
     
+    func updateCellVisibility(x: Int, y: Int) {
+        guard self.gameStatus == .running,
+              let aux = self.visibleFace
+        else { return }
+        
+        aux.cells[y][x].shown.toggle()
+        
+        self.visibleFace = aux
+    }
+    
     func getReference(for direction: Direction) -> Int {
         switch direction {
         case .up: return self.visibleFace.references.top

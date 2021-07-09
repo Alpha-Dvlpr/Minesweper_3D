@@ -10,7 +10,7 @@ import SwiftUI
 struct GameBoardCell: View {
     
     var face: Face
-    var boardCallback: (() -> Void)
+    var boardCallback: ((_ x: Int, _ y: Int) -> Void)
     
     var body: some View {
         VStack(
@@ -23,24 +23,26 @@ struct GameBoardCell: View {
                         spacing: Constants.cellSpacing,
                         content: {
                             ForEach(line, id: \.self) { cell in
-                                Text("\(cell.xCor),\(cell.yCor)")
-                                    .multilineTextAlignment(.center)
+                                cell.image
+                                    .resizable()
                                     .frame(width: Constants.cellSide, height: Constants.cellSide)
-                                    .background(cell.type.color)
-                                    .border(Color.gray, width: 1)
-                                    .font(.caption)
+                                    .foregroundColor(
+                                        cell.shown
+                                            ? cell.type.color
+                                            : .black
+                                    )
+                                    .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
                             }
                         }
                     )
                 }
             }
         )
-        .onTapGesture { self.boardCallback() }
     }
 }
 
 struct GameBoardCell_Previews: PreviewProvider {
     static var previews: some View {
-        GameBoardCell(face: Face(number: 4), boardCallback: { })
+        GameBoardCell(face: Face(number: 4), boardCallback: { (_, _) in })
     }
 }

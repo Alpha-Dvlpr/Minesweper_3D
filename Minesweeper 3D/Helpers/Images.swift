@@ -22,6 +22,7 @@ enum Images {
     
     case system(SysImg)
     case custom
+    case numbers(Int)
     
     var image: Image {
         switch self {
@@ -39,6 +40,13 @@ enum Images {
             }
         case .custom:
             return Image(systemName: "xmark.circle")
+        case .numbers(let number):
+            switch number {
+            case 1, 2, 3, 4, 5, 6, 7, 8, 9: return Image(systemName: "\(number).circle")
+            case 15: return Image(systemName: "flag.circle")
+            case 20: return Image(systemName: "ant.circle")
+            default: return Image(systemName: "circle")
+            }
         }
     }
 }

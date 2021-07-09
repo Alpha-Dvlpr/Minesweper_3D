@@ -17,12 +17,10 @@ struct HorizontalHintCell: View {
             spacing: Constants.cellSpacing,
             content: {
                 ForEach(Constants.boardCells, id: \.self) { _ in
-                    Text("\(self.sideScreen)")
-                        .bold()
-                        .multilineTextAlignment(.center)
+                    Images.numbers(self.sideScreen).image
+                        .resizable()
                         .frame(width: Constants.cellSide, height: Constants.cellSide)
-                        .background(Color.green)
-                        .border(Color.gray, width: 1)
+                        .foregroundColor(Color.green)
                 }
             }
         )

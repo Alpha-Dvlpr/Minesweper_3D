@@ -5,13 +5,19 @@
 //  Created by Aaron Granado Amores on 14/05/2021.
 //
 
-import Foundation
+import SwiftUI
 
 class Cell: Hashable {
     var xCor: Int
     var yCor: Int
     var type: CellType { return CellType.init(x: self.xCor, y: self.yCor) }
     var content: CellContent = .none
+    var shown: Bool = false
+    var image: Image {
+        return self.shown
+            ? Images.numbers(self.xCor).image
+            : Images.numbers(0).image
+    }
     
     init(
         _ xCor: Int,
