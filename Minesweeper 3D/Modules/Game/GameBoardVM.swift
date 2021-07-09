@@ -40,8 +40,15 @@ class GameBoardVM: ObservableObject {
         guard self.gameStatus == .running,
               let aux = self.visibleFace
         else { return }
-        
-        aux.cells[y][x].shown.toggle()
+    
+        if aux.cells[y][x].shown { return }
+        else {
+            if aux.cells[y][x].content == .void {
+                // TODO: Create recursion
+            }
+            
+            aux.cells[y][x].shown = true
+        }
         
         self.visibleFace = aux
     }

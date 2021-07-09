@@ -23,15 +23,27 @@ struct GameBoardCell: View {
                         spacing: Constants.cellSpacing,
                         content: {
                             ForEach(line, id: \.self) { cell in
-                                cell.image
-                                    .resizable()
-                                    .frame(width: Constants.cellSide, height: Constants.cellSide)
-                                    .foregroundColor(
-                                        cell.shown
-                                            ? cell.type.color
-                                            : nil
-                                    )
-                                    .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
+                                if cell.shown {
+                                    cell.content.display
+                                        .resizable()
+                                        .frame(width: Constants.cellSide, height: Constants.cellSide)
+                                        .foregroundColor(
+                                            cell.shown
+                                                ? cell.content.color
+                                                : nil
+                                        )
+                                        .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
+                                } else {
+                                    Images.numbers(ImageNumber.unselected.rawValue).image
+                                        .resizable()
+                                        .frame(width: Constants.cellSide, height: Constants.cellSide)
+                                        .foregroundColor(
+                                            cell.shown
+                                                ? cell.content.color
+                                                : nil
+                                        )
+                                        .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
+                                }
                             }
                         }
                     )

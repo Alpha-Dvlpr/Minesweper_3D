@@ -9,11 +9,12 @@ import SwiftUI
 
 class Constants {
     
-    static var numberOfItems: Int = 10
-    static var edge: CGFloat = 16
-    static var cellSpacing: CGFloat = 1
-    static var boardSpacing: CGFloat = 5
-    static var boardCells = (0..<Constants.numberOfItems)
+    static let numberOfItems: Int = 10
+    static let edge: CGFloat = 16
+    static let cellSpacing: CGFloat = 1
+    static let boardSpacing: CGFloat = 5
+    static let boardCells = (0..<Constants.numberOfItems)
+    static var numberOfMinesPerFace: Int { return (Constants.numberOfItems ^ 2) * 20 / 100 }
     static var cellSide: CGFloat {
         let innerBoardWidth: CGFloat = (CGFloat(Constants.numberOfItems) * Constants.cellSpacing)
         let edgeWidth: CGFloat = (2 * Constants.edge)

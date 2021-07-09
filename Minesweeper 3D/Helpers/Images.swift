@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+enum ImageNumber: Int {
+    case flag = 15
+    case mine = 20
+    case void = -1
+    case unselected = -2
+}
+
 enum Images {
     enum SysImg {
         case settings
@@ -43,8 +50,10 @@ enum Images {
         case .numbers(let number):
             switch number {
             case 1, 2, 3, 4, 5, 6, 7, 8, 9: return Image(systemName: "\(number).circle")
-            case 15: return Image(systemName: "flag.circle")
-            case 20: return Image(systemName: "ant.circle")
+            case ImageNumber.flag.rawValue: return Image(systemName: "flag.circle")
+            case ImageNumber.mine.rawValue: return Image(systemName: "ant.circle")
+            case ImageNumber.void.rawValue: return Image(systemName: "largecircle.fill.circle")
+            case ImageNumber.unselected.rawValue: return Image(systemName: "circle")
             default: return Image(systemName: "circle")
             }
         }

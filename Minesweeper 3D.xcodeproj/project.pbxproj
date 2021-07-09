@@ -32,6 +32,7 @@
 		93F0DB96264868070022F976 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB95264868070022F976 /* CoreDataController.swift */; };
 		93FE38CB2649B45700A78B84 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93FE38CD2649B45700A78B84 /* Localized.strings */; };
 		93FE38D22649B84D00A78B84 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FE38D12649B84D00A78B84 /* Language.swift */; };
+		E41FE74826989CC700E7080B /* Int_EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41FE74726989CC700E7080B /* Int_EXT.swift */; };
 		E468F6DD265D26ED0081ACD7 /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = E468F6DC265D26ED0081ACD7 /* KeyboardListener.swift */; };
 		E4CF5186264BF4780058FED5 /* GameBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF5185264BF4780058FED5 /* GameBoardVC.swift */; };
 		E4CF5188264BF6820058FED5 /* VerticalHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF5187264BF6820058FED5 /* VerticalHintCell.swift */; };
@@ -75,6 +76,7 @@
 		B2D993DEE2D6D76A9E5221D5 /* Pods-Minesweeper 3D.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minesweeper 3D.release.xcconfig"; path = "Target Support Files/Pods-Minesweeper 3D/Pods-Minesweeper 3D.release.xcconfig"; sourceTree = "<group>"; };
 		C09E57D4C7D10CF86D2E73F6 /* Pods-Minesweeper 3D.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minesweeper 3D.debug.xcconfig"; path = "Target Support Files/Pods-Minesweeper 3D/Pods-Minesweeper 3D.debug.xcconfig"; sourceTree = "<group>"; };
 		D2A15E5E4F34C4D1F6AD6812 /* Pods_Minesweeper_3D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Minesweeper_3D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E41FE74726989CC700E7080B /* Int_EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int_EXT.swift; sourceTree = "<group>"; };
 		E468F6DC265D26ED0081ACD7 /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
 		E4CF5185264BF4780058FED5 /* GameBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardVC.swift; sourceTree = "<group>"; };
 		E4CF5187264BF6820058FED5 /* VerticalHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalHintCell.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			children = (
 				933A4588264EEC6600BDE2AA /* Collection_EXT.swift */,
 				93DE280526580AF9007444E3 /* View_EXT.swift */,
+				E41FE74726989CC700E7080B /* Int_EXT.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				E468F6DD265D26ED0081ACD7 /* KeyboardListener.swift in Sources */,
 				933A4586264ED73900BDE2AA /* Cell.swift in Sources */,
 				93F0DB96264868070022F976 /* CoreDataController.swift in Sources */,
+				E41FE74826989CC700E7080B /* Int_EXT.swift in Sources */,
 				934C6870264C75B800099424 /* GameStatus.swift in Sources */,
 				E4EDDEB2265EA35D00588428 /* References.swift in Sources */,
 				93F0DB8126483D2B0022F976 /* SettingsVC.swift in Sources */,

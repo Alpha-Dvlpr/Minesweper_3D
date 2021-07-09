@@ -72,10 +72,65 @@ class Face: Identifiable {
     }
 
     private func generateBoard() -> [[Cell]] {
-        return Constants.boardCells.map { self.generateRow(rowNumber: $0) }
+        var generatedMines = 0
+        let board = Constants.boardCells.map { self.generateRow(rowNumber: $0) }
+        
+        repeat {
+            let selectedCoordinates = self.generateRandomCoords()
+            let cell = board[selectedCoordinates.0][selectedCoordinates.1]
+            
+            if cell.content == .mine { continue }
+            else {
+                board[selectedCoordinates.0][selectedCoordinates.1].updateContent(to: .mine)
+                generatedMines += 1
+            }
+        } while (generatedMines < Constants.numberOfMinesPerFace)
+        
+        return self.generateMineHints(for: board)
     }
     
     private func generateRow(rowNumber: Int) -> [Cell] {
-        return Constants.boardCells.map { return Cell($0, rowNumber) }
+        return Constants.boardCells.map {
+            return Cell(face: self.number, xCor: $0, yCor: rowNumber, content: .unselected)
+        }
+    }
+    
+    private func generateRandomCoords() -> (Int, Int) {
+        let number = Int(arc4random_uniform(UInt32(Constants.numberOfItems)))
+        
+        return (number, number)
+    }
+    
+    private func generateMineHints(for cells: [[Cell]]) -> [[Cell]] {
+        let aux = cells
+        
+        for row in aux {
+            for cell in row {
+                if cell.content == .mine { continue }
+                
+                var counter = 0
+                
+                switch cell.type {
+                case .corner: break
+                case .vBorder: break
+                case .hBorder: break
+                case .inner:
+                    [
+                        aux[cell.yCor][cell.xCor - 1],     // Nort Cell
+                        aux[cell.yCor + 1][cell.xCor - 1], // North East Cell
+                        aux[cell.yCor + 1][cell.xCor],     // East Cell
+                        aux[cell.yCor + 1][cell.xCor + 1], // South East Cell
+                        aux[cell.yCor][cell.xCor + 1],     // South Cell
+                        aux[cell.yCor - 1][cell.xCor + 1], // South West Cell
+                        aux[cell.yCor - 1][cell.xCor],     // West Cell
+                        aux[cell.yCor - 1][cell.xCor - 1]  // North West Cell
+                    ].forEach { if $0.content == .mine { counter += 1 } }
+                }
+                
+                cell.updateContent(to: counter == 0 ? .void : .number(counter))
+            }
+        }
+        
+        return aux
     }
 }
