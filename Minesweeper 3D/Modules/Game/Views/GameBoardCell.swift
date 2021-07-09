@@ -29,7 +29,7 @@ struct GameBoardCell: View {
                                     .foregroundColor(
                                         cell.shown
                                             ? cell.type.color
-                                            : .black
+                                            : nil
                                     )
                                     .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
                             }

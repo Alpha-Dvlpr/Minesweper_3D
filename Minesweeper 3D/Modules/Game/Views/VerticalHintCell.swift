@@ -20,7 +20,7 @@ struct VerticalHintCell: View {
                     Images.numbers(self.sideScreen).image
                         .resizable()
                         .frame(width: Constants.cellSide, height: Constants.cellSide)
-                        .foregroundColor(Color.green)
+//                        .foregroundColor(nil)
                 }
             }
         )
