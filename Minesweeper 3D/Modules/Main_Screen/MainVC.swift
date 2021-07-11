@@ -21,7 +21,10 @@ struct MainVC: View {
                     selection: self.$selection
                 ) { EmptyView() }
                 NavigationLink(
-                    destination: GameBoardVC(closeCallback: { self.selection = nil }),
+                    destination: GameBoardVC(
+                        viewModel: GameBoardVM(calculate: self.selection == "game"),
+                        closeCallback: { self.selection = nil }
+                    ),
                     tag: "game",
                     selection: self.$selection
                 ) { EmptyView() }

@@ -186,9 +186,9 @@
 		9392D57E264817CC000C858B /* Minesweeper 3D */ = {
 			isa = PBXGroup;
 			children = (
-				934C6877264C762100099424 /* Helpers */,
 				9392D59126481ABA000C858B /* App */,
 				93F0DB7026481F9E0022F976 /* CustomViews */,
+				934C6877264C762100099424 /* Helpers */,
 				9392D59226481ADE000C858B /* Modules */,
 				9392D585264817D1000C858B /* Preview Content */,
 				93F0DB7A26483C110022F976 /* Resources */,

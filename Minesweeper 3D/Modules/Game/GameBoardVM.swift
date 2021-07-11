@@ -13,13 +13,13 @@ class GameBoardVM: ObservableObject {
     @Published var actionBarButton: Image = Images.system(.pause).image
     @Published var stringTime: String = Utils.getStringTime(seconds: 0)
     
-    var gameStatus: GameStatus = .running
+    var gameStatus: GameStatus = .paused
     
     private var gameTime: Int = 0
     private var faces = [Face]()
     
-    init() {
-        self.newGame()
+    init(calculate: Bool) {
+        if calculate { self.newGame() }
     }
     
     // MARK: Game functions
@@ -48,9 +48,9 @@ class GameBoardVM: ObservableObject {
             }
             
             aux.cells[y][x].shown = true
+            
+            self.visibleFace = aux
         }
-        
-        self.visibleFace = aux
     }
     
     func getReference(for direction: Direction) -> Int {
@@ -82,7 +82,10 @@ class GameBoardVM: ObservableObject {
     }
     
     func restartGame() {
-        
+        self.gameTime = 0
+        self.faces.forEach { $0.hideAllCells() }
+        self.gameStatus = .running
+        self.updateImage()
     }
     
     func newGame() {
@@ -92,21 +95,47 @@ class GameBoardVM: ObservableObject {
     // MARK: Private Functions
     // =======================
     private func generateFaceNumbers() {
-        let face1 = Face(number: 1)
-        face1.references.top = 5
-        face1.references.bottom = 2
-        face1.references.left = 3
-        face1.references.right = 4
+        let face1 = Face(number: 1, references: References(top: 5, bottom: 2, left: 3, right: 4))
+        let face2 = Face(number: 2, references: References(top: 1, bottom: 6, left: 3, right: 4))
+        let face3 = Face(number: 3, references: References(top: 5, bottom: 2, left: 6, right: 1))
+        let face4 = Face(number: 4, references: References(top: 5, bottom: 2, left: 1, right: 6))
+        let face5 = Face(number: 5, references: References(top: 6, bottom: 1, left: 3, right: 4))
+        let face6 = Face(number: 6, references: References(top: 2, bottom: 5, left: 3, right: 4))
         
-        let face2 = Face(number: 2)
-        let face3 = Face(number: 3)
-        let face4 = Face(number: 4)
-        let face5 = Face(number: 5)
-        let face6 = Face(number: 6)
-        
-        self.faces = [face1, face2, face3, face4, face5, face6]
-        
-        self.visibleFace = face1
+        face1.generateBoard(
+            faces: (face5, face2, face3, face4),
+            completion: {
+                face2.generateBoard(
+                    faces: (face1, face6, face3, face4),
+                    completion: {
+                        face3.generateBoard(
+                            faces: (face5, face2, face6, face1),
+                            completion: {
+                                face4.generateBoard(
+                                    faces: (face5, face2, face1, face6),
+                                    completion: {
+                                        face5.generateBoard(
+                                            faces: (face6, face1, face3, face4),
+                                            completion: {
+                                                face6.generateBoard(
+                                                    faces: (face2, face5, face3, face4),
+                                                    completion: {
+                                                        self.faces = [face1, face2, face3, face4, face5, face6]
+                                                        self.visibleFace = face1
+                                                        self.gameStatus = .running
+                                                        self.updateImage()
+                                                    }
+                                                )
+                                            }
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+            }
+        )
     }
     
     private func updateImage() {

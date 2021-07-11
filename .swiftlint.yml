@@ -3,6 +3,7 @@ disabled_rules:
     - identifier_name
     - type_name
     - statement_position
+    - large_tuple
     
 excluded:
     - Pods

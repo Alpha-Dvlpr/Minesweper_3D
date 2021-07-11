@@ -10,13 +10,14 @@ import Foundation
 class Face: Identifiable {
     var id: UUID = UUID()
     var number: Int
-    var references = References()
+    var references: References
     var cells: [[Cell]] = [[]]
     var rotated: Face {
         let newFace = self
         newFace.cells = self.rotate(cells: self.cells, degrees: self.rotatedFromLastPosition)
         return newFace
     }
+    var generated: Bool = false
     
     private var lastReferences = References()
     private var rotatedFromLastPosition: Degrees {
@@ -28,9 +29,13 @@ class Face: Identifiable {
         }
     }
     
-    init(number: Int) {
+    init(number: Int, references: References) {
         self.number = number
-        self.cells = self.generateBoard()
+        self.references = references
+    }
+    
+    func hideAllCells() {
+        for line in self.cells { for cell in line { cell.shown = false } }
     }
     
     func updateLastReferences() {
@@ -71,9 +76,74 @@ class Face: Identifiable {
         }
     }
 
-    private func generateBoard() -> [[Cell]] {
-        var generatedMines = 0
-        let board = Constants.boardCells.map { self.generateRow(rowNumber: $0) }
+    /// Faces have following order: Top, Bottom, Left, Right. It is the same as the init for 'References' class.
+    func generateBoard(faces: (Face, Face, Face, Face), completion: @escaping (() -> Void)) {
+        var board = Constants.boardCells.map { self.generateRow(rowNumber: $0) }
+        
+        if faces.0.generated { board = self.updateHorizontalLines(on: board, from: faces.0) }
+        if faces.1.generated { board = self.updateHorizontalLines(on: board, from: faces.1) }
+        if faces.2.generated { board = self.updateVerticalLines(on: board, from: faces.2) }
+        if faces.3.generated { board = self.updateVerticalLines(on: board, from: faces.3) }
+        
+        let minedBoard = self.placeMines(on: board)
+        let hintedBoard = self.generateMineHints(for: minedBoard)
+        
+        self.cells = hintedBoard
+        self.generated = true
+        
+        completion()
+    }
+    
+    private func generateRow(rowNumber: Int) -> [Cell] {
+        return Constants.boardCells.map {
+            return Cell(face: self.number, xCor: $0, yCor: rowNumber, content: .unselected)
+        }
+    }
+    
+    private func updateHorizontalLines(on board: [[Cell]], from face: Face) -> [[Cell]] {
+        var auxBoard = board
+        
+        switch face.number {
+        case self.references.top:
+            // Take last line and place it as the first
+            guard let lastReferenceLine = face.cells.last else { break }
+            auxBoard[0] = lastReferenceLine
+        case self.references.bottom:
+            // Take first line and place it as the last
+            guard let firstReferenceLine = face.cells.first else { break }
+            auxBoard[auxBoard.count - 1] = firstReferenceLine
+        default: break
+        }
+        
+        return auxBoard
+    }
+    
+    private func updateVerticalLines(on board: [[Cell]], from face: Face) -> [[Cell]] {
+        var auxBoard = board
+        
+        switch face.number {
+        case self.references.left:
+            // Take last column and place it as the first
+            let lastReferenceColumn = face.cells.map { $0.last }.compactMap { $0 }
+            
+            guard lastReferenceColumn.count == auxBoard.count else { break }
+            
+            for index in 0..<auxBoard.count { auxBoard[index][0] = lastReferenceColumn[index] }
+        case self.references.right:
+            // Take first column and place it as the last
+            let firstReferenceColumn = face.cells.map { $0.first }.compactMap { $0 }
+            
+            guard firstReferenceColumn.count == auxBoard.count else { break }
+            
+            for index in 0..<auxBoard.count { auxBoard[index][auxBoard.count - 1] = firstReferenceColumn[index] }
+        default: break
+        }
+        
+        return auxBoard
+    }
+    
+    private func placeMines(on board: [[Cell]]) -> [[Cell]] {
+        var generatedMines = board.map { $0.filter { $0.content == .mine }.count }.reduce(0, +)
         
         repeat {
             let selectedCoordinates = self.generateRandomCoords()
@@ -86,19 +156,14 @@ class Face: Identifiable {
             }
         } while (generatedMines < Constants.numberOfMinesPerFace)
         
-        return self.generateMineHints(for: board)
-    }
-    
-    private func generateRow(rowNumber: Int) -> [Cell] {
-        return Constants.boardCells.map {
-            return Cell(face: self.number, xCor: $0, yCor: rowNumber, content: .unselected)
-        }
+        return board
     }
     
     private func generateRandomCoords() -> (Int, Int) {
-        let number = Int(arc4random_uniform(UInt32(Constants.numberOfItems)))
+        let number1 = Int(arc4random_uniform(UInt32(Constants.numberOfItems)))
+        let number2 = Int(arc4random_uniform(UInt32(Constants.numberOfItems)))
         
-        return (number, number)
+        return (number1, number2)
     }
     
     private func generateMineHints(for cells: [[Cell]]) -> [[Cell]] {

@@ -23,7 +23,7 @@ struct GameBoardCell: View {
                         spacing: Constants.cellSpacing,
                         content: {
                             ForEach(line, id: \.self) { cell in
-                                if cell.shown {
+//                                if cell.shown {
                                     cell.content.display
                                         .resizable()
                                         .frame(width: Constants.cellSide, height: Constants.cellSide)
@@ -33,17 +33,21 @@ struct GameBoardCell: View {
                                                 : nil
                                         )
                                         .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
-                                } else {
-                                    Images.numbers(ImageNumber.unselected.rawValue).image
-                                        .resizable()
-                                        .frame(width: Constants.cellSide, height: Constants.cellSide)
-                                        .foregroundColor(
-                                            cell.shown
-                                                ? cell.content.color
-                                                : nil
-                                        )
-                                        .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
-                                }
+//                                } else {
+//                                    Images.numbers(
+//                                        cell.flagged
+//                                            ? ImageNumber.flag.rawValue
+//                                            : ImageNumber.unselected.rawValue
+//                                    ).image
+//                                        .resizable()
+//                                        .frame(width: Constants.cellSide, height: Constants.cellSide)
+//                                        .foregroundColor(
+//                                            cell.shown
+//                                                ? cell.content.color
+//                                                : nil
+//                                        )
+//                                        .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
+//                                }
                             }
                         }
                     )
@@ -55,6 +59,12 @@ struct GameBoardCell: View {
 
 struct GameBoardCell_Previews: PreviewProvider {
     static var previews: some View {
-        GameBoardCell(face: Face(number: 4), boardCallback: { (_, _) in })
+        GameBoardCell(
+            face: Face(
+                number: 4,
+                references: References(top: 5, bottom: 2, left: 1, right: 6)
+            ),
+            boardCallback: { (_, _) in }
+        )
     }
 }

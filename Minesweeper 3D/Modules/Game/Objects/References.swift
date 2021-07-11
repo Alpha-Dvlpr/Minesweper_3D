@@ -12,4 +12,13 @@ struct References {
     var bottom: Int = 0
     var left: Int = 0
     var right: Int = 0
+    
+    init() { }
+    
+    init(top: Int, bottom: Int, left: Int, right: Int) {
+        self.top = top
+        self.bottom = bottom
+        self.left = left
+        self.right = right
+    }
 }

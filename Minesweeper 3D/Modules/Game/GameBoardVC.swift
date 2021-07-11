@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameBoardVC: View {
     
-    @ObservedObject private var viewModel = GameBoardVM()
+    @ObservedObject var viewModel: GameBoardVM
     @State private var menuShown: Bool = false
     @State private var dismissAlertShown: Bool = false
     var closeCallback: (() -> Void)?
@@ -25,20 +25,22 @@ struct GameBoardVC: View {
                 .font(.title)
             Spacer()
             VStack(spacing: Constants.boardSpacing) {
-                HorizontalHintCell(sideScreen: self.viewModel.visibleFace.references.top)
-                    .onTapGesture { self.viewModel.rotate(.up) }
-                HStack(spacing: Constants.boardSpacing) {
-                    VerticalHintCell(sideScreen: self.viewModel.visibleFace.references.left)
-                        .onTapGesture { self.viewModel.rotate(.left) }
-                    GameBoardCell(
-                        face: self.viewModel.visibleFace,
-                        boardCallback: { self.viewModel.updateCellVisibility(x: $0, y: $1) }
-                    )
-                    VerticalHintCell(sideScreen: self.viewModel.visibleFace.references.right)
-                        .onTapGesture { self.viewModel.rotate(.right) }
+                if self.viewModel.visibleFace != nil {
+                    HorizontalHintCell(sideScreen: self.viewModel.visibleFace.references.top)
+                        .onTapGesture { self.viewModel.rotate(.up) }
+                    HStack(spacing: Constants.boardSpacing) {
+                        VerticalHintCell(sideScreen: self.viewModel.visibleFace.references.left)
+                            .onTapGesture { self.viewModel.rotate(.left) }
+                        GameBoardCell(
+                            face: self.viewModel.visibleFace,
+                            boardCallback: { self.viewModel.updateCellVisibility(x: $0, y: $1) }
+                        )
+                        VerticalHintCell(sideScreen: self.viewModel.visibleFace.references.right)
+                            .onTapGesture { self.viewModel.rotate(.right) }
+                    }
+                    HorizontalHintCell(sideScreen: self.viewModel.visibleFace.references.bottom)
+                        .onTapGesture { self.viewModel.rotate(.down) }
                 }
-                HorizontalHintCell(sideScreen: self.viewModel.visibleFace.references.bottom)
-                    .onTapGesture { self.viewModel.rotate(.down) }
             }
             Spacer()
         }
@@ -112,6 +114,6 @@ struct GameBoardVC: View {
 
 struct GameBoardVC_Previews: PreviewProvider {
     static var previews: some View {
-        GameBoardVC(closeCallback: { })
+        GameBoardVC(viewModel: GameBoardVM(calculate: true), closeCallback: { })
     }
 }
