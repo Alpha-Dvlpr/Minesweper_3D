@@ -97,7 +97,6 @@ class GameBoardVM: ObservableObject {
     // =====================
     private func generateFaceNumbers() {
         let dispatchGroup = DispatchGroup()
-        
         let face1 = Face(number: 1, references: References(top: 5, bottom: 2, left: 3, right: 4))
         let face2 = Face(number: 2, references: References(top: 1, bottom: 6, left: 3, right: 4))
         let face3 = Face(number: 3, references: References(top: 5, bottom: 2, left: 6, right: 1))
@@ -110,41 +109,29 @@ class GameBoardVM: ObservableObject {
         face1.generated = true
         #endif
         
-        // Face1: no other face generated, place randomly
-        dispatchGroup.enter()
-        self.placeMines(on: face1.cells) {
-            face1.cells = $0
+        func finishUpdate(on face: Face, with cells: [[Cell]]) {
+            face.cells = cells
             dispatchGroup.leave()
         }
         
-        // Face2: face1 generated.
-        // Update face2's top line with face1's bottom line (update id).
-        // Place mines.
         dispatchGroup.enter()
+        self.placeMines(on: face1.cells) { finishUpdate(on: face1, with: $0) }
         
-        // Face3: face1 & face2 generated.
-        // Update face3's bottom line with face2's left column (update id).
-        // Update face3's right column with face1's left column (update id).
-        // Place mines.
+        dispatchGroup.enter()
+        self.updateFace2(face1: face1, face2: face2) { finishUpdate(on: face2, with: $0) }
         
-        // Face4: face1 & face2 geenrated.
-        // Update face4's bottom line with face2's right column (update id).
-        // Update face4's left column with face1's right column (update id).
-        // Place mines.
+        dispatchGroup.enter()
+        self.updateFace3(input: (face1, face2), face3: face3) { finishUpdate(on: face3, with: $0) }
         
-        // Face5: face1, face3 & face4 generated.
-        // Update face5's bottom line with face1's top line (update id).
-        // Update face5's left column with face3's top line (update id).
-        // Update face5's right column with face4's top line (update id).
-        // Place mines.
-                        
-        // Face6: face2, face3, face4 & face5 generated.
-        // Update face6's top line with face2's bottom line (update id).
-        // Update face6's bottom line with face5's top line (update id).
-        // Update face6's left column with face3's left column (update id).
-        // Update face6's right column with face4's right column (update id).
-        // Place mines.
-               
+        dispatchGroup.enter()
+        self.updateFace4(input: (face1, face2), face4: face4) { finishUpdate(on: face4, with: $0) }
+        
+        dispatchGroup.enter()
+        self.updateFace5(input: (face1, face3, face4), face5: face5) { finishUpdate(on: face5, with: $0) }
+                   
+        dispatchGroup.enter()
+        self.updateFace6(input: (face2, face3, face4, face5), face6: face6) { finishUpdate(on: face6, with: $0) }
+        
         dispatchGroup.notify(queue: .main) {
             self.faces = [face1, face2, face3, face4, face5, face6]
             self.visibleFace = face1
@@ -175,6 +162,8 @@ class GameBoardVM: ObservableObject {
                 board[coords.0][coords.1].updateContent(to: .mine)
                 generatedMines += 1
             }
+            
+            cell.canBeEdited = false
         }
 
         completion(board)
@@ -189,54 +178,98 @@ class GameBoardVM: ObservableObject {
     
     // MARK: Board updation functions
     // ==============================
+    private func updateFace2(face1: Face, face2: Face, completion: @escaping (([[Cell]]) -> Void)) {
+        guard let face1LasLine = face1.cells.last,
+              face1LasLine.count == Constants.numberOfItems
+        else { completion(face2.cells); return }
+        
+        face2.cells[0] = face1LasLine.map { return $0 >> 2 }
+        
+        self.placeMines(on: face2.cells) { completion($0) }
+    }
     
-//    private func updateLines(
-//        on board: [[Cell]],
-//        from face: Face,
-//        completion: @escaping (([[Cell]]) -> Void)
-//    ) {
-//        var auxBoard = board
-//        let lastIndex = Constants.numberOfItems - 1
-//        let lastReferenceLine = face.cells.last?.compactMap { $0 }.map { return $0 >> self.number } ?? []
-//        let firstReferenceLine = face.cells.first?.compactMap { $0 }.map { return $0 >> self.number } ?? []
-//        let lastReferenceColumn = face.cells.map { $0.last }.compactMap { $0 }.map { return $0 >> self.number }
-//        let firstReferenceColumn = face.cells.map { $0.first }.compactMap { $0 }.map { return $0 >> self.number }
-//
-//        guard lastReferenceLine.count == Constants.numberOfItems,
-//              firstReferenceLine.count == Constants.numberOfItems,
-//              lastReferenceColumn.count == Constants.numberOfItems,
-//              firstReferenceColumn.count == Constants.numberOfItems
-//        else { completion(auxBoard); return }
-//
-//        func updateHorizontal(at index: Int, with cells: [Cell]) {
-//            auxBoard[index] = cells
-//        }
-//
-//        func updateVertical(at index: Int, with cells: [Cell]) {
-//            (0..<lastIndex).forEach { auxBoard[$0][index] = cells[$0] }
-//        }
-//
-//        func checkReferences(for number: Int, to index: Int) {
-//            switch number {
-//            default: break
-//            }
-//        }
-//
-//        switch face.number {
-//        case self.references.top:
-//            updateHorizontal(at: 0, with: lastReferenceLine)
-//        case self.references.bottom:
-//            updateHorizontal(at: lastIndex, with: firstReferenceLine)
-//        case self.references.left:
-//            updateVertical(at: 0, with: lastReferenceColumn)
-//        case self.references.right:
-//            updateVertical(at: lastIndex, with: firstReferenceColumn)
-//        default: break
-//        }
-//
-//        completion(auxBoard)
-//    }
-
+    private func updateFace3(input: (Face, Face), face3: Face, completion: @escaping (([[Cell]]) -> Void)) {
+        let face1FirstColumn = input.0.cells.map { $0.first }.compactMap { $0 }
+        let face2FirstColumn = input.1.cells.map { $0.first }.compactMap { $0 }
+        let lastIndex = Constants.numberOfItems - 1
+        
+        guard face1FirstColumn.count == Constants.numberOfItems,
+              face2FirstColumn.count == Constants.numberOfItems
+        else { completion(face3.cells); return }
+        
+        let face1Converted = face1FirstColumn.map { return $0 >> 3 }
+        (0..<lastIndex).forEach { face3.cells[$0][lastIndex] = face1Converted[$0] }
+        
+        face3.cells[lastIndex] = face2FirstColumn.map { return $0 >> 3 }.reversed()
+        
+        self.placeMines(on: face3.cells) { completion($0) }
+    }
+    
+    private func updateFace4(input: (Face, Face), face4: Face, completion: @escaping (([[Cell]]) -> Void)) {
+        let face1LastColumn = input.0.cells.map { $0.last }.compactMap { $0 }
+        let face2LastColumn = input.1.cells.map { $0.last }.compactMap { $0 }
+        let lastIndex = Constants.numberOfItems - 1
+        
+        guard face1LastColumn.count == Constants.numberOfItems,
+              face2LastColumn.count == Constants.numberOfItems
+        else { completion(face4.cells); return }
+        
+        let face1Converted = face1LastColumn.map { return $0 >> 4 }
+        (0..<lastIndex).forEach { face4.cells[$0][0] = face1Converted[$0] }
+        
+        let face2Converted = face2LastColumn.map { return $0 >> 4 }
+        face4.cells[lastIndex] = face2Converted
+        
+        self.placeMines(on: face4.cells) { completion($0) }
+    }
+    
+    private func updateFace5(input: (Face, Face, Face), face5: Face, completion: @escaping (([[Cell]]) -> Void)) {
+        guard let face1FirstLine = input.0.cells.first,
+              let face3FirstLine = input.1.cells.first,
+              let face4FirstLine = input.2.cells.first,
+              face1FirstLine.count == Constants.numberOfItems,
+              face3FirstLine.count == Constants.numberOfItems,
+              face4FirstLine.count == Constants.numberOfItems
+        else { completion(face5.cells); return }
+        let lastIndex = Constants.numberOfItems - 1
+        
+        face5.cells[lastIndex] = face1FirstLine.map { return $0 >> 5 }
+        
+        let face3Converted = face3FirstLine.map { return $0 >> 5 }
+        (0..<lastIndex).forEach { face5.cells[$0][0] = face3Converted[$0] }
+        
+        let face4Converted = face4FirstLine.map { return $0 >> 5 }
+        (0..<lastIndex).forEach { face5.cells[$0][lastIndex] = face4Converted.reversed()[$0] }
+        
+        self.placeMines(on: face5.cells) { completion($0) }
+    }
+    
+    private func updateFace6(input: (Face, Face, Face, Face), face6: Face, completion: @escaping (([[Cell]]) -> Void)) {
+        let face3FirstColumn = input.1.cells.map { $0.first }.compactMap { $0 }
+        let face4LastColumn = input.2.cells.map { $0.last }.compactMap { $0 }
+        let lastIndex = Constants.numberOfItems - 1
+        
+        guard let face2LastLine = input.0.cells.last,
+              let face5FirstLine = input.3.cells.first,
+              face2LastLine.count == Constants.numberOfItems,
+              face3FirstColumn.count == Constants.numberOfItems,
+              face4LastColumn.count == Constants.numberOfItems,
+              face5FirstLine.count == Constants.numberOfItems
+        else { completion(face6.cells); return }
+        
+        face6.cells[0] = face2LastLine.map { return $0 >> 6 }
+        
+        let face3Converted = face3FirstColumn.map { return $0 >> 6 }
+        (0..<lastIndex).forEach { face6.cells[$0][0] = face3Converted.reversed()[$0] }
+        
+        let face4Converted = face4LastColumn.map { return $0 >> 6 }
+        (0..<lastIndex).forEach { face6.cells[$0][lastIndex] = face4Converted.reversed()[$0] }
+        
+        face6.cells[lastIndex] = face5FirstLine.map { return $0 >> 6 }
+        
+        self.placeMines(on: face6.cells) { completion($0) }
+    }
+    
     // MARK: Mine hint calculation functions
     // =====================================
     private func generateMineHints(for cells: [[Cell]], completion: @escaping (([[Cell]]) -> Void)) {
@@ -266,7 +299,6 @@ class GameBoardVM: ObservableObject {
                 }
                 
                 cell.updateContent(to: counter == 0 ? .void : .number(counter))
-                cell.canBeEdited = false
             }
         }
         
@@ -276,18 +308,22 @@ class GameBoardVM: ObservableObject {
     // swiftlint:disable line_length
     #if DEBUG
     private func debug_face1MineGeneration() -> [[Cell]] {
-        return [
+        let cells = [
             [Cell(face: 1, xCor: 0, yCor: 0, content: .unselected), Cell(face: 1, xCor: 1, yCor: 0, content: .unselected), Cell(face: 1, xCor: 2, yCor: 0, content: .unselected), Cell(face: 1, xCor: 3, yCor: 0, content: .mine), Cell(face: 1, xCor: 4, yCor: 0, content: .unselected), Cell(face: 1, xCor: 5, yCor: 0, content: .unselected), Cell(face: 1, xCor: 6, yCor: 0, content: .unselected), Cell(face: 1, xCor: 7, yCor: 0, content: .mine), Cell(face: 1, xCor: 8, yCor: 0, content: .unselected), Cell(face: 1, xCor: 9, yCor: 0, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 1, content: .unselected), Cell(face: 1, xCor: 1, yCor: 1, content: .mine), Cell(face: 1, xCor: 2, yCor: 1, content: .unselected), Cell(face: 1, xCor: 3, yCor: 1, content: .mine), Cell(face: 1, xCor: 4, yCor: 1, content: .unselected), Cell(face: 1, xCor: 5, yCor: 1, content: .unselected), Cell(face: 1, xCor: 6, yCor: 1, content: .unselected), Cell(face: 1, xCor: 7, yCor: 1, content: .mine), Cell(face: 1, xCor: 8, yCor: 1, content: .unselected), Cell(face: 1, xCor: 9, yCor: 1, content: .mine)],
+            [Cell(face: 1, xCor: 0, yCor: 1, content: .unselected), Cell(face: 1, xCor: 1, yCor: 1, content: .mine), Cell(face: 1, xCor: 2, yCor: 1, content: .unselected), Cell(face: 1, xCor: 3, yCor: 1, content: .mine), Cell(face: 1, xCor: 4, yCor: 1, content: .unselected), Cell(face: 1, xCor: 5, yCor: 1, content: .unselected), Cell(face: 1, xCor: 6, yCor: 1, content: .unselected), Cell(face: 1, xCor: 7, yCor: 1, content: .unselected), Cell(face: 1, xCor: 8, yCor: 1, content: .unselected), Cell(face: 1, xCor: 9, yCor: 1, content: .mine)],
             [Cell(face: 1, xCor: 0, yCor: 2, content: .unselected), Cell(face: 1, xCor: 1, yCor: 2, content: .unselected), Cell(face: 1, xCor: 2, yCor: 2, content: .unselected), Cell(face: 1, xCor: 3, yCor: 2, content: .mine), Cell(face: 1, xCor: 4, yCor: 2, content: .mine), Cell(face: 1, xCor: 5, yCor: 2, content: .unselected), Cell(face: 1, xCor: 6, yCor: 2, content: .unselected), Cell(face: 1, xCor: 7, yCor: 2, content: .unselected), Cell(face: 1, xCor: 8, yCor: 2, content: .unselected), Cell(face: 1, xCor: 9, yCor: 2, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 3, content: .unselected), Cell(face: 1, xCor: 1, yCor: 3, content: .unselected), Cell(face: 1, xCor: 2, yCor: 3, content: .mine), Cell(face: 1, xCor: 3, yCor: 3, content: .unselected), Cell(face: 1, xCor: 4, yCor: 3, content: .unselected), Cell(face: 1, xCor: 5, yCor: 3, content: .unselected), Cell(face: 1, xCor: 6, yCor: 3, content: .unselected), Cell(face: 1, xCor: 7, yCor: 3, content: .unselected), Cell(face: 1, xCor: 8, yCor: 3, content: .unselected), Cell(face: 1, xCor: 9, yCor: 3, content: .mine)],
+            [Cell(face: 1, xCor: 0, yCor: 3, content: .mine), Cell(face: 1, xCor: 1, yCor: 3, content: .unselected), Cell(face: 1, xCor: 2, yCor: 3, content: .mine), Cell(face: 1, xCor: 3, yCor: 3, content: .unselected), Cell(face: 1, xCor: 4, yCor: 3, content: .unselected), Cell(face: 1, xCor: 5, yCor: 3, content: .unselected), Cell(face: 1, xCor: 6, yCor: 3, content: .unselected), Cell(face: 1, xCor: 7, yCor: 3, content: .unselected), Cell(face: 1, xCor: 8, yCor: 3, content: .unselected), Cell(face: 1, xCor: 9, yCor: 3, content: .mine)],
             [Cell(face: 1, xCor: 0, yCor: 4, content: .unselected), Cell(face: 1, xCor: 1, yCor: 4, content: .mine), Cell(face: 1, xCor: 2, yCor: 4, content: .unselected), Cell(face: 1, xCor: 3, yCor: 4, content: .unselected), Cell(face: 1, xCor: 4, yCor: 4, content: .unselected), Cell(face: 1, xCor: 5, yCor: 4, content: .unselected), Cell(face: 1, xCor: 6, yCor: 4, content: .mine), Cell(face: 1, xCor: 7, yCor: 4, content: .unselected), Cell(face: 1, xCor: 8, yCor: 4, content: .unselected), Cell(face: 1, xCor: 9, yCor: 4, content: .unselected)],
             [Cell(face: 1, xCor: 0, yCor: 5, content: .unselected), Cell(face: 1, xCor: 1, yCor: 5, content: .unselected), Cell(face: 1, xCor: 2, yCor: 5, content: .unselected), Cell(face: 1, xCor: 3, yCor: 5, content: .unselected), Cell(face: 1, xCor: 4, yCor: 5, content: .mine), Cell(face: 1, xCor: 5, yCor: 5, content: .unselected), Cell(face: 1, xCor: 6, yCor: 5, content: .unselected), Cell(face: 1, xCor: 7, yCor: 5, content: .unselected), Cell(face: 1, xCor: 8, yCor: 5, content: .mine), Cell(face: 1, xCor: 9, yCor: 5, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 6, content: .unselected), Cell(face: 1, xCor: 1, yCor: 6, content: .unselected), Cell(face: 1, xCor: 2, yCor: 6, content: .unselected), Cell(face: 1, xCor: 3, yCor: 6, content: .mine), Cell(face: 1, xCor: 4, yCor: 6, content: .unselected), Cell(face: 1, xCor: 5, yCor: 6, content: .mine), Cell(face: 1, xCor: 6, yCor: 6, content: .unselected), Cell(face: 1, xCor: 7, yCor: 6, content: .unselected), Cell(face: 1, xCor: 8, yCor: 6, content: .unselected), Cell(face: 1, xCor: 9, yCor: 6, content: .unselected)],
+            [Cell(face: 1, xCor: 0, yCor: 6, content: .unselected), Cell(face: 1, xCor: 1, yCor: 6, content: .unselected), Cell(face: 1, xCor: 2, yCor: 6, content: .unselected), Cell(face: 1, xCor: 3, yCor: 6, content: .unselected), Cell(face: 1, xCor: 4, yCor: 6, content: .unselected), Cell(face: 1, xCor: 5, yCor: 6, content: .mine), Cell(face: 1, xCor: 6, yCor: 6, content: .unselected), Cell(face: 1, xCor: 7, yCor: 6, content: .unselected), Cell(face: 1, xCor: 8, yCor: 6, content: .unselected), Cell(face: 1, xCor: 9, yCor: 6, content: .unselected)],
             [Cell(face: 1, xCor: 0, yCor: 7, content: .unselected), Cell(face: 1, xCor: 1, yCor: 7, content: .unselected), Cell(face: 1, xCor: 2, yCor: 7, content: .unselected), Cell(face: 1, xCor: 3, yCor: 7, content: .unselected), Cell(face: 1, xCor: 4, yCor: 7, content: .unselected), Cell(face: 1, xCor: 5, yCor: 7, content: .mine), Cell(face: 1, xCor: 6, yCor: 7, content: .unselected), Cell(face: 1, xCor: 7, yCor: 7, content: .unselected), Cell(face: 1, xCor: 8, yCor: 7, content: .unselected), Cell(face: 1, xCor: 9, yCor: 7, content: .unselected)],
             [Cell(face: 1, xCor: 0, yCor: 8, content: .unselected), Cell(face: 1, xCor: 1, yCor: 8, content: .unselected), Cell(face: 1, xCor: 2, yCor: 8, content: .unselected), Cell(face: 1, xCor: 3, yCor: 8, content: .mine), Cell(face: 1, xCor: 4, yCor: 8, content: .unselected), Cell(face: 1, xCor: 5, yCor: 8, content: .unselected), Cell(face: 1, xCor: 6, yCor: 8, content: .unselected), Cell(face: 1, xCor: 7, yCor: 8, content: .unselected), Cell(face: 1, xCor: 8, yCor: 8, content: .unselected), Cell(face: 1, xCor: 9, yCor: 8, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 9, content: .unselected), Cell(face: 1, xCor: 1, yCor: 9, content: .unselected), Cell(face: 1, xCor: 2, yCor: 9, content: .unselected), Cell(face: 1, xCor: 3, yCor: 9, content: .mine), Cell(face: 1, xCor: 4, yCor: 9, content: .unselected), Cell(face: 1, xCor: 5, yCor: 9, content: .unselected), Cell(face: 1, xCor: 6, yCor: 9, content: .unselected), Cell(face: 1, xCor: 7, yCor: 9, content: .mine), Cell(face: 1, xCor: 8, yCor: 9, content: .unselected), Cell(face: 1, xCor: 9, yCor: 9, content: .unselected)]
+            [Cell(face: 1, xCor: 0, yCor: 9, content: .unselected), Cell(face: 1, xCor: 1, yCor: 9, content: .unselected), Cell(face: 1, xCor: 2, yCor: 9, content: .unselected), Cell(face: 1, xCor: 3, yCor: 9, content: .mine), Cell(face: 1, xCor: 4, yCor: 9, content: .unselected), Cell(face: 1, xCor: 5, yCor: 9, content: .unselected), Cell(face: 1, xCor: 6, yCor: 9, content: .unselected), Cell(face: 1, xCor: 7, yCor: 9, content: .mine), Cell(face: 1, xCor: 8, yCor: 9, content: .mine), Cell(face: 1, xCor: 9, yCor: 9, content: .unselected)]
         ]
+        
+        for line in cells { for cell in line { cell.canBeEdited = false } }
+        
+        return cells
     }
     #endif
 }
