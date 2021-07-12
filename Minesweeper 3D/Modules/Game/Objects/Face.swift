@@ -12,7 +12,7 @@ class Face: Identifiable {
     var id: UUID = UUID()
     var number: Int
     var references: References
-    var cells: [[Cell]] = [[]]
+    var cells: Board = Board([[]])
     var rotated: Face {
         let newFace = self
         newFace.cells = self.rotate(cells: self.cells, degrees: self.rotatedFromLastPosition)
@@ -36,7 +36,7 @@ class Face: Identifiable {
     }
     
     func hideAllCells() {
-        for line in self.cells { for cell in line { cell.shown = false } }
+        for line in self.cells.b { for cell in line { cell.shown = false } }
     }
     
     // MARK: Face rotation methods
@@ -70,11 +70,11 @@ class Face: Identifiable {
         }
     }
     
-    private func rotate(cells: [[Cell]], degrees: Degrees) -> [[Cell]] {
+    private func rotate(cells: Board, degrees: Degrees) -> Board {
         switch degrees {
-        case .positiveQuart: return cells.transposed.reversedRows
-        case .negativeQuart: return cells.transposed.reversedColumns
-        case .half: return cells.reversedRows.reversedColumns
+        case .positiveQuart: return Board(cells.b.transposed.reversedRows)
+        case .negativeQuart: return Board(cells.b.transposed.reversedColumns)
+        case .half: return Board(cells.b.reversedRows.reversedColumns)
         case .none: return cells
         }
     }
@@ -82,7 +82,7 @@ class Face: Identifiable {
     // MARK: Board generation methods
     // ==============================
     private func generateBoard() {
-        self.cells = Constants.boardCells.map { self.generateRow(rowNumber: $0) }
+        self.cells = Board(Constants.boardCells.map { self.generateRow(rowNumber: $0) })
     }
     
     private func generateRow(rowNumber: Int) -> [Cell] {

@@ -33,7 +33,10 @@
 		93FE38CB2649B45700A78B84 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93FE38CD2649B45700A78B84 /* Localized.strings */; };
 		93FE38D22649B84D00A78B84 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FE38D12649B84D00A78B84 /* Language.swift */; };
 		E41FE74826989CC700E7080B /* Int_EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41FE74726989CC700E7080B /* Int_EXT.swift */; };
+		E425150E269C990C00D01643 /* FaceTuples.swift in Sources */ = {isa = PBXBuildFile; fileRef = E425150D269C990C00D01643 /* FaceTuples.swift */; };
+		E4251512269C9D5000D01643 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4251511269C9D5000D01643 /* Board.swift */; };
 		E468F6DD265D26ED0081ACD7 /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = E468F6DC265D26ED0081ACD7 /* KeyboardListener.swift */; };
+		E48A3823269C91A600B909D2 /* FaceUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48A3822269C91A600B909D2 /* FaceUpdater.swift */; };
 		E4CF5186264BF4780058FED5 /* GameBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF5185264BF4780058FED5 /* GameBoardVC.swift */; };
 		E4CF5188264BF6820058FED5 /* VerticalHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF5187264BF6820058FED5 /* VerticalHintCell.swift */; };
 		E4CF518A264BF9DE0058FED5 /* HorizontalHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF5189264BF9DE0058FED5 /* HorizontalHintCell.swift */; };
@@ -77,7 +80,10 @@
 		C09E57D4C7D10CF86D2E73F6 /* Pods-Minesweeper 3D.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minesweeper 3D.debug.xcconfig"; path = "Target Support Files/Pods-Minesweeper 3D/Pods-Minesweeper 3D.debug.xcconfig"; sourceTree = "<group>"; };
 		D2A15E5E4F34C4D1F6AD6812 /* Pods_Minesweeper_3D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Minesweeper_3D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E41FE74726989CC700E7080B /* Int_EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int_EXT.swift; sourceTree = "<group>"; };
+		E425150D269C990C00D01643 /* FaceTuples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTuples.swift; sourceTree = "<group>"; };
+		E4251511269C9D5000D01643 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		E468F6DC265D26ED0081ACD7 /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
+		E48A3822269C91A600B909D2 /* FaceUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceUpdater.swift; sourceTree = "<group>"; };
 		E4CF5185264BF4780058FED5 /* GameBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardVC.swift; sourceTree = "<group>"; };
 		E4CF5187264BF6820058FED5 /* VerticalHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalHintCell.swift; sourceTree = "<group>"; };
 		E4CF5189264BF9DE0058FED5 /* HorizontalHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalHintCell.swift; sourceTree = "<group>"; };
@@ -136,8 +142,10 @@
 				E4EDDEAF265EA33B00588428 /* Degrees.swift */,
 				934C686B264C75A000099424 /* Direction.swift */,
 				934C6864264C567B00099424 /* Face.swift */,
+				E425150D269C990C00D01643 /* FaceTuples.swift */,
 				934C686F264C75B700099424 /* GameStatus.swift */,
 				E4EDDEB1265EA35D00588428 /* References.swift */,
+				E4251511269C9D5000D01643 /* Board.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -157,6 +165,7 @@
 				93CBB0CB2649EF89009A8E53 /* AppSate.swift */,
 				934C687A264C783500099424 /* Constants.swift */,
 				93F0DB85264847AF0022F976 /* Images.swift */,
+				E48A3822269C91A600B909D2 /* FaceUpdater.swift */,
 				E468F6DC265D26ED0081ACD7 /* KeyboardListener.swift */,
 				93FE38D12649B84D00A78B84 /* Language.swift */,
 				93F0DB7B26483C310022F976 /* Texts.swift */,
@@ -426,7 +435,9 @@
 			files = (
 				93DE280626580AF9007444E3 /* View_EXT.swift in Sources */,
 				E4CF518A264BF9DE0058FED5 /* HorizontalHintCell.swift in Sources */,
+				E425150E269C990C00D01643 /* FaceTuples.swift in Sources */,
 				93CBB0CC2649EF89009A8E53 /* AppSate.swift in Sources */,
+				E4251512269C9D5000D01643 /* Board.swift in Sources */,
 				934C6862264C54FC00099424 /* GameBoardVM.swift in Sources */,
 				E4CF5188264BF6820058FED5 /* VerticalHintCell.swift in Sources */,
 				E468F6DD265D26ED0081ACD7 /* KeyboardListener.swift in Sources */,
@@ -440,6 +451,7 @@
 				E4EDDEB0265EA33B00588428 /* Degrees.swift in Sources */,
 				93F0DB7226481FB90022F976 /* ImageButton.swift in Sources */,
 				9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */,
+				E48A3823269C91A600B909D2 /* FaceUpdater.swift in Sources */,
 				93F0DB7C26483C310022F976 /* Texts.swift in Sources */,
 				934C6865264C567C00099424 /* Face.swift in Sources */,
 				E4EDDEB4265EA3D700588428 /* CellContent.swift in Sources */,

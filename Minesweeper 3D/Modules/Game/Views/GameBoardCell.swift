@@ -17,7 +17,7 @@ struct GameBoardCell: View {
             alignment: .center,
             spacing: Constants.cellSpacing,
             content: {
-                ForEach(self.face.cells, id: \.self) { line in
+                ForEach(self.face.cells.b, id: \.self) { line in
                     HStack(
                         alignment: .center,
                         spacing: Constants.cellSpacing,
