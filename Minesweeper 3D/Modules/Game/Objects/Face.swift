@@ -8,6 +8,7 @@
 import Foundation
 
 class Face: Identifiable {
+    
     var id: UUID = UUID()
     var number: Int
     var references: References
@@ -18,7 +19,6 @@ class Face: Identifiable {
         return newFace
     }
     var generated: Bool = false
-    
     private var lastReferences = References()
     private var rotatedFromLastPosition: Degrees {
         switch self.references.top {
@@ -32,12 +32,15 @@ class Face: Identifiable {
     init(number: Int, references: References) {
         self.number = number
         self.references = references
+        self.generateBoard()
     }
     
     func hideAllCells() {
         for line in self.cells { for cell in line { cell.shown = false } }
     }
     
+    // MARK: Face rotation methods
+    // ===========================
     func updateLastReferences() {
         self.lastReferences = self.references
     }
@@ -76,126 +79,16 @@ class Face: Identifiable {
         }
     }
 
-    /// Faces have following order: Top, Bottom, Left, Right. It is the same as the init for 'References' class.
-    func generateBoard(faces: (Face, Face, Face, Face), completion: @escaping (() -> Void)) {
-        var board = Constants.boardCells.map { self.generateRow(rowNumber: $0) }
-        
-        if faces.0.generated { board = self.updateHorizontalLines(on: board, from: faces.0) }
-        if faces.1.generated { board = self.updateHorizontalLines(on: board, from: faces.1) }
-        if faces.2.generated { board = self.updateVerticalLines(on: board, from: faces.2) }
-        if faces.3.generated { board = self.updateVerticalLines(on: board, from: faces.3) }
-        
-        let minedBoard = self.placeMines(on: board)
-        let hintedBoard = self.generateMineHints(for: minedBoard)
-        
-        self.cells = hintedBoard
-        self.generated = true
-        
-        completion()
+    // MARK: Board generation methods
+    // ==============================
+    private func generateBoard() {
+        self.cells = Constants.boardCells.map { self.generateRow(rowNumber: $0) }
     }
     
     private func generateRow(rowNumber: Int) -> [Cell] {
         return Constants.boardCells.map {
-            return Cell(face: self.number, xCor: $0, yCor: rowNumber, content: .unselected)
+            let cell = Cell(face: self.number, xCor: $0, yCor: rowNumber, content: .unselected)
+            return cell
         }
-    }
-    
-    private func updateHorizontalLines(on board: [[Cell]], from face: Face) -> [[Cell]] {
-        var auxBoard = board
-        
-        switch face.number {
-        case self.references.top:
-            // Take last line and place it as the first
-            guard let lastReferenceLine = face.cells.last else { break }
-            auxBoard[0] = lastReferenceLine
-        case self.references.bottom:
-            // Take first line and place it as the last
-            guard let firstReferenceLine = face.cells.first else { break }
-            auxBoard[auxBoard.count - 1] = firstReferenceLine
-        default: break
-        }
-        
-        return auxBoard
-    }
-    
-    private func updateVerticalLines(on board: [[Cell]], from face: Face) -> [[Cell]] {
-        var auxBoard = board
-        
-        switch face.number {
-        case self.references.left:
-            // Take last column and place it as the first
-            let lastReferenceColumn = face.cells.map { $0.last }.compactMap { $0 }
-            
-            guard lastReferenceColumn.count == auxBoard.count else { break }
-            
-            for index in 0..<auxBoard.count { auxBoard[index][0] = lastReferenceColumn[index] }
-        case self.references.right:
-            // Take first column and place it as the last
-            let firstReferenceColumn = face.cells.map { $0.first }.compactMap { $0 }
-            
-            guard firstReferenceColumn.count == auxBoard.count else { break }
-            
-            for index in 0..<auxBoard.count { auxBoard[index][auxBoard.count - 1] = firstReferenceColumn[index] }
-        default: break
-        }
-        
-        return auxBoard
-    }
-    
-    private func placeMines(on board: [[Cell]]) -> [[Cell]] {
-        var generatedMines = board.map { $0.filter { $0.content == .mine }.count }.reduce(0, +)
-        
-        repeat {
-            let selectedCoordinates = self.generateRandomCoords()
-            let cell = board[selectedCoordinates.0][selectedCoordinates.1]
-            
-            if cell.content == .mine { continue }
-            else {
-                board[selectedCoordinates.0][selectedCoordinates.1].updateContent(to: .mine)
-                generatedMines += 1
-            }
-        } while (generatedMines < Constants.numberOfMinesPerFace)
-        
-        return board
-    }
-    
-    private func generateRandomCoords() -> (Int, Int) {
-        let number1 = Int(arc4random_uniform(UInt32(Constants.numberOfItems)))
-        let number2 = Int(arc4random_uniform(UInt32(Constants.numberOfItems)))
-        
-        return (number1, number2)
-    }
-    
-    private func generateMineHints(for cells: [[Cell]]) -> [[Cell]] {
-        let aux = cells
-        
-        for row in aux {
-            for cell in row {
-                if cell.content == .mine { continue }
-                
-                var counter = 0
-                
-                switch cell.type {
-                case .corner: break
-                case .vBorder: break
-                case .hBorder: break
-                case .inner:
-                    [
-                        aux[cell.yCor][cell.xCor - 1],     // Nort Cell
-                        aux[cell.yCor + 1][cell.xCor - 1], // North East Cell
-                        aux[cell.yCor + 1][cell.xCor],     // East Cell
-                        aux[cell.yCor + 1][cell.xCor + 1], // South East Cell
-                        aux[cell.yCor][cell.xCor + 1],     // South Cell
-                        aux[cell.yCor - 1][cell.xCor + 1], // South West Cell
-                        aux[cell.yCor - 1][cell.xCor],     // West Cell
-                        aux[cell.yCor - 1][cell.xCor - 1]  // North West Cell
-                    ].forEach { if $0.content == .mine { counter += 1 } }
-                }
-                
-                cell.updateContent(to: counter == 0 ? .void : .number(counter))
-            }
-        }
-        
-        return aux
     }
 }

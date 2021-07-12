@@ -40,6 +40,12 @@ struct GameBoardVC: View {
                     }
                     HorizontalHintCell(sideScreen: self.viewModel.visibleFace.references.bottom)
                         .onTapGesture { self.viewModel.rotate(.down) }
+                } else {
+                    Text("Generando nuevo juego...".uppercased())
+                        .bold()
+                        .font(.largeTitle)
+                        .foregroundColor(Color.blue)
+                        .multilineTextAlignment(.center)
                 }
             }
             Spacer()

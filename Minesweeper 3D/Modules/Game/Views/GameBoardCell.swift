@@ -28,9 +28,10 @@ struct GameBoardCell: View {
                                         .resizable()
                                         .frame(width: Constants.cellSide, height: Constants.cellSide)
                                         .foregroundColor(
-                                            cell.shown
-                                                ? cell.content.color
-                                                : nil
+                                            cell.content.color
+//                                            cell.shown
+//                                                ? cell.content.color
+//                                                : nil
                                         )
                                         .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
 //                                } else {

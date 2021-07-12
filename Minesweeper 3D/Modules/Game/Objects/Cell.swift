@@ -8,7 +8,8 @@
 import SwiftUI
 
 class Cell: Hashable {
-    private var id: String
+    private var id: String { return "\(self.face)-\(self.xCor).\(self.yCor)-\(self.content)" }
+    private var face: Int
     var xCor: Int
     var yCor: Int
     var type: CellType { return CellType.init(x: self.xCor, y: self.yCor) }
@@ -19,6 +20,7 @@ class Cell: Hashable {
     }
     var shown: Bool = false
     var flagged: Bool = false
+    var canBeEdited: Bool = true
     
     init(
         face: Int,
@@ -29,7 +31,7 @@ class Cell: Hashable {
         self.xCor = xCor
         self.yCor = yCor
         self.originalContent = content
-        self.id = "\(face)-\(xCor).\(yCor)-\(content)"
+        self.face = face
     }
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {
@@ -37,6 +39,15 @@ class Cell: Hashable {
             && lhs.yCor == rhs.yCor
             && lhs.type == rhs.type
             && lhs.id == rhs.id
+            && lhs.face == rhs.face
+            && lhs.canBeEdited == rhs.canBeEdited
+    }
+    
+    static func >> (cell: Cell, face: Int) -> Cell {
+        let cell = Cell(face: face, xCor: cell.xCor, yCor: cell.yCor, content: cell.originalContent)
+        cell.canBeEdited = false
+        
+        return cell
     }
     
     func hash(into hasher: inout Hasher) {
@@ -44,6 +55,8 @@ class Cell: Hashable {
         hasher.combine(self.yCor)
         hasher.combine(self.type)
         hasher.combine(self.id)
+        hasher.combine(self.face)
+        hasher.combine(self.canBeEdited)
     }
     
     func updateContent(to content: CellContent) {
