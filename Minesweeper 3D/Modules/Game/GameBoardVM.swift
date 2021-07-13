@@ -96,7 +96,7 @@ class GameBoardVM: ObservableObject {
     // MARK: Board Functions
     // =====================
     private func generateFaceNumbers() {
-        let updater = FaceUpdater()
+        let updater = Updater()
         let face1 = Face(number: 1, references: References(top: 5, bottom: 2, left: 3, right: 4))
         let face2 = Face(number: 2, references: References(top: 1, bottom: 6, left: 3, right: 4))
         let face3 = Face(number: 3, references: References(top: 5, bottom: 2, left: 6, right: 1))
@@ -110,7 +110,7 @@ class GameBoardVM: ObservableObject {
         #endif
        
         updater.updateFaces(
-            faces: FaceT_6((face1, face2, face3, face4, face5, face6))
+            faces: FaceT_6(face1, face2, face3, face4, face5, face6)
         ) { newFaces in
             face1.cells = newFaces.t.0.cells
             face2.cells = newFaces.t.1.cells

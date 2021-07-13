@@ -12,7 +12,7 @@ class Cell: Hashable {
     private var face: Int
     var xCor: Int
     var yCor: Int
-    var type: CellType { return CellType.init(x: self.xCor, y: self.yCor) }
+    var type: CellType { return CellType.init(x: xCor, y: yCor) }
     private var originalContent: CellContent
     var content: CellContent {
         if self.flagged { return .flagged }
@@ -43,7 +43,12 @@ class Cell: Hashable {
             && lhs.canBeEdited == rhs.canBeEdited
     }
     
-    static func >> (cell: Cell, face: Int) -> Cell {
+    static func << (cell: Cell, coords: (Int, Int)) -> Cell {
+        let cell = Cell(face: cell.face, xCor: coords.0, yCor: coords.1, content: cell.content)
+        return cell
+    }
+    
+    static func << (cell: Cell, face: Int) -> Cell {
         let cell = Cell(face: face, xCor: cell.xCor, yCor: cell.yCor, content: cell.originalContent)
         cell.canBeEdited = false
         

@@ -45,6 +45,9 @@
 		E4EDDEB0265EA33B00588428 /* Degrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDDEAF265EA33B00588428 /* Degrees.swift */; };
 		E4EDDEB2265EA35D00588428 /* References.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDDEB1265EA35D00588428 /* References.swift */; };
 		E4EDDEB4265EA3D700588428 /* CellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDDEB3265EA3D700588428 /* CellContent.swift */; };
+		E4F4047F269DE0A200E09CDC /* Miner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F4047E269DE0A200E09CDC /* Miner.swift */; };
+		E4F40482269DE1BC00E09CDC /* Hinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F40481269DE1BC00E09CDC /* Hinter.swift */; };
+		E4F40485269DE22800E09CDC /* Referencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F40484269DE22800E09CDC /* Referencer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +95,9 @@
 		E4EDDEAF265EA33B00588428 /* Degrees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degrees.swift; sourceTree = "<group>"; };
 		E4EDDEB1265EA35D00588428 /* References.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = References.swift; sourceTree = "<group>"; };
 		E4EDDEB3265EA3D700588428 /* CellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellContent.swift; sourceTree = "<group>"; };
+		E4F4047E269DE0A200E09CDC /* Miner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miner.swift; sourceTree = "<group>"; };
+		E4F40481269DE1BC00E09CDC /* Hinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hinter.swift; sourceTree = "<group>"; };
+		E4F40484269DE22800E09CDC /* Referencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referencer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +171,6 @@
 				93CBB0CB2649EF89009A8E53 /* AppSate.swift */,
 				934C687A264C783500099424 /* Constants.swift */,
 				93F0DB85264847AF0022F976 /* Images.swift */,
-				E48A3822269C91A600B909D2 /* FaceUpdater.swift */,
 				E468F6DC265D26ED0081ACD7 /* KeyboardListener.swift */,
 				93FE38D12649B84D00A78B84 /* Language.swift */,
 				93F0DB7B26483C310022F976 /* Texts.swift */,
@@ -290,12 +295,24 @@
 		E4CF5184264BF4520058FED5 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				E4F4047C269DD87E00E09CDC /* BoardHelpers */,
 				934C686A264C758E00099424 /* Objects */,
 				934C6869264C757C00099424 /* Views */,
 				E4CF5185264BF4780058FED5 /* GameBoardVC.swift */,
 				934C6861264C54FC00099424 /* GameBoardVM.swift */,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		E4F4047C269DD87E00E09CDC /* BoardHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				E48A3822269C91A600B909D2 /* FaceUpdater.swift */,
+				E4F40481269DE1BC00E09CDC /* Hinter.swift */,
+				E4F4047E269DE0A200E09CDC /* Miner.swift */,
+				E4F40484269DE22800E09CDC /* Referencer.swift */,
+			);
+			path = BoardHelpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,6 +450,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4F40485269DE22800E09CDC /* Referencer.swift in Sources */,
 				93DE280626580AF9007444E3 /* View_EXT.swift in Sources */,
 				E4CF518A264BF9DE0058FED5 /* HorizontalHintCell.swift in Sources */,
 				E425150E269C990C00D01643 /* FaceTuples.swift in Sources */,
@@ -441,10 +459,12 @@
 				934C6862264C54FC00099424 /* GameBoardVM.swift in Sources */,
 				E4CF5188264BF6820058FED5 /* VerticalHintCell.swift in Sources */,
 				E468F6DD265D26ED0081ACD7 /* KeyboardListener.swift in Sources */,
+				E4F4047F269DE0A200E09CDC /* Miner.swift in Sources */,
 				933A4586264ED73900BDE2AA /* Cell.swift in Sources */,
 				93F0DB96264868070022F976 /* CoreDataController.swift in Sources */,
 				E41FE74826989CC700E7080B /* Int_EXT.swift in Sources */,
 				934C6870264C75B800099424 /* GameStatus.swift in Sources */,
+				E4F40482269DE1BC00E09CDC /* Hinter.swift in Sources */,
 				E4EDDEB2265EA35D00588428 /* References.swift in Sources */,
 				93F0DB8126483D2B0022F976 /* SettingsVC.swift in Sources */,
 				93F0DB86264847AF0022F976 /* Images.swift in Sources */,

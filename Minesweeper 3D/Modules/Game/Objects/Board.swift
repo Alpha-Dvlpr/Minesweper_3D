@@ -8,6 +8,7 @@
 import Foundation
 
 struct Board {
+    
     var b: [[Cell]]
     
     init(_ b: [[Cell]]) {
