@@ -36,7 +36,8 @@ class FaceUpdater {
                                 face6: faces.t.5
                             ) { f6c in
                                 faces.t.5.cells = f6c
-                                completion(faces)
+                                
+                                self.calculateHints(faces: faces) { completion($0) }
                             }
                         }
                     }
@@ -172,40 +173,154 @@ class FaceUpdater {
     // MARK: Mine hint generation functions
     // ====================================
     func calculateHints(faces: FaceT_6, completion: @escaping ((FaceT_6) -> Void)) {
+        let dispatchGroup = DispatchGroup()
         
+        faces.i.forEach { face in
+            
+        }
+        
+        dispatchGroup.enter()
+        self.calculateInnerHints(for: faces.t.0.cells) { hf1 in
+            faces.t.0.cells = hf1
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        self.calculateVerticalHints(
+            for: faces.t.0.cells,
+            sides: (faces.t.2.cells, faces.t.3.cells)
+        ) { hf1 in
+            faces.t.0.cells = hf1
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        self.calculateHorizontalHints(
+            for: faces.t.0.cells,
+            sides: (faces.t.4.cells, faces.t.1.cells)
+        ) { hf1 in
+            faces.t.0.cells = hf1
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) { completion(faces) }
     }
-    
-    private func generateMineHints(for cells: Board, completion: @escaping ((Board) -> Void)) {
+
+    private func calculateInnerHints(for cells: Board, completion: @escaping ((Board) -> Void)) {
         let aux = cells.b
         
-        for row in aux {
-            for cell in row {
-                if cell.content == .mine { continue }
+        for line in aux {
+            for cell in line {
+                if cell.content == .mine || cell.type != .inner { continue }
                 
-                var counter = 0
+                let surrounding = [
+                    aux[cell.yCor - 1][cell.xCor],     // N  Cell
+                    aux[cell.yCor - 1][cell.xCor + 1], // NE Cell
+                    aux[cell.yCor][cell.xCor + 1],     // E  Cell
+                    aux[cell.yCor + 1][cell.xCor + 1], // SE Cell
+                    aux[cell.yCor + 1][cell.xCor],     // S  Cell
+                    aux[cell.yCor + 1][cell.xCor - 1], // SW Cell
+                    aux[cell.yCor][cell.xCor - 1],     // W  Cell
+                    aux[cell.yCor - 1][cell.xCor - 1]  // NW Cell
+                ]
                 
-                switch cell.type {
-                case .corner: break
-                case .vBorder: break
-                case .hBorder: break
-                case .inner:
-                    [
-                        aux[cell.yCor][cell.xCor - 1],     // Nort Cell
-                        aux[cell.yCor + 1][cell.xCor - 1], // North East Cell
-                        aux[cell.yCor + 1][cell.xCor],     // East Cell
-                        aux[cell.yCor + 1][cell.xCor + 1], // South East Cell
-                        aux[cell.yCor][cell.xCor + 1],     // South Cell
-                        aux[cell.yCor - 1][cell.xCor + 1], // South West Cell
-                        aux[cell.yCor - 1][cell.xCor],     // West Cell
-                        aux[cell.yCor - 1][cell.xCor - 1]  // North West Cell
-                    ].forEach { if $0.content == .mine { counter += 1 } }
-                }
+                let tempCell = self.switchToMine(cell: cell, inside: surrounding)
                 
-                cell.updateContent(to: counter == 0 ? .void : .number(counter))
+                cell.updateContent(to: tempCell.content)
             }
         }
         
         completion(Board(aux))
+    }
+    
+    private func calculateVerticalHints(
+        for cells: Board,
+        sides: (Board, Board),
+        completion: @escaping ((Board) -> Void)
+    ) {
+        let aux = cells.b
+        
+        for line in aux {
+            for cell in line {
+                if cell.content == .mine || cell.type != .vBorder { continue }
+                
+                var surrounding = [Cell]()
+                
+                if cell.xCor == 0 {
+                    surrounding = [
+                        aux[cell.yCor - 1][cell.xCor],     // N  Cell
+                        aux[cell.yCor - 1][cell.xCor + 1], // NE Cell
+                        aux[cell.yCor][cell.xCor + 1],     // E  Cell
+                        aux[cell.yCor + 1][cell.xCor + 1], // SE Cell
+                        aux[cell.yCor + 1][cell.xCor]      // S  Cell
+                    ]
+                } else if cell.xCor == Constants.numberOfItems - 1 {
+                    surrounding = [
+                        aux[cell.yCor + 1][cell.xCor],     // S  Cell
+                        aux[cell.yCor + 1][cell.xCor - 1], // SW Cell
+                        aux[cell.yCor][cell.xCor - 1],     // W  Cell
+                        aux[cell.yCor - 1][cell.xCor - 1], // NW Cell
+                        aux[cell.yCor - 1][cell.xCor]      // N  Cell
+                    ]
+                }
+                
+                let tempCell = self.switchToMine(cell: cell, inside: surrounding)
+                
+                cell.updateContent(to: tempCell.content)
+            }
+        }
+        
+        completion(Board(aux))
+    }
+    
+    private func calculateHorizontalHints(
+        for cells: Board,
+        sides: (Board, Board),
+        completion: @escaping ((Board) -> Void)
+    ) {
+        let aux = cells.b
+        
+        for line in aux {
+            for cell in line {
+                if cell.content == .mine || cell.type != .hBorder { continue }
+                
+                var surrounding = [Cell]()
+                
+                if cell.yCor == 0 {
+                    surrounding = [
+                        aux[cell.yCor][cell.xCor + 1],     // E  Cell
+                        aux[cell.yCor + 1][cell.xCor + 1], // SE Cell
+                        aux[cell.yCor + 1][cell.xCor],     // S  Cell
+                        aux[cell.yCor + 1][cell.xCor - 1], // SW Cell
+                        aux[cell.yCor][cell.xCor - 1]      // W Cell
+                    ]
+                } else if cell.yCor == Constants.numberOfItems - 1 {
+                    surrounding = [
+                        aux[cell.yCor][cell.xCor - 1],     // W  Cell
+                        aux[cell.yCor - 1][cell.xCor - 1], // NW Cell
+                        aux[cell.yCor - 1][cell.xCor],     // N  Cell
+                        aux[cell.yCor - 1][cell.xCor + 1], // NE Cell
+                        aux[cell.yCor][cell.xCor + 1]      // E  Cell
+                    ]
+                }
+                
+                let tempCell = self.switchToMine(cell: cell, inside: surrounding)
+                
+                cell.updateContent(to: tempCell.content)
+            }
+        }
+        
+        completion(Board(aux))
+    }
+    
+    private func switchToMine(cell: Cell, inside cells: [Cell]) -> Cell {
+        var counter = 0
+        
+        cells.forEach { counter += $0.content == .mine ? 1 : 0 }
+        
+        cell.updateContent(to: counter == 0 ? .void : .number(counter))
+        
+        return cell
     }
     
     // MARK: DEBUG functions
