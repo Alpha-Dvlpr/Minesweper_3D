@@ -9,14 +9,8 @@ import Foundation
 
 class Updater {
 
-    private let miner: Miner
-    private let hinter: Hinter
+    private let miner = Miner()
     private let lastIndex = Constants.numberOfItems - 1
-    
-    init() {
-        self.miner = Miner()
-        self.hinter = Hinter(referencer: Referencer())
-    }
     
     // MARK: Board updation functions
     // ==============================
@@ -45,8 +39,7 @@ class Updater {
                                 face6: faces.t.5
                             ) { f6c in
                                 faces.t.5.cells = f6c
-                                
-                                self.hinter.calculateHints(faces: faces) { completion($0) }
+                                completion(faces)
                             }
                         }
                     }

@@ -9,37 +9,33 @@ import Foundation
 
 class Hinter {
     
-    private let referencer: Referencer
-    
-    init(referencer: Referencer) {
-        self.referencer = referencer
-    }
+    private let referencer = Referencer()
     
     func calculateHints(faces: FaceT_6, completion: @escaping ((FaceT_6) -> Void)) {
         let dispatchGroup = DispatchGroup()
         
         faces.i.forEach { face in
-//            dispatchGroup.enter()
-//            self.calculateInnerHints(for: face.cells) { hintedFace in
-//                face.cells = hintedFace
-//                dispatchGroup.leave()
-//            }
+            dispatchGroup.enter()
+            self.calculateInnerHints(for: face.cells) { hintedFace in
+                face.cells = hintedFace
+                dispatchGroup.leave()
+            }
             
-//            if let vSides = self.referencer.getVerticalFaces(for: face.number, on: faces) {
-//                dispatchGroup.enter()
-//                self.calculateVerticalHints(for: face.cells, sides: vSides) { hintedFace in
-//                    face.cells = hintedFace
-//                    dispatchGroup.leave()
-//                }
-//            }
-//
-//            if let hSides = self.referencer.getHorizontalFaces(for: face.number, on: faces) {
-//                dispatchGroup.enter()
-//                self.calculateHorizontalHints(for: face.cells, sides: hSides) { hintedFace in
-//                    face.cells = hintedFace
-//                    dispatchGroup.leave()
-//                }
-//            }
+            if let vSides = self.referencer.getVerticalFaces(for: face.number, on: faces) {
+                dispatchGroup.enter()
+                self.calculateVerticalHints(for: face.cells, sides: vSides) { hintedFace in
+                    face.cells = hintedFace
+                    dispatchGroup.leave()
+                }
+            }
+
+            if let hSides = self.referencer.getHorizontalFaces(for: face.number, on: faces) {
+                dispatchGroup.enter()
+                self.calculateHorizontalHints(for: face.cells, sides: hSides) { hintedFace in
+                    face.cells = hintedFace
+                    dispatchGroup.leave()
+                }
+            }
             
             if let corners = self.referencer.getCornerReferences(for: face.number, on: faces) {
                 dispatchGroup.enter()
@@ -176,6 +172,10 @@ class Hinter {
             .map { $0.filter { $0.type == .corner }.map { $0 } }
             .flatMap { $0 }
             .filter { $0.content != .mine }
+        let tfc = sides.t.0
+        let bfc = sides.t.1
+        let lfc = sides.t.2
+        let rfc = sides.t.3
         
         corners.forEach { cell in
             var surrounding = [Cell]()
@@ -184,7 +184,8 @@ class Hinter {
                 surrounding = [
                     aux[cell.yCor][cell.xCor + 1],     // E  Cell
                     aux[cell.yCor + 1][cell.xCor + 1], // SE Cell
-                    aux[cell.yCor + 1][cell.xCor]      // S  Cell
+                    aux[cell.yCor + 1][cell.xCor],     // S  Cell
+                    lfc[1], lfc[0], tfc[1]             // SW - W - NW Cells
                 ]
             }
             
@@ -192,7 +193,8 @@ class Hinter {
                 surrounding = [
                     aux[cell.yCor + 1][cell.xCor],     // S  Cell
                     aux[cell.yCor + 1][cell.xCor - 1], // SW Cell
-                    aux[cell.yCor][cell.xCor - 1]      // W  Cell
+                    aux[cell.yCor][cell.xCor - 1],     // W  Cell
+                    tfc[8], tfc[9], rfc[1]             // NW - N - NE Cells
                 ]
             }
             
@@ -200,7 +202,8 @@ class Hinter {
                 surrounding = [
                     aux[cell.yCor - 1][cell.xCor],     // N  Cell
                     aux[cell.yCor - 1][cell.xCor + 1], // NE Cell
-                    aux[cell.yCor][cell.xCor + 1]      // E  Cell
+                    aux[cell.yCor][cell.xCor + 1],     // E  Cell
+                    bfc[1], bfc[0], lfc[8]             // SE - S - NW Cells
                 ]
             }
             
@@ -208,7 +211,8 @@ class Hinter {
                 surrounding = [
                     aux[cell.yCor][cell.xCor - 1],     // W  Cell
                     aux[cell.yCor - 1][cell.xCor - 1], // NW Cell
-                    aux[cell.yCor - 1][cell.xCor]      // N  Cell
+                    aux[cell.yCor - 1][cell.xCor],     // N  Cell
+                    rfc[8], rfc[9], bfc[8]             // NE - N - E Cells
                 ]
             }
             

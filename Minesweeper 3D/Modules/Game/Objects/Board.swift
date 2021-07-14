@@ -19,6 +19,10 @@ struct Board {
         for line in self.b { for cell in line { cell.shown = false } }
     }
     
+    func disableEditing() {
+        for line in self.b { for cell in line { cell.canBeEdited = false } }
+    }
+    
     func vertical(at index: Int, reversed: Bool = false) -> [Cell]? {
         let cells = self.b.map { $0[index] }.compactMap { $0 }
         

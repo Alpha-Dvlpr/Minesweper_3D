@@ -96,7 +96,6 @@ class GameBoardVM: ObservableObject {
     // MARK: Board Functions
     // =====================
     private func generateFaceNumbers() {
-        let updater = Updater()
         let face1 = Face(number: 1, references: References(top: 5, bottom: 2, left: 3, right: 4))
         let face2 = Face(number: 2, references: References(top: 1, bottom: 6, left: 3, right: 4))
         let face3 = Face(number: 3, references: References(top: 5, bottom: 2, left: 6, right: 1))
@@ -105,17 +104,21 @@ class GameBoardVM: ObservableObject {
         let face6 = Face(number: 6, references: References(top: 2, bottom: 5, left: 3, right: 4))
         
         #if DEBUG
-        face1.cells = updater.debug_face1MineGeneration()
+        face1.cells = Updater().debug_face1MineGeneration()
         face1.generated = true
         #endif
        
-        updater.updateFaces(
+        Updater().updateFaces(
             faces: FaceT_6(face1, face2, face3, face4, face5, face6)
-        ) { newFaces in
-            self.faces = newFaces.i
-            self.visibleFace = self.faces.first(where: { $0.number == 1 })!
-            self.gameStatus = .running
-            self.updateImage()
+        ) { minedFaces in
+            Hinter().calculateHints(faces: minedFaces) { hintedFaces in
+                hintedFaces.i.forEach { $0.cells.disableEditing() }
+                
+                self.faces = hintedFaces.i
+                self.visibleFace = self.faces.first(where: { $0.number == 1 })!
+                self.gameStatus = .running
+                self.updateImage()
+            }
         }
     }
     
