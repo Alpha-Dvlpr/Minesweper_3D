@@ -41,6 +41,7 @@ struct GameBoardVC: View {
                     HorizontalHintCell(sideScreen: self.viewModel.visibleFace.references.bottom)
                         .onTapGesture { self.viewModel.rotate(.down) }
                 } else {
+                    // TODO: Localize
                     Text("Generando nuevo juego...".uppercased())
                         .bold()
                         .font(.largeTitle)

@@ -8,37 +8,41 @@
 import SwiftUI
 
 enum Texts: String {
-    case main
-    case newGame
-    case restartGame
-    case bestMarks
-    case settings
-    case accept
-    case cancel
-    case save
-    case delete
-    case deleteTitle
-    case deleteDisclaimer
-    case username
-    case language
-    case autosaveRanks
-    case maxRanks
-    case yes
-    case no
-    case typeNewValue
-    case currentValueDisclaimer
-    case gamePaused
-    case gameLost
-    case gameWon
-    case general
     case advanced
-    case termsOfUse
-    case menu
+    case autosaveRanks
+    case bestMarks
+    case cancel
+    case copyright
+    case delete
+    case deleteDisclaimer
+    case deleteTitle
     case finishGame
     case finishGameDisclaimer
+    case gameLost
+    case gamePaused
+    case gameWon
+    case general
+    case info
+    case language
+    case main
+    case maxRanks
+    case menu
+    case moreInfo
+    case newGame
+    case no
+    case restartGame
+    case save
+    case settings
+    case username
+    case version
+    case yes
     
     var localized: String {
         return self.local()
+    }
+    
+    func localized(with parameters: [String]) -> String {
+        return String.init(format: self.local(), arguments: parameters)
     }
     
     private func local(comment: String = "") -> String {

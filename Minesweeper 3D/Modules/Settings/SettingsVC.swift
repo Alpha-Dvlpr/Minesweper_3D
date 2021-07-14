@@ -45,6 +45,11 @@ struct SettingsVC: View, KeyboardListener {
                     Text("\(Texts.maxRanks.localized.uppercased()): \(self.$viewModel.settings.maxRanks.wrappedValue)")
                 }
             }
+            Section(header: Text(Texts.info.localized)) {
+                Text(Texts.version.localized(with: [self.viewModel.appVersion]))
+                Text(Texts.copyright.localized)
+//                Link(Texts.moreInfo.localized, destination: self.viewModel.infoURL)
+            }
             Section(header: Text(Texts.advanced.localized)) {
                 Button(
                     action: { self.showDeleteAlert = true  },

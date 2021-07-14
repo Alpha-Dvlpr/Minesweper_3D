@@ -10,13 +10,16 @@ import SwiftUI
 class SettingsVM: ObservableObject {
     
     @Published var settings: Settings!
-    var originalSettings: Settings!
+    private var originalSettings: Settings!
     var settingsChanged: Bool { return !self.settings.equals(settings: self.originalSettings) }
+    var appVersion: String!
+    let infoURL = URL(string: "https://www.apple.com/es/iphone")!
         
     private var coreData = CoreDataController.shared
     
     init() {
         self.getAllData()
+        self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }
     
     func saveData() {
