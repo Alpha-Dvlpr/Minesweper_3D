@@ -112,15 +112,8 @@ class GameBoardVM: ObservableObject {
         updater.updateFaces(
             faces: FaceT_6(face1, face2, face3, face4, face5, face6)
         ) { newFaces in
-            face1.cells = newFaces.t.0.cells
-            face2.cells = newFaces.t.1.cells
-            face3.cells = newFaces.t.2.cells
-            face4.cells = newFaces.t.3.cells
-            face5.cells = newFaces.t.4.cells
-            face6.cells = newFaces.t.5.cells
-         
-            self.faces = [face1, face2, face3, face4, face5, face6]
-            self.visibleFace = face1
+            self.faces = newFaces.i
+            self.visibleFace = self.faces.first(where: { $0.number == 1 })!
             self.gameStatus = .running
             self.updateImage()
         }

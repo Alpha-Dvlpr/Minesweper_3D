@@ -102,8 +102,7 @@ class Updater {
         let face1Converted = face1LastColumn.map { return ($0 << (0, $0.yCor)) << 4 }
         (0...lastIndex).forEach { face4.cells.b[$0][0] = face1Converted[$0] }
         
-        let face2Converted = face2LastColumn.map { return ($0 << ($0.yCor, $0.xCor)) << 4 }
-        face4.cells.b[lastIndex] = face2Converted
+        face4.cells.b[lastIndex] = face2LastColumn.map { return ($0 << ($0.yCor, $0.xCor)) << 4 }
         
         self.miner.placeMines(on: face4.cells) { completion($0) }
     }
@@ -123,8 +122,7 @@ class Updater {
         (0...lastIndex).forEach { face5.cells.b[$0][0] = (face3FirstLine[$0] << (0, $0)) << 5 }
         
         let face4Converted = (0...lastIndex).map { index -> Cell in
-            let opposite = Int.opposite(of: index, max: lastIndex)
-            return (face4FirstLine[index] << (9, opposite)) << 5
+            return (face4FirstLine[index] << (9, Int.opposite(of: index, max: lastIndex))) << 5
         }
         
         (0...lastIndex).forEach { face5.cells.b[$0][lastIndex] = face4Converted.reversed()[$0] }
@@ -148,17 +146,15 @@ class Updater {
         face6.cells.b[0] = face2LastLine.map { return ($0 << ($0.xCor, 0)) << 6 }
         
         let face3Converted = (0...lastIndex).map { index -> Cell in
-            let opposite = Int.opposite(of: index, max: lastIndex)
             let cell = face3FirstColumn[index]
-            return (cell << (cell.xCor, opposite)) << 6
+            return (cell << (cell.xCor, Int.opposite(of: index, max: lastIndex))) << 6
         }
         
         (0...lastIndex).forEach { face6.cells.b[$0][0] = face3Converted.reversed()[$0] }
         
         let face4Converted = (0...lastIndex).map { index -> Cell in
-            let opposite = Int.opposite(of: index, max: lastIndex)
             let cell = face4LastColumn[index]
-            return (cell << (cell.xCor, opposite)) << 6
+            return (cell << (cell.xCor, Int.opposite(of: index, max: lastIndex))) << 6
         }
         
         (0...lastIndex).forEach { face6.cells.b[$0][lastIndex] = face4Converted.reversed()[$0] }
