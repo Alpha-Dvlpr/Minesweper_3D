@@ -35,10 +35,6 @@ class Face: Identifiable {
         self.generateBoard()
     }
     
-    func hideAllCells() {
-        for line in self.cells.b { for cell in line { cell.shown = false } }
-    }
-    
     // MARK: Face rotation methods
     // ===========================
     func updateLastReferences() {

@@ -83,7 +83,7 @@ class GameBoardVM: ObservableObject {
     
     func restartGame() {
         self.gameTime = 0
-        self.faces.forEach { $0.hideAllCells() }
+        self.faces.forEach { $0.cells.hideAllCells() }
         self.gameStatus = .running
         self.updateImage()
     }

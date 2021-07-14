@@ -15,6 +15,10 @@ struct Board {
         self.b = b
     }
     
+    func hideAllCells() {
+        for line in self.b { for cell in line { cell.shown = false } }
+    }
+    
     func vertical(at index: Int, reversed: Bool = false) -> [Cell]? {
         let cells = self.b.map { $0[index] }.compactMap { $0 }
         

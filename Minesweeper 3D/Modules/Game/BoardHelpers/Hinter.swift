@@ -32,7 +32,7 @@ class Hinter {
 //                    dispatchGroup.leave()
 //                }
 //            }
-//            
+//
 //            if let hSides = self.referencer.getHorizontalFaces(for: face.number, on: faces) {
 //                dispatchGroup.enter()
 //                self.calculateHorizontalHints(for: face.cells, sides: hSides) { hintedFace in
@@ -41,13 +41,13 @@ class Hinter {
 //                }
 //            }
             
-//            if let corners = self.referencer.getCornerReferences(for: face.number, on: faces) {
-//                dispatchGroup.enter()
-//                self.calculateCornerHints(for: face.cells, sides: corners.b) { hintedFace in
-//                    face.cells = hintedFace
-//                    dispatchGroup.leave()
-//                }
-//            }
+            if let corners = self.referencer.getCornerReferences(for: face.number, on: faces) {
+                dispatchGroup.enter()
+                self.calculateCornerHints(for: face.cells, sides: corners) { hintedFace in
+                    face.cells = hintedFace
+                    dispatchGroup.leave()
+                }
+            }
         }
         
         dispatchGroup.notify(queue: .main) { completion(faces) }
