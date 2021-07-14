@@ -12,9 +12,11 @@ struct GameBoardVC: View {
     @ObservedObject var viewModel: GameBoardVM
     @State private var menuShown: Bool = false
     @State private var dismissAlertShown: Bool = false
-    var closeCallback: (() -> Void)?
     
+    var closeCallback: (() -> Void)?
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    private let firstIndex = 1
+    private let lastIndex = Constants.numberOfItems - 2
     
     var body: some View {
         VStack {
@@ -26,20 +28,16 @@ struct GameBoardVC: View {
             Spacer()
             VStack(spacing: Constants.boardSpacing) {
                 if self.viewModel.visibleFace != nil {
-                    HorizontalHintCell(sideScreen: self.viewModel.visibleFace.references.top)
-                        .onTapGesture { self.viewModel.rotate(.up) }
+                    HorizontalHintCell(sideCells: self.viewModel.sideFaces.t.0) { self.viewModel.rotate(.up) }
                     HStack(spacing: Constants.boardSpacing) {
-                        VerticalHintCell(sideScreen: self.viewModel.visibleFace.references.left)
-                            .onTapGesture { self.viewModel.rotate(.left) }
+                        VerticalHintCell(sideCells: self.viewModel.sideFaces.t.2) { self.viewModel.rotate(.left) }
                         GameBoardCell(
                             face: self.viewModel.visibleFace,
                             boardCallback: { self.viewModel.updateCellVisibility(x: $0, y: $1) }
                         )
-                        VerticalHintCell(sideScreen: self.viewModel.visibleFace.references.right)
-                            .onTapGesture { self.viewModel.rotate(.right) }
+                        VerticalHintCell(sideCells: self.viewModel.sideFaces.t.3) { self.viewModel.rotate(.right) }
                     }
-                    HorizontalHintCell(sideScreen: self.viewModel.visibleFace.references.bottom)
-                        .onTapGesture { self.viewModel.rotate(.down) }
+                    HorizontalHintCell(sideCells: self.viewModel.sideFaces.t.1) { self.viewModel.rotate(.down) }
                 } else {
                     // TODO: Localize
                     Text("Generando nuevo juego...".uppercased())

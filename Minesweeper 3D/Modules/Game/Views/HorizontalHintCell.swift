@@ -9,26 +9,20 @@ import SwiftUI
 
 struct HorizontalHintCell: View {
     
-    var sideScreen: Int
+    var sideCells: [Cell]
+    var callback: (() -> Void)
     
     var body: some View {
         HStack(
             alignment: .center,
             spacing: Constants.cellSpacing,
-            content: {
-                ForEach(Constants.boardCells, id: \.self) { _ in
-                    Images.numbers(self.sideScreen).image
-                        .resizable()
-                        .frame(width: Constants.cellSide, height: Constants.cellSide)
-//                        .foregroundColor(nil)
-                }
-            }
+            content: { ForEach(self.sideCells, id: \.self) { GameCell(cell: $0) { _ in self.callback() } } }
         )
     }
 }
 
 struct HorizontalHintCell_Previews: PreviewProvider {
     static var previews: some View {
-        HorizontalHintCell(sideScreen: 4)
+        HorizontalHintCell(sideCells: [], callback: { })
     }
 }

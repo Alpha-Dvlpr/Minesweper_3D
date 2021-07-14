@@ -49,6 +49,7 @@
 		E4F40482269DE1BC00E09CDC /* Hinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F40481269DE1BC00E09CDC /* Hinter.swift */; };
 		E4F40485269DE22800E09CDC /* Referencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F40484269DE22800E09CDC /* Referencer.swift */; };
 		E4F910D8269F1D3F0093B490 /* BoardTuples.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F910D7269F1D3F0093B490 /* BoardTuples.swift */; };
+		E4F910DD269F542E0093B490 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F910DC269F542E0093B490 /* GameCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,7 @@
 		E4F40481269DE1BC00E09CDC /* Hinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hinter.swift; sourceTree = "<group>"; };
 		E4F40484269DE22800E09CDC /* Referencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referencer.swift; sourceTree = "<group>"; };
 		E4F910D7269F1D3F0093B490 /* BoardTuples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTuples.swift; sourceTree = "<group>"; };
+		E4F910DC269F542E0093B490 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				E4CF518B264BFF330058FED5 /* GameBoardCell.swift */,
 				E4CF5189264BF9DE0058FED5 /* HorizontalHintCell.swift */,
 				E4CF5187264BF6820058FED5 /* VerticalHintCell.swift */,
+				E4F910DC269F542E0093B490 /* GameCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 			files = (
 				E4F40485269DE22800E09CDC /* Referencer.swift in Sources */,
 				93DE280626580AF9007444E3 /* View_EXT.swift in Sources */,
+				E4F910DD269F542E0093B490 /* GameCell.swift in Sources */,
 				E4CF518A264BF9DE0058FED5 /* HorizontalHintCell.swift in Sources */,
 				E425150E269C990C00D01643 /* FaceTuples.swift in Sources */,
 				93CBB0CC2649EF89009A8E53 /* AppSate.swift in Sources */,

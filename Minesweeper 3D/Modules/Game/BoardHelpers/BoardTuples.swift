@@ -18,6 +18,8 @@ struct BoardT_2 {
         return noEmpty && allEqualCount
     }
     
+    static var empty: BoardT_2 { return BoardT_2([], []) }
+    
     init(_ t1: [Cell], _ t2: [Cell]) {
         self.t = (t1, t2)
     }
@@ -35,6 +37,8 @@ struct BoardT_4 {
         
         return noEmpty && allEqualCount
     }
+    
+    static var empty: BoardT_4 { return BoardT_4([], [], [], []) }
     
     init(_ t1: [Cell], _ t2: [Cell], _ t3: [Cell], _ t4: [Cell]) {
         self.t = (t1, t2, t3, t4)

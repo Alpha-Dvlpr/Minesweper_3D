@@ -23,32 +23,7 @@ struct GameBoardCell: View {
                         spacing: Constants.cellSpacing,
                         content: {
                             ForEach(line, id: \.self) { cell in
-//                                if cell.shown {
-                                    cell.content.display
-                                        .resizable()
-                                        .frame(width: Constants.cellSide, height: Constants.cellSide)
-                                        .foregroundColor(
-                                            cell.content.color
-//                                            cell.shown
-//                                                ? cell.content.color
-//                                                : nil
-                                        )
-                                        .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
-//                                } else {
-//                                    Images.numbers(
-//                                        cell.flagged
-//                                            ? ImageNumber.flag.rawValue
-//                                            : ImageNumber.unselected.rawValue
-//                                    ).image
-//                                        .resizable()
-//                                        .frame(width: Constants.cellSide, height: Constants.cellSide)
-//                                        .foregroundColor(
-//                                            cell.shown
-//                                                ? cell.content.color
-//                                                : nil
-//                                        )
-//                                        .onTapGesture { self.boardCallback(cell.xCor, cell.yCor) }
-//                                }
+                                GameCell(cell: cell) { self.boardCallback($0.xCor, $0.yCor) }
                             }
                         }
                     )

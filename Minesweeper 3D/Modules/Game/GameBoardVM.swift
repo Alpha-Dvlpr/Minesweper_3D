@@ -14,6 +14,31 @@ class GameBoardVM: ObservableObject {
     @Published var stringTime: String = Utils.getStringTime(seconds: 0)
     
     var gameStatus: GameStatus = .paused
+    var sideFaces: BoardT_4 {
+        let firstIndex = 1
+        let lastIndex = Constants.numberOfItems - 2
+        
+        guard let topRow = self.faces
+                .first(where: { $0.number == self.visibleFace.references.top })?
+                .cells.horizontal(at: lastIndex)
+              ,
+              let bottomRow = self.faces
+                .first(where: { $0.number == self.visibleFace.references.bottom })?
+                .cells.horizontal(at: firstIndex)
+              ,
+              let leftColumn = self.faces
+                .first(where: { $0.number == self.visibleFace.references.left })?
+                .cells.vertical(at: lastIndex)
+              ,
+              let rightColumn = self.faces
+                .first(where: { $0.number == self.visibleFace.references.right })?
+                .cells.vertical(at: firstIndex)
+        else { return BoardT_4.empty }
+        
+        let tuple = BoardT_4(topRow, bottomRow, leftColumn, rightColumn)
+        
+        return tuple.ok ? tuple : BoardT_4.empty
+    }
     
     private var gameTime: Int = 0
     private var faces = [Face]()
