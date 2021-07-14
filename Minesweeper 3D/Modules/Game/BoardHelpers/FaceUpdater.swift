@@ -11,6 +11,7 @@ class Updater {
 
     private let miner: Miner
     private let hinter: Hinter
+    private let lastIndex = Constants.numberOfItems - 1
     
     init() {
         self.miner = Miner()
@@ -59,105 +60,85 @@ class Updater {
     }
     
     private func updateFace2(face1: Face, face2: Face, completion: @escaping ((Board) -> Void)) {
-        guard let face1LasLine = face1.cells.b.last,
-              face1LasLine.count == Constants.numberOfItems
-        else { completion(face2.cells); return }
+        guard let face1LastLine = face1.cells.horizontal(at: self.lastIndex) else { completion(face2.cells); return }
         
-        face2.cells.b[0] = face1LasLine.map { return ($0 << ($0.xCor, 0)) << 2 }
+        face2.cells.b[0] = face1LastLine.map { return ($0 << ($0.xCor, 0)) << 2 }
         
         self.miner.placeMines(on: face2.cells) { completion($0) }
     }
     
     private func updateFace3(input: FaceT_2, face3: Face, completion: @escaping ((Board) -> Void)) {
-        let face1FirstColumn = input.t.0.cells.b.map { $0.first }.compactMap { $0 }
-        let face2FirstColumn = input.t.1.cells.b.map { $0.first }.compactMap { $0 }
-        let lastIndex = Constants.numberOfItems - 1
-        
-        guard face1FirstColumn.count == Constants.numberOfItems,
-              face2FirstColumn.count == Constants.numberOfItems
+        guard let face1FirstColumn = input.t.0.cells.vertical(at: 0),
+              let face2FirstColumn = input.t.1.cells.vertical(at: 0)
         else { completion(face3.cells); return }
         
         let face1Converted = face1FirstColumn.map { return ($0 << (9, $0.yCor)) << 3 }
-        (0...lastIndex).forEach { face3.cells.b[$0][lastIndex] = face1Converted[$0] }
+        (0...self.lastIndex).forEach { face3.cells.b[$0][lastIndex] = face1Converted[$0] }
         
-        let face2Converted = (0...lastIndex).map { index -> Cell in
-            let opposite = Int.opposite(of: index, max: lastIndex)
+        let face2Converted = (0...self.lastIndex).map { index -> Cell in
+            let opposite = Int.opposite(of: index, max: self.lastIndex)
             return (face2FirstColumn[index] << (opposite, 9)) << 3
         }
         
-        face3.cells.b[lastIndex] = face2Converted.reversed()
+        face3.cells.b[self.lastIndex] = face2Converted.reversed()
         
         self.miner.placeMines(on: face3.cells) { completion($0) }
     }
     
     private func updateFace4(input: FaceT_2, face4: Face, completion: @escaping ((Board) -> Void)) {
-        let face1LastColumn = input.t.0.cells.b.map { $0.last }.compactMap { $0 }
-        let face2LastColumn = input.t.1.cells.b.map { $0.last }.compactMap { $0 }
-        let lastIndex = Constants.numberOfItems - 1
-        
-        guard face1LastColumn.count == Constants.numberOfItems,
-              face2LastColumn.count == Constants.numberOfItems
+        guard let face1LastColumn = input.t.0.cells.vertical(at: self.lastIndex),
+              let face2LastColumn = input.t.1.cells.vertical(at: self.lastIndex)
         else { completion(face4.cells); return }
         
         let face1Converted = face1LastColumn.map { return ($0 << (0, $0.yCor)) << 4 }
-        (0...lastIndex).forEach { face4.cells.b[$0][0] = face1Converted[$0] }
+        (0...self.lastIndex).forEach { face4.cells.b[$0][0] = face1Converted[$0] }
         
-        face4.cells.b[lastIndex] = face2LastColumn.map { return ($0 << ($0.yCor, $0.xCor)) << 4 }
+        face4.cells.b[self.lastIndex] = face2LastColumn.map { return ($0 << ($0.yCor, $0.xCor)) << 4 }
         
         self.miner.placeMines(on: face4.cells) { completion($0) }
     }
     
     private func updateFace5(input: FaceT_3, face5: Face, completion: @escaping ((Board) -> Void)) {
-        guard let face1FirstLine = input.t.0.cells.b.first,
-              let face3FirstLine = input.t.1.cells.b.first,
-              let face4FirstLine = input.t.2.cells.b.first,
-              face1FirstLine.count == Constants.numberOfItems,
-              face3FirstLine.count == Constants.numberOfItems,
-              face4FirstLine.count == Constants.numberOfItems
+        guard let face1FirstLine = input.t.0.cells.horizontal(at: 0),
+              let face3FirstLine = input.t.1.cells.horizontal(at: 0),
+              let face4FirstLine = input.t.2.cells.horizontal(at: 0)
         else { completion(face5.cells); return }
-        let lastIndex = Constants.numberOfItems - 1
         
-        face5.cells.b[lastIndex] = face1FirstLine.map { return ($0 << ($0.xCor, 9)) << 5 }
+        face5.cells.b[self.lastIndex] = face1FirstLine.map { return ($0 << ($0.xCor, 9)) << 5 }
         
-        (0...lastIndex).forEach { face5.cells.b[$0][0] = (face3FirstLine[$0] << (0, $0)) << 5 }
+        (0...self.lastIndex).forEach { face5.cells.b[$0][0] = (face3FirstLine[$0] << (0, $0)) << 5 }
         
-        let face4Converted = (0...lastIndex).map { index -> Cell in
-            return (face4FirstLine[index] << (9, Int.opposite(of: index, max: lastIndex))) << 5
+        let face4Converted = (0...self.lastIndex).map { index -> Cell in
+            return (face4FirstLine[index] << (9, Int.opposite(of: index, max: self.lastIndex))) << 5
         }
         
-        (0...lastIndex).forEach { face5.cells.b[$0][lastIndex] = face4Converted.reversed()[$0] }
+        (0...self.lastIndex).forEach { face5.cells.b[$0][self.lastIndex] = face4Converted.reversed()[$0] }
         
         self.miner.placeMines(on: face5.cells) { completion($0) }
     }
     
     private func updateFace6(input: FaceT_4, face6: Face, completion: @escaping ((Board) -> Void)) {
-        let face3FirstColumn = input.t.1.cells.b.map { $0.first }.compactMap { $0 }
-        let face4LastColumn = input.t.2.cells.b.map { $0.last }.compactMap { $0 }
-        let lastIndex = Constants.numberOfItems - 1
-        
-        guard let face2LastLine = input.t.0.cells.b.last,
-              let face5FirstLine = input.t.3.cells.b.first,
-              face2LastLine.count == Constants.numberOfItems,
-              face3FirstColumn.count == Constants.numberOfItems,
-              face4LastColumn.count == Constants.numberOfItems,
-              face5FirstLine.count == Constants.numberOfItems
+        guard let face2LastLine = input.t.0.cells.horizontal(at: self.lastIndex),
+              let face3FirstColumn = input.t.1.cells.vertical(at: 0),
+              let face4LastColumn = input.t.2.cells.vertical(at: self.lastIndex),
+              let face5FirstLine = input.t.3.cells.horizontal(at: 0)
         else { completion(face6.cells); return }
         
         face6.cells.b[0] = face2LastLine.map { return ($0 << ($0.xCor, 0)) << 6 }
         
-        let face3Converted = (0...lastIndex).map { index -> Cell in
+        let face3Converted = (0...self.lastIndex).map { index -> Cell in
             let cell = face3FirstColumn[index]
-            return (cell << (cell.xCor, Int.opposite(of: index, max: lastIndex))) << 6
+            return (cell << (cell.xCor, Int.opposite(of: index, max: self.lastIndex))) << 6
         }
         
-        (0...lastIndex).forEach { face6.cells.b[$0][0] = face3Converted.reversed()[$0] }
+        (0...self.lastIndex).forEach { face6.cells.b[$0][0] = face3Converted.reversed()[$0] }
         
-        let face4Converted = (0...lastIndex).map { index -> Cell in
+        let face4Converted = (0...self.lastIndex).map { index -> Cell in
             let cell = face4LastColumn[index]
             return (cell << (cell.xCor, Int.opposite(of: index, max: lastIndex))) << 6
         }
         
-        (0...lastIndex).forEach { face6.cells.b[$0][lastIndex] = face4Converted.reversed()[$0] }
+        (0...self.lastIndex).forEach { face6.cells.b[$0][self.lastIndex] = face4Converted.reversed()[$0] }
         
         face6.cells.b[lastIndex] = face5FirstLine.map { return ($0 << ($0.xCor, 9)) << 6 }
         

@@ -9,85 +9,105 @@ import Foundation
 
 class Referencer {
     
+    private let firstIndex = 1
+    private let lastIndex = Constants.numberOfItems - 2
+    
     /// Faces -> (Top, Bottom)
-    func getHorizontalFaces(for face: Int, on faces: FaceT_6) -> ([Cell]?, [Cell]?) {
+    func getHorizontalFaces(for face: Int, on faces: FaceT_6) -> BoardT_2? {
         switch face {
         case 1:
-            let topLast = faces.t.4.cells.b.last
-            let bottomFirst = faces.t.1.cells.b.first
+            let topLast = faces.t.4.cells.horizontal(at: self.lastIndex) ?? []
+            let bottomFirst = faces.t.1.cells.horizontal(at: self.firstIndex) ?? []
+            let tuple = BoardT_2(topLast, bottomFirst)
             
-            return (topLast, bottomFirst)
+            return tuple.ok ? tuple : nil
         case 2:
-            let topLast = faces.t.0.cells.b.last
-            let bottomFirst = faces.t.5.cells.b.first
-
-            return (topLast, bottomFirst)
+            let topLast = faces.t.0.cells.horizontal(at: self.lastIndex) ?? []
+            let bottomFirst = faces.t.5.cells.horizontal(at: self.firstIndex) ?? []
+            let tuple = BoardT_2(topLast, bottomFirst)
+            
+            return tuple.ok ? tuple : nil
         case 3:
-            let topLast = faces.t.4.cells.getFirstVertical()
-            let bottomFirst = faces.t.1.cells.getFirstVertical(reversed: true)
+            let topLast = faces.t.4.cells.vertical(at: self.firstIndex) ?? []
+            let bottomFirst = faces.t.1.cells.vertical(at: self.firstIndex, reversed: true) ?? []
+            let tuple = BoardT_2(topLast, bottomFirst)
             
-            return (topLast, bottomFirst)
+            return tuple.ok ? tuple : nil
         case 4:
-            let topLast = faces.t.4.cells.getLastVertical(reversed: true)
-            let bottomFirst = faces.t.1.cells.getLastVertical()
+            let topLast = faces.t.4.cells.vertical(at: self.lastIndex, reversed: true) ?? []
+            let bottomFirst = faces.t.1.cells.vertical(at: self.lastIndex) ?? []
+            let tuple = BoardT_2(topLast, bottomFirst)
             
-            return (topLast, bottomFirst)
+            return tuple.ok ? tuple : nil
         case 5:
-            let topLast = faces.t.5.cells.b.last
-            let bottomFirst = faces.t.0.cells.b.first
+            let topLast = faces.t.5.cells.horizontal(at: self.lastIndex) ?? []
+            let bottomFirst = faces.t.0.cells.horizontal(at: self.firstIndex) ?? []
+            let tuple = BoardT_2(topLast, bottomFirst)
             
-            return (topLast, bottomFirst)
+            return tuple.ok ? tuple : nil
         case 6:
-            let topLast = faces.t.1.cells.b.last
-            let bottomFirst = faces.t.4.cells.b.first
+            let topLast = faces.t.1.cells.horizontal(at: self.lastIndex) ?? []
+            let bottomFirst = faces.t.4.cells.horizontal(at: self.firstIndex) ?? []
+            let tuple = BoardT_2(topLast, bottomFirst)
             
-            return (topLast, bottomFirst)
-        default: return (nil, nil)
+            return tuple.ok ? tuple : nil
+        default: return nil
         }
     }
     
     /// Faces -> (Left, Right)
-    func getVerticalFaces(for face: Int, on faces: FaceT_6) -> ([Cell]?, [Cell]?) {
+    func getVerticalFaces(for face: Int, on faces: FaceT_6) -> BoardT_2? {
         switch face {
         case 1:
-            let leftLast = faces.t.2.cells.getLastVertical()
-            let rightFirst = faces.t.3.cells.getFirstVertical()
+            let leftLast = faces.t.2.cells.vertical(at: self.lastIndex) ?? []
+            let rightFirst = faces.t.3.cells.vertical(at: self.firstIndex) ?? []
+            let tuple = BoardT_2(leftLast, rightFirst)
             
-            return (leftLast, rightFirst)
+            return tuple.ok ? tuple : nil
         case 2:
-            let leftLast = faces.t.2.cells.b.last
-            let rightFirst = faces.t.3.cells.b.last
+            let leftLast = faces.t.2.cells.horizontal(at: self.lastIndex, reversed: true) ?? []
+            let rightFirst = faces.t.3.cells.horizontal(at: self.lastIndex) ?? []
+            let tuple = BoardT_2(leftLast, rightFirst)
             
-            return (leftLast?.reversed(), rightFirst)
+            return tuple.ok ? tuple : nil
         case 3:
-            let leftLast = faces.t.5.cells.getFirstVertical(reversed: true)
-            let rightFirst = faces.t.0.cells.getFirstVertical()
+            let leftLast = faces.t.5.cells.vertical(at: self.firstIndex, reversed: true) ?? []
+            let rightFirst = faces.t.0.cells.vertical(at: self.firstIndex) ?? []
+            let tuple = BoardT_2(leftLast, rightFirst)
             
-            return (leftLast, rightFirst)
+            return tuple.ok ? tuple : nil
         case 4:
-            let leftLast = faces.t.0.cells.getFirstVertical()
-            let rightFirst = faces.t.5.cells.getLastVertical(reversed: true)
+            let leftLast = faces.t.0.cells.vertical(at: self.lastIndex) ?? []
+            let rightFirst = faces.t.5.cells.vertical(at: self.lastIndex, reversed: true) ?? []
+            let tuple = BoardT_2(leftLast, rightFirst)
             
-            return (leftLast, rightFirst)
+            return tuple.ok ? tuple : nil
         case 5:
-            let leftLast = faces.t.2.cells.b.first
-            let rightFirst = faces.t.3.cells.b.first
+            let leftLast = faces.t.2.cells.horizontal(at: self.firstIndex) ?? []
+            let rightFirst = faces.t.3.cells.horizontal(at: self.firstIndex, reversed: true) ?? []
+            let tuple = BoardT_2(leftLast, rightFirst)
             
-            return (leftLast, rightFirst?.reversed())
+            return tuple.ok ? tuple : nil
         case 6:
-            let leftLast = faces.t.2.cells.getFirstVertical(reversed: true)
-            let rightFirst = faces.t.3.cells.getLastVertical(reversed: true)
+            let leftLast = faces.t.2.cells.vertical(at: self.firstIndex, reversed: true) ?? []
+            let rightFirst = faces.t.3.cells.vertical(at: self.lastIndex, reversed: true) ?? []
+            let tuple = BoardT_2(leftLast, rightFirst)
             
-            return (leftLast, rightFirst)
-        default: return (nil, nil)
+            return tuple.ok ? tuple : nil
+        default: return nil
         }
     }
     
     /// Faces -> (Top, Bottom, Left, Right)
-    func getCornerReferences(for face: Int, on faces: FaceT_6) -> ([Cell]?, [Cell]?, [Cell]?, [Cell]?) {
-        let horizontal = self.getHorizontalFaces(for: face, on: faces)
-        let vertical = self.getVerticalFaces(for: face, on: faces)
+    func getCornerReferences(for face: Int, on faces: FaceT_6) -> BoardT_4? {
+        guard let horizontal = self.getHorizontalFaces(for: face, on: faces),
+              let vertical = self.getVerticalFaces(for: face, on: faces),
+              horizontal.ok,
+              vertical.ok
+        else { return nil }
         
-        return (horizontal.0, horizontal.1, vertical.0, vertical.1)
+        let tuple = BoardT_4(horizontal.t.0, horizontal.t.1, vertical.t.0, vertical.t.1)
+        
+        return tuple.ok ? tuple : nil
     }
 }

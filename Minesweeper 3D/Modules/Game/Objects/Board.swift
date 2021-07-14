@@ -15,16 +15,18 @@ struct Board {
         self.b = b
     }
     
-    func getFirstVertical(reversed: Bool = false) -> [Cell]? {
-        let cells = self.b.map { $0.first }.compactMap { $0 }
+    func vertical(at index: Int, reversed: Bool = false) -> [Cell]? {
+        let cells = self.b.map { $0[index] }.compactMap { $0 }
         
         guard cells.count == Constants.numberOfItems else { return nil }
         
         return reversed ? cells.reversed() : cells
     }
     
-    func getLastVertical(reversed: Bool = false) -> [Cell]? {
-        let cells = self.b.map { $0.last }.compactMap { $0 }
+    func horizontal(at index: Int, reversed: Bool = false) -> [Cell]? {
+        guard index < self.b.count else { return nil }
+        
+        let cells = self.b[index]
         
         guard cells.count == Constants.numberOfItems else { return nil }
         

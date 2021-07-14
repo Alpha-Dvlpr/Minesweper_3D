@@ -24,18 +24,18 @@ class Hinter {
 //                face.cells = hintedFace
 //                dispatchGroup.leave()
 //            }
-        
+            
 //            if let vSides = self.referencer.getVerticalFaces(for: face.number, on: faces) {
 //                dispatchGroup.enter()
-//                self.calculateVerticalHints(for: face.cells, sides: vSides.b) { hintedFace in
+//                self.calculateVerticalHints(for: face.cells, sides: vSides) { hintedFace in
 //                    face.cells = hintedFace
 //                    dispatchGroup.leave()
 //                }
 //            }
-            
+//            
 //            if let hSides = self.referencer.getHorizontalFaces(for: face.number, on: faces) {
 //                dispatchGroup.enter()
-//                self.calculateHorizontalHints(for: face.cells, sides: hSides.b) { hintedFace in
+//                self.calculateHorizontalHints(for: face.cells, sides: hSides) { hintedFace in
 //                    face.cells = hintedFace
 //                    dispatchGroup.leave()
 //                }
@@ -78,23 +78,18 @@ class Hinter {
         completion(Board(aux))
     }
     
-    private func calculateVerticalHints(
-        for cells: Board,
-        sides: (Board, Board),
-        completion: @escaping ((Board) -> Void)
-    ) {
+    private func calculateVerticalHints(for cells: Board, sides: BoardT_2, completion: @escaping ((Board) -> Void)) {
         let aux = cells.b
         let vBorderCells = aux
             .map { $0.filter { $0.type == .vBorder }.map { $0 } }
             .flatMap { $0 }
             .filter { $0.content != .mine }
-        let lastIndex = Constants.numberOfItems - 1
         
         vBorderCells.forEach { cell in
             var surrounding = [Cell]()
             
             if cell.xCor == 0 {
-                let lfc = sides.0.b
+                let lfc = sides.t.0
                 
                 surrounding = [
                     aux[cell.yCor - 1][cell.xCor],     // N  Cell
@@ -102,14 +97,14 @@ class Hinter {
                     aux[cell.yCor][cell.xCor + 1],     // E  Cell
                     aux[cell.yCor + 1][cell.xCor + 1], // SE Cell
                     aux[cell.yCor + 1][cell.xCor],     // S  Cell
-                    lfc[cell.yCor - 1][lastIndex - 1], // SW Cell
-                    lfc[cell.yCor][lastIndex - 1],     // W  Cell
-                    lfc[cell.yCor + 1][lastIndex - 1]  // NW Cell
+                    lfc[cell.yCor - 1],                // SW Cell
+                    lfc[cell.yCor],                    // W  Cell
+                    lfc[cell.yCor + 1]                 // NW Cell
                 ]
             }
             
             if cell.xCor == Constants.numberOfItems - 1 {
-                let rfc = sides.1.b
+                let rfc = sides.t.1
                 
                 surrounding = [
                     aux[cell.yCor + 1][cell.xCor],     // S  Cell
@@ -117,9 +112,9 @@ class Hinter {
                     aux[cell.yCor][cell.xCor - 1],     // W  Cell
                     aux[cell.yCor - 1][cell.xCor - 1], // NW Cell
                     aux[cell.yCor - 1][cell.xCor],     // N  Cell
-                    rfc[cell.yCor - 1][1],             // NE Cell
-                    rfc[cell.yCor][1],                 // E  Cell
-                    rfc[cell.yCor + 1][1]              // SE Cell
+                    rfc[cell.yCor - 1],                // NE Cell
+                    rfc[cell.yCor],                    // E  Cell
+                    rfc[cell.yCor + 1]                 // SE Cell
                 ]
             }
             
@@ -129,23 +124,18 @@ class Hinter {
         completion(Board(aux))
     }
     
-    private func calculateHorizontalHints(
-        for cells: Board,
-        sides: (Board, Board),
-        completion: @escaping ((Board) -> Void)
-    ) {
+    private func calculateHorizontalHints(for cells: Board, sides: BoardT_2, completion: @escaping ((Board) -> Void) ) {
         let aux = cells.b
         let hBorderCells = aux
             . map { $0.filter { $0.type == .hBorder }.map { $0 } }
             .flatMap { $0 }
             .filter { $0.content != .mine }
-        let lastIndex = Constants.numberOfItems - 1
         
         hBorderCells.forEach { cell in
             var surrounding = [Cell]()
             
             if cell.yCor == 0 {
-                let tfc = sides.0.b
+                let tfc = sides.t.0
                 
                 surrounding = [
                     aux[cell.yCor][cell.xCor + 1],     // E  Cell
@@ -153,14 +143,14 @@ class Hinter {
                     aux[cell.yCor + 1][cell.xCor],     // S  Cell
                     aux[cell.yCor + 1][cell.xCor - 1], // SW Cell
                     aux[cell.yCor][cell.xCor - 1],     // W  Cell
-                    tfc[lastIndex - 1][cell.xCor - 1], // NW Cell
-                    tfc[lastIndex - 1][cell.xCor],     // N  Cell
-                    tfc[lastIndex - 1][cell.xCor + 1]  // NE Cell
+                    tfc[cell.xCor - 1],                // NW Cell
+                    tfc[cell.xCor],                    // N  Cell
+                    tfc[cell.xCor + 1]                 // NE Cell
                 ]
             }
             
             if cell.yCor == Constants.numberOfItems - 1 {
-                let bfc = sides.1.b
+                let bfc = sides.t.1
                 
                 surrounding = [
                     aux[cell.yCor][cell.xCor - 1],     // W  Cell
@@ -168,9 +158,9 @@ class Hinter {
                     aux[cell.yCor - 1][cell.xCor],     // N  Cell
                     aux[cell.yCor - 1][cell.xCor + 1], // NE Cell
                     aux[cell.yCor][cell.xCor + 1],     // E  Cell
-                    bfc[1][cell.xCor + 1],             // SE Cell
-                    bfc[1][cell.xCor],                 // S  Cell
-                    bfc[1][cell.xCor - 1]              // SW Cell
+                    bfc[cell.xCor + 1],                // SE Cell
+                    bfc[cell.xCor],                    // S  Cell
+                    bfc[cell.xCor - 1]                 // SW Cell
                 ]
             }
             
@@ -180,11 +170,7 @@ class Hinter {
         completion(Board(aux))
     }
     
-    private func calculateCornerHints(
-        for cells: Board,
-        sides: (Board, Board, Board, Board),
-        completion: @escaping ((Board) -> Void)
-    ) {
+    private func calculateCornerHints( for cells: Board, sides: BoardT_4, completion: @escaping ((Board) -> Void) ) {
         let aux = cells.b
         let corners = aux
             .map { $0.filter { $0.type == .corner }.map { $0 } }

@@ -48,6 +48,7 @@
 		E4F4047F269DE0A200E09CDC /* Miner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F4047E269DE0A200E09CDC /* Miner.swift */; };
 		E4F40482269DE1BC00E09CDC /* Hinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F40481269DE1BC00E09CDC /* Hinter.swift */; };
 		E4F40485269DE22800E09CDC /* Referencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F40484269DE22800E09CDC /* Referencer.swift */; };
+		E4F910D8269F1D3F0093B490 /* BoardTuples.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F910D7269F1D3F0093B490 /* BoardTuples.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		E4F4047E269DE0A200E09CDC /* Miner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miner.swift; sourceTree = "<group>"; };
 		E4F40481269DE1BC00E09CDC /* Hinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hinter.swift; sourceTree = "<group>"; };
 		E4F40484269DE22800E09CDC /* Referencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referencer.swift; sourceTree = "<group>"; };
+		E4F910D7269F1D3F0093B490 /* BoardTuples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTuples.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 		934C686A264C758E00099424 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				E4251511269C9D5000D01643 /* Board.swift */,
 				933A4585264ED73900BDE2AA /* Cell.swift */,
 				E4EDDEB3265EA3D700588428 /* CellContent.swift */,
 				933A4582264ED71100BDE2AA /* CellType.swift */,
@@ -305,7 +308,7 @@
 		E4F4047C269DD87E00E09CDC /* BoardHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				E4251511269C9D5000D01643 /* Board.swift */,
+				E4F910D7269F1D3F0093B490 /* BoardTuples.swift */,
 				E425150D269C990C00D01643 /* FaceTuples.swift */,
 				E48A3822269C91A600B909D2 /* FaceUpdater.swift */,
 				E4F40481269DE1BC00E09CDC /* Hinter.swift */,
@@ -459,6 +462,7 @@
 				934C6862264C54FC00099424 /* GameBoardVM.swift in Sources */,
 				E4CF5188264BF6820058FED5 /* VerticalHintCell.swift in Sources */,
 				E468F6DD265D26ED0081ACD7 /* KeyboardListener.swift in Sources */,
+				E4F910D8269F1D3F0093B490 /* BoardTuples.swift in Sources */,
 				E4F4047F269DE0A200E09CDC /* Miner.swift in Sources */,
 				933A4586264ED73900BDE2AA /* Cell.swift in Sources */,
 				93F0DB96264868070022F976 /* CoreDataController.swift in Sources */,
