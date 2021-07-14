@@ -12,13 +12,14 @@ struct GameCell: View {
     var cell: Cell
     var cellCallback: ((Cell) -> Void)
     private var image: Image {
-        return self.cell.shown
-            ? self.cell.content.display
-            : Images.numbers(
-                self.cell.flagged
-                    ? ImageNumber.flag.rawValue
-                    : ImageNumber.unselected.rawValue
-            ).image
+//        return self.cell.shown
+//            ?
+        self.cell.content.display
+//            : Images.numbers(
+//                self.cell.flagged
+//                    ? ImageNumber.flag.rawValue
+//                    : ImageNumber.unselected.rawValue
+//            ).image
     }
     
     var body: some View {

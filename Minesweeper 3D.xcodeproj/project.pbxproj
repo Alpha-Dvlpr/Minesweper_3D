@@ -137,9 +137,9 @@
 			isa = PBXGroup;
 			children = (
 				E4CF518B264BFF330058FED5 /* GameBoardCell.swift */,
+				E4F910DC269F542E0093B490 /* GameCell.swift */,
 				E4CF5189264BF9DE0058FED5 /* HorizontalHintCell.swift */,
 				E4CF5187264BF6820058FED5 /* VerticalHintCell.swift */,
-				E4F910DC269F542E0093B490 /* GameCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
