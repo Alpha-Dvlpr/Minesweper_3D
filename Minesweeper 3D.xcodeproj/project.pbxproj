@@ -148,10 +148,8 @@
 				E4EDDEAF265EA33B00588428 /* Degrees.swift */,
 				934C686B264C75A000099424 /* Direction.swift */,
 				934C6864264C567B00099424 /* Face.swift */,
-				E425150D269C990C00D01643 /* FaceTuples.swift */,
 				934C686F264C75B700099424 /* GameStatus.swift */,
 				E4EDDEB1265EA35D00588428 /* References.swift */,
-				E4251511269C9D5000D01643 /* Board.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -307,6 +305,8 @@
 		E4F4047C269DD87E00E09CDC /* BoardHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				E4251511269C9D5000D01643 /* Board.swift */,
+				E425150D269C990C00D01643 /* FaceTuples.swift */,
 				E48A3822269C91A600B909D2 /* FaceUpdater.swift */,
 				E4F40481269DE1BC00E09CDC /* Hinter.swift */,
 				E4F4047E269DE0A200E09CDC /* Miner.swift */,
@@ -640,6 +640,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alphadvlpr.Minesweeper-3D";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -663,6 +664,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alphadvlpr.Minesweeper-3D";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
