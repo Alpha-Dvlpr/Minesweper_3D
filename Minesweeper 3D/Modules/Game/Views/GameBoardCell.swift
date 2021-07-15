@@ -17,12 +17,15 @@ struct GameBoardCell: View {
             alignment: .center,
             spacing: Constants.cellSpacing,
             content: {
-                ForEach(self.face.cells.b, id: \.self) { line in
+                ForEach(Constants.boardCells, id: \.self) { line in
                     HStack(
                         alignment: .center,
                         spacing: Constants.cellSpacing,
                         content: {
-                            ForEach(line, id: \.self) { cell in GameCell(cell: cell) { self.boardCallback($0) } }
+                            ForEach(Constants.boardCells, id: \.self) { columnn in
+                                let cell = self.face.cells.b[line][columnn]
+                                GameCell(cell: cell) { self.boardCallback($0) }
+                            }
                         }
                     )
                 }

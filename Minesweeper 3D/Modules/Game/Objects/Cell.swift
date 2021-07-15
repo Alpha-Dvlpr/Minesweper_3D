@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class Cell: Hashable {
+class Cell {
     
     var id: String { return "\(self.face)-\(self.xCor).\(self.yCor)-\(self.content)" }
     var xCor: Int
@@ -23,25 +23,11 @@ class Cell: Hashable {
     private var face: Int
     private var originalContent: CellContent
     
-    init(
-        face: Int,
-        xCor: Int,
-        yCor: Int,
-        content: CellContent
-    ) {
+    init(face: Int, xCor: Int, yCor: Int, content: CellContent) {
         self.xCor = xCor
         self.yCor = yCor
         self.originalContent = content
         self.face = face
-    }
-    
-    static func == (lhs: Cell, rhs: Cell) -> Bool {
-        return lhs.xCor == rhs.xCor
-            && lhs.yCor == rhs.yCor
-            && lhs.type == rhs.type
-            && lhs.id == rhs.id
-            && lhs.face == rhs.face
-            && lhs.canBeEdited == rhs.canBeEdited
     }
     
     static func << (cell: Cell, coords: (Int, Int)) -> Cell {
@@ -54,14 +40,6 @@ class Cell: Hashable {
         cell.canBeEdited = false
         
         return cell
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.xCor)
-        hasher.combine(self.yCor)
-        hasher.combine(self.type)
-        hasher.combine(self.face)
-        hasher.combine(self.canBeEdited)
     }
     
     func updateContent(to content: CellContent) {

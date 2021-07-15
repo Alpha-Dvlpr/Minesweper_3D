@@ -16,7 +16,12 @@ struct HorizontalHintCell: View {
         HStack(
             alignment: .center,
             spacing: Constants.cellSpacing,
-            content: { ForEach(self.sideCells, id: \.self) { GameCell(cell: $0) { _ in self.callback() } } }
+            content: {
+                ForEach(Constants.boardCells, id: \.self) { index in
+                    let cell = self.sideCells[index]
+                    GameCell(cell: cell) { _ in self.callback() }
+                }
+            }
         )
     }
 }
