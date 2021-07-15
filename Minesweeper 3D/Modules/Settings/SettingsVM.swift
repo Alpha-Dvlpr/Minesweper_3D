@@ -19,7 +19,11 @@ class SettingsVM: ObservableObject {
     
     init() {
         self.getAllData()
-        self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "_"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "_"
+        
+        self.appVersion = "\(version) (\(build))"
     }
     
     func saveData() {
