@@ -12,27 +12,20 @@ class GameBoardVM: ObservableObject {
     @Published var visibleFace: Face!
     @Published var actionBarButton: Image = Images.system(.pause).image
     @Published var stringTime: String = Utils.getStringTime(seconds: 0)
-    
     var gameStatus: GameStatus = .paused
     var sideFaces: BoardT_4 {
-        let firstIndex = 1
-        let lastIndex = Constants.numberOfItems - 2
+        let facesTuple = FaceT_6(
+            self.faces[0], self.faces[1], self.faces[2], self.faces[3], self.faces[4], self.faces[5]
+        )
         
-        guard let topRow = self.faces.first(where: { $0.number == self.visibleFace.references.top }),
-              let topCells = topRow.cells.horizontal(at: lastIndex),
-              let bottomRow = self.faces.first(where: { $0.number == self.visibleFace.references.bottom }),
-              let bottomCells = bottomRow.cells.horizontal(at: firstIndex),
-              let leftColumn = self.faces.first(where: { $0.number == self.visibleFace.references.left }),
-              let leftCells = leftColumn.cells.vertical(at: lastIndex),
-              let rightColumn = self.faces.first(where: { $0.number == self.visibleFace.references.right }),
-              let rightCells = rightColumn.cells.vertical(at: firstIndex)
+        guard let horizontal = Referencer().getHorizontalFaces(for: self.visibleFace.number, on: facesTuple),
+              let vertical = Referencer().getVerticalFaces(for: self.visibleFace.number, on: facesTuple)
         else { return BoardT_4.empty }
-        
-        let tuple = BoardT_4(topCells, bottomCells, leftCells, rightCells)
+      
+        let tuple = BoardT_4(horizontal.t.0, horizontal.t.1, vertical.t.0, vertical.t.1)
         
         return tuple.ok ? tuple : BoardT_4.empty
     }
-    
     private var gameTime: Int = 0
     private var faces = [Face]()
     
