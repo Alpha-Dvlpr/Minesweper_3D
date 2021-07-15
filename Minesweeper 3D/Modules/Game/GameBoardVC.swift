@@ -33,7 +33,7 @@ struct GameBoardVC: View {
                         VerticalHintCell(sideCells: self.viewModel.sideFaces.t.2) { self.viewModel.rotate(.left) }
                         GameBoardCell(
                             face: self.viewModel.visibleFace,
-                            boardCallback: { self.viewModel.updateCellVisibility(x: $0, y: $1) }
+                            boardCallback: { self.viewModel.updateCellVisibility(cell: $0) }
                         )
                         VerticalHintCell(sideCells: self.viewModel.sideFaces.t.3) { self.viewModel.rotate(.right) }
                     }

@@ -40,4 +40,13 @@ struct Board {
         
         return reversed ? cells.reversed() : cells
     }
+    
+    func resetCoords() {
+        for line in 0..<self.b.count {
+            for row in 0..<self.b[line].count {
+                self.b[line][row].xCor = row
+                self.b[line][row].yCor = line
+            }
+        }
+    }
 }

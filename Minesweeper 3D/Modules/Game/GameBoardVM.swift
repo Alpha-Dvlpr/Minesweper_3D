@@ -18,24 +18,17 @@ class GameBoardVM: ObservableObject {
         let firstIndex = 1
         let lastIndex = Constants.numberOfItems - 2
         
-        guard let topRow = self.faces
-                .first(where: { $0.number == self.visibleFace.references.top })?
-                .cells.horizontal(at: lastIndex)
-              ,
-              let bottomRow = self.faces
-                .first(where: { $0.number == self.visibleFace.references.bottom })?
-                .cells.horizontal(at: firstIndex)
-              ,
-              let leftColumn = self.faces
-                .first(where: { $0.number == self.visibleFace.references.left })?
-                .cells.vertical(at: lastIndex)
-              ,
-              let rightColumn = self.faces
-                .first(where: { $0.number == self.visibleFace.references.right })?
-                .cells.vertical(at: firstIndex)
+        guard let topRow = self.faces.first(where: { $0.number == self.visibleFace.references.top }),
+              let topCells = topRow.cells.horizontal(at: lastIndex),
+              let bottomRow = self.faces.first(where: { $0.number == self.visibleFace.references.bottom }),
+              let bottomCells = bottomRow.cells.horizontal(at: firstIndex),
+              let leftColumn = self.faces.first(where: { $0.number == self.visibleFace.references.left }),
+              let leftCells = leftColumn.cells.vertical(at: lastIndex),
+              let rightColumn = self.faces.first(where: { $0.number == self.visibleFace.references.right }),
+              let rightCells = rightColumn.cells.vertical(at: firstIndex)
         else { return BoardT_4.empty }
         
-        let tuple = BoardT_4(topRow, bottomRow, leftColumn, rightColumn)
+        let tuple = BoardT_4(topCells, bottomCells, leftCells, rightCells)
         
         return tuple.ok ? tuple : BoardT_4.empty
     }
@@ -56,24 +49,27 @@ class GameBoardVM: ObservableObject {
             let aux = linkedFace
             aux.updateLastReferences()
             aux.updateNewReferences(from: self.visibleFace, to: direction)
+            let rotated = aux.rotated
+            rotated.cells.resetCoords()
             
-            self.visibleFace = aux.rotated
+            self.visibleFace = rotated
         }
     }
     
-    func updateCellVisibility(x: Int, y: Int) {
+    func updateCellVisibility(cell: Cell) {
         guard self.gameStatus == .running,
               let aux = self.visibleFace
         else { return }
-    
-        if aux.cells.b[y][x].shown { return }
+        
+        let cellAtPosition = aux.cells.b[cell.yCor][cell.xCor]
+        
+        if cellAtPosition.shown { return }
         else {
-            if aux.cells.b[y][x].content == .void {
+            if cellAtPosition.content == .void {
                 // TODO: Create recursion
             }
             
-            aux.cells.b[y][x].shown = true
-            
+            aux.cells.b[cell.yCor][cell.xCor].shown = true
             self.visibleFace = aux
         }
     }

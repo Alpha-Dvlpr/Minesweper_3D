@@ -8,12 +8,11 @@
 import SwiftUI
 
 class Cell: Hashable {
-    private var id: String { return "\(self.face)-\(self.xCor).\(self.yCor)-\(self.content)" }
-    private var face: Int
+    
+    var id: String { return "\(self.face)-\(self.xCor).\(self.yCor)-\(self.content)" }
     var xCor: Int
     var yCor: Int
     var type: CellType { return CellType.init(x: xCor, y: yCor) }
-    private var originalContent: CellContent
     var content: CellContent {
         if self.flagged { return .flagged }
         else { return self.originalContent }
@@ -21,6 +20,8 @@ class Cell: Hashable {
     var shown: Bool = false
     var flagged: Bool = false
     var canBeEdited: Bool = true
+    private var face: Int
+    private var originalContent: CellContent
     
     init(
         face: Int,
@@ -59,7 +60,6 @@ class Cell: Hashable {
         hasher.combine(self.xCor)
         hasher.combine(self.yCor)
         hasher.combine(self.type)
-        hasher.combine(self.id)
         hasher.combine(self.face)
         hasher.combine(self.canBeEdited)
     }

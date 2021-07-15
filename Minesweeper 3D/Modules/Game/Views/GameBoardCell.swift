@@ -10,7 +10,7 @@ import SwiftUI
 struct GameBoardCell: View {
     
     var face: Face
-    var boardCallback: ((_ x: Int, _ y: Int) -> Void)
+    var boardCallback: ((Cell) -> Void)
     
     var body: some View {
         VStack(
@@ -22,9 +22,7 @@ struct GameBoardCell: View {
                         alignment: .center,
                         spacing: Constants.cellSpacing,
                         content: {
-                            ForEach(line, id: \.self) { cell in
-                                GameCell(cell: cell) { self.boardCallback($0.xCor, $0.yCor) }
-                            }
+                            ForEach(line, id: \.self) { cell in GameCell(cell: cell) { self.boardCallback($0) } }
                         }
                     )
                 }
@@ -40,7 +38,7 @@ struct GameBoardCell_Previews: PreviewProvider {
                 number: 4,
                 references: References(top: 5, bottom: 2, left: 1, right: 6)
             ),
-            boardCallback: { (_, _) in }
+            boardCallback: { _ in }
         )
     }
 }
