@@ -22,4 +22,10 @@ extension Int {
     static func random(max: Int) -> Int {
         return Int(arc4random_uniform(UInt32(max)))
     }
+    
+    static func equal(elements: [Int]) -> (Bool, Int) {
+        let contentCount = Array(Set(elements))
+        
+        return (contentCount.count == 1, contentCount.first!)
+    }
 }

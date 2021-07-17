@@ -82,13 +82,13 @@ extension Collection where Self == [Face] {
         return array.firstIndex(where: { $0.number == number })
     }
     
-    static func >> (array: Self, references: References) -> BoardT_4 {
+    static func >> (array: Self, references: References) -> BoardT_4? {
         guard let _self = references._self << array,
               let top =  references.top << array,
               let bottom =  references.bottom << array,
               let left =  references.left << array,
               let right =  references.right << array
-        else { return BoardT_4.empty }
+        else { return nil }
     
         let firstIndex = 1
         let lastIndex = Constants.numberOfItems - 2
@@ -103,8 +103,6 @@ extension Collection where Self == [Face] {
         let leftCells = left.rotated.cells.b.vertical(at: lastIndex) ?? []
         let rightCells = right.rotated.cells.b.vertical(at: firstIndex) ?? []
         
-        let tuple = BoardT_4(topCells, bottomCells, leftCells, rightCells)
-        
-        return tuple.ok ? tuple : BoardT_4.empty
+        return BoardT_4(topCells, bottomCells, leftCells, rightCells).ok
     }
 }

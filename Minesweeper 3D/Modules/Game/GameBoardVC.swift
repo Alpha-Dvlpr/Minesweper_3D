@@ -28,16 +28,16 @@ struct GameBoardVC: View {
             Spacer()
             VStack(spacing: Constants.boardSpacing) {
                 if self.viewModel.visibleFace != nil {
-                    HorizontalHintCell(sideCells: self.viewModel.sideFaces.t.0) { self.viewModel.rotate(.up) }
+                    HorizontalHintCell(sideCells: self.viewModel.sideFaces?.t.0) { self.viewModel.rotate(.up) }
                     HStack(spacing: Constants.boardSpacing) {
-                        VerticalHintCell(sideCells: self.viewModel.sideFaces.t.2) { self.viewModel.rotate(.left) }
+                        VerticalHintCell(sideCells: self.viewModel.sideFaces?.t.2) { self.viewModel.rotate(.left) }
                         GameBoardCell(
                             face: self.viewModel.visibleFace,
                             boardCallback: { self.viewModel.updateCellVisibility(cell: $0) }
                         )
-                        VerticalHintCell(sideCells: self.viewModel.sideFaces.t.3) { self.viewModel.rotate(.right) }
+                        VerticalHintCell(sideCells: self.viewModel.sideFaces?.t.3) { self.viewModel.rotate(.right) }
                     }
-                    HorizontalHintCell(sideCells: self.viewModel.sideFaces.t.1) { self.viewModel.rotate(.down) }
+                    HorizontalHintCell(sideCells: self.viewModel.sideFaces?.t.1) { self.viewModel.rotate(.down) }
                 } else {
                     // TODO: Localize
                     Text("Generando nuevo juego...".uppercased())

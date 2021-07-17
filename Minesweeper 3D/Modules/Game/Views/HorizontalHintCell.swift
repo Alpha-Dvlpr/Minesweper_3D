@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HorizontalHintCell: View {
     
-    var sideCells: [Cell]
+    var sideCells: [Cell]?
     var callback: (() -> Void)
     
     var body: some View {
@@ -17,9 +17,11 @@ struct HorizontalHintCell: View {
             alignment: .center,
             spacing: Constants.cellSpacing,
             content: {
-                ForEach(Constants.boardCells, id: \.self) { index in
-                    let cell = self.sideCells[index]
-                    GameCell(cell: cell) { _ in self.callback() }
+                if let cells = self.sideCells {
+                    ForEach((0..<cells.count), id: \.self) { index in
+                        let cell = cells[index]
+                        GameCell(cell: cell) { _ in self.callback() }
+                    }
                 }
             }
         )

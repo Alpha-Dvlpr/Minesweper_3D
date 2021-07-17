@@ -13,7 +13,7 @@ class GameBoardVM: ObservableObject {
     @Published var actionBarButton: Image = Images.system(.pause).image
     @Published var stringTime: String = Utils.getStringTime(seconds: 0)
     var gameStatus: GameStatus = .paused
-    var sideFaces: BoardT_4 { return self.faces >> self.visibleFace.references }
+    var sideFaces: BoardT_4? { return self.faces >> self.visibleFace.references }
     private var gameTime: Int = 0
     private var faces = [Face]()
     
