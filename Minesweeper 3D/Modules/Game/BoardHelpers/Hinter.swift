@@ -16,6 +16,7 @@ class Hinter {
         
         faces.i.forEach { face in
             dispatchGroup.enter()
+            
             self.calculateInnerHints(for: face.cells) { hintedFace in
                 face.cells = hintedFace
                 dispatchGroup.leave()
@@ -50,176 +51,162 @@ class Hinter {
     }
 
     private func calculateInnerHints(for cells: Board, completion: @escaping ((Board) -> Void)) {
-        let aux = cells.b
-        let innerCells: [Cell] = aux
+        cells.b
             .map { $0.filter { $0.type == .inner }.map { $0 } }
             .flatMap { $0 }
             .filter { $0.content != .mine }
+            .forEach { cell in
+                let surrounding = [
+                    cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
+                    cells.b[cell.yCor - 1][cell.xCor + 1], // NE Cell
+                    cells.b[cell.yCor][cell.xCor + 1],     // E  Cell
+                    cells.b[cell.yCor + 1][cell.xCor + 1], // SE Cell
+                    cells.b[cell.yCor + 1][cell.xCor],     // S  Cell
+                    cells.b[cell.yCor + 1][cell.xCor - 1], // SW Cell
+                    cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
+                    cells.b[cell.yCor - 1][cell.xCor - 1]  // NW Cell
+                ]
+                
+                cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
+            }
         
-        innerCells.forEach { cell in
-            let surrounding = [
-                aux[cell.yCor - 1][cell.xCor],     // N  Cell
-                aux[cell.yCor - 1][cell.xCor + 1], // NE Cell
-                aux[cell.yCor][cell.xCor + 1],     // E  Cell
-                aux[cell.yCor + 1][cell.xCor + 1], // SE Cell
-                aux[cell.yCor + 1][cell.xCor],     // S  Cell
-                aux[cell.yCor + 1][cell.xCor - 1], // SW Cell
-                aux[cell.yCor][cell.xCor - 1],     // W  Cell
-                aux[cell.yCor - 1][cell.xCor - 1]  // NW Cell
-            ]
-            
-            cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
-        }
-        
-        completion(Board(aux))
+        completion(cells)
     }
     
     private func calculateVerticalHints(for cells: Board, sides: BoardT_2, completion: @escaping ((Board) -> Void)) {
-        let aux = cells.b
-        let vBorderCells = aux
+        cells.b
             .map { $0.filter { $0.type == .vBorder }.map { $0 } }
             .flatMap { $0 }
             .filter { $0.content != .mine }
-        
-        vBorderCells.forEach { cell in
-            var surrounding = [Cell]()
-            
-            if cell.xCor == 0 {
-                let lfc = sides.t.0
+            .forEach { cell in
+                var surrounding = [Cell]()
                 
-                surrounding = [
-                    aux[cell.yCor - 1][cell.xCor],     // N  Cell
-                    aux[cell.yCor - 1][cell.xCor + 1], // NE Cell
-                    aux[cell.yCor][cell.xCor + 1],     // E  Cell
-                    aux[cell.yCor + 1][cell.xCor + 1], // SE Cell
-                    aux[cell.yCor + 1][cell.xCor],     // S  Cell
-                    lfc[cell.yCor - 1],                // SW Cell
-                    lfc[cell.yCor],                    // W  Cell
-                    lfc[cell.yCor + 1]                 // NW Cell
-                ]
-            }
-            
-            if cell.xCor == Constants.numberOfItems - 1 {
-                let rfc = sides.t.1
+                if cell.xCor == 0 {
+                    surrounding = [
+                        cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
+                        cells.b[cell.yCor - 1][cell.xCor + 1], // NE Cell
+                        cells.b[cell.yCor][cell.xCor + 1],     // E  Cell
+                        cells.b[cell.yCor + 1][cell.xCor + 1], // SE Cell
+                        cells.b[cell.yCor + 1][cell.xCor],     // S  Cell
+                        sides.t.0[cell.yCor - 1],              // SW Cell
+                        sides.t.0[cell.yCor],                  // W  Cell
+                        sides.t.0[cell.yCor + 1]               // NW Cell
+                    ]
+                }
                 
-                surrounding = [
-                    aux[cell.yCor + 1][cell.xCor],     // S  Cell
-                    aux[cell.yCor + 1][cell.xCor - 1], // SW Cell
-                    aux[cell.yCor][cell.xCor - 1],     // W  Cell
-                    aux[cell.yCor - 1][cell.xCor - 1], // NW Cell
-                    aux[cell.yCor - 1][cell.xCor],     // N  Cell
-                    rfc[cell.yCor - 1],                // NE Cell
-                    rfc[cell.yCor],                    // E  Cell
-                    rfc[cell.yCor + 1]                 // SE Cell
-                ]
+                if cell.xCor == Constants.numberOfItems - 1 {
+                    surrounding = [
+                        cells.b[cell.yCor + 1][cell.xCor],     // S  Cell
+                        cells.b[cell.yCor + 1][cell.xCor - 1], // SW Cell
+                        cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
+                        cells.b[cell.yCor - 1][cell.xCor - 1], // NW Cell
+                        cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
+                        sides.t.1[cell.yCor - 1],              // NE Cell
+                        sides.t.1[cell.yCor],                  // E  Cell
+                        sides.t.1[cell.yCor + 1]               // SE Cell
+                    ]
+                }
+                
+                cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
             }
-            
-            cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
-        }
         
-        completion(Board(aux))
+        completion(cells)
     }
     
     private func calculateHorizontalHints(for cells: Board, sides: BoardT_2, completion: @escaping ((Board) -> Void) ) {
-        let aux = cells.b
-        let hBorderCells = aux
-            . map { $0.filter { $0.type == .hBorder }.map { $0 } }
+        cells.b
+            .map { $0.filter { $0.type == .hBorder }.map { $0 } }
             .flatMap { $0 }
             .filter { $0.content != .mine }
-        
-        hBorderCells.forEach { cell in
-            var surrounding = [Cell]()
-            
-            if cell.yCor == 0 {
-                let tfc = sides.t.0
+            .forEach { cell in
+                var surrounding = [Cell]()
                 
-                surrounding = [
-                    aux[cell.yCor][cell.xCor + 1],     // E  Cell
-                    aux[cell.yCor + 1][cell.xCor + 1], // SE Cell
-                    aux[cell.yCor + 1][cell.xCor],     // S  Cell
-                    aux[cell.yCor + 1][cell.xCor - 1], // SW Cell
-                    aux[cell.yCor][cell.xCor - 1],     // W  Cell
-                    tfc[cell.xCor - 1],                // NW Cell
-                    tfc[cell.xCor],                    // N  Cell
-                    tfc[cell.xCor + 1]                 // NE Cell
-                ]
-            }
-            
-            if cell.yCor == Constants.numberOfItems - 1 {
-                let bfc = sides.t.1
+                if cell.yCor == 0 {
+                    surrounding = [
+                        cells.b[cell.yCor][cell.xCor + 1],     // E  Cell
+                        cells.b[cell.yCor + 1][cell.xCor + 1], // SE Cell
+                        cells.b[cell.yCor + 1][cell.xCor],     // S  Cell
+                        cells.b[cell.yCor + 1][cell.xCor - 1], // SW Cell
+                        cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
+                        sides.t.0[cell.xCor - 1],              // NW Cell
+                        sides.t.0[cell.xCor],                  // N  Cell
+                        sides.t.0[cell.xCor + 1]               // NE Cell
+                    ]
+                }
                 
-                surrounding = [
-                    aux[cell.yCor][cell.xCor - 1],     // W  Cell
-                    aux[cell.yCor - 1][cell.xCor - 1], // NW Cell
-                    aux[cell.yCor - 1][cell.xCor],     // N  Cell
-                    aux[cell.yCor - 1][cell.xCor + 1], // NE Cell
-                    aux[cell.yCor][cell.xCor + 1],     // E  Cell
-                    bfc[cell.xCor + 1],                // SE Cell
-                    bfc[cell.xCor],                    // S  Cell
-                    bfc[cell.xCor - 1]                 // SW Cell
-                ]
+                if cell.yCor == Constants.numberOfItems - 1 {
+                    surrounding = [
+                        cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
+                        cells.b[cell.yCor - 1][cell.xCor - 1], // NW Cell
+                        cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
+                        cells.b[cell.yCor - 1][cell.xCor + 1], // NE Cell
+                        cells.b[cell.yCor][cell.xCor + 1],     // E  Cell
+                        sides.t.1[cell.xCor + 1],              // SE Cell
+                        sides.t.1[cell.xCor],                  // S  Cell
+                        sides.t.1[cell.xCor - 1]               // SW Cell
+                    ]
+                }
+                
+                cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
             }
-            
-            cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
-        }
         
-        completion(Board(aux))
+        completion(cells)
     }
     
-    private func calculateCornerHints( for cells: Board, sides: BoardT_4, completion: @escaping ((Board) -> Void) ) {
-        let aux = cells.b
-        let corners = aux
+    private func calculateCornerHints(for cells: Board, sides: BoardT_4, completion: @escaping ((Board) -> Void) ) {
+        let lastIndex = Constants.numberOfItems - 1
+        
+        cells.b
             .map { $0.filter { $0.type == .corner }.map { $0 } }
             .flatMap { $0 }
             .filter { $0.content != .mine }
-        let tfc = sides.t.0
-        let bfc = sides.t.1
-        let lfc = sides.t.2
-        let rfc = sides.t.3
+            .forEach { cell in
+                var surrounding = [Cell]()
+                
+                if cell.xCor == 0 && cell.yCor == 0 {
+                    surrounding = [
+                        cells.b[cell.yCor][cell.xCor + 1],       // E  Cell
+                        cells.b[cell.yCor + 1][cell.xCor + 1],   // SE Cell
+                        cells.b[cell.yCor + 1][cell.xCor],       // S  Cell
+                        sides.t.2[1], sides.t.2[0], sides.t.0[1] // SW - W - NW Cells
+                    ]
+                }
+                
+                if cell.xCor == lastIndex && cell.yCor == 0 {
+                    surrounding = [
+                        cells.b[cell.yCor + 1][cell.xCor],     // S  Cell
+                        cells.b[cell.yCor + 1][cell.xCor - 1], // SW Cell
+                        cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
+                        sides.t.0[lastIndex - 1],              // NW Cell
+                        sides.t.0[lastIndex], sides.t.3[1]     // N - NE Cells
+                    ]
+                }
+                
+                if cell.xCor == 0 && cell.yCor == lastIndex {
+                    surrounding = [
+                        cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
+                        cells.b[cell.yCor - 1][cell.xCor + 1], // NE Cell
+                        cells.b[cell.yCor][cell.xCor + 1],     // E  Cell
+                        sides.t.1[1], sides.t.1[0],            // SE - S Cells
+                        sides.t.2[lastIndex - 1]               // NW Cell
+                    ]
+                }
+                
+                if cell.xCor == lastIndex && cell.yCor == lastIndex {
+                    surrounding = [
+                        cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
+                        cells.b[cell.yCor - 1][cell.xCor - 1], // NW Cell
+                        cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
+                        sides.t.3[lastIndex - 1],              // NE Cell
+                        sides.t.3[lastIndex],                  // N  Cell
+                        sides.t.1[lastIndex - 1]               // E  Cell
+                    ]
+                }
+                
+                cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
+            }
         
-        corners.forEach { cell in
-            var surrounding = [Cell]()
-            
-            if cell.xCor == 0 && cell.yCor == 0 {
-                surrounding = [
-                    aux[cell.yCor][cell.xCor + 1],     // E  Cell
-                    aux[cell.yCor + 1][cell.xCor + 1], // SE Cell
-                    aux[cell.yCor + 1][cell.xCor],     // S  Cell
-                    lfc[1], lfc[0], tfc[1]             // SW - W - NW Cells
-                ]
-            }
-            
-            if cell.xCor == 9 && cell.yCor == 0 {
-                surrounding = [
-                    aux[cell.yCor + 1][cell.xCor],     // S  Cell
-                    aux[cell.yCor + 1][cell.xCor - 1], // SW Cell
-                    aux[cell.yCor][cell.xCor - 1],     // W  Cell
-                    tfc[8], tfc[9], rfc[1]             // NW - N - NE Cells
-                ]
-            }
-            
-            if cell.xCor == 0 && cell.yCor == 9 {
-                surrounding = [
-                    aux[cell.yCor - 1][cell.xCor],     // N  Cell
-                    aux[cell.yCor - 1][cell.xCor + 1], // NE Cell
-                    aux[cell.yCor][cell.xCor + 1],     // E  Cell
-                    bfc[1], bfc[0], lfc[8]             // SE - S - NW Cells
-                ]
-            }
-            
-            if cell.xCor == 9 && cell.yCor == 9 {
-                surrounding = [
-                    aux[cell.yCor][cell.xCor - 1],     // W  Cell
-                    aux[cell.yCor - 1][cell.xCor - 1], // NW Cell
-                    aux[cell.yCor - 1][cell.xCor],     // N  Cell
-                    rfc[8], rfc[9], bfc[8]             // NE - N - E Cells
-                ]
-            }
-            
-            cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
-        }
-        
-        completion(Board(aux))
+        completion(cells)
     }
     
     private func switchToMine(cell: Cell, inside cells: [Cell]) -> Cell {

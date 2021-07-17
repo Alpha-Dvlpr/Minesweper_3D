@@ -48,4 +48,63 @@ extension Collection where Self.Iterator.Element: Collection {
         
         return result.reversed()
     }
+    
+    func vertical(at index: Int, reversed: Bool = false) -> [Self.Iterator.Element.Iterator.Element]? {
+        guard index < self.count else { return nil }
+        
+        var result = [Self.Iterator.Element.Iterator.Element]()
+        
+        for subArray in self { result.append(subArray.map { return $0 }[index]) }
+        
+        guard result.count == Constants.numberOfItems else { return nil }
+        
+        return reversed ? result.reversed() : result
+    }
+    
+    func horizontal(at index: Int, reversed: Bool = false) -> [Self.Iterator.Element.Iterator.Element]? {
+        guard index < self.count else { return nil }
+        
+        let result: [Self.Iterator.Element.Iterator.Element] = self.map { return $0.map { return $0 } }[index]
+        
+        guard result.count == Constants.numberOfItems else { return nil }
+        
+        return reversed ? result.reversed() : result
+    }
+}
+
+extension Collection where Self == [Face] {
+    
+    static func << (number: Int, array: Self) -> Face? {
+        return array.first(where: { $0.number == number })
+    }
+    
+    static func >> (array: Self, number: Int) -> Int? {
+        return array.firstIndex(where: { $0.number == number })
+    }
+    
+    static func >> (array: Self, references: References) -> BoardT_4 {
+        guard let _self = references._self << array,
+              let top =  references.top << array,
+              let bottom =  references.bottom << array,
+              let left =  references.left << array,
+              let right =  references.right << array
+        else { return BoardT_4.empty }
+    
+        let firstIndex = 1
+        let lastIndex = Constants.numberOfItems - 2
+        
+        top.updateNewReferences(from: _self, to: .up)
+        bottom.updateNewReferences(from: _self, to: .down)
+        left.updateNewReferences(from: _self, to: .left)
+        right.updateNewReferences(from: _self, to: .right)
+        
+        let topCells = top.rotated.cells.b.horizontal(at: lastIndex) ?? []
+        let bottomCells = bottom.rotated.cells.b.horizontal(at: firstIndex) ?? []
+        let leftCells = left.rotated.cells.b.vertical(at: lastIndex) ?? []
+        let rightCells = right.rotated.cells.b.vertical(at: firstIndex) ?? []
+        
+        let tuple = BoardT_4(topCells, bottomCells, leftCells, rightCells)
+        
+        return tuple.ok ? tuple : BoardT_4.empty
+    }
 }

@@ -39,7 +39,7 @@ struct GameBoardCell_Previews: PreviewProvider {
         GameBoardCell(
             face: Face(
                 number: 4,
-                references: References(top: 5, bottom: 2, left: 1, right: 6)
+                references: References(4, top: 5, bottom: 2, left: 1, right: 6)
             ),
             boardCallback: { _ in }
         )

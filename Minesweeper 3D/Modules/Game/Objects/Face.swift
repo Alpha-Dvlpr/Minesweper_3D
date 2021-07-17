@@ -37,11 +37,9 @@ class Face: Identifiable {
     
     // MARK: Face rotation methods
     // ===========================
-    func updateLastReferences() {
-        self.lastReferences = self.references
-    }
-    
     func updateNewReferences(from face: Face, to direction: Direction) {
+        self.lastReferences = self.references
+        
         switch direction {
         case .up:
             self.references.top = (7 - face.number)

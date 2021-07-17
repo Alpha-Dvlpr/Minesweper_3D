@@ -13,19 +13,7 @@ class GameBoardVM: ObservableObject {
     @Published var actionBarButton: Image = Images.system(.pause).image
     @Published var stringTime: String = Utils.getStringTime(seconds: 0)
     var gameStatus: GameStatus = .paused
-    var sideFaces: BoardT_4 {
-        let facesTuple = FaceT_6(
-            self.faces[0], self.faces[1], self.faces[2], self.faces[3], self.faces[4], self.faces[5]
-        )
-        
-        guard let horizontal = Referencer().getHorizontalFaces(for: self.visibleFace.number, on: facesTuple),
-              let vertical = Referencer().getVerticalFaces(for: self.visibleFace.number, on: facesTuple)
-        else { return BoardT_4.empty }
-      
-        let tuple = BoardT_4(horizontal.t.0, horizontal.t.1, vertical.t.0, vertical.t.1)
-        
-        return tuple.ok ? tuple : BoardT_4.empty
-    }
+    var sideFaces: BoardT_4 { return self.faces >> self.visibleFace.references }
     private var gameTime: Int = 0
     private var faces = [Face]()
     
@@ -40,7 +28,6 @@ class GameBoardVM: ObservableObject {
         
         if let linkedFace = self.faces.first(where: { $0.number == self.getReference(for: direction) }) {
             let aux = linkedFace
-            aux.updateLastReferences()
             aux.updateNewReferences(from: self.visibleFace, to: direction)
             let rotated = aux.rotated
             rotated.cells.resetCoords()
@@ -50,9 +37,7 @@ class GameBoardVM: ObservableObject {
     }
     
     func updateCellVisibility(cell: Cell) {
-        guard self.gameStatus == .running,
-              let aux = self.visibleFace
-        else { return }
+        guard self.gameStatus == .running, let aux = self.visibleFace else { return }
         
         let cellAtPosition = aux.cells.b[cell.yCor][cell.xCor]
         
@@ -110,18 +95,13 @@ class GameBoardVM: ObservableObject {
     // MARK: Board Functions
     // =====================
     private func generateFaceNumbers() {
-        let face1 = Face(number: 1, references: References(top: 5, bottom: 2, left: 3, right: 4))
-        let face2 = Face(number: 2, references: References(top: 1, bottom: 6, left: 3, right: 4))
-        let face3 = Face(number: 3, references: References(top: 5, bottom: 2, left: 6, right: 1))
-        let face4 = Face(number: 4, references: References(top: 5, bottom: 2, left: 1, right: 6))
-        let face5 = Face(number: 5, references: References(top: 6, bottom: 1, left: 3, right: 4))
-        let face6 = Face(number: 6, references: References(top: 2, bottom: 5, left: 3, right: 4))
+        let face1 = Face(number: 1, references: References(1, top: 5, bottom: 2, left: 3, right: 4))
+        let face2 = Face(number: 2, references: References(2, top: 1, bottom: 6, left: 3, right: 4))
+        let face3 = Face(number: 3, references: References(3, top: 5, bottom: 2, left: 6, right: 1))
+        let face4 = Face(number: 4, references: References(4, top: 5, bottom: 2, left: 1, right: 6))
+        let face5 = Face(number: 5, references: References(5, top: 6, bottom: 1, left: 3, right: 4))
+        let face6 = Face(number: 6, references: References(6, top: 2, bottom: 5, left: 3, right: 4))
         
-        #if DEBUG
-        face1.cells = Updater().debug_face1MineGeneration()
-        face1.generated = true
-        #endif
-       
         Updater().updateFaces(
             faces: FaceT_6(face1, face2, face3, face4, face5, face6)
         ) { minedFaces in

@@ -9,6 +9,7 @@ import Foundation
 
 struct References {
     
+    var _self: Int = 0
     var top: Int = 0
     var bottom: Int = 0
     var left: Int = 0
@@ -16,7 +17,8 @@ struct References {
     
     init() { }
     
-    init(top: Int, bottom: Int, left: Int, right: Int) {
+    init(_ _self: Int, top: Int, bottom: Int, left: Int, right: Int) {
+        self._self = _self
         self.top = top
         self.bottom = bottom
         self.left = left

@@ -53,7 +53,7 @@ class Updater {
     }
     
     private func updateFace2(face1: Face, face2: Face, completion: @escaping ((Board) -> Void)) {
-        guard let face1LastLine = face1.cells.horizontal(at: self.lastIndex) else { completion(face2.cells); return }
+        guard let face1LastLine = face1.cells.b.horizontal(at: self.lastIndex) else { completion(face2.cells); return }
         
         face2.cells.b[0] = face1LastLine.map { return ($0 << ($0.xCor, 0)) << 2 }
         
@@ -61,16 +61,16 @@ class Updater {
     }
     
     private func updateFace3(input: FaceT_2, face3: Face, completion: @escaping ((Board) -> Void)) {
-        guard let face1FirstColumn = input.t.0.cells.vertical(at: 0),
-              let face2FirstColumn = input.t.1.cells.vertical(at: 0)
+        guard let face1FirstColumn = input.t.0.cells.b.vertical(at: 0),
+              let face2FirstColumn = input.t.1.cells.b.vertical(at: 0)
         else { completion(face3.cells); return }
         
-        let face1Converted = face1FirstColumn.map { return ($0 << (9, $0.yCor)) << 3 }
+        let face1Converted = face1FirstColumn.map { return ($0 << (self.lastIndex, $0.yCor)) << 3 }
         (0...self.lastIndex).forEach { face3.cells.b[$0][lastIndex] = face1Converted[$0] }
         
         let face2Converted = (0...self.lastIndex).map { index -> Cell in
             let opposite = Int.opposite(of: index, max: self.lastIndex)
-            return (face2FirstColumn[index] << (opposite, 9)) << 3
+            return (face2FirstColumn[index] << (opposite, self.lastIndex)) << 3
         }
         
         face3.cells.b[self.lastIndex] = face2Converted.reversed()
@@ -79,8 +79,8 @@ class Updater {
     }
     
     private func updateFace4(input: FaceT_2, face4: Face, completion: @escaping ((Board) -> Void)) {
-        guard let face1LastColumn = input.t.0.cells.vertical(at: self.lastIndex),
-              let face2LastColumn = input.t.1.cells.vertical(at: self.lastIndex)
+        guard let face1LastColumn = input.t.0.cells.b.vertical(at: self.lastIndex),
+              let face2LastColumn = input.t.1.cells.b.vertical(at: self.lastIndex)
         else { completion(face4.cells); return }
         
         let face1Converted = face1LastColumn.map { return ($0 << (0, $0.yCor)) << 4 }
@@ -92,17 +92,17 @@ class Updater {
     }
     
     private func updateFace5(input: FaceT_3, face5: Face, completion: @escaping ((Board) -> Void)) {
-        guard let face1FirstLine = input.t.0.cells.horizontal(at: 0),
-              let face3FirstLine = input.t.1.cells.horizontal(at: 0),
-              let face4FirstLine = input.t.2.cells.horizontal(at: 0)
+        guard let face1FirstLine = input.t.0.cells.b.horizontal(at: 0),
+              let face3FirstLine = input.t.1.cells.b.horizontal(at: 0),
+              let face4FirstLine = input.t.2.cells.b.horizontal(at: 0)
         else { completion(face5.cells); return }
         
-        face5.cells.b[self.lastIndex] = face1FirstLine.map { return ($0 << ($0.xCor, 9)) << 5 }
+        face5.cells.b[self.lastIndex] = face1FirstLine.map { return ($0 << ($0.xCor, self.lastIndex)) << 5 }
         
         (0...self.lastIndex).forEach { face5.cells.b[$0][0] = (face3FirstLine[$0] << (0, $0)) << 5 }
         
         let face4Converted = (0...self.lastIndex).map { index -> Cell in
-            return (face4FirstLine[index] << (9, Int.opposite(of: index, max: self.lastIndex))) << 5
+            return (face4FirstLine[index] << (self.lastIndex, Int.opposite(of: index, max: self.lastIndex))) << 5
         }
         
         (0...self.lastIndex).forEach { face5.cells.b[$0][self.lastIndex] = face4Converted.reversed()[$0] }
@@ -111,10 +111,10 @@ class Updater {
     }
     
     private func updateFace6(input: FaceT_4, face6: Face, completion: @escaping ((Board) -> Void)) {
-        guard let face2LastLine = input.t.0.cells.horizontal(at: self.lastIndex),
-              let face3FirstColumn = input.t.1.cells.vertical(at: 0),
-              let face4LastColumn = input.t.2.cells.vertical(at: self.lastIndex),
-              let face5FirstLine = input.t.3.cells.horizontal(at: 0)
+        guard let face2LastLine = input.t.0.cells.b.horizontal(at: self.lastIndex),
+              let face3FirstColumn = input.t.1.cells.b.vertical(at: 0),
+              let face4LastColumn = input.t.2.cells.b.vertical(at: self.lastIndex),
+              let face5FirstLine = input.t.3.cells.b.horizontal(at: 0)
         else { completion(face6.cells); return }
         
         face6.cells.b[0] = face2LastLine.map { return ($0 << ($0.xCor, 0)) << 6 }
@@ -128,35 +128,13 @@ class Updater {
         
         let face4Converted = (0...self.lastIndex).map { index -> Cell in
             let cell = face4LastColumn[index]
-            return (cell << (cell.xCor, Int.opposite(of: index, max: lastIndex))) << 6
+            return (cell << (cell.xCor, Int.opposite(of: index, max: self.lastIndex))) << 6
         }
         
         (0...self.lastIndex).forEach { face6.cells.b[$0][self.lastIndex] = face4Converted.reversed()[$0] }
         
-        face6.cells.b[lastIndex] = face5FirstLine.map { return ($0 << ($0.xCor, 9)) << 6 }
+        face6.cells.b[self.lastIndex] = face5FirstLine.map { return ($0 << ($0.xCor, self.lastIndex)) << 6 }
         
         self.miner.placeMines(on: face6.cells) { completion($0) }
-    }
-    
-    // MARK: DEBUG functions
-    // =====================
-    // swiftlint:disable line_length
-    func debug_face1MineGeneration() -> Board {
-        let cells = [
-            [Cell(face: 1, xCor: 0, yCor: 0, content: .unselected), Cell(face: 1, xCor: 1, yCor: 0, content: .unselected), Cell(face: 1, xCor: 2, yCor: 0, content: .unselected), Cell(face: 1, xCor: 3, yCor: 0, content: .mine), Cell(face: 1, xCor: 4, yCor: 0, content: .unselected), Cell(face: 1, xCor: 5, yCor: 0, content: .unselected), Cell(face: 1, xCor: 6, yCor: 0, content: .unselected), Cell(face: 1, xCor: 7, yCor: 0, content: .mine), Cell(face: 1, xCor: 8, yCor: 0, content: .unselected), Cell(face: 1, xCor: 9, yCor: 0, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 1, content: .unselected), Cell(face: 1, xCor: 1, yCor: 1, content: .mine), Cell(face: 1, xCor: 2, yCor: 1, content: .unselected), Cell(face: 1, xCor: 3, yCor: 1, content: .mine), Cell(face: 1, xCor: 4, yCor: 1, content: .unselected), Cell(face: 1, xCor: 5, yCor: 1, content: .unselected), Cell(face: 1, xCor: 6, yCor: 1, content: .unselected), Cell(face: 1, xCor: 7, yCor: 1, content: .unselected), Cell(face: 1, xCor: 8, yCor: 1, content: .unselected), Cell(face: 1, xCor: 9, yCor: 1, content: .mine)],
-            [Cell(face: 1, xCor: 0, yCor: 2, content: .unselected), Cell(face: 1, xCor: 1, yCor: 2, content: .unselected), Cell(face: 1, xCor: 2, yCor: 2, content: .unselected), Cell(face: 1, xCor: 3, yCor: 2, content: .mine), Cell(face: 1, xCor: 4, yCor: 2, content: .mine), Cell(face: 1, xCor: 5, yCor: 2, content: .unselected), Cell(face: 1, xCor: 6, yCor: 2, content: .unselected), Cell(face: 1, xCor: 7, yCor: 2, content: .unselected), Cell(face: 1, xCor: 8, yCor: 2, content: .unselected), Cell(face: 1, xCor: 9, yCor: 2, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 3, content: .mine), Cell(face: 1, xCor: 1, yCor: 3, content: .unselected), Cell(face: 1, xCor: 2, yCor: 3, content: .mine), Cell(face: 1, xCor: 3, yCor: 3, content: .unselected), Cell(face: 1, xCor: 4, yCor: 3, content: .unselected), Cell(face: 1, xCor: 5, yCor: 3, content: .unselected), Cell(face: 1, xCor: 6, yCor: 3, content: .unselected), Cell(face: 1, xCor: 7, yCor: 3, content: .unselected), Cell(face: 1, xCor: 8, yCor: 3, content: .unselected), Cell(face: 1, xCor: 9, yCor: 3, content: .mine)],
-            [Cell(face: 1, xCor: 0, yCor: 4, content: .unselected), Cell(face: 1, xCor: 1, yCor: 4, content: .mine), Cell(face: 1, xCor: 2, yCor: 4, content: .unselected), Cell(face: 1, xCor: 3, yCor: 4, content: .unselected), Cell(face: 1, xCor: 4, yCor: 4, content: .unselected), Cell(face: 1, xCor: 5, yCor: 4, content: .unselected), Cell(face: 1, xCor: 6, yCor: 4, content: .mine), Cell(face: 1, xCor: 7, yCor: 4, content: .unselected), Cell(face: 1, xCor: 8, yCor: 4, content: .unselected), Cell(face: 1, xCor: 9, yCor: 4, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 5, content: .unselected), Cell(face: 1, xCor: 1, yCor: 5, content: .unselected), Cell(face: 1, xCor: 2, yCor: 5, content: .unselected), Cell(face: 1, xCor: 3, yCor: 5, content: .unselected), Cell(face: 1, xCor: 4, yCor: 5, content: .mine), Cell(face: 1, xCor: 5, yCor: 5, content: .unselected), Cell(face: 1, xCor: 6, yCor: 5, content: .unselected), Cell(face: 1, xCor: 7, yCor: 5, content: .unselected), Cell(face: 1, xCor: 8, yCor: 5, content: .mine), Cell(face: 1, xCor: 9, yCor: 5, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 6, content: .unselected), Cell(face: 1, xCor: 1, yCor: 6, content: .unselected), Cell(face: 1, xCor: 2, yCor: 6, content: .unselected), Cell(face: 1, xCor: 3, yCor: 6, content: .unselected), Cell(face: 1, xCor: 4, yCor: 6, content: .unselected), Cell(face: 1, xCor: 5, yCor: 6, content: .mine), Cell(face: 1, xCor: 6, yCor: 6, content: .unselected), Cell(face: 1, xCor: 7, yCor: 6, content: .unselected), Cell(face: 1, xCor: 8, yCor: 6, content: .unselected), Cell(face: 1, xCor: 9, yCor: 6, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 7, content: .unselected), Cell(face: 1, xCor: 1, yCor: 7, content: .unselected), Cell(face: 1, xCor: 2, yCor: 7, content: .unselected), Cell(face: 1, xCor: 3, yCor: 7, content: .unselected), Cell(face: 1, xCor: 4, yCor: 7, content: .unselected), Cell(face: 1, xCor: 5, yCor: 7, content: .mine), Cell(face: 1, xCor: 6, yCor: 7, content: .unselected), Cell(face: 1, xCor: 7, yCor: 7, content: .unselected), Cell(face: 1, xCor: 8, yCor: 7, content: .unselected), Cell(face: 1, xCor: 9, yCor: 7, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 8, content: .unselected), Cell(face: 1, xCor: 1, yCor: 8, content: .unselected), Cell(face: 1, xCor: 2, yCor: 8, content: .unselected), Cell(face: 1, xCor: 3, yCor: 8, content: .mine), Cell(face: 1, xCor: 4, yCor: 8, content: .unselected), Cell(face: 1, xCor: 5, yCor: 8, content: .unselected), Cell(face: 1, xCor: 6, yCor: 8, content: .unselected), Cell(face: 1, xCor: 7, yCor: 8, content: .unselected), Cell(face: 1, xCor: 8, yCor: 8, content: .unselected), Cell(face: 1, xCor: 9, yCor: 8, content: .unselected)],
-            [Cell(face: 1, xCor: 0, yCor: 9, content: .unselected), Cell(face: 1, xCor: 1, yCor: 9, content: .unselected), Cell(face: 1, xCor: 2, yCor: 9, content: .unselected), Cell(face: 1, xCor: 3, yCor: 9, content: .mine), Cell(face: 1, xCor: 4, yCor: 9, content: .unselected), Cell(face: 1, xCor: 5, yCor: 9, content: .unselected), Cell(face: 1, xCor: 6, yCor: 9, content: .unselected), Cell(face: 1, xCor: 7, yCor: 9, content: .mine), Cell(face: 1, xCor: 8, yCor: 9, content: .mine), Cell(face: 1, xCor: 9, yCor: 9, content: .unselected)]
-        ]
-        
-        for line in cells { for cell in line { cell.canBeEdited = false } }
-        
-        return Board(cells)
     }
 }
