@@ -101,6 +101,7 @@
 		E4A4216F26A4AB4700A4A214 /* Navigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigations.swift; sourceTree = "<group>"; };
 		E4A4217526A4AC7900A4A214 /* ShopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopVC.swift; sourceTree = "<group>"; };
 		E4A4217926A4AC9D00A4A214 /* RanksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RanksVC.swift; sourceTree = "<group>"; };
+		E4A4217E26A4AF5F00A4A214 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localized.strings; sourceTree = "<group>"; };
 		E4CF5185264BF4780058FED5 /* GameBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardVC.swift; sourceTree = "<group>"; };
 		E4CF5187264BF6820058FED5 /* VerHintVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerHintVC.swift; sourceTree = "<group>"; };
 		E4CF5189264BF9DE0058FED5 /* HorHintVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorHintVC.swift; sourceTree = "<group>"; };
@@ -409,6 +410,7 @@
 				es,
 				"ca-ES",
 				Base,
+				fr,
 			);
 			mainGroup = 9392D573264817CB000C858B;
 			productRefGroup = 9392D57D264817CC000C858B /* Products */;
@@ -555,6 +557,7 @@
 				93FE38CC2649B45700A78B84 /* en */,
 				93FE38CF2649B46000A78B84 /* es */,
 				93FE38D72649C4DA00A78B84 /* ca-ES */,
+				E4A4217E26A4AF5F00A4A214 /* fr */,
 			);
 			name = Localized.strings;
 			sourceTree = "<group>";

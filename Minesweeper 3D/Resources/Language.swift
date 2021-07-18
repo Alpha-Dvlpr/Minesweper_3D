@@ -11,7 +11,7 @@ enum Language: Equatable, Identifiable, CaseIterable, Hashable {
     
     // MARK: Protocols stuff
     // =====================
-    static var allCases: [Language] { return [.spanish(.es), .spanish(.ca), .english] }
+    static var allCases: [Language] { return [.spanish(.es), .spanish(.ca), .english, .french] }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.code)
@@ -28,6 +28,7 @@ enum Language: Equatable, Identifiable, CaseIterable, Hashable {
     // ===========
     case spanish(Spanish)
     case english
+    case french
     
     // MARK: Variables
     // ===============
@@ -39,6 +40,7 @@ enum Language: Equatable, Identifiable, CaseIterable, Hashable {
             case .ca: return "ca-ES"
             }
         case .english: return "en"
+        case .french: return "fr"
         }
     }
     
@@ -50,6 +52,7 @@ enum Language: Equatable, Identifiable, CaseIterable, Hashable {
             case .ca: return "Català"
             }
         case .english: return "English"
+        case .french: return "Français"
         }
     }
     
@@ -61,6 +64,7 @@ enum Language: Equatable, Identifiable, CaseIterable, Hashable {
             case .ca: return "catalan"
             }
         case .english: return "english"
+        case .french: return "french"
         }
     }
     
@@ -74,6 +78,7 @@ enum Language: Equatable, Identifiable, CaseIterable, Hashable {
         case "es": self = .spanish(.es)
         case "ca-ES": self = .spanish(.ca)
         case "en": self = .english
+        case "fr": self = .french
         default: return nil
         }
     }
@@ -84,6 +89,7 @@ enum Language: Equatable, Identifiable, CaseIterable, Hashable {
         case "spanish": self = .spanish(.es)
         case "catalan": self = .spanish(.ca)
         case "english": self = .english
+        case "french": self = .french
         default: return nil
         }
     }
