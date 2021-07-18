@@ -1,5 +1,5 @@
 //
-//  GameBoardCell.swift
+//  BoardVC.swift
 //  Minesweeper 3D
 //
 //  Created by Aarón Granado Amores on 12/5/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GameBoardCell: View {
+struct BoardVC: View {
     
     var face: Face
     var boardCallback: ((Cell) -> Void)
@@ -24,7 +24,7 @@ struct GameBoardCell: View {
                         content: {
                             ForEach(Constants.boardCells, id: \.self) { columnn in
                                 let cell = self.face.cells.b[line][columnn]
-                                GameCell(cell: cell) { self.boardCallback($0) }
+                                CellVC(cell: cell) { self.boardCallback($0) }
                             }
                         }
                     )
@@ -34,9 +34,9 @@ struct GameBoardCell: View {
     }
 }
 
-struct GameBoardCell_Previews: PreviewProvider {
+struct BoardVC_Previews: PreviewProvider {
     static var previews: some View {
-        GameBoardCell(
+        BoardVC(
             face: Face(
                 number: 4,
                 references: References(4, top: 5, bottom: 2, left: 1, right: 6)

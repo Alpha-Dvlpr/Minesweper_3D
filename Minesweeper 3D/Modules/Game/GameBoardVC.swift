@@ -25,27 +25,16 @@ struct GameBoardVC: View {
                 .foregroundColor(Color.blue)
                 .padding()
                 .font(.title)
+                .multilineTextAlignment(.center)
             Spacer()
-            VStack(spacing: Constants.boardSpacing) {
-                if self.viewModel.visibleFace != nil {
-                    HorizontalHintCell(sideCells: self.viewModel.sideFaces?.t.0) { self.viewModel.rotate(.up) }
-                    HStack(spacing: Constants.boardSpacing) {
-                        VerticalHintCell(sideCells: self.viewModel.sideFaces?.t.2) { self.viewModel.rotate(.left) }
-                        GameBoardCell(
-                            face: self.viewModel.visibleFace,
-                            boardCallback: { self.viewModel.updateCellVisibility(cell: $0) }
-                        )
-                        VerticalHintCell(sideCells: self.viewModel.sideFaces?.t.3) { self.viewModel.rotate(.right) }
-                    }
-                    HorizontalHintCell(sideCells: self.viewModel.sideFaces?.t.1) { self.viewModel.rotate(.down) }
-                } else {
-                    // TODO: Localize
-                    Text("Generando nuevo juego...".uppercased())
-                        .bold()
-                        .font(.largeTitle)
-                        .foregroundColor(Color.blue)
-                        .multilineTextAlignment(.center)
-                }
+            if self.viewModel.gameStatus != .generating {
+                GameVC(
+                    sideFaces: self.viewModel.sideFaces,
+                    visibleFace: self.viewModel.visibleFace,
+                    gameStatus: self.viewModel.gameStatus,
+                    rotateCallback: { self.viewModel.rotate($0) },
+                    updateCallback: { self.viewModel.update(cell: $0) }
+                )
             }
             Spacer()
         }
@@ -58,7 +47,10 @@ struct GameBoardVC: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button(
-                    action: { self.dismissAlertShown.toggle() },
+                    action: {
+                        if self.viewModel.gameStatus == .lost { self.closeCallback?() }
+                        else { self.dismissAlertShown.toggle() }
+                    },
                     label: { Images.system(.close).image }
                 )
             }
@@ -84,8 +76,12 @@ struct GameBoardVC: View {
                     primaryButton: .default(
                         Text(Texts.yes.localized),
                         action: {
-                            // TODO: Call viewmodel to save current game stuff then dismiss
-                            self.closeCallback?()
+                            self.viewModel.saveGame { success in
+                                if success { self.closeCallback?() }
+                                else {
+                                    // TODO: Create alert with error message
+                                }
+                            }
                         }
                     ),
                     secondaryButton: .default(

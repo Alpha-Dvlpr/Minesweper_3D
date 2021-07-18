@@ -19,6 +19,10 @@ struct Board {
         for line in self.b { for cell in line { cell.shown = false } }
     }
     
+    func showAllCells() {
+        for line in self.b { for cell in line { cell.shown = true } }
+    }
+    
     func disableEditing() {
         for line in self.b { for cell in line { cell.canBeEdited = false } }
     }

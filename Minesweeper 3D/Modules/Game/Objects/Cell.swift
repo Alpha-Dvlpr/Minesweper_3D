@@ -20,8 +20,17 @@ class Cell {
     var shown: Bool = false
     var flagged: Bool = false
     var canBeEdited: Bool = true
+    var isVoid: Bool {
+        return self.face == -1
+            && self.xCor == -1
+            && self.yCor == -1
+            && self.content == .unselected
+        
+    }
     private var face: Int
     private var originalContent: CellContent
+    
+    static var void: Cell { return Cell(face: -1, xCor: -1, yCor: -1, content: .unselected) }
     
     init(face: Int, xCor: Int, yCor: Int, content: CellContent) {
         self.xCor = xCor

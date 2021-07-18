@@ -17,11 +17,11 @@ enum CellContent: Hashable {
     
     var display: Image {
         switch self {
-        case .mine: return Images.numbers(ImageNumber.mine.rawValue).image
+        case .mine: return Images.symbols(.mine).image
         case .number(let number): return Images.numbers(number).image
-        case .flagged: return Images.numbers(ImageNumber.flag.rawValue).image
-        case .unselected: return Images.numbers(ImageNumber.unselected.rawValue).image
-        case .void: return Images.numbers(ImageNumber.void.rawValue).image
+        case .flagged: return Images.symbols(.flag).image
+        case .unselected: return Images.symbols(.unselected).image
+        case .void: return Images.symbols(.void).image
         }
     }
     

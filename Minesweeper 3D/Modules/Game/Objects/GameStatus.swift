@@ -12,12 +12,14 @@ enum GameStatus {
     case paused
     case won
     case lost
+    case generating
     
     var text: String {
         switch self {
         case .paused: return Texts.gamePaused.localized
         case .won: return Texts.gameWon.localized
         case .lost: return Texts.gameLost.localized
+        case .generating: return "Generando nuevo juego" // TODO: Localize
         default: return ""
         }
     }

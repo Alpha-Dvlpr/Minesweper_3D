@@ -27,4 +27,5 @@ class Constants {
         
         return CGFloat(marginalWidth / totalItems)
     }
+    static var numberOfHints: Int { return 4 }
 }

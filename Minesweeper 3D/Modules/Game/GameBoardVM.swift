@@ -12,7 +12,7 @@ class GameBoardVM: ObservableObject {
     @Published var visibleFace: Face!
     @Published var actionBarButton: Image = Images.system(.pause).image
     @Published var stringTime: String = Utils.getStringTime(seconds: 0)
-    var gameStatus: GameStatus = .paused
+    var gameStatus: GameStatus = .generating
     var sideFaces: BoardT_4? { return self.faces >> self.visibleFace.references }
     private var gameTime: Int = 0
     private var faces = [Face]()
@@ -36,18 +36,26 @@ class GameBoardVM: ObservableObject {
         }
     }
     
-    func updateCellVisibility(cell: Cell) {
+    func update(cell: Cell) {
         guard self.gameStatus == .running, let aux = self.visibleFace else { return }
         
         let cellAtPosition = aux.cells.b[cell.yCor][cell.xCor]
         
         if cellAtPosition.shown { return }
         else {
-            if cellAtPosition.content == .void {
-                // TODO: Create recursion
+            switch cellAtPosition.content {
+            case .mine:
+                self.faces.forEach { $0.cells.showAllCells() }
+                self.gameStatus = .lost
+            case .number(_):
+                aux.cells.b[cell.yCor][cell.xCor].shown = true
+            case .flagged: break
+            case .unselected: break
+            case .void:
+                // recursion for showing
+                aux.cells.b[cell.yCor][cell.xCor].shown = true
             }
             
-            aux.cells.b[cell.yCor][cell.xCor].shown = true
             self.visibleFace = aux
         }
     }
@@ -92,6 +100,11 @@ class GameBoardVM: ObservableObject {
         self.generateFaceNumbers()
     }
     
+    func saveGame(completion: @escaping ((Bool) -> Void)) {
+        completion(true)
+        // TODO: Save current game stuff then dismiss
+    }
+    
     // MARK: Board Functions
     // =====================
     private func generateFaceNumbers() {
@@ -121,6 +134,7 @@ class GameBoardVM: ObservableObject {
         case .running: self.actionBarButton = Images.system(.pause).image
         case .paused: self.actionBarButton = Images.system(.play).image
         case .won, .lost: self.actionBarButton = Images.system(.restart).image
+        case .generating: self.actionBarButton = Images.system(.timer).image
         }
     }
 }
