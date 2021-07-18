@@ -19,7 +19,7 @@ enum GameStatus {
         case .paused: return Texts.gamePaused.localized
         case .won: return Texts.gameWon.localized
         case .lost: return Texts.gameLost.localized
-        case .generating: return "Generando nuevo juego" // TODO: Localize
+        case .generating: return Texts.generatingGame.localized
         default: return ""
         }
     }

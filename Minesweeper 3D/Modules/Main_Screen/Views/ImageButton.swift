@@ -11,7 +11,6 @@ struct ImageButton: View {
 
     var title: String = ""
     var image: Images
-    var cornerRadius: CGFloat = 12
     
     var body: some View {
         HStack(spacing: 10) {
@@ -30,7 +29,7 @@ struct ImageButton: View {
         }
         .padding()
         .background(Color.blue)
-        .cornerRadius(self.cornerRadius)
+        .cornerRadius(12)
     }
 }
 
@@ -38,8 +37,7 @@ struct ImageButton_Previews: PreviewProvider {
     static var previews: some View {
         ImageButton(
             title: "button title",
-            image: .system(.play),
-            cornerRadius: 25
+            image: .system(.play)
         )
     }
 }

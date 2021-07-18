@@ -22,6 +22,7 @@ enum Texts: String {
     case gamePaused
     case gameWon
     case general
+    case generatingGame
     case info
     case language
     case main
@@ -33,6 +34,7 @@ enum Texts: String {
     case restartGame
     case save
     case settings
+    case shop
     case username
     case version
     case yes

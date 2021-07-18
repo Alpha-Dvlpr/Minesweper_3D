@@ -20,6 +20,7 @@
 "gamePaused" = "Joc en pausa";
 "gameWon" = "Has guanyat !!";
 "general" = "General";
+"generatingGame" = "S'està generant un joc nou";
 "info" = "Informació";
 "language" = "idioma de l'APP";
 "main" = "Inici";
@@ -31,6 +32,7 @@
 "restartGame" = "Reiniciar partida";
 "save" = "Desa";
 "settings" = "Configuració";
+"shop" = "Botiga";
 "username" = "Nom d'usuari";
 "version" = "Versió: %@";
 "yes" = "Sí";

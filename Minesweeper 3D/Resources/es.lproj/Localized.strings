@@ -20,6 +20,7 @@
 "gamePaused" = "Juego en pausa";
 "gameWon" = "Has ganado!!";
 "general" = "General";
+"generatingGame" = "Generando nuevo juego";
 "info" = "Información";
 "language" = "Idioma de la aplicación";
 "main" = "Inicio";
@@ -31,6 +32,7 @@
 "restartGame" = "Reiniciar partida";
 "save" = "Guardar";
 "settings" = "Ajustes";
+"shop" = "Tienda";
 "username" = "Nombre de usuario";
 "version" = "Versión: %@";
 "yes" = "Si";
