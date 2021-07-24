@@ -16,7 +16,7 @@ struct GameVC: View {
     var visibleFace: Face?
     var gameStatus: GameStatus
     var rotateCallback: ((Direction) -> Void)
-    var updateCallback: ((Cell) -> Void)
+    var updateCallback: ((Cell, Action) -> Void)
     
     var body: some View {
         if let sides = self.sideFaces, let visible = self.visibleFace {
@@ -33,20 +33,9 @@ struct GameVC: View {
             }
             HorHintVC(sideCells: sides.t.1) { self.rotateCallback(.down) }
             Spacer()
-            ActionsVC(enabled: self.actionsEnabled) { action in
-                switch action {
-                case .number:
-                    print("Number image tapped")
-                case .flag:
-                    print("Flag button tapped")
-                case .mine:
-                    print("Mine button tapped")
-                case .hint:
-                    print("Hint button tapped")
-                }
-                
+            ActionsVC(enabled: self.actionsEnabled) {
                 if !self.selectedCell.isVoid {
-                    self.updateCallback(self.selectedCell)
+                    self.updateCallback(self.selectedCell, $0)
                     self.actionsEnabled = false
                 }
             }
@@ -65,7 +54,7 @@ struct GameVC_Previews: PreviewProvider {
             ),
             gameStatus: .running,
             rotateCallback: { _ in },
-            updateCallback: { _ in }
+            updateCallback: { (_, _) in }
         )
     }
 }

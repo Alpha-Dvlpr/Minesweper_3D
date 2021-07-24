@@ -15,6 +15,12 @@ enum CellContent: Hashable {
     case unselected
     case void
     
+    func display(flagged: Bool, mined: Bool) -> Image {
+        return flagged
+            ? Images.symbols(.flag).image
+            : Images.symbols(mined ? .mine : .unselected).image
+    }
+    
     var display: Image {
         switch self {
         case .mine: return Images.symbols(.mine).image

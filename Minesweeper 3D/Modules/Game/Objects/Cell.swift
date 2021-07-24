@@ -15,17 +15,19 @@ class Cell {
     var type: CellType { return CellType.init(x: xCor, y: yCor) }
     var content: CellContent {
         if self.flagged { return .flagged }
+        else if self.mined { return .mine }
         else { return self.originalContent }
     }
     var shown: Bool = false
+    var tappable: Bool = true
     var flagged: Bool = false
+    var mined: Bool = false
     var canBeEdited: Bool = true
     var isVoid: Bool {
         return self.face == -1
             && self.xCor == -1
             && self.yCor == -1
             && self.content == .unselected
-        
     }
     private var face: Int
     private var originalContent: CellContent
@@ -47,11 +49,47 @@ class Cell {
     static func << (cell: Cell, face: Int) -> Cell {
         let cell = Cell(face: face, xCor: cell.xCor, yCor: cell.yCor, content: cell.originalContent)
         cell.canBeEdited = false
-        
         return cell
     }
     
     func updateContent(to content: CellContent) {
         self.originalContent = content
+    }
+    
+    func update(with action: Action, completion: @escaping ((Cell, Bool) -> Void)) {
+        guard self.originalContent != .void else { completion(self, false); return }
+        
+        switch action {
+        case .number:
+            self.makeVisible()
+        case .flag:
+            if self.mined { break }
+            self.flagged.toggle()
+        case .mine:
+            if self.flagged { break }
+            self.mined.toggle()
+        case .hint:
+            self.flagged = false
+            self.mined = false
+            self.shown = true
+            self.tappable = false
+            
+            // TODO: Reduce hint counter
+        }
+        
+        completion(self, true)
+    }
+    
+    private func makeVisible() {
+        guard !self.flagged else { return }
+   
+        switch self.originalContent {
+        case .mine:
+            print("Cell is mine, callback for losing game")
+        case .number:
+            self.shown = true
+            self.tappable = false
+        default: break
+        }
     }
 }

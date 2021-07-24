@@ -36,27 +36,19 @@ class GameBoardVM: ObservableObject {
         }
     }
     
-    func update(cell: Cell) {
+    func update(cell: Cell, with action: Action) {
         guard self.gameStatus == .running, let aux = self.visibleFace else { return }
         
-        let cellAtPosition = aux.cells.b[cell.yCor][cell.xCor]
+        let x = cell.xCor, y = cell.yCor
         
-        if cellAtPosition.shown { return }
-        else {
-            switch cellAtPosition.content {
-            case .mine:
-                self.faces.forEach { $0.cells.showAllCells() }
-                self.gameStatus = .lost
-            case .number(_):
-                aux.cells.b[cell.yCor][cell.xCor].shown = true
-            case .flagged: break
-            case .unselected: break
-            case .void:
-                // recursion for showing
-                aux.cells.b[cell.yCor][cell.xCor].shown = true
+        aux.cells.b[y][x].update(with: action) { (updatedCell, completed) in
+            if completed { aux.cells.b[y][x] = updatedCell }
+            else {
+                // TODO: Call face updater + create method for recursion
+                aux.cells.recursiveDisplay(from: aux.cells.b[y][x]) { _ in
+                    self.visibleFace = aux
+                }
             }
-            
-            self.visibleFace = aux
         }
     }
     

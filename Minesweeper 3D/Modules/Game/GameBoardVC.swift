@@ -15,8 +15,6 @@ struct GameBoardVC: View {
     
     var closeCallback: (() -> Void)?
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    private let firstIndex = 1
-    private let lastIndex = Constants.numberOfItems - 2
     
     var body: some View {
         VStack {
@@ -33,7 +31,7 @@ struct GameBoardVC: View {
                     visibleFace: self.viewModel.visibleFace,
                     gameStatus: self.viewModel.gameStatus,
                     rotateCallback: { self.viewModel.rotate($0) },
-                    updateCallback: { self.viewModel.update(cell: $0) }
+                    updateCallback: { self.viewModel.update(cell: $0, with: $1) }
                 )
             }
             Spacer()

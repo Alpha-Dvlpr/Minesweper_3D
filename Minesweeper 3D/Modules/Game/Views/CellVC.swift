@@ -14,11 +14,10 @@ struct CellVC: View {
     private var image: Image {
         return self.cell.shown
             ? self.cell.content.display
-            : Images.symbols(
-                self.cell.flagged
-                    ? .flag
-                    : .unselected
-            ).image
+            : self.cell.content.display(
+                flagged: self.cell.flagged,
+                mined: self.cell.mined
+            )
     }
     
     var body: some View {
@@ -26,7 +25,7 @@ struct CellVC: View {
             .resizable()
             .frame(width: Constants.cellSide, height: Constants.cellSide)
             .foregroundColor(self.cell.shown ? self.cell.content.color : nil)
-            .onTapGesture { self.cellCallback(self.cell) }
+            .onTapGesture { if self.cell.tappable { self.cellCallback(self.cell) } }
     }
 }
 
