@@ -10,6 +10,7 @@
 "autosaveRanks" = "Auto guardado de puntuaciones";
 "bestMarks" = "Mejores puntuaciones";
 "cancel" = "Cancelar";
+"close" = "Cerrar";
 "copyright" = "© 2021. Aarón Granado Amores.";
 "delete" = "Eliminar";
 "deleteDisclaimer" = "¿Desea eliminar todos los datos de la aplicación?\nLa aplicación se reiniciará para que los cambios surtan efecto";
@@ -29,6 +30,7 @@
 "moreInfo" = "Más info. (Se abrirá en un navegador externo)";
 "newGame" = "Nueva partida";
 "no" = "No";
+"options" = "Opciones";
 "restartGame" = "Reiniciar partida";
 "save" = "Guardar";
 "settings" = "Ajustes";

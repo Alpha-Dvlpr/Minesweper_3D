@@ -12,6 +12,7 @@ enum Texts: String {
     case autosaveRanks
     case bestMarks
     case cancel
+    case close
     case copyright
     case delete
     case deleteDisclaimer
@@ -31,6 +32,7 @@ enum Texts: String {
     case moreInfo
     case newGame
     case no
+    case options
     case restartGame
     case save
     case settings

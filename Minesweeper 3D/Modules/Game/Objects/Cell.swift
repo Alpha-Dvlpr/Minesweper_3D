@@ -56,29 +56,29 @@ class Cell {
         self.originalContent = content
     }
     
-    func update(with action: Action, completion: @escaping ((Cell, Bool) -> Void)) {
-        guard self.originalContent != .void else { completion(self, false); return }
+    func update(with action: Action, completion: @escaping ((Cell, GameStatus) -> Void)) {
+        func continueGame() { completion(self, .running) }
         
         switch action {
         case .number:
             if self.flagged { break }
-            self.makeVisible()
+            self.makeVisible { completion(self, $0) }
         case .flag:
             if self.mined { break }
             self.flagged.toggle()
+            continueGame()
         case .mine:
             if self.flagged { break }
             self.mined.toggle()
+            continueGame()
         case .hint:
             self.flagged = false
             self.mined = false
             self.shown = true
             self.tappable = false
-            
-            // TODO: Reduce hint counter
+            self.reduceHintCounter()
+            continueGame()
         }
-        
-        completion(self, true)
     }
     
     func setTappability(_ shown: Bool) {
@@ -86,15 +86,26 @@ class Cell {
         self.tappable = !shown
     }
     
-    private func makeVisible() {
+    private func makeVisible(callback: @escaping ((GameStatus) -> Void)) {
         switch self.originalContent {
-        case .mine:
-            print("Cell is mine, callback for losing game")
+        case .mine: callback(.lost)
         case .number:
-            if self.mined { self.mined = false }
-            self.shown = true
-            self.tappable = false
+            self.unmine()
+            callback(.running)
+        case .void:
+            self.unmine()
+            callback(.recurssive)
         default: break
         }
+    }
+    
+    private func unmine() {
+        if self.mined { self.mined = false }
+        self.shown = true
+        self.tappable = false
+    }
+    
+    private func reduceHintCounter() {
+        
     }
 }

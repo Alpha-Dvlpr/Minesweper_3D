@@ -40,18 +40,23 @@ class GameBoardVM: ObservableObject {
         }
     }
     
-    func update(cell: Cell, with action: Action) {
+    func update(cell: Cell, with action: Action, loseCallback: @escaping (() -> Void)) {
         guard self.gameStatus == .running, let aux = self.visibleFace, cell.tappable else { return }
         
         let x = cell.xCor, y = cell.yCor
         
-        aux.cells.b[y][x].update(with: action) { (updatedCell, completed) in
-            if completed { aux.cells.b[y][x] = updatedCell }
-            else {
-                // TODO: Call face updater + create method for recursion
+        aux.cells.b[y][x].update(with: action) { (updatedCell, status) in
+            switch status {
+            case .running:
+                aux.cells.b[y][x] = updatedCell
+            case .recurssive:
                 aux.cells.recursiveDisplay(from: aux.cells.b[y][x]) { _ in
                     self.visibleFace = aux
                 }
+            case .lost:
+                self.gameStatus = .lost
+                loseCallback()
+            default: break
             }
         }
     }
@@ -131,6 +136,7 @@ class GameBoardVM: ObservableObject {
         case .paused: self.actionBarButton = Images.system(.play).image
         case .won, .lost: self.actionBarButton = Images.system(.restart).image
         case .generating: self.actionBarButton = Images.system(.timer).image
+        case .recurssive: self.actionBarButton = Images.system(.clock).image
         }
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 enum SysImg {
     case cart
     case cellArrow
+    case clock
     case close
     case closeKeyboard
     case menu
@@ -51,6 +52,7 @@ enum Images {
             switch sys {
             case .cart: return Image(systemName: "cart")
             case .cellArrow: return Image(systemName: "chevron.right")
+            case .clock: return Image(systemName: "clock")
             case .close: return Image(systemName: "xmark")
             case .closeKeyboard: return Image(systemName: "keyboard.chevron.compact.down")
             case .menu: return Image(systemName: "text.justify")

@@ -12,6 +12,7 @@ struct GameBoardVC: View {
     @ObservedObject var viewModel: GameBoardVM
     @State private var menuShown: Bool = false
     @State private var dismissAlertShown: Bool = false
+    @State private var gameLost: Bool = false
     
     var closeCallback: (() -> Void)?
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -31,7 +32,7 @@ struct GameBoardVC: View {
                     visibleFace: self.viewModel.visibleFace,
                     gameStatus: self.viewModel.gameStatus,
                     rotateCallback: { self.viewModel.rotate($0) },
-                    updateCallback: { self.viewModel.update(cell: $0, with: $1) }
+                    updateCallback: { self.viewModel.update(cell: $0, with: $1) { self.gameLost = true } }
                 )
             }
             Spacer()
@@ -86,6 +87,17 @@ struct GameBoardVC: View {
                         Text(Texts.no.localized),
                         action: { self.closeCallback?() }
                     )
+                )
+            }
+        )
+        .alert(
+            isPresented: self.$gameLost,
+            content: {
+                Alert(
+                    title: Text(Texts.info.localized),
+                    message: Text(Texts.gameLost.localized),
+                    primaryButton: .default(Text(Texts.options.localized), action: { self.menuShown = true }),
+                    secondaryButton: .cancel(Text(Texts.close.localized), action: { self.closeCallback?() })
                 )
             }
         )

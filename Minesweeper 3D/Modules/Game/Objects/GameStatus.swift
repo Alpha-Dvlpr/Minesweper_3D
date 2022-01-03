@@ -13,6 +13,7 @@ enum GameStatus {
     case won
     case lost
     case generating
+    case recurssive
     
     var text: String {
         switch self {

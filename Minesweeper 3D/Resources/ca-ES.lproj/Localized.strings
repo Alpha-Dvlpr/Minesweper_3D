@@ -10,6 +10,7 @@
 "autosaveRanks" = "Desa automàticament els rangs";
 "bestMarks" = "Millors notes";
 "cancel" = "Cancel·la";
+"close" = "Tancar";
 "copyright" = "© 2021. Aarón Granado Amores.";
 "delete" = "Suprimeix";
 "deleteDisclaimer" = "Voleu eliminar totes les dades de l'aplicació?\nL'aplicació es reiniciarà per aplicar els canvis.";
@@ -29,6 +30,7 @@
 "moreInfo" = "Més info. (S'obrirà en un navegador extern)";
 "newGame" = "Joc nou";
 "no" = "No";
+"options" = "Opcions";
 "restartGame" = "Reiniciar partida";
 "save" = "Desa";
 "settings" = "Configuració";
