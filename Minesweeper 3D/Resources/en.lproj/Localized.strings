@@ -15,6 +15,7 @@
 "delete" = "Delete";
 "deleteDisclaimer" = "Do you want to delete all APP data?\nAPP will restart to apply changes.";
 "deleteTitle" = "Delete data";
+"errorSavingGame" = "Error saving game.";
 "finishGame" = "Finish game";
 "finishGameDisclaimer" = "Do you want to save the current game to continue later?";
 "gameLost" = "You lost :(";

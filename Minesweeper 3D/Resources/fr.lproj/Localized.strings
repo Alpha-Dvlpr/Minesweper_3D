@@ -15,6 +15,7 @@
 "delete" = "Supprimer";
 "deleteDisclaimer" = "Voulez-vous supprimer toutes les données APP ?\nAPP redémarrera pour appliquer les modifications.";
 "deleteTitle" = "Supprimer les données";
+"errorSavingGame" = "Erreur de enreistrement du jeu.";
 "finishGame" = "Terminer le jeu";
 "finishGameDisclaimer" = "Voulez-vous enregistrer le jeu en cours pour continuer plus tard ?";
 "gameLost" = "Vous avez perdu :(";

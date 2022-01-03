@@ -15,6 +15,7 @@
 "delete" = "Suprimeix";
 "deleteDisclaimer" = "Voleu eliminar totes les dades de l'aplicació?\nL'aplicació es reiniciarà per aplicar els canvis.";
 "deleteTitle" = "Eliminar dades";
+"errorSavingGame" = "Error en desar el joc.";
 "finishGame" = "Finalitza el joc";
 "finishGameDisclaimer" = "Voleu desar el joc actual per continuar més tard?";
 "gameLost" = "Heu perdut :(";

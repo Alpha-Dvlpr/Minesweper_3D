@@ -15,6 +15,7 @@
 "delete" = "Eliminar";
 "deleteDisclaimer" = "¿Desea eliminar todos los datos de la aplicación?\nLa aplicación se reiniciará para que los cambios surtan efecto";
 "deleteTitle" = "Eliminar datos";
+"errorSavingGame" = "Error al guardar la partida.";
 "finishGame" = "Finalizar partida";
 "finishGameDisclaimer" = "¿Desea guardar la partida actual para continuar más tarde?";
 "gameLost" = "Has perdido :(";

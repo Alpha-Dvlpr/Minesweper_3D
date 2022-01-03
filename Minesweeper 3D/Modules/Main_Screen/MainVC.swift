@@ -11,7 +11,8 @@ struct MainVC: View {
     
     private var screenEdges = EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
     @State private var selection: Navigations?
-    @State private var debugAlertShown: Bool = false
+    @State private var saveErrorAlertShown: Bool = false
+    @State private var canPerformActions: Bool = true
     
     var body: some View {
         NavigationView {
@@ -24,7 +25,13 @@ struct MainVC: View {
                 NavigationLink(
                     destination: GameBoardVC(
                         viewModel: GameBoardVM(calculate: self.selection == Navigations.game),
-                        closeCallback: { saved in self.selection = nil }
+                        closeCallback: { saved in
+                            self.selection = nil
+                            if saved == nil {
+                                self.canPerformActions = false
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { self.saveErrorAlertShown = true }
+                            }
+                        }
                     ),
                     tag: Navigations.game,
                     selection: self.$selection
@@ -43,7 +50,7 @@ struct MainVC: View {
                 HStack {
                     Spacer()
                     Button(
-                        action: { self.selection = Navigations.settings },
+                        action: { if self.canPerformActions { self.selection = Navigations.settings } },
                         label: {
                             Images.system(.settings).image
                                 .resizable()
@@ -56,17 +63,17 @@ struct MainVC: View {
                     title: Texts.newGame.localized,
                     image: .system(.play)
                 )
-                .onTapGesture { self.selection = Navigations.game }
+                .onTapGesture { if self.canPerformActions { self.selection = Navigations.game } }
 //                ImageButton(
 //                    title: Texts.bestMarks.localized,
 //                    image: .system(.rank)
 //                )
-//                .onTapGesture { self.selection = Navigations.ranks }
+//                .onTapGesture { if self.canPerformActions { self.selection = Navigations.ranks } }
 //                ImageButton(
 //                    title: Texts.shop.localized,
 //                    image: .system(.cart)
 //                )
-//                .onTapGesture { self.selection = Navigations.shop }
+//                .onTapGesture { if self.canPerformActions { self.selection = Navigations.shop } }
                 Spacer()
             }
             .padding(self.screenEdges)
@@ -76,6 +83,16 @@ struct MainVC: View {
             )
             .navigationBarHidden(true)
         }
+        .alert(
+            isPresented: self.$saveErrorAlertShown,
+            content: {
+                Alert(
+                    title: Text(Texts.info.localized),
+                    message: Text(Texts.errorSavingGame.localized),
+                    dismissButton: .default(Text(Texts.close.localized), action: { self.canPerformActions = true })
+                )
+            }
+        )
     }
 }
 
