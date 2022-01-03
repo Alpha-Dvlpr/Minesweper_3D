@@ -25,7 +25,7 @@ struct CellVC: View {
             .resizable()
             .frame(width: Constants.cellSide, height: Constants.cellSide)
             .foregroundColor(self.cell.shown ? self.cell.content.color : nil)
-            .onTapGesture { if self.cell.tappable { self.cellCallback(self.cell) } }
+            .onTapGesture { self.cellCallback(self.cell) }
     }
 }
 

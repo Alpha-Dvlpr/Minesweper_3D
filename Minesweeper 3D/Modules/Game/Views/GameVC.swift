@@ -27,7 +27,7 @@ struct GameVC: View {
                     VerHintVC(sideCells: sides.t.2) { self.rotateCallback(.left) }
                     BoardDividerVC(horizontal: false)
                     BoardVC(face: visible) { cell in
-                        if self.gameStatus == .running {
+                        if self.gameStatus == .running, cell.tappable {
                             self.selectedCell = cell
                             self.actionsEnabled = true
                         }

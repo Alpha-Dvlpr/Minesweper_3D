@@ -41,7 +41,7 @@ class GameBoardVM: ObservableObject {
     }
     
     func update(cell: Cell, with action: Action) {
-        guard self.gameStatus == .running, let aux = self.visibleFace else { return }
+        guard self.gameStatus == .running, let aux = self.visibleFace, cell.tappable else { return }
         
         let x = cell.xCor, y = cell.yCor
         
