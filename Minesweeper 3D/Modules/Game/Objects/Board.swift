@@ -16,11 +16,11 @@ struct Board {
     }
     
     func hideAllCells() {
-        for line in self.b { for cell in line { cell.shown = false; cell.tappable = true } }
+        for line in self.b { for cell in line { cell.setTappability(false) } }
     }
     
     func showAllCells() {
-        for line in self.b { for cell in line { cell.shown = true; cell.tappable = false } }
+        for line in self.b { for cell in line { cell.setTappability(true) } }
     }
     
     func disableEditing() {

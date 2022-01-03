@@ -80,6 +80,11 @@ class Cell {
         completion(self, true)
     }
     
+    func setTappability(_ shown: Bool) {
+        self.shown = shown
+        self.tappable = !shown
+    }
+    
     private func makeVisible() {
         guard !self.flagged else { return }
    
