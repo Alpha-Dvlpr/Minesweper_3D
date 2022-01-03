@@ -20,18 +20,24 @@ struct GameVC: View {
     
     var body: some View {
         if let sides = self.sideFaces, let visible = self.visibleFace {
-            HorHintVC(sideCells: sides.t.0) { self.rotateCallback(.up) }
-            HStack(spacing: Constants.cellSpacing) {
-                VerHintVC(sideCells: sides.t.2) { self.rotateCallback(.left) }
-                BoardVC(face: visible) { cell in
-                    if self.gameStatus == .running {
-                        self.selectedCell = cell
-                        self.actionsEnabled = true
+            VStack(spacing: Constants.cellSpacing * 2) {
+                HorHintVC(sideCells: sides.t.0) { self.rotateCallback(.up) }
+                BoardDividerVC(horizontal: true)
+                HStack(spacing: Constants.cellSpacing * 2) {
+                    VerHintVC(sideCells: sides.t.2) { self.rotateCallback(.left) }
+                    BoardDividerVC(horizontal: false)
+                    BoardVC(face: visible) { cell in
+                        if self.gameStatus == .running {
+                            self.selectedCell = cell
+                            self.actionsEnabled = true
+                        }
                     }
+                    BoardDividerVC(horizontal: false)
+                    VerHintVC(sideCells: sides.t.3) { self.rotateCallback(.right) }
                 }
-                VerHintVC(sideCells: sides.t.3) { self.rotateCallback(.right) }
+                BoardDividerVC(horizontal: true)
+                HorHintVC(sideCells: sides.t.1) { self.rotateCallback(.down) }
             }
-            HorHintVC(sideCells: sides.t.1) { self.rotateCallback(.down) }
             Spacer()
             ActionsVC(enabled: self.actionsEnabled) {
                 if !self.selectedCell.isVoid {
