@@ -31,7 +31,8 @@ struct ActionsVC: View {
 //                            .clipShape(Circle())
 //                            .frame(
 //                                width: shape.size.width * 0.4,
-//                                height: shape.size.height * 0.4),
+//                                height: shape.size.height * 0.4
+//                            ),
 //                            alignment: .topTrailing
 //                        )
 //                }
@@ -53,6 +54,6 @@ struct ActionsVC: View {
 
 struct ActionsVC_Previews: PreviewProvider {
     static var previews: some View {
-        ActionsVC(enabled: true, callback: {_ in })
+        ActionsVC(enabled: true, callback: { _ in })
     }
 }
