@@ -29,16 +29,16 @@ struct MainVC: View {
                     tag: Navigations.game,
                     selection: self.$selection
                 ) { EmptyView() }
-                NavigationLink(
-                    destination: RanksVC(),
-                    tag: Navigations.ranks,
-                    selection: self.$selection
-                ) { EmptyView() }
-                NavigationLink(
-                    destination: ShopVC(),
-                    tag: Navigations.shop,
-                    selection: self.$selection
-                ) { EmptyView() }
+//                NavigationLink(
+//                    destination: RanksVC(),
+//                    tag: Navigations.ranks,
+//                    selection: self.$selection
+//                ) { EmptyView() }
+//                NavigationLink(
+//                    destination: ShopVC(),
+//                    tag: Navigations.shop,
+//                    selection: self.$selection
+//                ) { EmptyView() }
                 
                 HStack {
                     Spacer()
@@ -57,16 +57,16 @@ struct MainVC: View {
                     image: .system(.play)
                 )
                 .onTapGesture { self.selection = Navigations.game }
-                ImageButton(
-                    title: Texts.bestMarks.localized,
-                    image: .system(.rank)
-                )
-                .onTapGesture { self.selection = Navigations.ranks }
-                ImageButton(
-                    title: Texts.shop.localized,
-                    image: .system(.cart)
-                )
-                .onTapGesture { self.selection = Navigations.shop }
+//                ImageButton(
+//                    title: Texts.bestMarks.localized,
+//                    image: .system(.rank)
+//                )
+//                .onTapGesture { self.selection = Navigations.ranks }
+//                ImageButton(
+//                    title: Texts.shop.localized,
+//                    image: .system(.cart)
+//                )
+//                .onTapGesture { self.selection = Navigations.shop }
                 Spacer()
             }
             .padding(self.screenEdges)
