@@ -61,6 +61,7 @@ class Cell {
         
         switch action {
         case .number:
+            if self.flagged { break }
             self.makeVisible()
         case .flag:
             if self.mined { break }
@@ -86,12 +87,11 @@ class Cell {
     }
     
     private func makeVisible() {
-        guard !self.flagged else { return }
-   
         switch self.originalContent {
         case .mine:
             print("Cell is mine, callback for losing game")
         case .number:
+            if self.mined { self.mined = false }
             self.shown = true
             self.tappable = false
         default: break
