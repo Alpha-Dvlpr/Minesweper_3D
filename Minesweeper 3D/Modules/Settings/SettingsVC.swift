@@ -37,13 +37,13 @@ struct SettingsVC: View, KeyboardListener {
                     }
                     .frame(width: 100)
                 }
-                Toggle(
-                    Texts.autosaveRanks.localized.uppercased(),
-                    isOn: self.$viewModel.settings.autosaveRanks
-                )
-                Stepper(value: self.$viewModel.settings.maxRanks, in: 10...30) {
-                    Text("\(Texts.maxRanks.localized.uppercased()): \(self.$viewModel.settings.maxRanks.wrappedValue)")
-                }
+//                Toggle(
+//                    Texts.autosaveRanks.localized.uppercased(),
+//                    isOn: self.$viewModel.settings.autosaveRanks
+//                )
+//                Stepper(value: self.$viewModel.settings.maxRanks, in: 10...30) {
+//                    Text("\(Texts.maxRanks.localized.uppercased()): \(self.$viewModel.settings.maxRanks.wrappedValue)")
+//                }
             }
             Section(header: Text(Texts.info.localized)) {
                 Text(Texts.version.localized(with: [self.viewModel.appVersion]))
