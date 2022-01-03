@@ -371,8 +371,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9392D58B264817D1000C858B /* Build configuration list for PBXNativeTarget "Minesweeper 3D" */;
 			buildPhases = (
-				93FE38E02649DA0900A78B84 /* SwiftLint */,
 				FFAE159141B0CFD1A6DD5AEF /* [CP] Check Pods Manifest.lock */,
+				93FE38E02649DA0900A78B84 /* SwiftLint */,
 				9392D578264817CC000C858B /* Sources */,
 				9392D579264817CC000C858B /* Frameworks */,
 				9392D57A264817CC000C858B /* Resources */,
