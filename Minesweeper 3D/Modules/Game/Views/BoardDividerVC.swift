@@ -13,11 +13,11 @@ struct BoardDividerVC: View {
     var width: CGFloat {
         return self.horizontal
             ? Constants.cellSide * 10
-            : Constants.cellSpacing * 8
+            : Constants.cellSpacing * 6
     }
     var height: CGFloat {
         return self.horizontal
-            ? Constants.cellSpacing * 8
+            ? Constants.cellSpacing * 6
             : Constants.cellSide * 10
     }
     

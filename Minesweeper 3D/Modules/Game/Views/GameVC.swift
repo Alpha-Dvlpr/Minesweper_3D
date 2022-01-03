@@ -20,10 +20,10 @@ struct GameVC: View {
     
     var body: some View {
         if let sides = self.sideFaces, let visible = self.visibleFace {
-            VStack(spacing: Constants.cellSpacing * 2) {
+            VStack(spacing: Constants.cellSpacing * 4) {
                 HorHintVC(sideCells: sides.t.0) { self.rotateCallback(.up) }
                 BoardDividerVC(horizontal: true)
-                HStack(spacing: Constants.cellSpacing * 2) {
+                HStack(spacing: Constants.cellSpacing * 4) {
                     VerHintVC(sideCells: sides.t.2) { self.rotateCallback(.left) }
                     BoardDividerVC(horizontal: false)
                     BoardVC(face: visible) { cell in
