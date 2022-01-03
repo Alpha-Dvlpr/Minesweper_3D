@@ -12,9 +12,8 @@ struct GameBoardVC: View {
     @ObservedObject var viewModel: GameBoardVM
     @State private var menuShown: Bool = false
     @State private var dismissAlertShown: Bool = false
-    @State private var gameLost: Bool = false
     
-    var closeCallback: (() -> Void)?
+    var closeCallback: ((Bool?) -> Void)?
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -32,7 +31,7 @@ struct GameBoardVC: View {
                     visibleFace: self.viewModel.visibleFace,
                     gameStatus: self.viewModel.gameStatus,
                     rotateCallback: { self.viewModel.rotate($0) },
-                    updateCallback: { self.viewModel.update(cell: $0, with: $1) { self.gameLost = true } }
+                    updateCallback: { self.viewModel.update(cell: $0, with: $1) { self.dismissAlertShown = true } }
                 )
             }
             Spacer()
@@ -46,10 +45,7 @@ struct GameBoardVC: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button(
-                    action: {
-                        if self.viewModel.gameStatus == .lost { self.closeCallback?() }
-                        else { self.dismissAlertShown.toggle() }
-                    },
+                    action: { self.dismissAlertShown = true },
                     label: { Images.system(.close).image }
                 )
             }
@@ -61,7 +57,7 @@ struct GameBoardVC: View {
                     label: { self.viewModel.actionBarButton }
                 )
                 Button(
-                    action: { self.menuShown.toggle() },
+                    action: { self.menuShown = true },
                     label: { Images.system(.menu).image }
                 )
             }
@@ -69,36 +65,27 @@ struct GameBoardVC: View {
         .alert(
             isPresented: self.$dismissAlertShown,
             content: {
-                Alert(
-                    title: Text(Texts.finishGame.localized),
-                    message: Text(Texts.finishGameDisclaimer.localized),
-                    primaryButton: .default(
-                        Text(Texts.yes.localized),
-                        action: {
-                            self.viewModel.saveGame { success in
-                                if success { self.closeCallback?() }
-                                else {
-                                    // TODO: Create alert with error message
-                                }
-                            }
-                        }
-                    ),
-                    secondaryButton: .default(
-                        Text(Texts.no.localized),
-                        action: { self.closeCallback?() }
+                if self.viewModel.gameStatus == .lost {
+                    return Alert(
+                        title: Text(Texts.info.localized),
+                        message: Text(Texts.gameLost.localized),
+                        primaryButton: .default(Text(Texts.options.localized), action: { self.menuShown = true }),
+                        secondaryButton: .cancel(Text(Texts.close.localized), action: { self.closeCallback?(false) })
                     )
-                )
-            }
-        )
-        .alert(
-            isPresented: self.$gameLost,
-            content: {
-                Alert(
-                    title: Text(Texts.info.localized),
-                    message: Text(Texts.gameLost.localized),
-                    primaryButton: .default(Text(Texts.options.localized), action: { self.menuShown = true }),
-                    secondaryButton: .cancel(Text(Texts.close.localized), action: { self.closeCallback?() })
-                )
+                } else {
+                    return Alert(
+                        title: Text(Texts.finishGame.localized),
+                        message: Text(Texts.finishGameDisclaimer.localized),
+                        primaryButton: .default(
+                            Text(Texts.yes.localized),
+                            action: { self.viewModel.saveGame { success in self.closeCallback?(success ? true : nil) } }
+                        ),
+                        secondaryButton: .default(
+                            Text(Texts.no.localized),
+                            action: { self.closeCallback?(false) }
+                        )
+                    )
+                }
             }
         )
         .actionSheet(
@@ -125,6 +112,6 @@ struct GameBoardVC: View {
 
 struct GameBoardVC_Previews: PreviewProvider {
     static var previews: some View {
-        GameBoardVC(viewModel: GameBoardVM(calculate: true), closeCallback: { })
+        GameBoardVC(viewModel: GameBoardVM(calculate: true), closeCallback: { _ in })
     }
 }

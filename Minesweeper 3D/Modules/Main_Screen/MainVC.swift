@@ -24,7 +24,7 @@ struct MainVC: View {
                 NavigationLink(
                     destination: GameBoardVC(
                         viewModel: GameBoardVM(calculate: self.selection == Navigations.game),
-                        closeCallback: { self.selection = nil }
+                        closeCallback: { saved in self.selection = nil }
                     ),
                     tag: Navigations.game,
                     selection: self.$selection
