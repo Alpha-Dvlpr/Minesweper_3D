@@ -82,16 +82,16 @@ extension Collection where Self == [Face] {
         return array.firstIndex(where: { $0.number == number })
     }
     
-    static func >> (array: Self, references: References) -> BoardT_4? {
-        guard let _self = references._self << array,
-              let top =  references.top << array,
-              let bottom =  references.bottom << array,
-              let left =  references.left << array,
-              let right =  references.right << array
+    static func >> (array: Self, references: (ref: References, b: Bool)) -> BoardT_4? {
+        guard let _self = references.ref._self << array,
+              let top =  references.ref.top << array,
+              let bottom =  references.ref.bottom << array,
+              let left =  references.ref.left << array,
+              let right =  references.ref.right << array
         else { return nil }
     
-        let firstIndex = 1
-        let lastIndex = Constants.numberOfItems - 2
+        let firstIndex = references.b ? 0 : 1
+        let lastIndex = Constants.numberOfItems - (references.b ? 1 : 2)
         
         top.updateNewReferences(from: _self, to: .up)
         bottom.updateNewReferences(from: _self, to: .down)

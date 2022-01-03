@@ -13,7 +13,7 @@ class GameBoardVM: ObservableObject {
     @Published var actionBarButton: Image = Images.system(.pause).image
     @Published var stringTime: String = Utils.getStringTime(seconds: 0)
     var gameStatus: GameStatus = .generating
-    var sideFaces: BoardT_4? { return self.faces >> self.visibleFace.references }
+    var sideFaces: BoardT_4? { return self.faces >> (self.visibleFace.references, false) }
     private var gameTime: Int = 0
     private var faces = [Face]()
     
@@ -33,6 +33,10 @@ class GameBoardVM: ObservableObject {
             rotated.cells.resetCoords()
             
             self.visibleFace = rotated
+            
+            if let visibleSides = self.faces >> (self.visibleFace.references, true) {
+                self.visibleFace.updateVisibleSides(with: visibleSides)
+            }
         }
     }
     
