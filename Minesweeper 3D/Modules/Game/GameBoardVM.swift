@@ -47,12 +47,8 @@ class GameBoardVM: ObservableObject {
         
         aux.cells.b[y][x].update(with: action) { (updatedCell, status) in
             switch status {
-            case .running:
-                aux.cells.b[y][x] = updatedCell
-            case .recurssive:
-                aux.recursiveDisplay(from: aux.cells.b[y][x]) { newCell in
-                    aux.cells.b[newCell.yCor][newCell.xCor] = newCell
-                }
+            case .running: aux.cells.b[y][x] = updatedCell
+            case .recurssive: aux.recursiveDisplay(from: aux.cells.b[y][x]) { aux.cells.b[$0.yCor][$0.xCor] = $0 }
             case .lost:
                 self.gameStatus = .lost
                 loseCallback()

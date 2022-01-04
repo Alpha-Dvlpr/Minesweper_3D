@@ -56,17 +56,7 @@ class Hinter {
             .flatMap { $0 }
             .filter { $0.content != .mine }
             .forEach { cell in
-                let surrounding = [
-                    cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
-                    cells.b[cell.yCor - 1][cell.xCor + 1], // NE Cell
-                    cells.b[cell.yCor][cell.xCor + 1],     // E  Cell
-                    cells.b[cell.yCor + 1][cell.xCor + 1], // SE Cell
-                    cells.b[cell.yCor + 1][cell.xCor],     // S  Cell
-                    cells.b[cell.yCor + 1][cell.xCor - 1], // SW Cell
-                    cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
-                    cells.b[cell.yCor - 1][cell.xCor - 1]  // NW Cell
-                ]
-                
+                let surrounding = cells.getInnerSideCells(at: (cell.yCor, cell.xCor))
                 cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
             }
         
@@ -75,39 +65,26 @@ class Hinter {
     
     private func calculateVerticalHints(for cells: Board, sides: BoardT_2, completion: @escaping ((Board) -> Void)) {
         cells.b
-            .map { $0.filter { $0.type == .vBorder }.map { $0 } }
+            .map { $0.filter { $0.type.isVSide }.map { $0 } }
             .flatMap { $0 }
             .filter { $0.content != .mine }
             .forEach { cell in
-                var surrounding = [Cell]()
-                
-                if cell.xCor == 0 {
-                    surrounding = [
-                        cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
-                        cells.b[cell.yCor - 1][cell.xCor + 1], // NE Cell
-                        cells.b[cell.yCor][cell.xCor + 1],     // E  Cell
-                        cells.b[cell.yCor + 1][cell.xCor + 1], // SE Cell
-                        cells.b[cell.yCor + 1][cell.xCor],     // S  Cell
-                        sides.t.0[cell.yCor - 1],              // SW Cell
-                        sides.t.0[cell.yCor],                  // W  Cell
-                        sides.t.0[cell.yCor + 1]               // NW Cell
-                    ]
+                switch cell.type {
+                case .vBorder(let side):
+                    var surrounding = cells.getVBorderSideCells(at: cell.yCor, side: side)
+                    
+                    switch side {
+                    case .left:
+                        let appending = [sides.t.0[cell.yCor - 1], sides.t.0[cell.yCor], sides.t.0[cell.yCor + 1]]
+                        surrounding.append(contentsOf: appending)
+                    case .right:
+                        let appending = [sides.t.1[cell.yCor - 1], sides.t.1[cell.yCor], sides.t.1[cell.yCor + 1]]
+                        surrounding.append(contentsOf: appending)
+                    }
+                    
+                    cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
+                default: break
                 }
-                
-                if cell.xCor == Constants.numberOfItems - 1 {
-                    surrounding = [
-                        cells.b[cell.yCor + 1][cell.xCor],     // S  Cell
-                        cells.b[cell.yCor + 1][cell.xCor - 1], // SW Cell
-                        cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
-                        cells.b[cell.yCor - 1][cell.xCor - 1], // NW Cell
-                        cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
-                        sides.t.1[cell.yCor - 1],              // NE Cell
-                        sides.t.1[cell.yCor],                  // E  Cell
-                        sides.t.1[cell.yCor + 1]               // SE Cell
-                    ]
-                }
-                
-                cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
             }
         
         completion(cells)
@@ -115,39 +92,26 @@ class Hinter {
     
     private func calculateHorizontalHints(for cells: Board, sides: BoardT_2, completion: @escaping ((Board) -> Void) ) {
         cells.b
-            .map { $0.filter { $0.type == .hBorder }.map { $0 } }
+            .map { $0.filter { $0.type.isHSide }.map { $0 } }
             .flatMap { $0 }
             .filter { $0.content != .mine }
             .forEach { cell in
-                var surrounding = [Cell]()
-                
-                if cell.yCor == 0 {
-                    surrounding = [
-                        cells.b[cell.yCor][cell.xCor + 1],     // E  Cell
-                        cells.b[cell.yCor + 1][cell.xCor + 1], // SE Cell
-                        cells.b[cell.yCor + 1][cell.xCor],     // S  Cell
-                        cells.b[cell.yCor + 1][cell.xCor - 1], // SW Cell
-                        cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
-                        sides.t.0[cell.xCor - 1],              // NW Cell
-                        sides.t.0[cell.xCor],                  // N  Cell
-                        sides.t.0[cell.xCor + 1]               // NE Cell
-                    ]
+                switch cell.type {
+                case .hBorder(let side):
+                    var surrounding = cells.getHBorderSideCells(at: cell.xCor, side: side)
+                    
+                    switch side {
+                    case .top:
+                        let appending = [sides.t.0[cell.xCor - 1], sides.t.0[cell.xCor], sides.t.0[cell.xCor + 1]]
+                        surrounding.append(contentsOf: appending)
+                    case .bottom:
+                        let appending = [sides.t.1[cell.xCor + 1], sides.t.1[cell.xCor], sides.t.1[cell.xCor - 1]]
+                        surrounding.append(contentsOf: appending)
+                    }
+                    
+                    cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
+                default: break
                 }
-                
-                if cell.yCor == Constants.numberOfItems - 1 {
-                    surrounding = [
-                        cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
-                        cells.b[cell.yCor - 1][cell.xCor - 1], // NW Cell
-                        cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
-                        cells.b[cell.yCor - 1][cell.xCor + 1], // NE Cell
-                        cells.b[cell.yCor][cell.xCor + 1],     // E  Cell
-                        sides.t.1[cell.xCor + 1],              // SE Cell
-                        sides.t.1[cell.xCor],                  // S  Cell
-                        sides.t.1[cell.xCor - 1]               // SW Cell
-                    ]
-                }
-                
-                cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
             }
         
         completion(cells)
@@ -157,53 +121,32 @@ class Hinter {
         let lastIndex = Constants.numberOfItems - 1
         
         cells.b
-            .map { $0.filter { $0.type == .corner }.map { $0 } }
+            .map { $0.filter { $0.type.isCorner }.map { $0 } }
             .flatMap { $0 }
             .filter { $0.content != .mine }
             .forEach { cell in
-                var surrounding = [Cell]()
-                
-                if cell.xCor == 0 && cell.yCor == 0 {
-                    surrounding = [
-                        cells.b[cell.yCor][cell.xCor + 1],       // E  Cell
-                        cells.b[cell.yCor + 1][cell.xCor + 1],   // SE Cell
-                        cells.b[cell.yCor + 1][cell.xCor],       // S  Cell
-                        sides.t.2[1], sides.t.2[0], sides.t.0[1] // SW - W - NW Cells
-                    ]
+                switch cell.type {
+                case .corner(let corner):
+                    var surrounding = [Cell]()
+                    
+                    switch corner {
+                    case .tL:
+                        let appending = [sides.t.2[1], sides.t.2[0], sides.t.0[1]]
+                        surrounding.append(contentsOf: appending)
+                    case .tR:
+                        let appending = [sides.t.0[lastIndex - 1], sides.t.0[lastIndex], sides.t.3[1]]
+                        surrounding.append(contentsOf: appending)
+                    case .bL:
+                        let appending = [sides.t.1[1], sides.t.1[0], sides.t.2[lastIndex - 1]]
+                        surrounding.append(contentsOf: appending)
+                    case .bR:
+                        let appending = [sides.t.3[lastIndex - 1], sides.t.3[lastIndex], sides.t.1[lastIndex - 1]]
+                        surrounding.append(contentsOf: appending)
+                    }
+                    
+                    cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
+                default: break
                 }
-                
-                if cell.xCor == lastIndex && cell.yCor == 0 {
-                    surrounding = [
-                        cells.b[cell.yCor + 1][cell.xCor],     // S  Cell
-                        cells.b[cell.yCor + 1][cell.xCor - 1], // SW Cell
-                        cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
-                        sides.t.0[lastIndex - 1],              // NW Cell
-                        sides.t.0[lastIndex], sides.t.3[1]     // N - NE Cells
-                    ]
-                }
-                
-                if cell.xCor == 0 && cell.yCor == lastIndex {
-                    surrounding = [
-                        cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
-                        cells.b[cell.yCor - 1][cell.xCor + 1], // NE Cell
-                        cells.b[cell.yCor][cell.xCor + 1],     // E  Cell
-                        sides.t.1[1], sides.t.1[0],            // SE - S Cells
-                        sides.t.2[lastIndex - 1]               // NW Cell
-                    ]
-                }
-                
-                if cell.xCor == lastIndex && cell.yCor == lastIndex {
-                    surrounding = [
-                        cells.b[cell.yCor][cell.xCor - 1],     // W  Cell
-                        cells.b[cell.yCor - 1][cell.xCor - 1], // NW Cell
-                        cells.b[cell.yCor - 1][cell.xCor],     // N  Cell
-                        sides.t.3[lastIndex - 1],              // NE Cell
-                        sides.t.3[lastIndex],                  // N  Cell
-                        sides.t.1[lastIndex - 1]               // E  Cell
-                    ]
-                }
-                
-                cell.updateContent(to: self.switchToMine(cell: cell, inside: surrounding).content)
             }
         
         completion(cells)

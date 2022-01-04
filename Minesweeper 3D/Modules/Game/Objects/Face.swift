@@ -110,51 +110,24 @@ class Face: Identifiable {
     // MARK: Recurssion methods
     // ========================
     func recursiveDisplay(from cell: Cell, completion: @escaping ((Cell) -> Void)) {
+        var sideCells: [Cell] = []
+        
         switch cell.type {
-        case .inner:
-            let sideCells = self.getInnerSideCells(at: (cell.yCor, cell.xCor)).filter { !$0.shown }
-            print(sideCells.count)
-            
-            sideCells.forEach {
-                switch $0.content {
-                case .void, .number:
-                    $0.setTappability(true)
-                    completion($0)
-                    
-                    if $0.content == .void { self.recursiveDisplay(from: $0, completion: completion) }
-                default: completion(cell)
-                }
-            }
-            
-        default: completion(cell)
+        case .inner: sideCells = self.cells.getInnerSideCells(at: (cell.yCor, cell.xCor)).filter { !$0.shown }
+        case .vBorder(let s): sideCells = self.cells.getVBorderSideCells(at: cell.yCor, side: s).filter { !$0.shown }
+        case .hBorder(let s): sideCells = self.cells.getHBorderSideCells(at: cell.xCor, side: s).filter { !$0.shown }
+        case .corner(let c): sideCells = self.cells.getCornerSideCells(at: c).filter { !$0.shown }
         }
-    }
-    
-    private func getHBorderSideCells(at row: Int) -> [Cell] {
         
-        return []
-    }
-    
-    private func getVBorderSideCells(at column: Int) -> [Cell] {
-        
-        return []
-    }
-    
-    private func getCornerSideCells(at coords: (row: Int, column: Int)) -> [Cell] {
-        
-        return []
-    }
-    
-    private func getInnerSideCells(at coords: (row: Int, column: Int)) -> [Cell] {
-        return [
-            self.cells.b[coords.row - 1][coords.column - 1],
-            self.cells.b[coords.row - 1][coords.column],
-            self.cells.b[coords.row - 1][coords.column + 1],
-            self.cells.b[coords.row][coords.column - 1],
-            self.cells.b[coords.row][coords.column + 1],
-            self.cells.b[coords.row + 1][coords.column - 1],
-            self.cells.b[coords.row + 1][coords.column],
-            self.cells.b[coords.row + 1][coords.column + 1]
-        ]
+        sideCells.forEach {
+            switch $0.content {
+            case .void, .number:
+                $0.setTappability(true)
+                completion($0)
+                
+                if $0.content == .void { self.recursiveDisplay(from: $0, completion: completion) }
+            default: completion(cell)
+            }
+        }
     }
 }
