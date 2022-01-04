@@ -49,4 +49,16 @@ enum CellContent: Hashable {
         default: return nil
         }
     }
+    
+    // MARK: DEBUG functions
+    // =====================
+    var debug: String {
+        switch self {
+        case .mine: return "*"
+        case .number(let number): return "\(number)"
+        case .flagged: return "F"
+        case .unselected: return "O"
+        case .void: return " "
+        }
+    }
 }

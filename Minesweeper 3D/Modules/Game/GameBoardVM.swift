@@ -139,4 +139,20 @@ class GameBoardVM: ObservableObject {
         case .recurssive: self.actionBarButton = Images.system(.clock).image
         }
     }
+    
+    // MARK: DEBUG functions
+    // =====================
+    func printCurrentFace() {
+        guard let face = self.visibleFace else { return }
+        let cells = face.cells.b
+        
+        print("-----------[FACE \(face.number)]-----------")
+        cells.forEach { row in
+            var rowString = ""
+            row.forEach { cell in rowString.append("[\(cell.content.debug)]") }
+            rowString.append("\n")
+            print(rowString)
+        }
+        print("------------------------------")
+    }
 }

@@ -18,6 +18,9 @@ struct GameBoardVC: View {
     
     var body: some View {
         VStack {
+            #if DEBUG
+            Text("print cells").onTapGesture { self.viewModel.printCurrentFace() }
+            #endif
             Text(self.viewModel.gameStatus.text.uppercased())
                 .bold()
                 .foregroundColor(Color.blue)
