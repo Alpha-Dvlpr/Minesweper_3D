@@ -50,8 +50,8 @@ class GameBoardVM: ObservableObject {
             case .running:
                 aux.cells.b[y][x] = updatedCell
             case .recurssive:
-                aux.cells.recursiveDisplay(from: aux.cells.b[y][x]) { _ in
-                    self.visibleFace = aux
+                aux.recursiveDisplay(from: aux.cells.b[y][x]) { newCell in
+                    aux.cells.b[newCell.yCor][newCell.xCor] = newCell
                 }
             case .lost:
                 self.gameStatus = .lost
