@@ -67,10 +67,22 @@ class Face: Identifiable {
     func updateVisibleSides(with sides: BoardT_4) {
         let b = sides.t, top = b.0, bottom = b.1, left = b.2, right = b.3, last = Constants.numberOfItems - 1
         
-        for index in 0..<top.count { self.cells.b[0][index].setTappability(top[index].shown) }
-        for index in 0..<bottom.count { self.cells.b[last][index].setTappability(bottom[index].shown) }
-        for index in 0..<left.count { self.cells.b[index][0].setTappability(left[index].shown) }
-        for index in 0..<right.count { self.cells.b[index][last].setTappability(right[index].shown) }
+        for index in 0..<top.count {
+            let cell = self.cells.b[0][index]
+            if !cell.shown { cell.setTappability(top[index].shown) }
+        }
+        for index in 0..<bottom.count {
+            let cell = self.cells.b[last][index]
+            if !cell.shown { cell.setTappability(bottom[index].shown) }
+        }
+        for index in 0..<left.count {
+            let cell = self.cells.b[index][0]
+            if !cell.shown { cell.setTappability(left[index].shown) }
+        }
+        for index in 0..<right.count {
+            let cell = self.cells.b[index][last]
+            if !cell.shown { cell.setTappability(right[index].shown) }
+        }
     }
     
     private func rotate(cells: Board, degrees: Degrees) -> Board {
