@@ -127,7 +127,7 @@ class Hinter {
             .forEach { cell in
                 switch cell.type {
                 case .corner(let corner):
-                    var surrounding = [Cell]()
+                    var surrounding = cells.getCornerSideCells(at: corner)
                     
                     switch corner {
                     case .tL:
