@@ -85,6 +85,10 @@ class CoreDataController {
         self.restart()
     }
     
+    func deleteSavedGame() {
+        UserDefaults.standard.removeObject(forKey: CoreDataKey.game.key)
+    }
+    
     func restart() {
         AppState.shared.gameID = UUID()
     }

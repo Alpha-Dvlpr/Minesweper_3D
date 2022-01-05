@@ -10,6 +10,7 @@ import SwiftUI
 struct MainVC: View {
     
     private var screenEdges = EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
+    private var coreData = CoreDataController.shared
     @State private var selection: Navigations?
     @State private var saveErrorAlertShown: Bool = false
     @State private var canPerformActions: Bool = true
@@ -67,7 +68,12 @@ struct MainVC: View {
                     title: Texts.newGame.localized,
                     image: .system(.play)
                 )
-                .onTapGesture { if self.canPerformActions { self.selection = Navigations.game } }
+                .onTapGesture {
+                    if self.canPerformActions {
+                        self.selection = Navigations.game
+                        self.coreData.deleteSavedGame()
+                    }
+                }
                 if let game = self.savedGame {
                     ImageButton(
                         title: "Continuar partida:\n'\(Utils.getStringTime(seconds: game.time))'",
@@ -109,9 +115,7 @@ struct MainVC: View {
     private func closeGameAction(with error: Error?) {
         self.selection = nil
         guard let error = error else {
-            CoreDataController.shared.getGame(iteration: 0) {
-                self.savedGame = $0
-            }
+            self.coreData.getGame(iteration: 0) { self.savedGame = $0 }
             return
         }
         
