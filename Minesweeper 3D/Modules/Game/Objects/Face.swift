@@ -67,22 +67,18 @@ class Face: Identifiable {
     func updateVisibleSides(with sides: BoardT_4) {
         let b = sides.t, top = b.0, bottom = b.1, left = b.2, right = b.3, last = Constants.numberOfItems - 1
         
-        for index in 0..<top.count {
-            let cell = self.cells.b[0][index]
-            if !cell.shown { cell.setTappability(top[index].shown) }
-        }
-        for index in 0..<bottom.count {
-            let cell = self.cells.b[last][index]
-            if !cell.shown { cell.setTappability(bottom[index].shown) }
-        }
-        for index in 0..<left.count {
-            let cell = self.cells.b[index][0]
-            if !cell.shown { cell.setTappability(left[index].shown) }
-        }
-        for index in 0..<right.count {
-            let cell = self.cells.b[index][last]
-            if !cell.shown { cell.setTappability(right[index].shown) }
-        }
+        (0..<top.count).forEach { self.updateCell(at: (0, $0), from: top[$0]) }
+        (0..<bottom.count).forEach { self.updateCell(at: (last, $0), from: bottom[$0]) }
+        (0..<left.count).forEach { self.updateCell(at: ($0, 0), from: left[$0]) }
+        (0..<right.count).forEach { self.updateCell(at: ($0, last), from: right[$0]) }
+    }
+    
+    private func updateCell(at position: (x: Int, y: Int), from cell: Cell) {
+        let aux = self.cells.b[position.x][position.y]
+        aux.mined = cell.mined
+        aux.flagged = cell.flagged
+        
+        if !aux.shown { aux.setTappability(cell.shown) }
     }
     
     private func rotate(cells: Board, degrees: Degrees) -> Board {
