@@ -41,6 +41,18 @@ class Cell {
         self.face = face
     }
     
+    init(cellCD: CellCD) {
+        self.xCor = cellCD.xCor
+        self.yCor = cellCD.yCor
+        self.shown = cellCD.shown
+        self.tappable = cellCD.tappable
+        self.flagged = cellCD.flagged
+        self.mined = cellCD.mined
+        self.canBeEdited = cellCD.canBeEdited
+        self.face = cellCD.face
+        self.originalContent = cellCD.originalContent
+    }
+    
     static func << (cell: Cell, coords: (Int, Int)) -> Cell {
         let cell = Cell(face: cell.face, xCor: coords.0, yCor: coords.1, content: cell.content)
         return cell
@@ -107,5 +119,19 @@ class Cell {
     
     private func reduceHintCounter() {
         
+    }
+    
+    func getCellCD() -> CellCD {
+        return CellCD(
+            xCor: self.xCor,
+            yCor: self.yCor,
+            shown: self.shown,
+            tappable: self.tappable,
+            flagged: self.flagged,
+            mined: self.mined,
+            canBeEdited: self.canBeEdited,
+            face: self.face, 
+            originalContent: self.originalContent
+        )
     }
 }

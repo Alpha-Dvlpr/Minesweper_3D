@@ -12,7 +12,7 @@ class Face: Identifiable {
     var id: UUID = UUID()
     var number: Int
     var references: References
-    var cells: Board = Board([[]])
+    var cells: Board = Board([[Cell]]())
     var rotated: Face {
         let newFace = self
         newFace.cells = self.rotate(cells: self.cells, degrees: self.rotatedFromLastPosition)
@@ -33,6 +33,14 @@ class Face: Identifiable {
         self.number = number
         self.references = references
         self.generateBoard()
+    }
+    
+    init(faceCD: FaceCD) {
+        self.number = faceCD.number
+        self.references = faceCD.references
+        self.cells = Board(faceCD.cells)
+        self.generated = faceCD.generated
+        self.lastReferences = faceCD.lastReferences
     }
     
     // MARK: Face rotation methods
@@ -125,5 +133,17 @@ class Face: Identifiable {
             default: completion(cell)
             }
         }
+    }
+    
+    // MARK: CoreData Saving
+    // =====================
+    func getDaceCD() -> FaceCD {
+        return FaceCD(
+            number: self.number,
+            references: self.references,
+            cells: self.cells,
+            generated: self.generated,
+            lastReferences: self.lastReferences
+        )
     }
 }

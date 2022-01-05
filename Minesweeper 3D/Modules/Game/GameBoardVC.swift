@@ -13,7 +13,7 @@ struct GameBoardVC: View {
     @State private var menuShown: Bool = false
     @State private var dismissAlertShown: Bool = false
     
-    var closeCallback: ((Bool?) -> Void)?
+    var closeCallback: ((Error?) -> Void)?
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -81,11 +81,11 @@ struct GameBoardVC: View {
                         message: Text(Texts.finishGameDisclaimer.localized),
                         primaryButton: .default(
                             Text(Texts.yes.localized),
-                            action: { self.viewModel.saveGame { success in self.closeCallback?(success ? true : nil) } }
+                            action: { self.viewModel.saveGame { self.closeCallback?($0) } }
                         ),
                         secondaryButton: .default(
                             Text(Texts.no.localized),
-                            action: { self.closeCallback?(false) }
+                            action: { self.closeCallback?(nil) }
                         )
                     )
                 }

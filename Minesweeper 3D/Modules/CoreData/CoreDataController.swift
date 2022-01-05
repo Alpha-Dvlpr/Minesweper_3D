@@ -22,6 +22,16 @@ class CoreDataController {
         }
     }
     
+    func save(game: Game, completion: @escaping ((Error?) -> Void)) {
+        do {
+            let encodedGame = try NSKeyedArchiver.archivedData(withRootObject: game, requiringSecureCoding: false)
+            UserDefaults.standard.set(encodedGame, forKey: CoreDataKey.game.key)
+            completion(nil)
+        } catch {
+            completion(error)
+        }
+    }
+    
     func save(ranks: [Any]) {
         UserDefaults.standard.set(ranks, forKey: CoreDataKey.ranks.key)
     }
@@ -46,6 +56,19 @@ class CoreDataController {
         } else {
             self.save(settings: model, reset: false)
             return self.getSettingModel(iteration: iteration + 1)
+        }
+    }
+    
+    func getGame(iteration: Int, completion: @escaping ((Game?) -> Void)) {
+        guard iteration < 3 else { completion(nil); return }
+        
+        if let decoded = UserDefaults.standard.object(forKey: CoreDataKey.game.key) as? Data {
+            do {
+                let decodedGame = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as? Game
+                completion(decodedGame)
+            } catch { completion(nil) }
+        } else {
+            self.getGame(iteration: iteration + 1, completion: completion)
         }
     }
     

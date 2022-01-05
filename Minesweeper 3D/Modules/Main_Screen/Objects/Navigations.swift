@@ -9,6 +9,7 @@ import Foundation
 
 enum Navigations {
     case game
+    case gameResume
     case ranks
     case settings
     case shop

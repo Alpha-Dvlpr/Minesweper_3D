@@ -15,6 +15,10 @@ struct Board {
         self.b = b
     }
     
+    init(_ b: [[CellCD]]) {
+        self.b = b.map { return $0.map { return Cell(cellCD: $0) } }
+    }
+    
     func hideAllCells() {
         for line in self.b {
             for cell in line {

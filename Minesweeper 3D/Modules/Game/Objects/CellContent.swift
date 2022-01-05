@@ -15,10 +15,30 @@ enum CellContent: Hashable {
     case unselected
     case void
     
+    init(from key: String) {
+        switch key {
+        case "*": self = .mine
+        case "F": self = .flagged
+        case "O": self = .unselected
+        case " ": self = .void
+        default: self = .number(Int(key)!)
+        }
+    }
+    
     func display(flagged: Bool, mined: Bool) -> Image {
         return flagged
             ? Images.symbols(.flag).image
             : Images.symbols(mined ? .mine : .unselected).image
+    }
+    
+    var settingKey: String {
+        switch self {
+        case .mine: return "*"
+        case .number(let number): return "\(number)"
+        case .flagged: return "F"
+        case .unselected: return "O"
+        case .void: return " "
+        }
     }
     
     var display: Image {
@@ -47,18 +67,6 @@ enum CellContent: Hashable {
             default: return nil
             }
         default: return nil
-        }
-    }
-    
-    // MARK: DEBUG functions
-    // =====================
-    var debug: String {
-        switch self {
-        case .mine: return "*"
-        case .number(let number): return "\(number)"
-        case .flagged: return "F"
-        case .unselected: return "O"
-        case .void: return " "
         }
     }
 }

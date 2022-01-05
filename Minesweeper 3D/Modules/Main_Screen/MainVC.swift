@@ -13,6 +13,8 @@ struct MainVC: View {
     @State private var selection: Navigations?
     @State private var saveErrorAlertShown: Bool = false
     @State private var canPerformActions: Bool = true
+    @State private var error: Error?
+    @State private var savedGame: Game?
     
     var body: some View {
         NavigationView {
@@ -25,15 +27,17 @@ struct MainVC: View {
                 NavigationLink(
                     destination: GameBoardVC(
                         viewModel: GameBoardVM(calculate: self.selection == Navigations.game),
-                        closeCallback: { saved in
-                            self.selection = nil
-                            if saved == nil {
-                                self.canPerformActions = false
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { self.saveErrorAlertShown = true }
-                            }
-                        }
+                        closeCallback: { self.closeGameAction(with: $0) }
                     ),
                     tag: Navigations.game,
+                    selection: self.$selection
+                ) { EmptyView() }
+                NavigationLink(
+                    destination: GameBoardVC(
+                        viewModel: GameBoardVM(with: self.savedGame),
+                        closeCallback: { self.closeGameAction(with: $0) }
+                    ),
+                    tag: Navigations.gameResume,
                     selection: self.$selection
                 ) { EmptyView() }
 //                NavigationLink(
@@ -64,6 +68,13 @@ struct MainVC: View {
                     image: .system(.play)
                 )
                 .onTapGesture { if self.canPerformActions { self.selection = Navigations.game } }
+                if let game = self.savedGame {
+                    ImageButton(
+                        title: "Continuar partida:\n'\(Utils.getStringTime(seconds: game.time))'",
+                        image: .system(.play)
+                    )
+                    .onTapGesture { if self.canPerformActions { self.selection = Navigations.gameResume } }
+                }
 //                ImageButton(
 //                    title: Texts.bestMarks.localized,
 //                    image: .system(.rank)
@@ -88,11 +99,25 @@ struct MainVC: View {
             content: {
                 Alert(
                     title: Text(Texts.info.localized),
-                    message: Text(Texts.errorSavingGame.localized),
+                    message: Text("\(Texts.errorSavingGame.localized): \(self.error?.localizedDescription ?? "")"),
                     dismissButton: .default(Text(Texts.close.localized), action: { self.canPerformActions = true })
                 )
             }
         )
+    }
+    
+    private func closeGameAction(with error: Error?) {
+        self.selection = nil
+        guard let error = error else {
+            CoreDataController.shared.getGame(iteration: 0) {
+                self.savedGame = $0
+            }
+            return
+        }
+        
+        self.canPerformActions = false
+        self.error = error
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { self.saveErrorAlertShown = true }
     }
 }
 

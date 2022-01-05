@@ -21,6 +21,17 @@ class GameBoardVM: ObservableObject {
         if calculate { self.newGame() }
     }
     
+    init(with game: Game?) {
+        guard let game = game else { return }
+        
+        self.visibleFace = Face(faceCD: game.visibleFace)
+        self.gameStatus = game.status
+        self.faces = game.faces.map { return Face(faceCD: $0) }
+        self.gameTime = game.time
+        
+        self.updateTime()
+    }
+    
     // MARK: Game functions
     // ====================
     func rotate(_ direction: Direction) {
@@ -98,9 +109,11 @@ class GameBoardVM: ObservableObject {
         self.generateFaceNumbers()
     }
     
-    func saveGame(completion: @escaping ((Bool) -> Void)) {
-        completion(true)
-        // TODO: Save current game stuff then dismiss
+    func saveGame(completion: @escaping ((Error?) -> Void)) {
+        let coreDataGame = Game(
+            faces: self.faces, visibleFace: self.visibleFace, time: self.gameTime, status: self.gameStatus
+        )
+        CoreDataController.shared.save(game: coreDataGame, completion: completion)
     }
     
     // MARK: Board Functions
@@ -146,7 +159,7 @@ class GameBoardVM: ObservableObject {
         print("-----------[FACE \(face.number)]-----------")
         cells.forEach { row in
             var rowString = ""
-            row.forEach { cell in rowString.append("[\(cell.content.debug)]") }
+            row.forEach { cell in rowString.append("[\(cell.content.settingKey)]") }
             rowString.append("\n")
             print(rowString)
         }

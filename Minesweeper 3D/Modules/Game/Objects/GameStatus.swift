@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GameStatus {
+enum GameStatus: String {
     case running
     case paused
     case won
