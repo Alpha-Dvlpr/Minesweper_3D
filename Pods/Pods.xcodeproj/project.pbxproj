@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = SwiftLint;
+			productName = SwiftLint;
 		};
 /* End PBXAggregateTarget section */
 
@@ -249,7 +250,7 @@
 		2FDDE9561E7BA99498A09A3E791E5858 /* TreeChangeset+Array2D.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TreeChangeset+Array2D.swift"; path = "Sources/Bond/Observable Collections/TreeChangeset+Array2D.swift"; sourceTree = "<group>"; };
 		31E9BFBBA964EEB01AEE3C85096529DC /* SignalProtocol+Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SignalProtocol+Result.swift"; path = "Sources/SignalProtocol+Result.swift"; sourceTree = "<group>"; };
 		339970202B2E6F0E607590F9F7CDDD4F /* UIPickerView+DataSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIPickerView+DataSource.swift"; path = "Sources/Bond/UIKit/UIPickerView+DataSource.swift"; sourceTree = "<group>"; };
-		3436D7C5225069490C685D77EB2E7F20 /* Differ */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Differ; path = Differ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3436D7C5225069490C685D77EB2E7F20 /* Differ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Differ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34C3AC5433BAA76DF5B7C7B72034AC44 /* OrderedCollectionDiff+IndexPath+Differ.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "OrderedCollectionDiff+IndexPath+Differ.swift"; path = "Sources/Bond/Observable Collections/OrderedCollectionDiff+IndexPath+Differ.swift"; sourceTree = "<group>"; };
 		36F37FACF62F1690024045E3F4ADF689 /* SignalProtocol+Arities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SignalProtocol+Arities.swift"; path = "Sources/SignalProtocol+Arities.swift"; sourceTree = "<group>"; };
 		37206F0E807DA74A2FC3C51FA17F24C9 /* Accumulator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Accumulator.swift; path = Sources/Subscribers/Accumulator.swift; sourceTree = "<group>"; };
@@ -326,10 +327,10 @@
 		9CD53CD01CF1555F11892908148FB56C /* SectionedDataSourceChangesetConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SectionedDataSourceChangesetConvertible.swift; path = "Sources/Bond/Data Sources/SectionedDataSourceChangesetConvertible.swift"; sourceTree = "<group>"; };
 		9CF11D9F28986759B4E5CCEE9C3287E2 /* NestedExtendedDiff.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NestedExtendedDiff.swift; path = Sources/Differ/NestedExtendedDiff.swift; sourceTree = "<group>"; };
 		9D3217EB06A76E3CF7D928E515C6F3AE /* Changeset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Changeset.swift; path = "Sources/Bond/Observable Collections/Changeset.swift"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DFDD60282D39044FD1D9F3D52323D15 /* Bond.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Bond.h; path = "Supporting Files/Bond.h"; sourceTree = "<group>"; };
 		9E29FC402C35042C68B2220A059A12B0 /* OrderedCollectionDiff+IndexPath+Patch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "OrderedCollectionDiff+IndexPath+Patch.swift"; path = "Sources/Bond/Observable Collections/OrderedCollectionDiff+IndexPath+Patch.swift"; sourceTree = "<group>"; };
-		9E5F6C63BBAB5A60862B7E067B771531 /* Bond */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Bond; path = Bond.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E5F6C63BBAB5A60862B7E067B771531 /* Bond.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bond.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A041A4BF112876611A8A4D57AB80B14D /* Differ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Differ.release.xcconfig; sourceTree = "<group>"; };
 		A2D3F08F8B4E137B45C75040A791A50F /* Subscriber.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Subscriber.swift; path = Sources/Subscriber.swift; sourceTree = "<group>"; };
 		A303F776EB58B54423D0302E8B1873A4 /* Property.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Property.swift; path = Sources/Property.swift; sourceTree = "<group>"; };
@@ -338,7 +339,7 @@
 		A9210F7331184A524223D7D96C08A860 /* Signal+ChangesetProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Signal+ChangesetProtocol.swift"; path = "Sources/Bond/Observable Collections/Signal+ChangesetProtocol.swift"; sourceTree = "<group>"; };
 		AB2BE5FC8C4DCDEC38112F2C56E36916 /* SignalProtocol+Timelane.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SignalProtocol+Timelane.swift"; path = "Sources/SignalProtocol+Timelane.swift"; sourceTree = "<group>"; };
 		AC92D2D38AC7A362F66FCAB90753F35B /* Property+ChangesetContainerProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Property+ChangesetContainerProtocol.swift"; path = "Sources/Bond/Observable Collections/Property+ChangesetContainerProtocol.swift"; sourceTree = "<group>"; };
-		ADA702C2D716D7E53C702815F8F27952 /* Pods-Minesweeper 3D */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Minesweeper 3D"; path = Pods_Minesweeper_3D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADA702C2D716D7E53C702815F8F27952 /* Pods_Minesweeper_3D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Minesweeper_3D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A431A924AF71652C9C1533AA9632C4 /* Differ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Differ.debug.xcconfig; sourceTree = "<group>"; };
 		B30FE4595D40CF0D984C85394BA926EF /* Bond-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Bond-dummy.m"; sourceTree = "<group>"; };
 		B40DD947CB0F23242B1AEC7890EDD9B1 /* Bond.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Bond.debug.xcconfig; sourceTree = "<group>"; };
@@ -379,7 +380,7 @@
 		ECD2D25FD512A038004746E2A918C14A /* Collection+Bond.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Collection+Bond.swift"; path = "Sources/Bond/Data Structures/Collection+Bond.swift"; sourceTree = "<group>"; };
 		ED9A24616202374E3A9C3B91DD2AB5FB /* BNDProtocolProxyBase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BNDProtocolProxyBase.m; path = Sources/BNDProtocolProxyBase/BNDProtocolProxyBase.m; sourceTree = "<group>"; };
 		EE3BEC02C7042ACD66BD0A7FCFFFB6ED /* UIBarItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIBarItem.swift; path = Sources/Bond/UIKit/UIBarItem.swift; sourceTree = "<group>"; };
-		EE64B414D0662BDC3A4919CDA3BC3A49 /* ReactiveKit */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ReactiveKit; path = ReactiveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE64B414D0662BDC3A4919CDA3BC3A49 /* ReactiveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE850565111A572AE88A33EC2630614F /* Instantiatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Instantiatable.swift; path = Sources/Bond/Instantiatable.swift; sourceTree = "<group>"; };
 		EF8BCB3734E9A026D768BBBCE595CACB /* UISearchBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UISearchBar.swift; path = Sources/Bond/UIKit/UISearchBar.swift; sourceTree = "<group>"; };
 		F0865E14C019B9F4A650D1968186AA96 /* Patch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Patch.swift; path = Sources/Differ/Patch.swift; sourceTree = "<group>"; };
@@ -484,7 +485,6 @@
 				26ADB80B118AA8458A61F1C70A556CC4 /* TimelaneCore.swift */,
 				D6DDB1E7B4AE67376D8FE441674B15A7 /* Support Files */,
 			);
-			name = ReactiveKit;
 			path = ReactiveKit;
 			sourceTree = "<group>";
 		};
@@ -507,7 +507,6 @@
 				5D1654F2149BC0CE7C2EA53E8E833448 /* Patch+Sort.swift */,
 				9143BE45B37E664B599B2F7628077A66 /* Support Files */,
 			);
-			name = Differ;
 			path = Differ;
 			sourceTree = "<group>";
 		};
@@ -539,10 +538,10 @@
 		5B495DF2CCC4A2C4CBE5619511A68C76 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9E5F6C63BBAB5A60862B7E067B771531 /* Bond */,
-				3436D7C5225069490C685D77EB2E7F20 /* Differ */,
-				ADA702C2D716D7E53C702815F8F27952 /* Pods-Minesweeper 3D */,
-				EE64B414D0662BDC3A4919CDA3BC3A49 /* ReactiveKit */,
+				9E5F6C63BBAB5A60862B7E067B771531 /* Bond.framework */,
+				3436D7C5225069490C685D77EB2E7F20 /* Differ.framework */,
+				ADA702C2D716D7E53C702815F8F27952 /* Pods_Minesweeper_3D.framework */,
+				EE64B414D0662BDC3A4919CDA3BC3A49 /* ReactiveKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -649,7 +648,6 @@
 				078D45AA9D59D0C65A6F743D1605FC4E /* ViewControllerLifecycle.swift */,
 				A5908C9B8A7BB1AB8E9E2BB9E1DECEFC /* Support Files */,
 			);
-			name = Bond;
 			path = Bond;
 			sourceTree = "<group>";
 		};
@@ -736,7 +734,6 @@
 			children = (
 				C2248A08B608E5BE026C78A6FC566616 /* Support Files */,
 			);
-			name = SwiftLint;
 			path = SwiftLint;
 			sourceTree = "<group>";
 		};
@@ -797,7 +794,7 @@
 			);
 			name = Bond;
 			productName = Bond;
-			productReference = 9E5F6C63BBAB5A60862B7E067B771531 /* Bond */;
+			productReference = 9E5F6C63BBAB5A60862B7E067B771531 /* Bond.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		1988226A6B9D4D9CB6C68283E38E5B97 /* ReactiveKit */ = {
@@ -815,7 +812,7 @@
 			);
 			name = ReactiveKit;
 			productName = ReactiveKit;
-			productReference = EE64B414D0662BDC3A4919CDA3BC3A49 /* ReactiveKit */;
+			productReference = EE64B414D0662BDC3A4919CDA3BC3A49 /* ReactiveKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		1AB917332735A47C4FA04749CD48A94A /* Pods-Minesweeper 3D */ = {
@@ -837,7 +834,7 @@
 			);
 			name = "Pods-Minesweeper 3D";
 			productName = Pods_Minesweeper_3D;
-			productReference = ADA702C2D716D7E53C702815F8F27952 /* Pods-Minesweeper 3D */;
+			productReference = ADA702C2D716D7E53C702815F8F27952 /* Pods_Minesweeper_3D.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		A325783180C9BEB3D60A7CAD046D1CF8 /* Differ */ = {
@@ -855,7 +852,7 @@
 			);
 			name = Differ;
 			productName = Differ;
-			productReference = 3436D7C5225069490C685D77EB2E7F20 /* Differ */;
+			productReference = 3436D7C5225069490C685D77EB2E7F20 /* Differ.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */

@@ -76,7 +76,7 @@ struct MainVC: View {
                 }
                 if let game = self.savedGame {
                     ImageButton(
-                        title: "Continuar partida:\n'\(Utils.getStringTime(seconds: game.time))'",
+                        title: String(format: Texts.resumeGame.localized, Utils.getStringTime(seconds: game.time)),
                         image: .system(.play)
                     )
                     .onTapGesture { if self.canPerformActions { self.selection = Navigations.gameResume } }
