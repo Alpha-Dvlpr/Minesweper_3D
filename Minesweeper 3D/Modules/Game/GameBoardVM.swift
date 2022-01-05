@@ -24,7 +24,7 @@ class GameBoardVM: ObservableObject {
     // MARK: Game functions
     // ====================
     func rotate(_ direction: Direction) {
-        guard self.gameStatus == .running else { return }
+        guard self.gameStatus == .running || self.gameStatus == .lost else { return }
         
         if let linkedFace = self.faces.first(where: { $0.number == self.getReference(for: direction) }) {
             let aux = linkedFace
