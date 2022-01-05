@@ -33,6 +33,7 @@
 "no" = "No";
 "options" = "Opciones";
 "restartGame" = "Reiniciar partida";
+"resumeGame" = "Continuar partida:\n'%@'";
 "save" = "Guardar";
 "settings" = "Ajustes";
 "shop" = "Tienda";

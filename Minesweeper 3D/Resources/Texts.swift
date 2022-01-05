@@ -35,6 +35,7 @@ enum Texts: String {
     case no
     case options
     case restartGame
+    case resumeGame
     case save
     case settings
     case shop
