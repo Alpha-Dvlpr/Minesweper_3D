@@ -51,6 +51,7 @@ class GameBoardVM: ObservableObject {
             case .recurssive: aux.recursiveDisplay(from: aux.cells.b[y][x]) { aux.cells.b[$0.yCor][$0.xCor] = $0 }
             case .lost:
                 self.gameStatus = .lost
+                self.faces.forEach { $0.cells.showAllCells() }
                 loseCallback()
             default: break
             }
