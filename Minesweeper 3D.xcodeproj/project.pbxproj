@@ -40,6 +40,7 @@
 		E48E4A272785E92E006F7BE5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A262785E92E006F7BE5 /* Game.swift */; };
 		E48E4A2C2785F3A2006F7BE5 /* FaceCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A2B2785F3A2006F7BE5 /* FaceCD.swift */; };
 		E48E4A332785F903006F7BE5 /* CellCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A322785F903006F7BE5 /* CellCD.swift */; };
+		E48E4A4327860C9A006F7BE5 /* MainVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A4227860C9A006F7BE5 /* MainVM.swift */; };
 		E4A4215A26A4867700A4A214 /* ActionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4215926A4867700A4A214 /* ActionsVC.swift */; };
 		E4A4216326A491D900A4A214 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4216226A491D900A4A214 /* GameVC.swift */; };
 		E4A4216A26A4A13800A4A214 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4216926A4A13800A4A214 /* Action.swift */; };
@@ -102,6 +103,7 @@
 		E48E4A262785E92E006F7BE5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		E48E4A2B2785F3A2006F7BE5 /* FaceCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCD.swift; sourceTree = "<group>"; };
 		E48E4A322785F903006F7BE5 /* CellCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCD.swift; sourceTree = "<group>"; };
+		E48E4A4227860C9A006F7BE5 /* MainVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVM.swift; sourceTree = "<group>"; };
 		E4A4215926A4867700A4A214 /* ActionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsVC.swift; sourceTree = "<group>"; };
 		E4A4216226A491D900A4A214 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		E4A4216926A4A13800A4A214 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				93F0DB7126481FB90022F976 /* ImageButton.swift */,
+				E48E4A4227860C9A006F7BE5 /* MainVM.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				E48A3823269C91A600B909D2 /* FaceUpdater.swift in Sources */,
 				93F0DB7C26483C310022F976 /* Texts.swift in Sources */,
 				934C6865264C567C00099424 /* Face.swift in Sources */,
+				E48E4A4327860C9A006F7BE5 /* MainVM.swift in Sources */,
 				E4EDDEB4265EA3D700588428 /* CellContent.swift in Sources */,
 				E4CF518E264C12DD0058FED5 /* Utils.swift in Sources */,
 				934C686C264C75A000099424 /* Direction.swift in Sources */,

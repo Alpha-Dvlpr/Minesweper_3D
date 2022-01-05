@@ -10,12 +10,10 @@ import SwiftUI
 struct MainVC: View {
     
     private var screenEdges = EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
-    private var coreData = CoreDataController.shared
+    private var viewModel = MainVM()
     @State private var selection: Navigations?
     @State private var saveErrorAlertShown: Bool = false
     @State private var canPerformActions: Bool = true
-    @State private var error: Error?
-    @State private var savedGame: Game?
     
     var body: some View {
         NavigationView {
@@ -35,7 +33,7 @@ struct MainVC: View {
                 ) { EmptyView() }
                 NavigationLink(
                     destination: GameBoardVC(
-                        viewModel: GameBoardVM(with: self.savedGame),
+                        viewModel: GameBoardVM(with: self.viewModel.savedGame),
                         closeCallback: { self.closeGameAction(with: $0) }
                     ),
                     tag: Navigations.gameResume,
@@ -71,10 +69,10 @@ struct MainVC: View {
                 .onTapGesture {
                     if self.canPerformActions {
                         self.selection = Navigations.game
-                        self.coreData.deleteSavedGame()
+                        self.viewModel.deleteGame()
                     }
                 }
-                if let game = self.savedGame {
+                if let game = self.viewModel.savedGame {
                     ImageButton(
                         title: String(format: Texts.resumeGame.localized, Utils.getStringTime(seconds: game.time)),
                         image: .system(.play)
@@ -105,7 +103,7 @@ struct MainVC: View {
             content: {
                 Alert(
                     title: Text(Texts.info.localized),
-                    message: Text("\(Texts.errorSavingGame.localized): \(self.error?.localizedDescription ?? "")"),
+                    message: Text(Texts.errorSavingGame.localized),
                     dismissButton: .default(Text(Texts.close.localized), action: { self.canPerformActions = true })
                 )
             }
@@ -114,13 +112,10 @@ struct MainVC: View {
     
     private func closeGameAction(with error: Error?) {
         self.selection = nil
-        guard let error = error else {
-            self.coreData.getGame(iteration: 0) { self.savedGame = $0 }
-            return
-        }
+        guard let error = error else { self.viewModel.getSavedGame(); return }
         
         self.canPerformActions = false
-        self.error = error
+        self.viewModel.updateError(error)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { self.saveErrorAlertShown = true }
     }
 }
