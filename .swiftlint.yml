@@ -1,0 +1,9 @@
+disabled_rules:
+    - trailing_whitespace
+    - identifier_name
+    - type_name
+    - statement_position
+    - large_tuple
+    
+excluded:
+    - Pods

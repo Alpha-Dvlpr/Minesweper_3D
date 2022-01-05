@@ -1,0 +1,41 @@
+/* 
+  Localized.strings
+  Minesweeper 3D
+
+  Created by Aaron Granado Amores on 10/05/2021.
+  
+*/
+
+"advanced" = "Avanzado";
+"autosaveRanks" = "Auto guardado de puntuaciones";
+"bestMarks" = "Mejores puntuaciones";
+"cancel" = "Cancelar";
+"close" = "Cerrar";
+"copyright" = "© 2021. Aarón Granado Amores.";
+"delete" = "Eliminar";
+"deleteDisclaimer" = "¿Desea eliminar todos los datos de la aplicación?\nLa aplicación se reiniciará para que los cambios surtan efecto";
+"deleteTitle" = "Eliminar datos";
+"errorSavingGame" = "Error al guardar la partida.";
+"finishGame" = "Finalizar partida";
+"finishGameDisclaimer" = "¿Desea guardar la partida actual para continuar más tarde?";
+"gameLost" = "Has perdido :(";
+"gamePaused" = "Juego en pausa";
+"gameWon" = "Has ganado!!";
+"general" = "General";
+"generatingGame" = "Generando nuevo juego";
+"info" = "Información";
+"language" = "Idioma de la aplicación";
+"main" = "Inicio";
+"maxRanks" = "Número máximo de puntuaciones";
+"menu" = "Menú";
+"moreInfo" = "Más info. (Se abrirá en un navegador externo)";
+"newGame" = "Nueva partida";
+"no" = "No";
+"options" = "Opciones";
+"restartGame" = "Reiniciar partida";
+"save" = "Guardar";
+"settings" = "Ajustes";
+"shop" = "Tienda";
+"username" = "Nombre de usuario";
+"version" = "Versión: %@";
+"yes" = "Si";
