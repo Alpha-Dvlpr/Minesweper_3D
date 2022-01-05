@@ -105,7 +105,9 @@ struct GameBoardVC: View {
                             Text(Texts.newGame.localized),
                             action: { self.viewModel.newGame() }
                         ),
-                        .cancel(Text(Texts.cancel.localized))
+                        self.viewModel.gameStatus == .lost
+                            ? .destructive(Text(Texts.close.localized), action: { self.closeCallback?(nil) })
+                            : .cancel(Text(Texts.cancel.localized))
                     ]
                 )
             }
