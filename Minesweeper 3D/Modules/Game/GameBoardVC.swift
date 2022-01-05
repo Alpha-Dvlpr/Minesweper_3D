@@ -73,7 +73,7 @@ struct GameBoardVC: View {
                         title: Text(Texts.info.localized),
                         message: Text(Texts.gameLost.localized),
                         primaryButton: .default(Text(Texts.options.localized), action: { self.menuShown = true }),
-                        secondaryButton: .cancel(Text(Texts.close.localized), action: { self.closeCallback?(false) })
+                        secondaryButton: .cancel(Text(Texts.close.localized))
                     )
                 } else {
                     return Alert(
