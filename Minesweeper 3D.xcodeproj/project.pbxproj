@@ -162,13 +162,13 @@
 			isa = PBXGroup;
 			children = (
 				E4A4215926A4867700A4A214 /* ActionsVC.swift */,
+				E4F309E627830890005A324B /* BoardDividerVC.swift */,
 				E4CF518B264BFF330058FED5 /* BoardVC.swift */,
 				E4F910DC269F542E0093B490 /* CellVC.swift */,
+				E428364C278D8528008C506E /* CustomAlert.swift */,
 				E4A4216226A491D900A4A214 /* GameVC.swift */,
 				E4CF5189264BF9DE0058FED5 /* HorHintVC.swift */,
 				E4CF5187264BF6820058FED5 /* VerHintVC.swift */,
-				E4F309E627830890005A324B /* BoardDividerVC.swift */,
-				E428364C278D8528008C506E /* CustomAlert.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

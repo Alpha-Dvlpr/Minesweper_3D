@@ -105,7 +105,6 @@ class GameBoardVM: ObservableObject {
     }
     
     func newGame() {
-        // TODO: Create and show loader for new games
         self.generateFaceNumbers()
     }
     
