@@ -19,6 +19,7 @@ enum SysImg {
     case rank
     case restart
     case settings
+    case share
     case timer
     case trash
 }
@@ -62,6 +63,7 @@ enum Images {
             case .rank: return Image(systemName: "list.star")
             case .restart: return Image(systemName: "repeat")
             case .settings: return Image(systemName: "gear")
+            case .share: return Image(systemName: "arrowshape.turn.up.right")
             case .timer: return Image(systemName: "timer")
             case .trash: return Image(systemName: "trash")
             }

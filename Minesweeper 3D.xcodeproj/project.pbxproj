@@ -40,6 +40,9 @@
 		E428365C278DD352008C506E /* RanksVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428365B278DD352008C506E /* RanksVM.swift */; };
 		E4283660278DD5D8008C506E /* RankModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428365F278DD5D8008C506E /* RankModel.swift */; };
 		E4283664278DDBB6008C506E /* RankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4283663278DDBB6008C506E /* RankCell.swift */; };
+		E4283668278DE423008C506E /* Social.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4283667278DE423008C506E /* Social.swift */; };
+		E428366D278DE6EB008C506E /* SwipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428366C278DE6EB008C506E /* SwipeButton.swift */; };
+		E4283671278DE928008C506E /* SwipeActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4283670278DE928008C506E /* SwipeActionView.swift */; };
 		E468F6DD265D26ED0081ACD7 /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = E468F6DC265D26ED0081ACD7 /* KeyboardListener.swift */; };
 		E48A3823269C91A600B909D2 /* FaceUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48A3822269C91A600B909D2 /* FaceUpdater.swift */; };
 		E48E4A272785E92E006F7BE5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A262785E92E006F7BE5 /* Game.swift */; };
@@ -108,6 +111,9 @@
 		E428365B278DD352008C506E /* RanksVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RanksVM.swift; sourceTree = "<group>"; };
 		E428365F278DD5D8008C506E /* RankModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankModel.swift; sourceTree = "<group>"; };
 		E4283663278DDBB6008C506E /* RankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCell.swift; sourceTree = "<group>"; };
+		E4283667278DE423008C506E /* Social.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Social.swift; sourceTree = "<group>"; };
+		E428366C278DE6EB008C506E /* SwipeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeButton.swift; sourceTree = "<group>"; };
+		E4283670278DE928008C506E /* SwipeActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionView.swift; sourceTree = "<group>"; };
 		E468F6DC265D26ED0081ACD7 /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
 		E48A3822269C91A600B909D2 /* FaceUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceUpdater.swift; sourceTree = "<group>"; };
 		E48E4A262785E92E006F7BE5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -278,6 +284,8 @@
 				E4A4217326A4AC5A00A4A214 /* Ranks */,
 				93F0DB7F26483D110022F976 /* Settings */,
 				E4A4217426A4AC6400A4A214 /* Shop */,
+				E4283666278DE404008C506E /* Social */,
+				E428366F278DE902008C506E /* SwipeAction */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -347,6 +355,23 @@
 				E4283663278DDBB6008C506E /* RankCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E4283666278DE404008C506E /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				E4283667278DE423008C506E /* Social.swift */,
+			);
+			path = Social;
+			sourceTree = "<group>";
+		};
+		E428366F278DE902008C506E /* SwipeAction */ = {
+			isa = PBXGroup;
+			children = (
+				E4283670278DE928008C506E /* SwipeActionView.swift */,
+				E428366C278DE6EB008C506E /* SwipeButton.swift */,
+			);
+			path = SwipeAction;
 			sourceTree = "<group>";
 		};
 		E4A4216E26A4AB3500A4A214 /* Objects */ = {
@@ -553,6 +578,7 @@
 				E4CF518A264BF9DE0058FED5 /* HorHintVC.swift in Sources */,
 				E425150E269C990C00D01643 /* FaceTuples.swift in Sources */,
 				93CBB0CC2649EF89009A8E53 /* AppSate.swift in Sources */,
+				E4283668278DE423008C506E /* Social.swift in Sources */,
 				E4283664278DDBB6008C506E /* RankCell.swift in Sources */,
 				E4251512269C9D5000D01643 /* Board.swift in Sources */,
 				934C6862264C54FC00099424 /* GameBoardVM.swift in Sources */,
@@ -576,6 +602,7 @@
 				E4A4216A26A4A13800A4A214 /* Action.swift in Sources */,
 				E428365C278DD352008C506E /* RanksVM.swift in Sources */,
 				9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */,
+				E4283671278DE928008C506E /* SwipeActionView.swift in Sources */,
 				E48A3823269C91A600B909D2 /* FaceUpdater.swift in Sources */,
 				93F0DB7C26483C310022F976 /* Texts.swift in Sources */,
 				934C6865264C567C00099424 /* Face.swift in Sources */,
@@ -594,6 +621,7 @@
 				93F0DB91264865F40022F976 /* SettingsVM.swift in Sources */,
 				E4A4217626A4AC7900A4A214 /* ShopVC.swift in Sources */,
 				E4CF518C264BFF330058FED5 /* BoardVC.swift in Sources */,
+				E428366D278DE6EB008C506E /* SwipeButton.swift in Sources */,
 				933A4589264EEC6600BDE2AA /* Collection_EXT.swift in Sources */,
 				E4CF5186264BF4780058FED5 /* GameBoardVC.swift in Sources */,
 				E48E4A272785E92E006F7BE5 /* Game.swift in Sources */,

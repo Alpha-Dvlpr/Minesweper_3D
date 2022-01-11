@@ -19,7 +19,7 @@ struct RanksVC: View {
             List {
                 ForEach(self.viewModel.ranks) { section in
                     Section(header: Text(section.name).font(.headline)) {
-                        ForEach(section.ranks, id: \.self) { RankCell(rank: $0) }
+                        ForEach(section.ranks, id: \.self) { self.generateCell(for: $0) }
                     }
                 }
             }
@@ -53,6 +53,19 @@ struct RanksVC: View {
             positiveButtonAction: { _ in self.showDeleteAlert = false },
             negativeButtonAction: { self.viewModel.deleteRanks { self.closeCallback?() } }
         )
+    }
+    
+    private func generateCell(for rank: Rank) -> some View {
+        return RankCell(rank: rank)
+            .swipeActions(
+                trailing: [
+                    SwipeButton(
+                        icon: Images.system(.share).image,
+                        action: { Social.shared.share(rank: rank) },
+                        tint: .blue
+                    )
+                ] 
+            )
     }
 }
 
