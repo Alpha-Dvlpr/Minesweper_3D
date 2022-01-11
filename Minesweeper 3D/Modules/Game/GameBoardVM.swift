@@ -118,7 +118,7 @@ class GameBoardVM: ObservableObject {
     func saveRank(with userName: String, completion: @escaping ((Error?) -> Void)) {
         guard !userName.isEmpty else { return }
         
-        let rank = Rank(name: "yolo", date: Date(), score: 450)
+        let rank = Rank(name: userName, date: Date(), score: self.calculateGameScore())
         CoreDataController.shared.save(rank: rank, completion: completion)
     }
     
@@ -154,6 +154,10 @@ class GameBoardVM: ObservableObject {
         case .generating: self.actionBarButton = Images.system(.timer).image
         case .recurssive: self.actionBarButton = Images.system(.clock).image
         }
+    }
+    
+    private func calculateGameScore() -> Int {
+        return Int.random(max: 1500)
     }
     
     // MARK: DEBUG functions

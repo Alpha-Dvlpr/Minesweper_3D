@@ -106,12 +106,17 @@ class CoreDataController {
     // ==============
     func deleteAllData() {
         UserDefaults.standard.removeObject(forKey: CoreDataKey.settings.key)
+        UserDefaults.standard.removeObject(forKey: CoreDataKey.game.key)
         UserDefaults.standard.removeObject(forKey: CoreDataKey.ranks.key)
         self.restart()
     }
     
     func deleteSavedGame() {
         UserDefaults.standard.removeObject(forKey: CoreDataKey.game.key)
+    }
+    
+    func deleteSavedRanks() {
+        UserDefaults.standard.removeObject(forKey: CoreDataKey.ranks.key)
     }
     
     func restart() {
