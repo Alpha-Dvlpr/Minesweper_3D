@@ -9,12 +9,50 @@ import SwiftUI
 
 struct RanksVC: View {
     
+    @State var showDeleteAlert: Bool = false
+    
+    private let viewModel = RanksVM()
+    var closeCallback: (() -> Void)?
+    
     var body: some View {
-        Text("")
-            .navigationBarTitle(
-                Text(Texts.bestMarks.localized.uppercased()),
-                displayMode: .inline
-            )
+        ZStack {
+            List {
+                ForEach(self.viewModel.ranks) { section in
+                    Section(header: Text(section.name).font(.headline)) {
+                        ForEach(section.ranks, id: \.self) { RankCell(rank: $0) }
+                    }
+                }
+            }
+            
+            if self.showDeleteAlert { self.generateDeleteWarningAlert() }
+        }
+        .listStyle(InsetGroupedListStyle())
+        .navigationBarTitle(
+            Text(Texts.bestMarks.localized.uppercased()),
+            displayMode: .inline
+        )
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                if !self.viewModel.ranks.isEmpty {
+                    Button(
+                        action: { self.showDeleteAlert = true },
+                        label: { Images.system(.trash).image }
+                    )
+                }
+            }
+        }
+    }
+    
+    private func generateDeleteWarningAlert() -> CustomAlert {
+        return CustomAlert(
+            showInput: false,
+            title: Texts.deleteRanksTitle.localized,
+            message: Texts.deleteRanksDisclaimer.localized,
+            positiveButtonTitle: Texts.cancel.localized,
+            negativeButtonTitle: Texts.delete.localized,
+            positiveButtonAction: { _ in self.showDeleteAlert = false },
+            negativeButtonAction: { self.viewModel.deleteRanks { self.closeCallback?() } }
+        )
     }
 }
 

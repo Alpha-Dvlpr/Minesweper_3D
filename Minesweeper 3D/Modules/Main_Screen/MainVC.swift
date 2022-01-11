@@ -41,7 +41,7 @@ struct MainVC: View {
                         selection: self.$selection
                     ) { EmptyView() }
                     NavigationLink(
-                        destination: RanksVC(),
+                        destination: RanksVC(closeCallback: { self.selection = nil }),
                         tag: Navigations.ranks,
                         selection: self.$selection
                     ) { EmptyView() }

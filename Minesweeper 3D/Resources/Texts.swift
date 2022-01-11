@@ -17,6 +17,8 @@ enum Texts: String {
     case delete
     case deleteDisclaimer
     case deleteTitle
+    case deleteRanksDisclaimer
+    case deleteRanksTitle
     case errorSavingGame
     case finishGame
     case finishGameDisclaimer

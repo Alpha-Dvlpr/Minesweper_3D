@@ -47,7 +47,10 @@ struct SettingsVC: View, KeyboardListener {
                         Texts.autosaveRanks.localized.uppercased(),
                         isOn: self.$viewModel.settings.autosaveRanks
                     )
-                    Stepper(value: self.$viewModel.settings.maxRanks, in: Constants.maxRanksRange) { Text(self.stepperString) }
+                    Stepper(
+                        value: self.$viewModel.settings.maxRanks,
+                        in: Constants.maxRanksRange
+                    ) { Text(self.stepperString) }
                 }
                 Section(header: Text(Texts.info.localized)) {
                     Text(Texts.version.localized(with: [self.viewModel.appVersion]))
@@ -66,7 +69,6 @@ struct SettingsVC: View, KeyboardListener {
             
             if self.showDeleteAlert { self.generateDeleteAlert() }
         }
-        
         .navigationBarTitle(
             Text(Texts.settings.localized.uppercased()),
             displayMode: .inline
@@ -92,7 +94,7 @@ struct SettingsVC: View, KeyboardListener {
     private func generateDeleteAlert() -> CustomAlert {
         return CustomAlert(
             showInput: false,
-            title: Texts.deleteTitle.localized.uppercased(),
+            title: Texts.deleteTitle.localized,
             message: Texts.deleteDisclaimer.localized,
             positiveButtonTitle: Texts.cancel.localized,
             negativeButtonTitle: Texts.delete.localized,

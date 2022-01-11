@@ -20,6 +20,7 @@ enum SysImg {
     case restart
     case settings
     case timer
+    case trash
 }
 
 enum Symbol {
@@ -62,6 +63,7 @@ enum Images {
             case .restart: return Image(systemName: "repeat")
             case .settings: return Image(systemName: "gear")
             case .timer: return Image(systemName: "timer")
+            case .trash: return Image(systemName: "trash")
             }
         }
     }

@@ -37,6 +37,9 @@
 		E4251512269C9D5000D01643 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4251511269C9D5000D01643 /* Board.swift */; };
 		E428364D278D8528008C506E /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428364C278D8528008C506E /* CustomAlert.swift */; };
 		E4283659278DA311008C506E /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4283658278DA311008C506E /* Rank.swift */; };
+		E428365C278DD352008C506E /* RanksVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428365B278DD352008C506E /* RanksVM.swift */; };
+		E4283660278DD5D8008C506E /* RankModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428365F278DD5D8008C506E /* RankModel.swift */; };
+		E4283664278DDBB6008C506E /* RankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4283663278DDBB6008C506E /* RankCell.swift */; };
 		E468F6DD265D26ED0081ACD7 /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = E468F6DC265D26ED0081ACD7 /* KeyboardListener.swift */; };
 		E48A3823269C91A600B909D2 /* FaceUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48A3822269C91A600B909D2 /* FaceUpdater.swift */; };
 		E48E4A272785E92E006F7BE5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A262785E92E006F7BE5 /* Game.swift */; };
@@ -102,6 +105,9 @@
 		E4251511269C9D5000D01643 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		E428364C278D8528008C506E /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		E4283658278DA311008C506E /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
+		E428365B278DD352008C506E /* RanksVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RanksVM.swift; sourceTree = "<group>"; };
+		E428365F278DD5D8008C506E /* RankModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankModel.swift; sourceTree = "<group>"; };
+		E4283663278DDBB6008C506E /* RankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCell.swift; sourceTree = "<group>"; };
 		E468F6DC265D26ED0081ACD7 /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
 		E48A3822269C91A600B909D2 /* FaceUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceUpdater.swift; sourceTree = "<group>"; };
 		E48E4A262785E92E006F7BE5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -327,6 +333,22 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		E428365E278DD5C5008C506E /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				E428365F278DD5D8008C506E /* RankModel.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		E4283662278DDB98008C506E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E4283663278DDBB6008C506E /* RankCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E4A4216E26A4AB3500A4A214 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,7 +360,10 @@
 		E4A4217326A4AC5A00A4A214 /* Ranks */ = {
 			isa = PBXGroup;
 			children = (
+				E428365E278DD5C5008C506E /* Objects */,
+				E4283662278DDB98008C506E /* Views */,
 				E4A4217926A4AC9D00A4A214 /* RanksVC.swift */,
+				E428365B278DD352008C506E /* RanksVM.swift */,
 			);
 			path = Ranks;
 			sourceTree = "<group>";
@@ -528,6 +553,7 @@
 				E4CF518A264BF9DE0058FED5 /* HorHintVC.swift in Sources */,
 				E425150E269C990C00D01643 /* FaceTuples.swift in Sources */,
 				93CBB0CC2649EF89009A8E53 /* AppSate.swift in Sources */,
+				E4283664278DDBB6008C506E /* RankCell.swift in Sources */,
 				E4251512269C9D5000D01643 /* Board.swift in Sources */,
 				934C6862264C54FC00099424 /* GameBoardVM.swift in Sources */,
 				E4CF5188264BF6820058FED5 /* VerHintVC.swift in Sources */,
@@ -548,6 +574,7 @@
 				E4A4215A26A4867700A4A214 /* ActionsVC.swift in Sources */,
 				93F0DB7226481FB90022F976 /* ImageButton.swift in Sources */,
 				E4A4216A26A4A13800A4A214 /* Action.swift in Sources */,
+				E428365C278DD352008C506E /* RanksVM.swift in Sources */,
 				9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */,
 				E48A3823269C91A600B909D2 /* FaceUpdater.swift in Sources */,
 				93F0DB7C26483C310022F976 /* Texts.swift in Sources */,
@@ -559,6 +586,7 @@
 				E4F309E727830890005A324B /* BoardDividerVC.swift in Sources */,
 				E428364D278D8528008C506E /* CustomAlert.swift in Sources */,
 				E4283659278DA311008C506E /* Rank.swift in Sources */,
+				E4283660278DD5D8008C506E /* RankModel.swift in Sources */,
 				93DE280B26580FE3007444E3 /* Settings.swift in Sources */,
 				933A4583264ED71100BDE2AA /* CellType.swift in Sources */,
 				934C6873264C75E200099424 /* CoreDataKeys.swift in Sources */,

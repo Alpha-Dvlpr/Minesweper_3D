@@ -25,4 +25,11 @@ class Utils {
         
         return text
     }
+    
+    static func getFormattedDate(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+        dateFormatter.locale = .current
+        return "'\(dateFormatter.string(from: date))'"
+    }
 }

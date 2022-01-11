@@ -8,13 +8,15 @@
 
 "advanced" = "Avançat";
 "autosaveRanks" = "Desa automàticament els rangs";
-"bestMarks" = "Millors notes";
+"bestMarks" = "Millors puntuacions";
 "cancel" = "Cancel·la";
 "close" = "Tancar";
 "copyright" = "© 2021. Aarón Granado Amores.";
 "delete" = "Suprimeix";
 "deleteDisclaimer" = "Voleu eliminar totes les dades de l'aplicació?\nL'aplicació es reiniciarà per aplicar els canvis.";
 "deleteTitle" = "Eliminar dades";
+"deleteRanksDisclaimer" = "Voleu eliminar totes les puntuacions desades?";
+"deleteRanksTitle" = "Eliminar puntuacions";
 "errorSavingGame" = "Error en desar el joc.";
 "finishGame" = "Finalitza el joc";
 "finishGameDisclaimer" = "Voleu desar el joc actual per continuar més tard?";
