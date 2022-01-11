@@ -17,7 +17,8 @@ struct GameBoardVC: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
+        ZStack {
+            VStack {
             #if DEBUG
             Text("print cells").onTapGesture { self.viewModel.printCurrentFace() }
             #endif
@@ -38,6 +39,12 @@ struct GameBoardVC: View {
                 )
             }
             Spacer()
+        }
+            if self.dismissAlertShown {
+                self.viewModel.gameStatus == .lost
+                    ? self.generateSaveRankAlert()
+                    : self.generateCloseAlert()
+            }
         }
         .onReceive(self.timer) { _ in self.viewModel.updateTime() }
         .navigationBarTitle(
@@ -65,32 +72,6 @@ struct GameBoardVC: View {
                 )
             }
         }
-        .alert(
-            isPresented: self.$dismissAlertShown,
-            content: {
-                if self.viewModel.gameStatus == .lost {
-                    return Alert(
-                        title: Text(Texts.info.localized),
-                        message: Text(Texts.gameLost.localized),
-                        primaryButton: .default(Text(Texts.options.localized), action: { self.menuShown = true }),
-                        secondaryButton: .cancel(Text(Texts.close.localized))
-                    )
-                } else {
-                    return Alert(
-                        title: Text(Texts.finishGame.localized),
-                        message: Text(Texts.finishGameDisclaimer.localized),
-                        primaryButton: .default(
-                            Text(Texts.yes.localized),
-                            action: { self.viewModel.saveGame { self.closeCallback?($0) } }
-                        ),
-                        secondaryButton: .default(
-                            Text(Texts.no.localized),
-                            action: { self.closeCallback?(nil) }
-                        )
-                    )
-                }
-            }
-        )
         .actionSheet(
             isPresented: self.$menuShown,
             content: {
@@ -111,6 +92,34 @@ struct GameBoardVC: View {
                     ]
                 )
             }
+        )
+    }
+    
+    private func generateCloseAlert() -> CustomAlert {
+        return CustomAlert(
+            showInput: false,
+            title: Texts.finishGame.localized,
+            message: Texts.finishGameDisclaimer.localized,
+            positiveButtonTitle: Texts.yes.localized,
+            negativeButtonTitle: Texts.no.localized,
+            positiveButtonAction: { _ in self.viewModel.saveGame { self.closeCallback?($0) } },
+            negativeButtonAction: { self.closeCallback?(nil) }
+        )
+    }
+    
+    private func generateSaveRankAlert() -> CustomAlert {
+        return CustomAlert(
+            showInput: true,
+            title: Texts.info.localized,
+            message: Texts.gameLost.localized,
+            inputPlaceholder: Texts.username.localized,
+            positiveButtonTitle: Texts.save.localized,
+            negativeButtonTitle: Texts.close.localized,
+            positiveButtonAction: { name in
+                self.closeCallback?(nil)
+                // TODO: Create stuff for saving ranks
+            },
+            negativeButtonAction: { self.closeCallback?(nil) }
         )
     }
 }

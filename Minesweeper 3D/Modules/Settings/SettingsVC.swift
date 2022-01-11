@@ -14,51 +14,56 @@ struct SettingsVC: View, KeyboardListener {
     @State private var isKeyboardVisible: Bool = false
     
     var body: some View {
-        Form {
-            Section(header: Text(Texts.general.localized)) {
-                HStack(spacing: 15) {
-                    Text(Texts.username.localized.uppercased())
-                        .foregroundColor(self.viewModel.settings.invalidData ? Color.red : nil)
-                    TextField(
-                        Texts.username.localized.uppercased(),
-                        text: self.$viewModel.settings.username
-                    )
-                    .multilineTextAlignment(.trailing)
-                    .onReceive(
-                        self.publisher,
-                        perform: { self.isKeyboardVisible = $0 }
-                    )
-                }
-                HStack(spacing: 15) {
-                    Text(Texts.language.localized.uppercased())
-                    Spacer()
-                    Picker("", selection: self.$viewModel.settings.appLanguage) {
-                        ForEach(Language.allCases) { Text($0.name.uppercased()).tag($0) }
+        ZStack {
+            Form {
+                Section(header: Text(Texts.general.localized)) {
+                    HStack(spacing: 15) {
+                        Text(Texts.username.localized.uppercased())
+                            .foregroundColor(self.viewModel.settings.invalidData ? Color.red : nil)
+                        TextField(
+                            Texts.username.localized.uppercased(),
+                            text: self.$viewModel.settings.username
+                        )
+                        .multilineTextAlignment(.trailing)
+                        .onReceive(
+                            self.publisher,
+                            perform: { self.isKeyboardVisible = $0 }
+                        )
                     }
-                    .frame(width: 100)
+                    HStack(spacing: 15) {
+                        Text(Texts.language.localized.uppercased())
+                        Spacer()
+                        Picker("", selection: self.$viewModel.settings.appLanguage) {
+                            ForEach(Language.allCases) { Text($0.name.uppercased()).tag($0) }
+                        }
+                        .frame(width: 100)
+                    }
+                    //                Toggle(
+                    //                    Texts.autosaveRanks.localized.uppercased(),
+                    //                    isOn: self.$viewModel.settings.autosaveRanks
+                    //                )
+                    //                Stepper(value: self.$viewModel.settings.maxRanks, in: 10...30) {
+                    //                    Text("\(Texts.maxRanks.localized.uppercased()): \(self.$viewModel.settings.maxRanks.wrappedValue)")
+                    //                }
                 }
-//                Toggle(
-//                    Texts.autosaveRanks.localized.uppercased(),
-//                    isOn: self.$viewModel.settings.autosaveRanks
-//                )
-//                Stepper(value: self.$viewModel.settings.maxRanks, in: 10...30) {
-//                    Text("\(Texts.maxRanks.localized.uppercased()): \(self.$viewModel.settings.maxRanks.wrappedValue)")
-//                }
+                Section(header: Text(Texts.info.localized)) {
+                    Text(Texts.version.localized(with: [self.viewModel.appVersion]))
+                    Text(Texts.copyright.localized)
+                    //                Link(Texts.moreInfo.localized, destination: self.viewModel.infoURL)
+                }
+                Section(header: Text(Texts.advanced.localized)) {
+                    Button(
+                        action: { self.showDeleteAlert = true  },
+                        label: { Text(Texts.deleteTitle.localized) }
+                    )
+                    .foregroundColor(Color.red)
+                }
             }
-            Section(header: Text(Texts.info.localized)) {
-                Text(Texts.version.localized(with: [self.viewModel.appVersion]))
-                Text(Texts.copyright.localized)
-//                Link(Texts.moreInfo.localized, destination: self.viewModel.infoURL)
-            }
-            Section(header: Text(Texts.advanced.localized)) {
-                Button(
-                    action: { self.showDeleteAlert = true  },
-                    label: { Text(Texts.deleteTitle.localized) }
-                )
-                .foregroundColor(Color.red)
-            }
+            .font(.caption)
+            
+            if self.showDeleteAlert { self.generateDeleteAlert() }
         }
-        .font(.caption)
+        
         .navigationBarTitle(
             Text(Texts.settings.localized.uppercased()),
             displayMode: .inline
@@ -79,24 +84,19 @@ struct SettingsVC: View, KeyboardListener {
                 }
             }
         }
-        .alert(
-            isPresented: self.$showDeleteAlert,
-            content: {
-                Alert(
-                    title: Text(Texts.deleteTitle.localized.uppercased()),
-                    message: Text(Texts.deleteDisclaimer.localized),
-                    primaryButton: .cancel(
-                        Text(Texts.cancel.localized),
-                        action: { self.showDeleteAlert = false })
-                    ,
-                    secondaryButton: .destructive(
-                        Text(Texts.delete.localized),
-                        action: {
-                            self.viewModel.deleteData()
-                            self.showDeleteAlert = false
-                        }
-                    )
-                )
+    }
+    
+    private func generateDeleteAlert() -> CustomAlert {
+        return CustomAlert(
+            showInput: false,
+            title: Texts.deleteTitle.localized.uppercased(),
+            message: Texts.deleteDisclaimer.localized,
+            positiveButtonTitle: Texts.cancel.localized,
+            negativeButtonTitle: Texts.delete.localized,
+            positiveButtonAction: { _ in self.showDeleteAlert = false },
+            negativeButtonAction: {
+                self.viewModel.deleteData()
+                self.showDeleteAlert = false
             }
         )
     }

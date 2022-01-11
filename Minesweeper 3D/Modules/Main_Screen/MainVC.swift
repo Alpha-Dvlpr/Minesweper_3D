@@ -17,7 +17,8 @@ struct MainVC: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack {
+                VStack {
                 NavigationLink(
                     destination: SettingsVC(),
                     tag: Navigations.settings,
@@ -91,6 +92,8 @@ struct MainVC: View {
 //                .onTapGesture { if self.canPerformActions { self.selection = Navigations.shop } }
                 Spacer()
             }
+                if self.saveErrorAlertShown { self.generateSavingErrorAlert() }
+            }
             .padding(self.screenEdges)
             .navigationBarTitle(
                 Text(Texts.main.localized.uppercased()),
@@ -98,16 +101,6 @@ struct MainVC: View {
             )
             .navigationBarHidden(true)
         }
-        .alert(
-            isPresented: self.$saveErrorAlertShown,
-            content: {
-                Alert(
-                    title: Text(Texts.info.localized),
-                    message: Text(Texts.errorSavingGame.localized),
-                    dismissButton: .default(Text(Texts.close.localized), action: { self.canPerformActions = true })
-                )
-            }
-        )
     }
     
     private func closeGameAction(with error: Error?) {
@@ -117,6 +110,16 @@ struct MainVC: View {
         self.canPerformActions = false
         self.viewModel.updateError(error)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { self.saveErrorAlertShown = true }
+    }
+    
+    private func generateSavingErrorAlert() -> CustomAlert {
+        return CustomAlert(
+            showInput: false,
+            title: Texts.info.localized,
+            message: Texts.errorSavingGame.localized,
+            positiveButtonTitle: Texts.close.localized,
+            positiveButtonAction: { _ in self.canPerformActions = true }
+        )
     }
 }
 

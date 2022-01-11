@@ -9,16 +9,15 @@ import SwiftUI
 
 struct CustomAlert: View {
     
-    //    @State var shown: Bool
-    @Binding var fieldText: String
+    @State var fieldText: String = ""
     let showInput: Bool
     let title: String
     let message: String
-    let inputPlaceholder: String?
-    let positiveButtonTitle: String?
-    let negativeButtonTitle: String?
-    let positiveButtonAction: ((Any?) -> Void)?
-    let negativeButtonAction: (() -> Void)?
+    var inputPlaceholder: String?
+    var positiveButtonTitle: String?
+    var negativeButtonTitle: String?
+    var positiveButtonAction: ((Any?) -> Void)?
+    var negativeButtonAction: (() -> Void)?
     
     var body: some View {
         ZStack {
@@ -86,19 +85,13 @@ struct CustomAlert: View {
 struct CustomAlert_Previews: PreviewProvider {
     static var previews: some View {
         CustomAlert(
-            fieldText: .constant(""),
             showInput: true,
             title: "Henlo",
             message: "How you doing friend?",
-            inputPlaceholder: "Nombre",
             positiveButtonTitle: "Aceptar",
             negativeButtonTitle: "Cancelar",
-            positiveButtonAction: {
-                print("positive tapped: ", $0 as Any)
-            },
-            negativeButtonAction: {
-                print("negative tapped")
-            }
+            positiveButtonAction: { print("positive tapped: ", $0 as Any) },
+            negativeButtonAction: { print("negative tapped") }
         )
     }
 }
