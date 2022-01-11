@@ -47,6 +47,7 @@ class GameBoardVM: ObservableObject {
             
             if let visibleSides = self.faces >> (self.visibleFace.references, true) {
                 self.visibleFace.updateVisibleSides(with: visibleSides)
+                // TODO: Check if any side has void cells and show recurssivelly
             }
         }
     }
