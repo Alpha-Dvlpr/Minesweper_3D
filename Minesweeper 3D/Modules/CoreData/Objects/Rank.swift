@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Rank: NSObject, NSCoding  {
+class Rank: NSObject, NSCoding {
     var name: String
     var date: Date
     var score: Int

@@ -12,6 +12,11 @@ struct SettingsVC: View, KeyboardListener {
     @ObservedObject private var viewModel = SettingsVM()
     @State private var showDeleteAlert: Bool = false
     @State private var isKeyboardVisible: Bool = false
+    private var stepperString: String {
+        var stringValue = Texts.maxRanks.localized.uppercased()
+        stringValue.append(": \(self.$viewModel.settings.maxRanks.wrappedValue)")
+        return stringValue
+    }
     
     var body: some View {
         ZStack {
@@ -38,13 +43,11 @@ struct SettingsVC: View, KeyboardListener {
                         }
                         .frame(width: 100)
                     }
-                    //                Toggle(
-                    //                    Texts.autosaveRanks.localized.uppercased(),
-                    //                    isOn: self.$viewModel.settings.autosaveRanks
-                    //                )
-                    //                Stepper(value: self.$viewModel.settings.maxRanks, in: 10...30) {
-                    //                    Text("\(Texts.maxRanks.localized.uppercased()): \(self.$viewModel.settings.maxRanks.wrappedValue)")
-                    //                }
+                    Toggle(
+                        Texts.autosaveRanks.localized.uppercased(),
+                        isOn: self.$viewModel.settings.autosaveRanks
+                    )
+                    Stepper(value: self.$viewModel.settings.maxRanks, in: 10...30) { Text(self.stepperString) }
                 }
                 Section(header: Text(Texts.info.localized)) {
                     Text(Texts.version.localized(with: [self.viewModel.appVersion]))
