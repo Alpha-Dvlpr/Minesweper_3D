@@ -9,6 +9,8 @@ import SwiftUI
 
 class Constants {
     
+    static let screenWidth: CGFloat = UIScreen.main.bounds.size.width
+    static let screenHeight: CGFloat = UIScreen.main.bounds.size.height
     static let numberOfItems: Int = 10
     static let edge: CGFloat = 16
     static let cellSpacing: CGFloat = 1
@@ -22,7 +24,7 @@ class Constants {
         
         let margins: CGFloat = hintsSpacing + edgeWidth + innerBoardWidth
         
-        let marginalWidth: Int = Int(UIScreen.main.bounds.size.width - margins)
+        let marginalWidth: Int = Int(Constants.screenWidth - margins)
         let totalItems: Int = Constants.numberOfItems + 2
         
         return CGFloat(marginalWidth / totalItems)
