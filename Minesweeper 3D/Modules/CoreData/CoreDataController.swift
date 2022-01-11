@@ -32,8 +32,25 @@ class CoreDataController {
         }
     }
     
-    func save(ranks: [Any]) {
-        UserDefaults.standard.set(ranks, forKey: CoreDataKey.ranks.key)
+    func save(rank: Rank, completion: @escaping ((Error?) -> Void)) {
+        func save(ranks: [Rank], completion: @escaping ((Error?) -> Void)) {
+            do {
+                let encodedRank = try NSKeyedArchiver.archivedData(withRootObject: ranks, requiringSecureCoding: false)
+                UserDefaults.standard.set(encodedRank, forKey: CoreDataKey.ranks.key)
+                completion(nil)
+            } catch {
+                completion(error)
+            }
+        }
+        
+        self.getRanks(iteration: 1) { existingRanks in
+            if var existingRanks = existingRanks {
+                existingRanks.append(rank)
+                save(ranks: existingRanks, completion: completion)
+            } else {
+                save(ranks: [rank], completion: completion)
+            }
+        }
     }
     
     // MARK: Retrieving
@@ -72,9 +89,17 @@ class CoreDataController {
         }
     }
     
-    func getRanks(for value: Any?) -> String {
-        guard let stringValue = value as? String else { return "" }
-        return stringValue
+    func getRanks(iteration: Int, completion: @escaping (([Rank]?) -> Void)) {
+        guard iteration < 3 else { completion(nil); return }
+        
+        if let decoded = UserDefaults.standard.object(forKey: CoreDataKey.ranks.key) as? Data {
+            do {
+                let decodedRanks = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as? [Rank]
+                completion(decodedRanks)
+            } catch { completion(nil) }
+        } else {
+            self.getRanks(iteration: iteration + 1, completion: completion)
+        }
     }
     
     // MARK: Deletion

@@ -115,10 +115,9 @@ struct GameBoardVC: View {
             inputPlaceholder: Texts.username.localized,
             positiveButtonTitle: Texts.save.localized,
             negativeButtonTitle: Texts.close.localized,
-            positiveButtonAction: { name in
-                self.closeCallback?(nil)
-                // TODO: Create stuff for saving ranks
-            },
+            positiveButtonAction: {
+                guard let name = $0 as? String else { return }
+                self.viewModel.saveRank(with: name) { self.closeCallback?($0) } },
             negativeButtonAction: { self.closeCallback?(nil) }
         )
     }

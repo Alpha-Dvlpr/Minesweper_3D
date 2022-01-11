@@ -115,6 +115,13 @@ class GameBoardVM: ObservableObject {
         CoreDataController.shared.save(game: coreDataGame, completion: completion)
     }
     
+    func saveRank(with userName: String, completion: @escaping ((Error?) -> Void)) {
+        guard !userName.isEmpty else { return }
+        
+        let rank = Rank(name: "yolo", date: Date(), score: 450)
+        CoreDataController.shared.save(rank: rank, completion: completion)
+    }
+    
     // MARK: Board Functions
     // =====================
     private func generateFaceNumbers() {

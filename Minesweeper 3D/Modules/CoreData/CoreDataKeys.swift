@@ -35,6 +35,9 @@ enum CoreDataKey {
     case faceReferencesTopLast
     case game
     case ranks
+    case ranksDate
+    case ranksName
+    case ranksScore
     case settings
     case status
     case time
@@ -71,6 +74,9 @@ enum CoreDataKey {
         case .faceReferencesTopLast: return "com_alpha_dvlpr_face_references_top_last"
         case .game: return "com_alpha_dvlpr_game"
         case .ranks: return "com_alpha_dvlpr_ranks"
+        case .ranksDate: return "com_alpha_dvlpr_ranks_date"
+        case .ranksName: return "com_alpha_dvlpr_ranks_name"
+        case .ranksScore: return "com_alpha_dvlpr_ranks_score"
         case .settings: return "com_alpha_dvlpr_settings"
         case .status: return "com_alpha_dvlpr_status"
         case .time: return "com_alpha_dvlpr_time"
