@@ -30,4 +30,5 @@ class Constants {
         return CGFloat(marginalWidth / totalItems)
     }
     static var numberOfHints: Int { return 2 }
+    static var maxRanksRange = 10...30
 }

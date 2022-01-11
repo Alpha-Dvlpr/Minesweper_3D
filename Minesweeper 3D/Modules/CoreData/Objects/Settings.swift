@@ -28,11 +28,13 @@ class Settings: NSObject, NSCoding {
     
     required init(coder aDecoder: NSCoder) {
         let code = aDecoder.decodeObject(forKey: CoreDataKey.appLanguage.key) as? String
+        let ranks = aDecoder.decodeInteger(forKey: CoreDataKey.maxNumberOfRanks.key)
+        let lowerBound = Constants.maxRanksRange.lowerBound
         
         self.username = aDecoder.decodeObject(forKey: CoreDataKey.username.key) as? String ?? ""
         self.appLanguage = Language(languageSetting: code) ?? .spanish(.es)
         self.autosaveRanks = aDecoder.decodeBool(forKey: CoreDataKey.autoSaveRanks.key)
-        self.maxRanks = aDecoder.decodeInteger(forKey: CoreDataKey.maxNumberOfRanks.key)
+        self.maxRanks = ranks < lowerBound ? lowerBound : ranks
     }
     
     func encode(with aCoder: NSCoder) {

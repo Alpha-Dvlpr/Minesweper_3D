@@ -62,7 +62,7 @@ class CoreDataController {
             username: "",
             appLanguage: nil,
             autosaveRanks: false,
-            maxRanks: 15
+            maxRanks: Constants.maxRanksRange.lowerBound
         )
         
         if let decoded = UserDefaults.standard.object(forKey: CoreDataKey.settings.key) as? Data {
