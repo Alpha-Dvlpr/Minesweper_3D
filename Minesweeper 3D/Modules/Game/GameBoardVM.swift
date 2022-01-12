@@ -62,7 +62,6 @@ class GameBoardVM: ObservableObject {
             case .recurssive: aux.recursiveDisplay(from: aux.cells.b[y][x]) { aux.cells.b[$0.yCor][$0.xCor] = $0 }
             case .lost:
                 self.gameStatus = .lost
-                self.faces.forEach { $0.cells.showAllCells() }
                 loseCallback()
             default: break
             }
@@ -157,7 +156,35 @@ class GameBoardVM: ObservableObject {
     }
     
     private func calculateGameScore() -> Int {
-        return Int.random(max: 1500)
+        var score: Double = 0
+        
+        self.faces.forEach { face in
+            let visibleCells = face.cells.b
+                .map { $0.filter { $0.shown || $0.flagged || $0.mined } }
+                .flatMap { return $0 }
+            let items = Double(Constants.numberOfItems ^ 2)
+            let count = Double(visibleCells.count)
+            let fraction = count / items
+            let multiplyer: Double = 1 + (count == items ? 1 : fraction)
+            var faceScore: Double = 0
+            
+            visibleCells.forEach { cell in
+                switch cell.content {
+                case .mine: if cell.isMine { faceScore += 10 }
+                case .number(let number): faceScore += Double(number)
+                case .flagged: if cell.isMine { faceScore += 5 }
+                case .unselected: break
+                case .void: faceScore += 1
+                }
+            }
+            
+            faceScore *= multiplyer
+            score += faceScore
+        }
+        
+        if self.gameStatus == .won { score += 1500 }
+        
+        return Int(score)
     }
     
     // MARK: DEBUG functions

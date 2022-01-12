@@ -29,6 +29,7 @@ class Cell {
             && self.yCor == -1
             && self.content == .unselected
     }
+    var isMine: Bool { return self.originalContent == .mine }
     private var face: Int
     private var originalContent: CellContent
     
