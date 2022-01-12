@@ -20,7 +20,7 @@ struct MainVC: View {
             ZStack {
                 VStack {
                     NavigationLink(
-                        destination: SettingsVC(),
+                        destination: SettingsVC { self.viewModel.updateSettings() },
                         tag: Navigations.settings,
                         selection: self.$selection
                     ) { EmptyView() }
@@ -53,14 +53,7 @@ struct MainVC: View {
                     
                     HStack {
                         Spacer()
-                        Button(
-                            action: { if self.canPerformActions { self.selection = Navigations.settings } },
-                            label: {
-                                Images.system(.settings).image
-                                    .resizable()
-                                    .frame(width: 32, height: 32)
-                            }
-                        )
+                        self.getSettingsImage()
                     }
                     Spacer()
                     ImageButton(
@@ -120,6 +113,35 @@ struct MainVC: View {
             positiveButtonTitle: Texts.close.localized,
             positiveButtonAction: { _ in self.canPerformActions = true }
         )
+    }
+    
+    private func getSettingsImage() -> some View {
+        let image = Images.system(.settings).image
+            .resizable()
+            .frame(width: 32, height: 32)
+            .foregroundColor(Color.blue)
+            .onTapGesture {
+                if self.canPerformActions { self.selection = Navigations.settings }
+            }
+            .aspectRatio(1.0, contentMode: .fit)
+        
+        if self.viewModel.settings.invalidData {
+            return AnyView(
+                image
+                    .overlay(
+                        Images.numbers(1).image
+                            .resizable()
+                            .background(Color.white)
+                            .clipShape(Circle())
+                            .frame(width: 16, height: 16)
+                            .foregroundColor(Color.red)
+                        ,
+                        alignment: .topTrailing
+                    )
+            )
+        } else {
+            return AnyView(image)
+        }
     }
 }
 

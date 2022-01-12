@@ -12,9 +12,11 @@ class MainVM {
     @Published var savedGame: Game?
     var error: Error?
     private let coreData = CoreDataController.shared
+    var settings: Settings!
     
     init() {
         self.getSavedGame()
+        self.settings = self.coreData.getSettingModel(iteration: 1)
     }
     
     // MARK: Error methods
@@ -31,5 +33,11 @@ class MainVM {
     
     func deleteGame() {
         self.coreData.deleteSavedGame()
+    }
+    
+    // MARK: UI update functions
+    // =========================
+    func updateSettings() {
+        self.settings = self.coreData.getSettingModel(iteration: 1)
     }
 }

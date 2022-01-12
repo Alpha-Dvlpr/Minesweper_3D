@@ -17,6 +17,7 @@ struct SettingsVC: View, KeyboardListener {
         stringValue.append(": \(self.$viewModel.settings.maxRanks.wrappedValue)")
         return stringValue
     }
+    var saveCallback: (() -> Void)?
     
     var body: some View {
         ZStack {
@@ -83,7 +84,10 @@ struct SettingsVC: View, KeyboardListener {
                 }
                 if self.viewModel.settingsChanged {
                     Button(
-                        action: { self.viewModel.saveData() },
+                        action: {
+                            self.viewModel.saveData()
+                            self.saveCallback?()
+                        },
                         label: { Text(Texts.save.localized) }
                     )
                 }
