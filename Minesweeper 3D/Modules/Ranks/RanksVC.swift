@@ -57,15 +57,15 @@ struct RanksVC: View {
     
     private func generateCell(for rank: Rank) -> some View {
         return RankCell(rank: rank)
-            .swipeActions(
-                trailing: [
-                    SwipeButton(
-                        icon: Images.system(.share).image,
-                        action: { Social.shared.share(rank: rank) },
-                        tint: .blue
-                    )
-                ] 
-            )
+//            .swipeActions(
+//                trailing: [
+//                    SwipeButton(
+//                        icon: Images.system(.share).image,
+//                        action: { Social.shared.share(rank: rank) },
+//                        tint: .blue
+//                    )
+//                ] 
+//            )
     }
 }
 
