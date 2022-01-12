@@ -79,6 +79,11 @@ class Face: Identifiable {
         (0..<bottom.count).forEach { self.updateCell(at: (last, $0), from: bottom[$0]) }
         (0..<left.count).forEach { self.updateCell(at: ($0, 0), from: left[$0]) }
         (0..<right.count).forEach { self.updateCell(at: ($0, last), from: right[$0]) }
+        
+        self.executeRecurssionAfterRotation(type: .hBorder(.bottom))
+        self.executeRecurssionAfterRotation(type: .hBorder(.top))
+        self.executeRecurssionAfterRotation(type: .vBorder(.right))
+        self.executeRecurssionAfterRotation(type: .vBorder(.left))
     }
     
     private func updateCell(at position: (x: Int, y: Int), from cell: Cell) {
@@ -133,6 +138,21 @@ class Face: Identifiable {
             default: completion(cell)
             }
         }
+    }
+    
+    private func executeRecurssionAfterRotation(type: CellType) {
+        var sideVisible: [Cell] = []
+        let last = Constants.numberOfItems - 1
+        
+        switch type {
+        case .vBorder(let s): sideVisible = self.cells.b.vertical(at: s == .left ? 0 : last) ?? []
+        case .hBorder(let s): sideVisible = self.cells.b.horizontal(at: s == .top ? 0 : last) ?? []
+        default: break
+        }
+
+        sideVisible
+            .filter { $0.shown && $0.content == .void }
+            .forEach { self.recursiveDisplay(from: $0) { _ in } }
     }
     
     // MARK: CoreData Saving
