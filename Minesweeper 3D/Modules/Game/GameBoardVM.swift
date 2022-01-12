@@ -14,10 +14,12 @@ class GameBoardVM: ObservableObject {
     @Published var stringTime: String = Utils.getStringTime(seconds: 0)
     @Published var gameStatus: GameStatus = .generating
     var sideFaces: BoardT_4? { return self.faces >> (self.visibleFace.references, false) }
+    var settings: Settings!
     private var gameTime: Int = 0
     private var faces = [Face]()
     
     init(calculate: Bool) {
+        self.settings = CoreDataController.shared.getSettingModel(iteration: 1)
         if calculate { self.newGame() }
     }
     
@@ -28,6 +30,7 @@ class GameBoardVM: ObservableObject {
         self.gameStatus = game.status
         self.faces = game.faces.map { return Face(faceCD: $0) }
         self.gameTime = game.time
+        self.settings = CoreDataController.shared.getSettingModel(iteration: 1)
         
         self.updateTime()
     }

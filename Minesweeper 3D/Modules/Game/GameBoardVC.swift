@@ -113,6 +113,7 @@ struct GameBoardVC: View {
     
     private func generateSaveRankAlert(win: Bool = false) -> CustomAlert {
         return CustomAlert(
+            fieldText: self.viewModel.settings.username,
             showInput: true,
             title: Texts.info.localized,
             message: win ? Texts.gameWon.localized : Texts.gameLost.localized,
