@@ -45,6 +45,10 @@ struct GameBoardVC: View {
                     ? self.generateSaveRankAlert()
                     : self.generateCloseAlert()
             }
+            
+            if self.viewModel.gameStatus == .won {
+                self.generateSaveRankAlert(win: true)
+            }
         }
         .onReceive(self.timer) { _ in self.viewModel.updateTime() }
         .navigationBarTitle(
@@ -107,11 +111,11 @@ struct GameBoardVC: View {
         )
     }
     
-    private func generateSaveRankAlert() -> CustomAlert {
+    private func generateSaveRankAlert(win: Bool = false) -> CustomAlert {
         return CustomAlert(
             showInput: true,
             title: Texts.info.localized,
-            message: Texts.gameLost.localized,
+            message: win ? Texts.gameWon.localized : Texts.gameLost.localized,
             inputPlaceholder: Texts.username.localized,
             positiveButtonTitle: Texts.save.localized,
             negativeButtonTitle: Texts.close.localized,

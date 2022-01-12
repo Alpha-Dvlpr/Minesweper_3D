@@ -12,7 +12,7 @@ class GameBoardVM: ObservableObject {
     @Published var visibleFace: Face!
     @Published var actionBarButton: Image = Images.system(.pause).image
     @Published var stringTime: String = Utils.getStringTime(seconds: 0)
-    var gameStatus: GameStatus = .generating
+    @Published var gameStatus: GameStatus = .generating
     var sideFaces: BoardT_4? { return self.faces >> (self.visibleFace.references, false) }
     private var gameTime: Int = 0
     private var faces = [Face]()
@@ -35,7 +35,7 @@ class GameBoardVM: ObservableObject {
     // MARK: Game functions
     // ====================
     func rotate(_ direction: Direction) {
-        guard self.gameStatus == .running || self.gameStatus == .lost else { return }
+        guard self.gameStatus == .running || self.gameStatus == .lost || self.gameStatus == .won else { return }
         
         if let linkedFace = self.faces.first(where: { $0.number == self.getReference(for: direction) }) {
             let aux = linkedFace
@@ -48,6 +48,8 @@ class GameBoardVM: ObservableObject {
             if let visibleSides = self.faces >> (self.visibleFace.references, true) {
                 self.visibleFace.updateVisibleSides(with: visibleSides)
             }
+            
+            self.checkWon()
         }
     }
     
@@ -65,6 +67,8 @@ class GameBoardVM: ObservableObject {
                 loseCallback()
             default: break
             }
+            
+            self.checkWon()
         }
     }
     
@@ -153,6 +157,20 @@ class GameBoardVM: ObservableObject {
         case .generating: self.actionBarButton = Images.system(.timer).image
         case .recurssive: self.actionBarButton = Images.system(.clock).image
         }
+    }
+    
+    private func checkWon() {
+        let totalCells = (Constants.numberOfItems ^ 2) * self.faces.count
+        let visibleCells = self.faces
+            .map {
+                $0.cells.b
+                    .map { $0.filter { $0.shown || $0.mined } }
+                    .flatMap { return $0 }
+                    .count
+            }
+            .reduce(0, +)
+        
+        if totalCells == visibleCells { self.gameStatus = .won }
     }
     
     private func calculateGameScore() -> Int {
