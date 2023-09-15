@@ -5,6 +5,6 @@ target 'Minesweeper 3D' do
   use_frameworks!
 
   # Pods for Minesweeper 3D
-  pod 'SwiftLint'
-  pod 'Bond'
+  #pod 'SwiftLint'
+  #pod 'Bond'
 end

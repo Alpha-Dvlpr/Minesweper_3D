@@ -14,13 +14,13 @@ struct Minesweeper_3DApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainVC().id(self.appState.gameID)
+            MSMainVC().id(self.appState.gameID)
         }
     }
 }
 
 struct Minesweeper_3DApp_Previews: PreviewProvider {
     static var previews: some View {
-        MainVC()
+        MSMainVC()
     }
 }
