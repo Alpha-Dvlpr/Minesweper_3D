@@ -17,9 +17,9 @@ struct ActionsVC: View {
         HStack(spacing: 15) {
             Spacer().frame(width: 30)
             HStack(spacing: 20) {
-                self.update(image: Images.numbers(1), action: .number)
-                self.update(image: Images.symbols(.flag), action: .flag)
-                self.update(image: Images.symbols(.mine), action: .mine)
+                self.update(image: MSImages.numbers(1), action: .number)
+                self.update(image: MSImages.symbols(.flag), action: .flag)
+                self.update(image: MSImages.symbols(.mine), action: .mine)
 //                GeometryReader { shape in
 //                    self.update(image: Images.symbols(.hint), action: .hint)
 //                        .overlay(
@@ -42,7 +42,7 @@ struct ActionsVC: View {
         }
     }
     
-    private func update(image: Images, action: Action) -> some View {
+    private func update(image: MSImages, action: Action) -> some View {
         return image.image
             .resizable()
             .frame(width: 60, height: 60)

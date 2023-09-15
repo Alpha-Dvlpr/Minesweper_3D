@@ -10,7 +10,7 @@ import SwiftUI
 struct MSImageButton: View {
 
     var title: String = ""
-    var image: Images
+    var image: MSImages
     
     var body: some View {
         HStack(spacing: 10) {

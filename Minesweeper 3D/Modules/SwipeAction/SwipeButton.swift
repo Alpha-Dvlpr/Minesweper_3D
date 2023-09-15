@@ -40,6 +40,6 @@ struct SwipeButton: View, Identifiable {
 
 struct SwipeButton_Previews: PreviewProvider {
     static var previews: some View {
-        SwipeButton(icon: Images.system(.share).image, action: { })
+        SwipeButton(icon: MSImages.system(.share).image, action: { })
     }
 }

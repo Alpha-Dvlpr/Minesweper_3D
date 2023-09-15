@@ -7,30 +7,30 @@
 
 import SwiftUI
 
-struct BoardDividerVC: View {
-    
-    var horizontal: Bool
-    var width: CGFloat {
-        return self.horizontal
-            ? Constants.cellSide * CGFloat(Constants.numberOfItems)
-            : Constants.cellSpacing * 6
-    }
-    var height: CGFloat {
-        return self.horizontal
-            ? Constants.cellSpacing * 6
-            : Constants.cellSide * CGFloat(Constants.numberOfItems)
-    }
-    
-    var body: some View {
-        Spacer()
-            .frame(width: self.width, height: self.height)
-            .background(Color.gray)
-            .cornerRadius(16)
-    }
-}
+//struct BoardDividerVC: View {
+//
+//    var horizontal: Bool
+//    var width: CGFloat {
+//        return self.horizontal
+//            ? Constants.cellSide * CGFloat(Constants.numberOfItems)
+//            : Constants.cellSpacing * 6
+//    }
+//    var height: CGFloat {
+//        return self.horizontal
+//            ? Constants.cellSpacing * 6
+//            : Constants.cellSide * CGFloat(Constants.numberOfItems)
+//    }
+//
+//    var body: some View {
+//        Spacer()
+//            .frame(width: self.width, height: self.height)
+//            .background(Color.gray)
+//            .cornerRadius(16)
+//    }
+//}
 
-struct BoardDividerVC_Previews: PreviewProvider {
-    static var previews: some View {
-        BoardDividerVC(horizontal: false)
-    }
-}
+//struct BoardDividerVC_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BoardDividerVC(horizontal: false)
+//    }
+//}

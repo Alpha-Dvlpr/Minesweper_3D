@@ -7,32 +7,21 @@
 
 import SwiftUI
 
-class MSMainVM {
+class MSMainVM: ObservableObject {
     
-    @Published var savedGame: Game?
-    var settings: Settings!
-    var error: Error?
-    private let coreData = CoreDataController.shared
-    
-    init() {
-        getSavedGame()
-        settings = coreData.getSettingModel(iteration: 1)
-    }
-    
-    // MARK: Error methods
-    // ===================
-    func updateError(_ error: Error?) {
-        self.error = error
-    }
+//    @Published var savedGame: Game?
+    @Published var settings: MSSettings?
+    @Published var error: Error?
+    private let coreData = MSCoreDataController.shared
     
     // MARK: Game functions
     // ====================
     func getSavedGame() {
-        coreData.getGame(iteration: 0) { self.savedGame = $0 }
+//        coreData.getGame(iteration: 0) { self.savedGame = $0 }
     }
     
     func deleteGame() {
-        coreData.deleteSavedGame()
+//        coreData.deleteSavedGame()
     }
     
     // MARK: UI update functions

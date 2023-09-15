@@ -23,8 +23,8 @@ struct CustomAlert: View {
         ZStack {
             Spacer()
                 .frame(
-                    width: Constants.screenWidth,
-                    height: Constants.screenHeight
+                    width: MSConstants.screenWidth,
+                    height: MSConstants.screenHeight
                 )
                 .background(Color.gray)
                 .opacity(0.2)
@@ -74,7 +74,7 @@ struct CustomAlert: View {
                     }
                 }
             }
-            .frame(width: Constants.screenWidth * 0.6)
+            .frame(width: MSConstants.screenWidth * 0.6)
             .padding()
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 16))

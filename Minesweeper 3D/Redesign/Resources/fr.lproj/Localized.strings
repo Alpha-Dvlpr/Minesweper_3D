@@ -1,0 +1,43 @@
+/* 
+  Localized.strings
+  Minesweeper 3D
+
+  Created by Aaron Granado Amores on 10/05/2021.
+  
+*/
+
+"advanced" = "Avancé";
+"autosaveRanks" = "Enregistrement automatique des rangs";
+"bestMarks" = "Meilleures notes";
+"cancel" = "Annuler";
+"close" = "Fermer";
+"delete" = "Supprimer";
+"deleteDisclaimer" = "Voulez-vous supprimer toutes les données APP ?\nAPP redémarrera pour appliquer les modifications.";
+"deleteTitle" = "Supprimer les données";
+"deleteRanksDisclaimer" = "Voulez-vous supprimer tous les notes enregistrés?";
+"deleteRanksTitle" = "Supprimer les notes";
+"errorSavingGame" = "Erreur de enreistrement du jeu.";
+"finishGame" = "Terminer le jeu";
+"finishGameDisclaimer" = "Voulez-vous enregistrer le jeu en cours pour continuer plus tard ?";
+"gameLost" = "Vous avez perdu :(";
+"gamePaused" = "Jeu en pause";
+"gameWon" = "Vous avez gagné !!";
+"general" = "Général";
+"generatingGame" = "Génération d'un nouveau jeu";
+"info" = "Info";
+"language" = "Langue de l'APP";
+"main" = "Accueil";
+"maxRanks" = "Nombre max de rangs";
+"menu" = "Menu";
+"moreInfo" = "Plus d'infos. (Sera ouvert sur un navigateur externe)";
+"newGame" = "Nouveau jeu";
+"no" = "Non";
+"options" = "Options";
+"restartGame" = "Redémarrer le jeu";
+"resumeGame" = "Continuer le jeu:\n'%@'";
+"save" = "Enregistrer";
+"settings" = "Paramètres";
+"shop" = "Magasin";
+"username" = "Nom d'utilisateur";
+"version" = "Version de l'application : %@";
+"yes" = "Oui";

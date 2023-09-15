@@ -10,7 +10,5 @@ import Foundation
 enum MSNavigations {
     case game
     case gameResume
-    case ranks
     case settings
-    case shop
 }
