@@ -94,7 +94,7 @@ struct MSSettingsVC: View {
     }
 }
 
-extension MSSettingsVC {
+private extension MSSettingsVC {
     
     func deleteData() {
         MSRealmManaager.shared.deleteAllData()

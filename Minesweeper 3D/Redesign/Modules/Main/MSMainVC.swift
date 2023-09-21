@@ -51,9 +51,9 @@ struct MSMainVC: View {
     }
 }
 
-extension MSMainVC {
+private extension MSMainVC {
         
-    private func deleteGame() {
+    func deleteGame() {
         
     }
 }

@@ -34,6 +34,7 @@
 		E428366D278DE6EB008C506E /* SwipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428366C278DE6EB008C506E /* SwipeButton.swift */; };
 		E4283671278DE928008C506E /* SwipeActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4283670278DE928008C506E /* SwipeActionView.swift */; };
 		E45ADB672A4EFD3C00A31586 /* MSMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45ADB662A4EFD3C00A31586 /* MSMainVC.swift */; };
+		E467A3F42ABC97500056EE27 /* MSGameAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E467A3F32ABC97500056EE27 /* MSGameAlertType.swift */; };
 		E48A3823269C91A600B909D2 /* FaceUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48A3822269C91A600B909D2 /* FaceUpdater.swift */; };
 		E48E4A272785E92E006F7BE5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A262785E92E006F7BE5 /* Game.swift */; };
 		E48E4A2C2785F3A2006F7BE5 /* FaceCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A2B2785F3A2006F7BE5 /* FaceCD.swift */; };
@@ -94,6 +95,7 @@
 		E428366C278DE6EB008C506E /* SwipeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeButton.swift; sourceTree = "<group>"; };
 		E4283670278DE928008C506E /* SwipeActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionView.swift; sourceTree = "<group>"; };
 		E45ADB662A4EFD3C00A31586 /* MSMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSMainVC.swift; sourceTree = "<group>"; };
+		E467A3F32ABC97500056EE27 /* MSGameAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGameAlertType.swift; sourceTree = "<group>"; };
 		E48A3822269C91A600B909D2 /* FaceUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceUpdater.swift; sourceTree = "<group>"; };
 		E48E4A262785E92E006F7BE5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		E48E4A2B2785F3A2006F7BE5 /* FaceCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCD.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			children = (
 				E4CF5185264BF4780058FED5 /* MSGameBoardVC.swift */,
 				934C686F264C75B700099424 /* MSGameStatus.swift */,
+				E467A3F32ABC97500056EE27 /* MSGameAlertType.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				E4F4047F269DE0A200E09CDC /* Miner.swift in Sources */,
 				E48E4A2C2785F3A2006F7BE5 /* FaceCD.swift in Sources */,
 				933A4586264ED73900BDE2AA /* Cell.swift in Sources */,
+				E467A3F42ABC97500056EE27 /* MSGameAlertType.swift in Sources */,
 				E4A4217026A4AB4700A4A214 /* MSNavigations.swift in Sources */,
 				E41FE74826989CC700E7080B /* Int_EXT.swift in Sources */,
 				934C6870264C75B800099424 /* MSGameStatus.swift in Sources */,
