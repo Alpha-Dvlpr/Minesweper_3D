@@ -8,11 +8,11 @@
 import SwiftUI
 import RealmSwift
 
-struct MSSettingsVC: View, MSKeyboardListener {
+struct MSSettingsVC: View {
     
     @ObservedRealmObject var settings: MSSettings = MSSettings.empty()
     @State private var showDeleteAlert: Bool = false
-    @State private var isKeyboardVisible: Bool = false
+    @FocusState private var nameFieldfocused: Bool
     
     private var stepperString: String {
         var stringValue = MSTexts.maxRanks.localized
@@ -38,7 +38,7 @@ struct MSSettingsVC: View, MSKeyboardListener {
                         text: $settings.username
                     )
                     .multilineTextAlignment(.trailing)
-                    .onReceive(publisher, perform: { isKeyboardVisible = $0 })
+                    .focused($nameFieldfocused)
                 }
                 Picker(MSTexts.language.localized, selection: $settings.appLanguage) {
                     ForEach(MSLanguageType.allCases) {
@@ -70,9 +70,9 @@ struct MSSettingsVC: View, MSKeyboardListener {
         .navigationBarTitle(MSTexts.settings.localizedText, displayMode: .inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                if isKeyboardVisible {
+                if nameFieldfocused {
                     Button(
-                        action: { hideKeyboard() },
+                        action: { nameFieldfocused = false },
                         label: { MSImages.system(.closeKeyboard).image }
                     )
                 }

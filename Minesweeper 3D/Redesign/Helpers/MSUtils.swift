@@ -8,6 +8,7 @@
 import Foundation
 
 class MSUtils {
+    
     static func getStringTime(seconds: Int) -> String {
         let hours = seconds / 3600
         let minutes = (seconds % 3600) / 60
