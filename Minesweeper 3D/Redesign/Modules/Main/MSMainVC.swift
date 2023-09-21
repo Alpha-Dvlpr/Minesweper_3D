@@ -11,7 +11,8 @@ struct MSMainVC: View {
     
     @State private var saveErrorAlertShown: Bool = false
     @State private var selection: MSNavigations?
-    @State private var missingData: Int? = nil
+    private var missingData: Int { return MSRealmManaager.shared.getSetings().freeze().getMissingData() }
+    private var savedGame: Bool { return false }
     
     var body: some View {
         NavigationStack {
@@ -24,13 +25,7 @@ struct MSMainVC: View {
             .toolbar {
                 NavigationLink(
                     value: MSNavigations.settings,
-                    label: {
-                        if let errors = missingData {
-                            MSSettingsImage(number: errors)
-                        } else {
-                            MSImages.system(.settings).image
-                        }
-                    }
+                    label: { MSSettingsImage(number: missingData) }
                 )
             }
             .navigationDestination(for: MSNavigations.self) { value in
@@ -51,7 +46,7 @@ struct MSMainVC: View {
                     message: MSTexts.errorSavingGame.localizedText,
                     dismissButton: .default(MSTexts.cancel.localizedText)
                 )
-            }.onAppear { getMissingSettings() }
+            }
         }
     }
 }
@@ -60,10 +55,6 @@ extension MSMainVC {
         
     private func deleteGame() {
         
-    }
-    
-    private func getMissingSettings() {
-        missingData = MSRealmManaager.shared.getSetings().freeze().getMissingData()
     }
 }
 

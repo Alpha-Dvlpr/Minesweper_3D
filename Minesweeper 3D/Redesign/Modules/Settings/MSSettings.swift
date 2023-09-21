@@ -32,12 +32,12 @@ class MSSettings: Object, ObjectKeyIdentifiable {
     }
     
     // MARK: - Functions
-    func getMissingData() -> Int? {
+    func getMissingData() -> Int {
         var missing: [MSMissingData] = []
         
         if !isNameValid() { missing.append(.invalidName) }
         
-        return missing.isEmpty ? nil : missing.count
+        return missing.count
     }
     
     static func ==(lhs: MSSettings, rhs: MSSettings) -> Bool {

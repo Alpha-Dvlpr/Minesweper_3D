@@ -71,18 +71,22 @@ enum MSImages {
 
 struct MSSettingsImage: View {
     
-    var number: Int = 1
+    var number: Int = 0
     
     var body: some View {
-        MSImages.system(.settings).image
-            .overlay(
-                MSImages.numbers(number).image
-                    .resizable()
-                    .background(Color.white)
-                    .clipShape(Circle())
-                    .frame(width: 12, height: 12)
-                    .foregroundColor(Color.red),
-                alignment: .topTrailing
-            )
+        if number == 0 {
+            MSImages.system(.settings).image
+        } else {
+            MSImages.system(.settings).image
+                .overlay(
+                    MSImages.numbers(number).image
+                        .resizable()
+                        .background(Color.white)
+                        .clipShape(Circle())
+                        .frame(width: 12, height: 12)
+                        .foregroundColor(Color.red),
+                    alignment: .topTrailing
+                )
+        }
     }
 }
