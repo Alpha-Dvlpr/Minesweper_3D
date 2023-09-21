@@ -9,6 +9,5 @@ import Foundation
 
 enum MSNavigations {
     case game
-    case gameResume
     case settings
 }

@@ -33,9 +33,7 @@ struct MSMainVC: View {
                 case .settings:
                     MSSettingsVC()
                 case .game:
-                    Text("game")
-                case .gameResume:
-                    Text("saved game")
+                    MSGameBoardVC() { saveErrorAlertShown = $0 != nil }
                 }
             }
             .navigationTitle("")
