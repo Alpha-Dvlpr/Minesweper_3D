@@ -11,7 +11,7 @@ struct MSMainVC: View {
     
     @State private var saveErrorAlertShown: Bool = false
     @State private var selection: MSNavigations?
-    @State private var missingData: Int = 0
+    @State private var missingData: Int? = nil
     
     var body: some View {
         NavigationStack {
@@ -25,8 +25,8 @@ struct MSMainVC: View {
                 NavigationLink(
                     value: MSNavigations.settings,
                     label: {
-                        if missingData != 0 {
-                            MSSettingsImage(number: missingData)
+                        if let errors = missingData {
+                            MSSettingsImage(number: errors)
                         } else {
                             MSImages.system(.settings).image
                         }

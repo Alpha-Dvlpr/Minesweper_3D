@@ -32,7 +32,7 @@ struct MSSettingsVC: View, MSKeyboardListener {
             Section(header: MSTexts.general.localizedText) {
                 HStack(spacing: 15) {
                     MSTexts.username.localizedText
-                        .foregroundColor(settings.username.isEmpty ? Color.red : nil)
+                        .foregroundColor(settings.isNameValid() ? nil : Color.red)
                     TextField(
                         MSTexts.username.localized,
                         text: $settings.username

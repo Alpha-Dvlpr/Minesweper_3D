@@ -32,12 +32,12 @@ class MSSettings: Object, ObjectKeyIdentifiable {
     }
     
     // MARK: - Functions
-    func getMissingData() -> Int {
+    func getMissingData() -> Int? {
         var missing: [MSMissingData] = []
         
-        if username.isEmpty || username.count < 5 { missing.append(.invalidName) }
+        if !isNameValid() { missing.append(.invalidName) }
         
-        return missing.count
+        return missing.isEmpty ? nil : missing.count
     }
     
     static func ==(lhs: MSSettings, rhs: MSSettings) -> Bool {
@@ -55,4 +55,7 @@ class MSSettings: Object, ObjectKeyIdentifiable {
             maxRanks: MSConstants.maxRanksRange.lowerBound
         )
     }
+    
+    // MARK: - Data validation
+    func isNameValid() -> Bool { return username.count > 5 }
 }

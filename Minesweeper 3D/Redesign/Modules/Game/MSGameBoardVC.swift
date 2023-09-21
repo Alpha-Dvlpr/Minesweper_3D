@@ -1,5 +1,5 @@
 //
-//  GameBoardVC.swift
+//  MSGameBoardVC.swift
 //  Minesweeper 3D
 //
 //  Created by Aarón Granado Amores on 12/5/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//struct GameBoardVC: View {
+//struct MSGameBoardVC: View {
 //
 //    @ObservedObject var viewModel: GameBoardVM
 //    @State private var menuShown: Bool = false
@@ -128,8 +128,8 @@ import SwiftUI
 //    }
 //}
 
-//struct GameBoardVC_Previews: PreviewProvider {
+//struct MSGameBoardVC_Previews: PreviewProvider {
 //    static var previews: some View {
-//        GameBoardVC(viewModel: GameBoardVM(calculate: true), closeCallback: { _ in })
+//        MSGameBoardVC(viewModel: GameBoardVM(calculate: true), closeCallback: { _ in })
 //    }
 //}

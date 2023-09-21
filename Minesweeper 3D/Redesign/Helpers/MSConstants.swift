@@ -16,7 +16,7 @@ class MSConstants {
     static let cellSpacing: CGFloat = 1
     static let boardSpacing: CGFloat = 5
     static let boardCells = (0..<numberOfItems)
-    static var numberOfMinesPerFace: Int { return (numberOfItems ^ 2) * 20 / 100 }
+    static var numberOfMinesPerFace: Int { return (numberOfItems ^ 2) * 20 / 100 } // TODO: Save difficulty on database to get percentage
     static var cellSide: CGFloat {
         let innerBoardWidth: CGFloat = (CGFloat(numberOfItems) * cellSpacing)
         let edgeWidth: CGFloat = (2 * edge)
@@ -29,6 +29,6 @@ class MSConstants {
         
         return CGFloat(marginalWidth / totalItems)
     }
-    static var numberOfHints: Int { return 2 }
+    static var numberOfHints: Int { return 2 } // TODO: Save on database for future in-app purchases
     static var maxRanksRange = 10...30
 }
