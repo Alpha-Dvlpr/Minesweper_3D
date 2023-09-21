@@ -61,12 +61,8 @@ enum MSTexts: String {
     }
     
     private func local(comment: String = "") -> String {
-        let coreData = MSCoreDataController.shared
-        var lang: String!
-        
-        let savedLanguage = coreData.getSettingModel(iteration: 0).appLanguage.code
-        lang = savedLanguage
-
+        let realm = MSRealmManaager.shared
+        let lang: String = realm.getSetings().appLanguage
         let path = Bundle.main.path(forResource: lang, ofType: "lproj")
         let result = NSLocalizedString(
             self.rawValue,

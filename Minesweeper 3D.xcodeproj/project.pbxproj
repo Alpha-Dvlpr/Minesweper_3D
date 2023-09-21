@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,6 @@
 		934C6865264C567C00099424 /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C6864264C567B00099424 /* Face.swift */; };
 		934C686C264C75A000099424 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C686B264C75A000099424 /* Direction.swift */; };
 		934C6870264C75B800099424 /* MSGameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C686F264C75B700099424 /* MSGameStatus.swift */; };
-		934C6873264C75E200099424 /* MSCoreDataKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C6872264C75E200099424 /* MSCoreDataKeys.swift */; };
 		934C687B264C783500099424 /* MSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C687A264C783500099424 /* MSConstants.swift */; };
 		9392D580264817CC000C858B /* Minesweeper_3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9392D57F264817CC000C858B /* Minesweeper_3DApp.swift */; };
 		9392D584264817D1000C858B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9392D583264817D1000C858B /* Assets.xcassets */; };
@@ -26,8 +25,6 @@
 		93F0DB7C26483C310022F976 /* MSTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB7B26483C310022F976 /* MSTexts.swift */; };
 		93F0DB8126483D2B0022F976 /* MSSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB8026483D2B0022F976 /* MSSettingsVC.swift */; };
 		93F0DB86264847AF0022F976 /* MSImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB85264847AF0022F976 /* MSImages.swift */; };
-		93F0DB91264865F40022F976 /* MSSettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB90264865F40022F976 /* MSSettingsVM.swift */; };
-		93F0DB96264868070022F976 /* MSCoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0DB95264868070022F976 /* MSCoreDataController.swift */; };
 		93FE38CB2649B45700A78B84 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93FE38CD2649B45700A78B84 /* Localized.strings */; };
 		93FE38D22649B84D00A78B84 /* MSLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FE38D12649B84D00A78B84 /* MSLanguage.swift */; };
 		E41FE74826989CC700E7080B /* Int_EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41FE74726989CC700E7080B /* Int_EXT.swift */; };
@@ -43,7 +40,9 @@
 		E48E4A272785E92E006F7BE5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A262785E92E006F7BE5 /* Game.swift */; };
 		E48E4A2C2785F3A2006F7BE5 /* FaceCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A2B2785F3A2006F7BE5 /* FaceCD.swift */; };
 		E48E4A332785F903006F7BE5 /* CellCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A322785F903006F7BE5 /* CellCD.swift */; };
-		E48E4A4327860C9A006F7BE5 /* MSMainVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48E4A4227860C9A006F7BE5 /* MSMainVM.swift */; };
+		E495EB6D2ABB51B400F7430A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E495EB6C2ABB51B400F7430A /* Realm */; };
+		E495EB6F2ABB51B400F7430A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E495EB6E2ABB51B400F7430A /* RealmSwift */; };
+		E495EB712ABB51CA00F7430A /* MSRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E495EB702ABB51CA00F7430A /* MSRealmManager.swift */; };
 		E4A4215A26A4867700A4A214 /* ActionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4215926A4867700A4A214 /* ActionsVC.swift */; };
 		E4A4216326A491D900A4A214 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4216226A491D900A4A214 /* GameVC.swift */; };
 		E4A4216A26A4A13800A4A214 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4216926A4A13800A4A214 /* Action.swift */; };
@@ -53,6 +52,7 @@
 		E4CF518A264BF9DE0058FED5 /* HorHintVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF5189264BF9DE0058FED5 /* HorHintVC.swift */; };
 		E4CF518C264BFF330058FED5 /* BoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF518B264BFF330058FED5 /* BoardVC.swift */; };
 		E4CF518E264C12DD0058FED5 /* MSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF518D264C12DD0058FED5 /* MSUtils.swift */; };
+		E4E05C462ABB4B0000A96728 /* MSLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E05C452ABB4B0000A96728 /* MSLogger.swift */; };
 		E4EDDEB0265EA33B00588428 /* Degrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDDEAF265EA33B00588428 /* Degrees.swift */; };
 		E4EDDEB2265EA35D00588428 /* References.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDDEB1265EA35D00588428 /* References.swift */; };
 		E4EDDEB4265EA3D700588428 /* CellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDDEB3265EA3D700588428 /* CellContent.swift */; };
@@ -72,7 +72,6 @@
 		934C6864264C567B00099424 /* Face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 		934C686B264C75A000099424 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		934C686F264C75B700099424 /* MSGameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGameStatus.swift; sourceTree = "<group>"; };
-		934C6872264C75E200099424 /* MSCoreDataKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSCoreDataKeys.swift; sourceTree = "<group>"; };
 		934C687A264C783500099424 /* MSConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSConstants.swift; sourceTree = "<group>"; };
 		9392D57C264817CC000C858B /* Minesweeper 3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minesweeper 3D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9392D57F264817CC000C858B /* Minesweeper_3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minesweeper_3DApp.swift; sourceTree = "<group>"; };
@@ -86,8 +85,6 @@
 		93F0DB7B26483C310022F976 /* MSTexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSTexts.swift; sourceTree = "<group>"; };
 		93F0DB8026483D2B0022F976 /* MSSettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSSettingsVC.swift; sourceTree = "<group>"; };
 		93F0DB85264847AF0022F976 /* MSImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSImages.swift; sourceTree = "<group>"; };
-		93F0DB90264865F40022F976 /* MSSettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSSettingsVM.swift; sourceTree = "<group>"; };
-		93F0DB95264868070022F976 /* MSCoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSCoreDataController.swift; sourceTree = "<group>"; };
 		93FE38CC2649B45700A78B84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localized.strings; sourceTree = "<group>"; };
 		93FE38CF2649B46000A78B84 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localized.strings; sourceTree = "<group>"; };
 		93FE38D12649B84D00A78B84 /* MSLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSLanguage.swift; sourceTree = "<group>"; };
@@ -105,7 +102,7 @@
 		E48E4A262785E92E006F7BE5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		E48E4A2B2785F3A2006F7BE5 /* FaceCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCD.swift; sourceTree = "<group>"; };
 		E48E4A322785F903006F7BE5 /* CellCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCD.swift; sourceTree = "<group>"; };
-		E48E4A4227860C9A006F7BE5 /* MSMainVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSMainVM.swift; sourceTree = "<group>"; };
+		E495EB702ABB51CA00F7430A /* MSRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSRealmManager.swift; sourceTree = "<group>"; };
 		E4A4215926A4867700A4A214 /* ActionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsVC.swift; sourceTree = "<group>"; };
 		E4A4216226A491D900A4A214 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		E4A4216926A4A13800A4A214 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
@@ -116,6 +113,7 @@
 		E4CF5189264BF9DE0058FED5 /* HorHintVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorHintVC.swift; sourceTree = "<group>"; };
 		E4CF518B264BFF330058FED5 /* BoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardVC.swift; sourceTree = "<group>"; };
 		E4CF518D264C12DD0058FED5 /* MSUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSUtils.swift; sourceTree = "<group>"; };
+		E4E05C452ABB4B0000A96728 /* MSLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSLogger.swift; sourceTree = "<group>"; };
 		E4EDDEAF265EA33B00588428 /* Degrees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degrees.swift; sourceTree = "<group>"; };
 		E4EDDEB1265EA35D00588428 /* References.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = References.swift; sourceTree = "<group>"; };
 		E4EDDEB3265EA3D700588428 /* CellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellContent.swift; sourceTree = "<group>"; };
@@ -132,6 +130,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E495EB6F2ABB51B400F7430A /* RealmSwift in Frameworks */,
+				E495EB6D2ABB51B400F7430A /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +186,8 @@
 				93CBB0CB2649EF89009A8E53 /* MSAppSate.swift */,
 				934C687A264C783500099424 /* MSConstants.swift */,
 				E468F6DC265D26ED0081ACD7 /* MSKeyboardListener.swift */,
+				E4E05C452ABB4B0000A96728 /* MSLogger.swift */,
+				E495EB702ABB51CA00F7430A /* MSRealmManager.swift */,
 				E4CF518D264C12DD0058FED5 /* MSUtils.swift */,
 			);
 			path = Helpers;
@@ -241,7 +243,6 @@
 				93F0DB94264867F50022F976 /* CoreData */,
 				E4CF5184264BF4520058FED5 /* Game */,
 				9392D59326481AEB000C858B /* Main_Screen */,
-				93F0DB7F26483D110022F976 /* Settings */,
 				E4283666278DE404008C506E /* Social */,
 				E428366F278DE902008C506E /* SwipeAction */,
 			);
@@ -260,8 +261,8 @@
 			isa = PBXGroup;
 			children = (
 				933A4588264EEC6600BDE2AA /* Collection_EXT.swift */,
-				93DE280526580AF9007444E3 /* View_EXT.swift */,
 				E41FE74726989CC700E7080B /* Int_EXT.swift */,
+				93DE280526580AF9007444E3 /* View_EXT.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -269,22 +270,12 @@
 		93F0DB7A26483C110022F976 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				93F0DB85264847AF0022F976 /* MSImages.swift */,
-				93FE38D12649B84D00A78B84 /* MSLanguage.swift */,
-				93F0DB7B26483C310022F976 /* MSTexts.swift */,
 				9392D583264817D1000C858B /* Assets.xcassets */,
 				93FE38CD2649B45700A78B84 /* Localized.strings */,
+				93F0DB85264847AF0022F976 /* MSImages.swift */,
+				93F0DB7B26483C310022F976 /* MSTexts.swift */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		93F0DB7F26483D110022F976 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				93F0DB8026483D2B0022F976 /* MSSettingsVC.swift */,
-				93F0DB90264865F40022F976 /* MSSettingsVM.swift */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 		93F0DB94264867F50022F976 /* CoreData */ = {
@@ -295,38 +286,12 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		E411BA442AB49DEB00BB5960 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				93F0DB95264868070022F976 /* MSCoreDataController.swift */,
-				934C6872264C75E200099424 /* MSCoreDataKeys.swift */,
-				E411BA452AB49DF800BB5960 /* Objects */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
-		E411BA452AB49DF800BB5960 /* Objects */ = {
-			isa = PBXGroup;
-			children = (
-				93DE280A26580FE3007444E3 /* MSSettings.swift */,
-			);
-			path = Objects;
-			sourceTree = "<group>";
-		};
 		E411BA462AB4B44900BB5960 /* Game */ = {
-			isa = PBXGroup;
-			children = (
-				E411BA472AB4B45200BB5960 /* Objects */,
-			);
-			path = Game;
-			sourceTree = "<group>";
-		};
-		E411BA472AB4B45200BB5960 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
 				934C686F264C75B700099424 /* MSGameStatus.swift */,
 			);
-			path = Objects;
+			path = Game;
 			sourceTree = "<group>";
 		};
 		E4283666278DE404008C506E /* Social */ = {
@@ -349,10 +314,8 @@
 		E45ADB642A4EFC1500A31586 /* Redesign */ = {
 			isa = PBXGroup;
 			children = (
-				E411BA462AB4B44900BB5960 /* Game */,
-				E411BA442AB49DEB00BB5960 /* CoreData */,
+				E495EB722ABB5A0E00F7430A /* Modules */,
 				934C6877264C762100099424 /* Helpers */,
-				E45ADB652A4EFD2600A31586 /* Main */,
 				93F0DB7A26483C110022F976 /* Resources */,
 			);
 			path = Redesign;
@@ -361,12 +324,31 @@
 		E45ADB652A4EFD2600A31586 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E4A4216F26A4AB4700A4A214 /* MSNavigations.swift */,
-				E48E4A4227860C9A006F7BE5 /* MSMainVM.swift */,
-				E45ADB662A4EFD3C00A31586 /* MSMainVC.swift */,
 				93F0DB7126481FB90022F976 /* MSImageButton.swift */,
+				E45ADB662A4EFD3C00A31586 /* MSMainVC.swift */,
+				E4A4216F26A4AB4700A4A214 /* MSNavigations.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		E495EB722ABB5A0E00F7430A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				E411BA462AB4B44900BB5960 /* Game */,
+				E45ADB652A4EFD2600A31586 /* Main */,
+				E495EB732ABB5A3800F7430A /* Settings */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		E495EB732ABB5A3800F7430A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				93FE38D12649B84D00A78B84 /* MSLanguage.swift */,
+				93DE280A26580FE3007444E3 /* MSSettings.swift */,
+				93F0DB8026483D2B0022F976 /* MSSettingsVC.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		E4A4216E26A4AB3500A4A214 /* Objects */ = {
@@ -417,6 +399,10 @@
 			dependencies = (
 			);
 			name = "Minesweeper 3D";
+			packageProductDependencies = (
+				E495EB6C2ABB51B400F7430A /* Realm */,
+				E495EB6E2ABB51B400F7430A /* RealmSwift */,
+			);
 			productName = "Minesweeper 3D";
 			productReference = 9392D57C264817CC000C858B /* Minesweeper 3D.app */;
 			productType = "com.apple.product-type.application";
@@ -447,6 +433,9 @@
 				fr,
 			);
 			mainGroup = 9392D573264817CB000C858B;
+			packageReferences = (
+				E495EB6B2ABB51B400F7430A /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 9392D57D264817CC000C858B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -490,7 +479,6 @@
 				E4F4047F269DE0A200E09CDC /* Miner.swift in Sources */,
 				E48E4A2C2785F3A2006F7BE5 /* FaceCD.swift in Sources */,
 				933A4586264ED73900BDE2AA /* Cell.swift in Sources */,
-				93F0DB96264868070022F976 /* MSCoreDataController.swift in Sources */,
 				E4A4217026A4AB4700A4A214 /* MSNavigations.swift in Sources */,
 				E41FE74826989CC700E7080B /* Int_EXT.swift in Sources */,
 				934C6870264C75B800099424 /* MSGameStatus.swift in Sources */,
@@ -507,7 +495,7 @@
 				E48A3823269C91A600B909D2 /* FaceUpdater.swift in Sources */,
 				93F0DB7C26483C310022F976 /* MSTexts.swift in Sources */,
 				934C6865264C567C00099424 /* Face.swift in Sources */,
-				E48E4A4327860C9A006F7BE5 /* MSMainVM.swift in Sources */,
+				E4E05C462ABB4B0000A96728 /* MSLogger.swift in Sources */,
 				E4EDDEB4265EA3D700588428 /* CellContent.swift in Sources */,
 				E4CF518E264C12DD0058FED5 /* MSUtils.swift in Sources */,
 				934C686C264C75A000099424 /* Direction.swift in Sources */,
@@ -515,13 +503,12 @@
 				E428364D278D8528008C506E /* CustomAlert.swift in Sources */,
 				93DE280B26580FE3007444E3 /* MSSettings.swift in Sources */,
 				933A4583264ED71100BDE2AA /* CellType.swift in Sources */,
-				934C6873264C75E200099424 /* MSCoreDataKeys.swift in Sources */,
-				93F0DB91264865F40022F976 /* MSSettingsVM.swift in Sources */,
 				E4CF518C264BFF330058FED5 /* BoardVC.swift in Sources */,
 				E428366D278DE6EB008C506E /* SwipeButton.swift in Sources */,
 				933A4589264EEC6600BDE2AA /* Collection_EXT.swift in Sources */,
 				E45ADB672A4EFD3C00A31586 /* MSMainVC.swift in Sources */,
 				E4CF5186264BF4780058FED5 /* GameBoardVC.swift in Sources */,
+				E495EB712ABB51CA00F7430A /* MSRealmManager.swift in Sources */,
 				E48E4A272785E92E006F7BE5 /* Game.swift in Sources */,
 				93FE38D22649B84D00A78B84 /* MSLanguage.swift in Sources */,
 				E48E4A332785F903006F7BE5 /* CellCD.swift in Sources */,
@@ -734,6 +721,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E495EB6B2ABB51B400F7430A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.42.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E495EB6C2ABB51B400F7430A /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E495EB6B2ABB51B400F7430A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		E495EB6E2ABB51B400F7430A /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E495EB6B2ABB51B400F7430A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9392D574264817CB000C858B /* Project object */;
 }

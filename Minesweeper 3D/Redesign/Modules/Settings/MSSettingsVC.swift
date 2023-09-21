@@ -6,50 +6,56 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct MSSettingsVC: View, MSKeyboardListener {
     
-    @ObservedObject private var viewModel = MSSettingsVM()
+    @ObservedRealmObject var settings: MSSettings = MSSettings.empty()
     @State private var showDeleteAlert: Bool = false
     @State private var isKeyboardVisible: Bool = false
     
     private var stepperString: String {
         var stringValue = MSTexts.maxRanks.localized
-        stringValue.append(": \($viewModel.settings.maxRanks.wrappedValue)")
+        stringValue.append(": \(settings.maxRanks)")
         
         return stringValue
     }
-    var saveCallback: (() -> Void)?
+    var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "_"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "_"
+        
+        return "\(version) (\(build))"
+    }
     
     var body: some View {
         Form {
             Section(header: MSTexts.general.localizedText) {
                 HStack(spacing: 15) {
                     MSTexts.username.localizedText
-                        .foregroundColor(viewModel.settings.getMissingData() != nil ? Color.red : nil)
+                        .foregroundColor(settings.username.isEmpty ? Color.red : nil)
                     TextField(
                         MSTexts.username.localized,
-                        text: $viewModel.settings.username
+                        text: $settings.username
                     )
                     .multilineTextAlignment(.trailing)
                     .onReceive(publisher, perform: { isKeyboardVisible = $0 })
                 }
-                Picker(MSTexts.language.localized, selection: $viewModel.settings.appLanguage) {
-                    ForEach(MSLanguage.allCases) {
-                        Text($0.name).tag($0)
+                Picker(MSTexts.language.localized, selection: $settings.appLanguage) {
+                    ForEach(MSLanguageType.allCases) {
+                        Text($0.name).tag($0.code)
                     }
                 }
                 Toggle(
                     MSTexts.autosaveRanks.localized,
-                    isOn: $viewModel.settings.autosaveRanks
+                    isOn: $settings.autosaveRanks
                 )
                 Stepper(
-                    value: $viewModel.settings.maxRanks,
+                    value: $settings.maxRanks,
                     in: MSConstants.maxRanksRange
                 ) { Text(stepperString) }
             }
             Section(header: Text(MSTexts.info.localized)) {
-                MSTexts.version.localizedText(with: [viewModel.appVersion])
+                MSTexts.version.localizedText(with: [appVersion])
                 Text("© 2023. Aarón Granado Amores.")
             }
             Section(header: MSTexts.advanced.localizedText) {
@@ -70,15 +76,10 @@ struct MSSettingsVC: View, MSKeyboardListener {
                         label: { MSImages.system(.closeKeyboard).image }
                     )
                 }
-                if viewModel.settingsChanged {
-                    Button(
-                        action: {
-                            viewModel.saveData()
-                            saveCallback?()
-                        },
-                        label: { Text(MSTexts.save.localized) }
-                    )
-                }
+                Button(
+                    action: { updateSettings() },
+                    label: { MSTexts.save.localizedText }
+                )
             }
         }
         .alert(isPresented: $showDeleteAlert) {
@@ -86,16 +87,35 @@ struct MSSettingsVC: View, MSKeyboardListener {
                 title: MSTexts.deleteTitle.localizedText,
                 message: MSTexts.deleteDisclaimer.localizedText,
                 primaryButton: .default(MSTexts.cancel.localizedText),
-                secondaryButton: .destructive(MSTexts.delete.localizedText) {
-                    viewModel.deleteData()
-                }
+                secondaryButton: .destructive(MSTexts.delete.localizedText) { deleteData() }
             )
         }
+        .onAppear { getSettings() }
+    }
+}
+
+extension MSSettingsVC {
+    
+    func deleteData() {
+        MSRealmManaager.shared.deleteAllData()
+    }
+    
+    func getSettings() {
+        let newSettings = MSRealmManaager.shared.getSetings().freeze()
+        
+        $settings.username.wrappedValue = newSettings.username
+        $settings.appLanguage.wrappedValue = newSettings.appLanguage
+        $settings.autosaveRanks.wrappedValue = newSettings.autosaveRanks
+        $settings.maxRanks.wrappedValue = newSettings.maxRanks
+    }
+    
+    func updateSettings() {
+        MSRealmManaager.shared.updateSettings(settings)
     }
 }
 
 struct SettingsVC_Previews: PreviewProvider {
     static var previews: some View {
-        MSSettingsVC()
+        MSSettingsVC(settings: MSSettings.empty())
     }
 }

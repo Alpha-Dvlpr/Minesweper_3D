@@ -9,9 +9,9 @@ import SwiftUI
 
 struct MSMainVC: View {
     
-    @StateObject private var viewModel = MSMainVM()
     @State private var saveErrorAlertShown: Bool = false
     @State private var selection: MSNavigations?
+    @State private var missingData: Int = 0
     
     var body: some View {
         NavigationStack {
@@ -19,14 +19,14 @@ struct MSMainVC: View {
                 NavigationLink(
                     value: MSNavigations.game,
                     label: { MSImageButton(title: MSTexts.newGame.localized, image: .system(.play)) }
-                ).onTapGesture { viewModel.deleteGame() }
+                ).onTapGesture { deleteGame() }
             }
             .toolbar {
                 NavigationLink(
                     value: MSNavigations.settings,
                     label: {
-                        if let errors = viewModel.settings?.getMissingData() {
-                            MSSettingsImage(number: errors)
+                        if missingData != 0 {
+                            MSSettingsImage(number: missingData)
                         } else {
                             MSImages.system(.settings).image
                         }
@@ -36,14 +36,14 @@ struct MSMainVC: View {
             .navigationDestination(for: MSNavigations.self) { value in
                 switch value {
                 case .settings:
-                    MSSettingsVC() { viewModel.updateSettings() }
+                    MSSettingsVC()
                 case .game:
                     Text("game")
                 case .gameResume:
                     Text("saved game")
                 }
             }
-            .navigationTitle(MSTexts.main.localized)
+            .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .alert(isPresented: $saveErrorAlertShown) {
                 Alert(
@@ -51,12 +51,19 @@ struct MSMainVC: View {
                     message: MSTexts.errorSavingGame.localizedText,
                     dismissButton: .default(MSTexts.cancel.localizedText)
                 )
-            }
-            .onAppear {
-                viewModel.getSavedGame()
-                viewModel.updateSettings()
-            }
+            }.onAppear { getMissingSettings() }
         }
+    }
+}
+
+extension MSMainVC {
+        
+    private func deleteGame() {
+        
+    }
+    
+    private func getMissingSettings() {
+        missingData = MSRealmManaager.shared.getSetings().freeze().getMissingData()
     }
 }
 
