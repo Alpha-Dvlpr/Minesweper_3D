@@ -10,9 +10,11 @@ import SwiftUI
 @main
 struct Minesweeper_3DApp: App {
     
+    @StateObject var appState = MSAppState.shared
+    
     var body: some Scene {
         WindowGroup {
-            Text("Hello")
+            MSMainView().id(appState.gameID)
         }
     }
 }

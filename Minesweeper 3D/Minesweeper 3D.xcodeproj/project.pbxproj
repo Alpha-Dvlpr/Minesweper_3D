@@ -10,6 +10,27 @@
 		E42E84D32BB317D900280DB3 /* Minesweeper_3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84D22BB317D900280DB3 /* Minesweeper_3DApp.swift */; };
 		E42E84D72BB317DA00280DB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E84D62BB317DA00280DB3 /* Assets.xcassets */; };
 		E42E84DB2BB317DA00280DB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E84DA2BB317DA00280DB3 /* Preview Assets.xcassets */; };
+		E42E84E72BB31DAF00280DB3 /* MSAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84E62BB31DAF00280DB3 /* MSAppState.swift */; };
+		E42E84E92BB31E1E00280DB3 /* MSLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84E82BB31E1E00280DB3 /* MSLogger.swift */; };
+		E42E84EB2BB31F2900280DB3 /* MSMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84EA2BB31F2900280DB3 /* MSMainView.swift */; };
+		E42E84ED2BB3224000280DB3 /* MSMainVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84EC2BB3224000280DB3 /* MSMainVM.swift */; };
+		E42E84EF2BB3250F00280DB3 /* MSTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84EE2BB3250F00280DB3 /* MSTexts.swift */; };
+		E42E84F22BB325A100280DB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E42E84F42BB325A100280DB3 /* Localizable.strings */; };
+		E42E84F72BB3264500280DB3 /* MSRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84F62BB3264500280DB3 /* MSRealmManager.swift */; };
+		E42E84FA2BB3268800280DB3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E42E84F92BB3268800280DB3 /* Realm */; };
+		E42E84FC2BB3268800280DB3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E42E84FB2BB3268800280DB3 /* RealmSwift */; };
+		E42E85012BB32A1800280DB3 /* MSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E85002BB32A1800280DB3 /* MSSettings.swift */; };
+		E42E85032BB32B6300280DB3 /* MSLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E85022BB32B6300280DB3 /* MSLanguage.swift */; };
+		E42E85052BB32D6300280DB3 /* MSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E85042BB32D6300280DB3 /* MSConstants.swift */; };
+		E42E85072BB32E6A00280DB3 /* MSSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E85062BB32E6A00280DB3 /* MSSettingsView.swift */; };
+		E42E85092BB32E8E00280DB3 /* MSSettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E85082BB32E8E00280DB3 /* MSSettingsVM.swift */; };
+		E42E850C2BB3360500280DB3 /* MSLanguageDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E850B2BB3360500280DB3 /* MSLanguageDescription.swift */; };
+		E42E850E2BB3361800280DB3 /* MSLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E850D2BB3361800280DB3 /* MSLanguageType.swift */; };
+		E42E85102BB3365800280DB3 /* MSNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E850F2BB3365800280DB3 /* MSNavigations.swift */; };
+		E42E85132BB336C200280DB3 /* MSImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E85122BB336C200280DB3 /* MSImages.swift */; };
+		E42E85152BB336D900280DB3 /* MSSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E85142BB336D900280DB3 /* MSSymbol.swift */; };
+		E42E85172BB336F900280DB3 /* MSSysImg.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E85162BB336F900280DB3 /* MSSysImg.swift */; };
+		E42E85192BB3372300280DB3 /* MSSettingsImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E85182BB3372300280DB3 /* MSSettingsImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +39,25 @@
 		E42E84D62BB317DA00280DB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E42E84D82BB317DA00280DB3 /* Minesweeper_3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minesweeper_3D.entitlements; sourceTree = "<group>"; };
 		E42E84DA2BB317DA00280DB3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E42E84E62BB31DAF00280DB3 /* MSAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSAppState.swift; sourceTree = "<group>"; };
+		E42E84E82BB31E1E00280DB3 /* MSLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSLogger.swift; sourceTree = "<group>"; };
+		E42E84EA2BB31F2900280DB3 /* MSMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSMainView.swift; sourceTree = "<group>"; };
+		E42E84EC2BB3224000280DB3 /* MSMainVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSMainVM.swift; sourceTree = "<group>"; };
+		E42E84EE2BB3250F00280DB3 /* MSTexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSTexts.swift; sourceTree = "<group>"; };
+		E42E84F52BB325BA00280DB3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E42E84F62BB3264500280DB3 /* MSRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSRealmManager.swift; sourceTree = "<group>"; };
+		E42E85002BB32A1800280DB3 /* MSSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSSettings.swift; sourceTree = "<group>"; };
+		E42E85022BB32B6300280DB3 /* MSLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSLanguage.swift; sourceTree = "<group>"; };
+		E42E85042BB32D6300280DB3 /* MSConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSConstants.swift; sourceTree = "<group>"; };
+		E42E85062BB32E6A00280DB3 /* MSSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSSettingsView.swift; sourceTree = "<group>"; };
+		E42E85082BB32E8E00280DB3 /* MSSettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSSettingsVM.swift; sourceTree = "<group>"; };
+		E42E850B2BB3360500280DB3 /* MSLanguageDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSLanguageDescription.swift; sourceTree = "<group>"; };
+		E42E850D2BB3361800280DB3 /* MSLanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSLanguageType.swift; sourceTree = "<group>"; };
+		E42E850F2BB3365800280DB3 /* MSNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSNavigations.swift; sourceTree = "<group>"; };
+		E42E85122BB336C200280DB3 /* MSImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSImages.swift; sourceTree = "<group>"; };
+		E42E85142BB336D900280DB3 /* MSSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSSymbol.swift; sourceTree = "<group>"; };
+		E42E85162BB336F900280DB3 /* MSSysImg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSSysImg.swift; sourceTree = "<group>"; };
+		E42E85182BB3372300280DB3 /* MSSettingsImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSSettingsImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E42E84FC2BB3268800280DB3 /* RealmSwift in Frameworks */,
+				E42E84FA2BB3268800280DB3 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +93,9 @@
 			isa = PBXGroup;
 			children = (
 				E42E84E12BB3182A00280DB3 /* App */,
+				E42E84E52BB31D9900280DB3 /* Helpers */,
+				E42E84FF2BB32A0A00280DB3 /* Models */,
+				E42E84E32BB31BA900280DB3 /* Modules */,
 				E42E84D92BB317DA00280DB3 /* Preview Content */,
 				E42E84E22BB3184300280DB3 /* Resources */,
 			);
@@ -78,8 +123,80 @@
 			isa = PBXGroup;
 			children = (
 				E42E84D62BB317DA00280DB3 /* Assets.xcassets */,
+				E42E84EE2BB3250F00280DB3 /* MSTexts.swift */,
+				E42E84F42BB325A100280DB3 /* Localizable.strings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		E42E84E32BB31BA900280DB3 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				E42E84FD2BB329EA00280DB3 /* Settings */,
+				E42E84E42BB31BB900280DB3 /* Main */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		E42E84E42BB31BB900280DB3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E42E84EA2BB31F2900280DB3 /* MSMainView.swift */,
+				E42E84EC2BB3224000280DB3 /* MSMainVM.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		E42E84E52BB31D9900280DB3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E42E84E62BB31DAF00280DB3 /* MSAppState.swift */,
+				E42E84E82BB31E1E00280DB3 /* MSLogger.swift */,
+				E42E84F62BB3264500280DB3 /* MSRealmManager.swift */,
+				E42E85042BB32D6300280DB3 /* MSConstants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E42E84FD2BB329EA00280DB3 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E42E85182BB3372300280DB3 /* MSSettingsImage.swift */,
+				E42E85062BB32E6A00280DB3 /* MSSettingsView.swift */,
+				E42E85082BB32E8E00280DB3 /* MSSettingsVM.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E42E84FF2BB32A0A00280DB3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E42E85112BB336B500280DB3 /* Images */,
+				E42E850A2BB335F300280DB3 /* Language */,
+				E42E850F2BB3365800280DB3 /* MSNavigations.swift */,
+				E42E85002BB32A1800280DB3 /* MSSettings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E42E850A2BB335F300280DB3 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				E42E85022BB32B6300280DB3 /* MSLanguage.swift */,
+				E42E850B2BB3360500280DB3 /* MSLanguageDescription.swift */,
+				E42E850D2BB3361800280DB3 /* MSLanguageType.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
+		E42E85112BB336B500280DB3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E42E85122BB336C200280DB3 /* MSImages.swift */,
+				E42E85142BB336D900280DB3 /* MSSymbol.swift */,
+				E42E85162BB336F900280DB3 /* MSSysImg.swift */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,6 +215,10 @@
 			dependencies = (
 			);
 			name = "Minesweeper 3D";
+			packageProductDependencies = (
+				E42E84F92BB3268800280DB3 /* Realm */,
+				E42E84FB2BB3268800280DB3 /* RealmSwift */,
+			);
 			productName = "Minesweeper 3D";
 			productReference = E42E84CF2BB317D900280DB3 /* Minesweeper 3D debug.app */;
 			productType = "com.apple.product-type.application";
@@ -119,13 +240,15 @@
 			};
 			buildConfigurationList = E42E84CA2BB317D900280DB3 /* Build configuration list for PBXProject "Minesweeper 3D" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = es;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
+				es,
 			);
 			mainGroup = E42E84C62BB317D900280DB3;
+			packageReferences = (
+				E42E84F82BB3268800280DB3 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = E42E84D02BB317D900280DB3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E42E84DB2BB317DA00280DB3 /* Preview Assets.xcassets in Resources */,
+				E42E84F22BB325A100280DB3 /* Localizable.strings in Resources */,
 				E42E84D72BB317DA00280DB3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,11 +276,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E42E84EF2BB3250F00280DB3 /* MSTexts.swift in Sources */,
+				E42E850E2BB3361800280DB3 /* MSLanguageType.swift in Sources */,
+				E42E85152BB336D900280DB3 /* MSSymbol.swift in Sources */,
+				E42E85052BB32D6300280DB3 /* MSConstants.swift in Sources */,
+				E42E850C2BB3360500280DB3 /* MSLanguageDescription.swift in Sources */,
+				E42E85172BB336F900280DB3 /* MSSysImg.swift in Sources */,
 				E42E84D32BB317D900280DB3 /* Minesweeper_3DApp.swift in Sources */,
+				E42E84E72BB31DAF00280DB3 /* MSAppState.swift in Sources */,
+				E42E85032BB32B6300280DB3 /* MSLanguage.swift in Sources */,
+				E42E84E92BB31E1E00280DB3 /* MSLogger.swift in Sources */,
+				E42E85012BB32A1800280DB3 /* MSSettings.swift in Sources */,
+				E42E84ED2BB3224000280DB3 /* MSMainVM.swift in Sources */,
+				E42E84F72BB3264500280DB3 /* MSRealmManager.swift in Sources */,
+				E42E85092BB32E8E00280DB3 /* MSSettingsVM.swift in Sources */,
+				E42E84EB2BB31F2900280DB3 /* MSMainView.swift in Sources */,
+				E42E85102BB3365800280DB3 /* MSNavigations.swift in Sources */,
+				E42E85192BB3372300280DB3 /* MSSettingsImage.swift in Sources */,
+				E42E85072BB32E6A00280DB3 /* MSSettingsView.swift in Sources */,
+				E42E85132BB336C200280DB3 /* MSImages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E42E84F42BB325A100280DB3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E42E84F52BB325BA00280DB3 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E42E84DC2BB317DA00280DB3 /* Debug */ = {
@@ -164,6 +317,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -225,6 +379,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -374,6 +529,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E42E84F82BB3268800280DB3 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E42E84F92BB3268800280DB3 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E42E84F82BB3268800280DB3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		E42E84FB2BB3268800280DB3 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E42E84F82BB3268800280DB3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E42E84C72BB317D900280DB3 /* Project object */;
 }
