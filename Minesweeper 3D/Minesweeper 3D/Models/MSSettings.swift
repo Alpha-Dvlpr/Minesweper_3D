@@ -6,28 +6,18 @@
 //
 
 import Foundation
-import RealmSwift
 
-class MSSettings: Object, ObjectKeyIdentifiable {
+struct MSSettings: Identifiable, Hashable {
     
     enum MSMissingData {
         case invalidName
     }
     
-    @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var username: String
-    @Persisted var appLanguage: String
-    @Persisted var autosaveRanks: Bool
-    @Persisted var maxRanks: Int
-    
-    convenience init(username: String, appLanguage:  String, autosaveranks: Bool, maxRanks: Int) {
-        self.init()
-        
-        self.username = username
-        self.appLanguage = appLanguage
-        self.autosaveRanks = autosaveranks
-        self.maxRanks = maxRanks
-    }
+    var id = UUID()
+    var username: String = ""
+    var appLanguage: String = MSLanguage(type: .spanish).code
+    var autosaveRanks: Bool = false
+    var maxRanks: Int = MSConstants.maxRanksRange.lowerBound
     
     func getMissingData() -> Int {
         var missing: [MSMissingData] = []
@@ -44,14 +34,5 @@ class MSSettings: Object, ObjectKeyIdentifiable {
             && lhs.appLanguage == rhs.appLanguage
             && lhs.autosaveRanks == rhs.autosaveRanks
             && lhs.maxRanks == rhs.maxRanks
-    }
-    
-    static func empty() -> MSSettings {
-        return MSSettings(
-            username: "",
-            appLanguage: MSLanguage(type: .spanish).code,
-            autosaveranks: false,
-            maxRanks: MSConstants.maxRanksRange.lowerBound
-        )
     }
 }

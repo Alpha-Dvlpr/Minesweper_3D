@@ -6,12 +6,10 @@
 //
 
 import Foundation
-import RealmSwift
 
-class MSLanguage: Object, ObjectKeyIdentifiable {
+class MSLanguage {
     
-    @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var code: String = MSLanguageType.spanish.code
+    var code: String = MSLanguageType.spanish.code
     var language: MSLanguageType = .spanish
     
     convenience init(type: MSLanguageType) {

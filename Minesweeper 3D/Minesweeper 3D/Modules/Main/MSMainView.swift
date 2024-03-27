@@ -15,7 +15,10 @@ struct MSMainView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                
+                NavigationLink(
+                    value: MSNavigations.game,
+                    label: { MSImageButton(title: MSTexts.newGame.localized, image: .system(.play)) }
+                )
             }
             .toolbar {
                 NavigationLink(
@@ -25,8 +28,8 @@ struct MSMainView: View {
             }
             .navigationDestination(for: MSNavigations.self) { value in
                 switch value {
-                case .settings:
-                    MSSettingsView(settingsVM: settingsVM)
+                case .game: Text("New game")
+                case .settings: MSSettingsView(settingsVM: settingsVM)
                 }
             }
             .navigationTitle("")

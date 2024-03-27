@@ -13,15 +13,15 @@ class MSRealmManager {
     static let shared = MSRealmManager()
     
     // MARK: - Settings
-    func getSettings() -> MSSettings {
+    func getSettings() -> RealmSettings {
         do {
             let realm = try Realm()
-            let settings = realm.objects(MSSettings.self)
+            let settings = realm.objects(RealmSettings.self)
             
             if let first = settings.first {
                 return first
             } else {
-                let empty = MSSettings.empty()
+                let empty = RealmSettings.empty()
                 
                 self.saveSettings(empty)
                 
@@ -31,10 +31,10 @@ class MSRealmManager {
             MSLogManager.shared.log(type: .error(error: MSError(error.localizedDescription)))
         }
         
-        return MSSettings.empty()
+        return RealmSettings.empty()
     }
     
-    func saveSettings(_ settings: MSSettings) {
+    func saveSettings(_ settings: RealmSettings) {
         do {
             let realm = try Realm()
             
@@ -46,10 +46,10 @@ class MSRealmManager {
         }
     }
     
-    func updateSettings(_ settings: MSSettings) {
+    func updateSettings(_ settings: RealmSettings) {
         do {
             let realm = try Realm()
-            let existing = realm.objects(MSSettings.self)
+            let existing = realm.objects(RealmSettings.self)
             
             if existing.isEmpty {
                 saveSettings(settings)
@@ -72,7 +72,7 @@ class MSRealmManager {
     func deleteAllData() {
         do {
             let realm = try Realm()
-            let existingSettings = realm.objects(MSSettings.self)
+            let existingSettings = realm.objects(RealmSettings.self)
             
             try realm.write {
                 existingSettings.forEach { realm.delete($0) }

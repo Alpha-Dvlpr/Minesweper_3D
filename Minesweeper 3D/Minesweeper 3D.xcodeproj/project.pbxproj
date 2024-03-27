@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E401EDDB2BB41C380008A980 /* RealmSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDDA2BB41C380008A980 /* RealmSettings.swift */; };
+		E401EDDE2BB420100008A980 /* MSImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDDD2BB420100008A980 /* MSImageButton.swift */; };
 		E42E84D32BB317D900280DB3 /* Minesweeper_3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84D22BB317D900280DB3 /* Minesweeper_3DApp.swift */; };
 		E42E84D72BB317DA00280DB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E84D62BB317DA00280DB3 /* Assets.xcassets */; };
 		E42E84DB2BB317DA00280DB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E84DA2BB317DA00280DB3 /* Preview Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E401EDDA2BB41C380008A980 /* RealmSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSettings.swift; sourceTree = "<group>"; };
+		E401EDDD2BB420100008A980 /* MSImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSImageButton.swift; sourceTree = "<group>"; };
 		E42E84CF2BB317D900280DB3 /* Minesweeper 3D debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minesweeper 3D debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42E84D22BB317D900280DB3 /* Minesweeper_3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minesweeper_3DApp.swift; sourceTree = "<group>"; };
 		E42E84D62BB317DA00280DB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,6 +77,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E401EDD92BB41C2B0008A980 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				E401EDDA2BB41C380008A980 /* RealmSettings.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		E401EDDC2BB41FEB0008A980 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E401EDDD2BB420100008A980 /* MSImageButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E42E84C62BB317D900280DB3 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +118,7 @@
 				E42E84E32BB31BA900280DB3 /* Modules */,
 				E42E84D92BB317DA00280DB3 /* Preview Content */,
 				E42E84E22BB3184300280DB3 /* Resources */,
+				E401EDDC2BB41FEB0008A980 /* Views */,
 			);
 			path = "Minesweeper 3D";
 			sourceTree = "<group>";
@@ -151,9 +172,9 @@
 			isa = PBXGroup;
 			children = (
 				E42E84E62BB31DAF00280DB3 /* MSAppState.swift */,
+				E42E85042BB32D6300280DB3 /* MSConstants.swift */,
 				E42E84E82BB31E1E00280DB3 /* MSLogger.swift */,
 				E42E84F62BB3264500280DB3 /* MSRealmManager.swift */,
-				E42E85042BB32D6300280DB3 /* MSConstants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -171,6 +192,7 @@
 		E42E84FF2BB32A0A00280DB3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E401EDD92BB41C2B0008A980 /* Realm */,
 				E42E85112BB336B500280DB3 /* Images */,
 				E42E850A2BB335F300280DB3 /* Language */,
 				E42E850F2BB3365800280DB3 /* MSNavigations.swift */,
@@ -280,6 +302,7 @@
 				E42E850E2BB3361800280DB3 /* MSLanguageType.swift in Sources */,
 				E42E85152BB336D900280DB3 /* MSSymbol.swift in Sources */,
 				E42E85052BB32D6300280DB3 /* MSConstants.swift in Sources */,
+				E401EDDE2BB420100008A980 /* MSImageButton.swift in Sources */,
 				E42E850C2BB3360500280DB3 /* MSLanguageDescription.swift in Sources */,
 				E42E85172BB336F900280DB3 /* MSSysImg.swift in Sources */,
 				E42E84D32BB317D900280DB3 /* Minesweeper_3DApp.swift in Sources */,
@@ -288,6 +311,7 @@
 				E42E84E92BB31E1E00280DB3 /* MSLogger.swift in Sources */,
 				E42E85012BB32A1800280DB3 /* MSSettings.swift in Sources */,
 				E42E84ED2BB3224000280DB3 /* MSMainVM.swift in Sources */,
+				E401EDDB2BB41C380008A980 /* RealmSettings.swift in Sources */,
 				E42E84F72BB3264500280DB3 /* MSRealmManager.swift in Sources */,
 				E42E85092BB32E8E00280DB3 /* MSSettingsVM.swift in Sources */,
 				E42E84EB2BB31F2900280DB3 /* MSMainView.swift in Sources */,

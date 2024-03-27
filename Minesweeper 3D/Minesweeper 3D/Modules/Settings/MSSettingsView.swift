@@ -11,6 +11,7 @@ struct MSSettingsView: View {
     
     @ObservedObject var settingsVM: MSSettingsVM
     @FocusState private var nameFieldfocused: Bool
+    @State private var isAlertShown: Bool = false
     
     var body: some View {
         Form {
@@ -45,7 +46,7 @@ struct MSSettingsView: View {
             }
             Section(header: MSTexts.advanced.localizedText) {
                 Button(
-                    action: { settingsVM.showAlert() },
+                    action: { isAlertShown = true },
                     label: { MSTexts.deleteTitle.localizedText }
                 ).foregroundStyle(.red)
             }
@@ -67,5 +68,17 @@ struct MSSettingsView: View {
                 )
             }
         }
+        .alert(
+            MSTexts.deleteTitle.localized,
+            isPresented: $isAlertShown,
+            actions: {
+                Button(
+                    MSTexts.delete.localized,
+                    role: .destructive,
+                    action: { settingsVM.deleteData() }
+                )
+            },
+            message: { MSTexts.deleteDisclaimer.localizedText }
+        )
     }
 }

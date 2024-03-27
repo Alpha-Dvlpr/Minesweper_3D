@@ -10,8 +10,7 @@ import RealmSwift
 
 class MSSettingsVM: ObservableObject {
     
-    @ObservedRealmObject var settings = MSSettings.empty()
-    @Published var isAlertShown: Bool = false
+    @Published var settings: MSSettings!
     
     var alert: Alert {
         return Alert(
@@ -42,22 +41,25 @@ class MSSettingsVM: ObservableObject {
         getSettings()
     }
     
-    func showAlert() {
-        isAlertShown = true
+    func getSettings() {
+        let existing = MSRealmManager.shared.getSettings().freeze()
+        let newSettings = MSSettings(
+            username: existing.username,
+            appLanguage: existing.appLanguage,
+            autosaveRanks: existing.autosaveRanks,
+            maxRanks: existing.maxRanks
+        )
+        
+        settings = newSettings
     }
-    
-    func updateSettings() {
-        MSRealmManager.shared.updateSettings(settings)
-    }
-}
-
-private extension MSSettingsVM {
     
     func deleteData() {
         MSRealmManager.shared.deleteAllData()
     }
     
-    func getSettings() {
-        settings = MSRealmManager.shared.getSettings().freeze()
+    func updateSettings() {
+        let realmSettings = RealmSettings(settings: settings)
+        
+        MSRealmManager.shared.updateSettings(realmSettings)
     }
 }
