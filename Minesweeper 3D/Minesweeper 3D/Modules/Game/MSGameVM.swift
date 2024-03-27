@@ -9,16 +9,14 @@ import SwiftUI
 
 class MSGameVM: ObservableObject {
     
-    @Published var gameStatus: MSGameStatus = .running
+    @Published var gameStatus: MSGameStatus = .generating
     @Published var gameTime: Int = 0
     @Published var showActionSheet: Bool = false
     @Published var showCloseAlert: Bool = false
-    @Published var showRanksAlert: Bool = false
+//    @Published var showRanksAlert: Bool = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
     var stringTime: String { return MSUtils.getStringTime(seconds: gameTime) }
-    
     var actionBarButton: Image {
         switch gameStatus {
         case .generating: return MSImages.system(.timer).image
@@ -29,11 +27,12 @@ class MSGameVM: ObservableObject {
         }
     }
     
-    func increaseTimer() {
-        if gameStatus == .running { gameTime += 1 }
-    }
+    // MARK: - Button Actions
+    func timerAction() { gameTime += gameStatus == .running ? 1 : 0 }
+    func closeAction() { showCloseAlert = true }
+    func menuAction() { showActionSheet = true }
     
-    func pauseResumeButtonTapped() {
+    func pauseAction() {
         switch gameStatus {
         case .paused: gameStatus = .running
         case .running: gameStatus = .paused
@@ -41,23 +40,11 @@ class MSGameVM: ObservableObject {
         }
     }
     
-    func newGame() {
-        gameTime = 0
-        gameStatus = .generating
-        // generateFaceNumbers()
-    }
+    func newGame() { }
     
-    func restartGame() {
-        gameTime = 0
-        // faces.forEach { $0.cells.hideAllCells() }
-        gameStatus = .running
-    }
+    func restartGame() { }
     
-    func saveGame() {
-        
-    }
+    func saveGame() { }
     
-    func saveRank() {
-        
-    }
+//    func saveRank() { }
 }

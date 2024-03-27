@@ -11,7 +11,6 @@ struct MSSettingsView: View {
     
     @ObservedObject var settingsVM: MSSettingsVM
     @FocusState private var nameFieldfocused: Bool
-    @State private var isAlertShown: Bool = false
     
     var body: some View {
         Form {
@@ -41,12 +40,12 @@ struct MSSettingsView: View {
                 ) { settingsVM.stepperString }
             }
             Section(header: MSTexts.info.localizedText) {
-                settingsVM.appVersion
-                Text("© 2024. Aarón Granado Amores.")
+                Text(MSUtils.getAppVersion())
+                Text(MSUtils.getAppCopyright())
             }
             Section(header: MSTexts.advanced.localizedText) {
                 Button(
-                    action: { isAlertShown = true },
+                    action: { settingsVM.deleteAction() },
                     label: { MSTexts.deleteTitle.localizedText }
                 ).foregroundStyle(.red)
             }
@@ -70,7 +69,7 @@ struct MSSettingsView: View {
         }
         .alert(
             MSTexts.deleteTitle.localized,
-            isPresented: $isAlertShown,
+            isPresented: $settingsVM.showDeleteAlert,
             actions: {
                 Button(
                     MSTexts.delete.localized,

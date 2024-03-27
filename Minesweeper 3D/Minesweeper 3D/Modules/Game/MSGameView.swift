@@ -18,14 +18,14 @@ struct MSGameView: View {
         VStack {
             
         }
-        .onReceive(gameVM.timer) { _ in gameVM.increaseTimer() }
+        .onReceive(gameVM.timer) { _ in gameVM.timerAction() }
         .navigationTitle(gameVM.stringTime)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItemGroup(placement: .topBarLeading) {
                 Button(
-                    action: { gameVM.showCloseAlert = true },
+                    action: { gameVM.closeAction() },
                     label: { MSImages.system(.close).image }
                 )
             }
@@ -33,11 +33,11 @@ struct MSGameView: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 Button(
-                    action: { gameVM.pauseResumeButtonTapped() },
+                    action: { gameVM.pauseAction() },
                     label: { gameVM.actionBarButton }
                 )
                 Button(
-                    action: { gameVM.showActionSheet = true },
+                    action: { gameVM.menuAction() },
                     label: { MSImages.system(.menu).image }
                 )
             }
@@ -78,22 +78,22 @@ struct MSGameView: View {
             },
             message: { MSTexts.finishGameDisclaimer.localizedText }
         )
-        .alert(
-            MSTexts.info.localized,
-            isPresented: $gameVM.showRanksAlert,
-            actions: {
-                Button(
-                    action: { gameVM.saveRank() },
-                    label: { MSTexts.save.localizedText }
-                )
-                Button(
-                    MSTexts.no.localized,
-                    role: .cancel,
-                    action: { close() }
-                )
-            },
-            message: { gameVM.gameStatus == .won ? MSTexts.gameWon.localizedText : MSTexts.gameLost.localizedText }
-        )
+//        .alert(
+//            MSTexts.info.localized,
+//            isPresented: $gameVM.showRanksAlert,
+//            actions: {
+//                Button(
+//                    action: { gameVM.saveRank() },
+//                    label: { MSTexts.save.localizedText }
+//                )
+//                Button(
+//                    MSTexts.no.localized,
+//                    role: .cancel,
+//                    action: { close() }
+//                )
+//            },
+//            message: { gameVM.gameStatus == .won ? MSTexts.gameWon.localizedText : MSTexts.gameLost.localizedText }
+//        )
     }
 }
 

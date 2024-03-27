@@ -25,4 +25,13 @@ class MSUtils {
         
         return text
     }
+    
+    static func getAppVersion() -> String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "-"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "-"
+        
+        return MSTexts.version.localized(with: [ "\(version) (\(build))" ])
+    }
+    
+    static func getAppCopyright() -> String { return "© \(Calendar.current.component(.year, from: Date())). Aarón Granado Amores." }
 }
