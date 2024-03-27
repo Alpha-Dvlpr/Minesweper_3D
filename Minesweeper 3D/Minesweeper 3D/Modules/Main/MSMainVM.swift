@@ -9,4 +9,5 @@ import SwiftUI
 
 final class MSMainVM: ObservableObject {
     
+    @Published var showSaveErrorAlert: Bool = false
 }

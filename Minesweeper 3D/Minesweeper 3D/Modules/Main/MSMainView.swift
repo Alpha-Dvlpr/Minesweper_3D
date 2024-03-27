@@ -28,12 +28,17 @@ struct MSMainView: View {
             }
             .navigationDestination(for: MSNavigations.self) { value in
                 switch value {
-                case .game: Text("New game")
+                case .game: MSGameView(gameVM: MSGameVM()) { mainVM.showSaveErrorAlert = $0 != nil }
                 case .settings: MSSettingsView(settingsVM: settingsVM)
                 }
             }
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
+            .alert(
+                MSTexts.info.localized,
+                isPresented: $mainVM.showSaveErrorAlert,
+                actions: { }
+            )
         }
     }
 }

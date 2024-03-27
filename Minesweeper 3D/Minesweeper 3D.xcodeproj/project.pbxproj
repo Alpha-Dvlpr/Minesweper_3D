@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		E401EDDB2BB41C380008A980 /* RealmSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDDA2BB41C380008A980 /* RealmSettings.swift */; };
 		E401EDDE2BB420100008A980 /* MSImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDDD2BB420100008A980 /* MSImageButton.swift */; };
+		E401EDE12BB432800008A980 /* MSGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDE02BB432800008A980 /* MSGameView.swift */; };
+		E401EDE32BB432DF0008A980 /* MSGameVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDE22BB432DF0008A980 /* MSGameVM.swift */; };
+		E401EDE52BB433070008A980 /* MSGameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDE42BB433070008A980 /* MSGameStatus.swift */; };
+		E401EDE72BB433E80008A980 /* MSGameAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDE62BB433E80008A980 /* MSGameAlertType.swift */; };
+		E401EDE92BB458140008A980 /* MSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDE82BB458140008A980 /* MSUtils.swift */; };
 		E42E84D32BB317D900280DB3 /* Minesweeper_3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84D22BB317D900280DB3 /* Minesweeper_3DApp.swift */; };
 		E42E84D72BB317DA00280DB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E84D62BB317DA00280DB3 /* Assets.xcassets */; };
 		E42E84DB2BB317DA00280DB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E84DA2BB317DA00280DB3 /* Preview Assets.xcassets */; };
@@ -38,6 +43,11 @@
 /* Begin PBXFileReference section */
 		E401EDDA2BB41C380008A980 /* RealmSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSettings.swift; sourceTree = "<group>"; };
 		E401EDDD2BB420100008A980 /* MSImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSImageButton.swift; sourceTree = "<group>"; };
+		E401EDE02BB432800008A980 /* MSGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGameView.swift; sourceTree = "<group>"; };
+		E401EDE22BB432DF0008A980 /* MSGameVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGameVM.swift; sourceTree = "<group>"; };
+		E401EDE42BB433070008A980 /* MSGameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGameStatus.swift; sourceTree = "<group>"; };
+		E401EDE62BB433E80008A980 /* MSGameAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGameAlertType.swift; sourceTree = "<group>"; };
+		E401EDE82BB458140008A980 /* MSUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSUtils.swift; sourceTree = "<group>"; };
 		E42E84CF2BB317D900280DB3 /* Minesweeper 3D debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minesweeper 3D debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42E84D22BB317D900280DB3 /* Minesweeper_3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minesweeper_3DApp.swift; sourceTree = "<group>"; };
 		E42E84D62BB317DA00280DB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,12 +95,22 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
-		E401EDDC2BB41FEB0008A980 /* Views */ = {
+		E401EDDC2BB41FEB0008A980 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E42E85182BB3372300280DB3 /* MSSettingsImage.swift */,
 				E401EDDD2BB420100008A980 /* MSImageButton.swift */,
 			);
-			path = Views;
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E401EDDF2BB432690008A980 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				E401EDE02BB432800008A980 /* MSGameView.swift */,
+				E401EDE22BB432DF0008A980 /* MSGameVM.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		E42E84C62BB317D900280DB3 = {
@@ -118,7 +138,7 @@
 				E42E84E32BB31BA900280DB3 /* Modules */,
 				E42E84D92BB317DA00280DB3 /* Preview Content */,
 				E42E84E22BB3184300280DB3 /* Resources */,
-				E401EDDC2BB41FEB0008A980 /* Views */,
+				E401EDDC2BB41FEB0008A980 /* Components */,
 			);
 			path = "Minesweeper 3D";
 			sourceTree = "<group>";
@@ -153,6 +173,7 @@
 		E42E84E32BB31BA900280DB3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				E401EDDF2BB432690008A980 /* Game */,
 				E42E84FD2BB329EA00280DB3 /* Settings */,
 				E42E84E42BB31BB900280DB3 /* Main */,
 			);
@@ -175,6 +196,7 @@
 				E42E85042BB32D6300280DB3 /* MSConstants.swift */,
 				E42E84E82BB31E1E00280DB3 /* MSLogger.swift */,
 				E42E84F62BB3264500280DB3 /* MSRealmManager.swift */,
+				E401EDE82BB458140008A980 /* MSUtils.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -182,7 +204,6 @@
 		E42E84FD2BB329EA00280DB3 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				E42E85182BB3372300280DB3 /* MSSettingsImage.swift */,
 				E42E85062BB32E6A00280DB3 /* MSSettingsView.swift */,
 				E42E85082BB32E8E00280DB3 /* MSSettingsVM.swift */,
 			);
@@ -197,6 +218,8 @@
 				E42E850A2BB335F300280DB3 /* Language */,
 				E42E850F2BB3365800280DB3 /* MSNavigations.swift */,
 				E42E85002BB32A1800280DB3 /* MSSettings.swift */,
+				E401EDE42BB433070008A980 /* MSGameStatus.swift */,
+				E401EDE62BB433E80008A980 /* MSGameAlertType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -299,23 +322,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				E42E84EF2BB3250F00280DB3 /* MSTexts.swift in Sources */,
+				E401EDE72BB433E80008A980 /* MSGameAlertType.swift in Sources */,
 				E42E850E2BB3361800280DB3 /* MSLanguageType.swift in Sources */,
 				E42E85152BB336D900280DB3 /* MSSymbol.swift in Sources */,
 				E42E85052BB32D6300280DB3 /* MSConstants.swift in Sources */,
 				E401EDDE2BB420100008A980 /* MSImageButton.swift in Sources */,
 				E42E850C2BB3360500280DB3 /* MSLanguageDescription.swift in Sources */,
+				E401EDE32BB432DF0008A980 /* MSGameVM.swift in Sources */,
 				E42E85172BB336F900280DB3 /* MSSysImg.swift in Sources */,
 				E42E84D32BB317D900280DB3 /* Minesweeper_3DApp.swift in Sources */,
 				E42E84E72BB31DAF00280DB3 /* MSAppState.swift in Sources */,
 				E42E85032BB32B6300280DB3 /* MSLanguage.swift in Sources */,
+				E401EDE52BB433070008A980 /* MSGameStatus.swift in Sources */,
 				E42E84E92BB31E1E00280DB3 /* MSLogger.swift in Sources */,
 				E42E85012BB32A1800280DB3 /* MSSettings.swift in Sources */,
 				E42E84ED2BB3224000280DB3 /* MSMainVM.swift in Sources */,
 				E401EDDB2BB41C380008A980 /* RealmSettings.swift in Sources */,
 				E42E84F72BB3264500280DB3 /* MSRealmManager.swift in Sources */,
 				E42E85092BB32E8E00280DB3 /* MSSettingsVM.swift in Sources */,
+				E401EDE92BB458140008A980 /* MSUtils.swift in Sources */,
 				E42E84EB2BB31F2900280DB3 /* MSMainView.swift in Sources */,
 				E42E85102BB3365800280DB3 /* MSNavigations.swift in Sources */,
+				E401EDE12BB432800008A980 /* MSGameView.swift in Sources */,
 				E42E85192BB3372300280DB3 /* MSSettingsImage.swift in Sources */,
 				E42E85072BB32E6A00280DB3 /* MSSettingsView.swift in Sources */,
 				E42E85132BB336C200280DB3 /* MSImages.swift in Sources */,
