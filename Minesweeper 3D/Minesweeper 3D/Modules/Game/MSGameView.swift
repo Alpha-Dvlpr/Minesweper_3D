@@ -24,7 +24,21 @@ struct MSGameView: View {
                 )
                 Spacer()
                 #endif
-                EmptyView()
+                Spacer()
+                VStack(spacing: MSConstants.cellSpacing * 4) {
+                    horizontalHintView(with: gameVM.getHints(for: .top))
+                    MSBoardDivider(orientation: .horizontal)
+                    HStack(spacing: MSConstants.cellSpacing * 4) {
+                        verticalHintView(with: gameVM.getHints(for: .left))
+                        MSBoardDivider(orientation: .vertical)
+                        Spacer()
+                        MSBoardDivider(orientation: .vertical)
+                        verticalHintView(with: gameVM.getHints(for: .right))
+                    }
+                    MSBoardDivider(orientation: .horizontal)
+                    horizontalHintView(with: gameVM.getHints(for: .bottom))
+                }
+                Spacer()
                 MSBoardDivider(orientation: .horizontal)
                 actionsView()
             }
@@ -145,5 +159,29 @@ private extension MSGameView {
             .frame(width: 60, height: 60)
             .aspectRatio(1.0, contentMode: .fit)
             .foregroundStyle(gameVM.actionsEnabled ? .black : .gray)
+    }
+    
+    func verticalHintView(with cells: [Int]) -> some View {
+        VStack(
+            alignment: .center,
+            spacing: MSConstants.cellSpacing
+        ) {
+//            ForEach((0..<cells.count), id: \.self) { index in
+//                let cell = cells[index]
+//                CellVC(cell: cell) { _ in self.callback() }
+//            }
+        }
+    }
+    
+    func horizontalHintView(with cells: [Int]) -> some View {
+        HStack(
+            alignment: .center,
+            spacing: MSConstants.cellSpacing
+        ) {
+//            ForEach((0..<cells.count), id: \.self) { index in
+//                let cell = cells[index]
+//                CellVC(cell: cell) { _ in self.callback() }
+//            }
+        }
     }
 }

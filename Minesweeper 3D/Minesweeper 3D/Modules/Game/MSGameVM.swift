@@ -27,10 +27,14 @@ class MSGameVM: ObservableObject {
         }
     }
     
-    // MARK: - Actions
+    // MARK: - Board And Game Actions
     func timerAction() { gameTime += gameStatus == .running ? 1 : 0 }
     func closeAction() { showCloseAlert = true }
     func menuAction() { showActionSheet = true }
+    
+    func printCurrentFace() {
+        
+    }
     
     func pauseAction() {
         switch gameStatus {
@@ -40,10 +44,27 @@ class MSGameVM: ObservableObject {
         }
     }
     
-    func printCurrentFace() {
+    func newGame() { }
+    
+    func restartGame() { }
+    
+    func saveGame() { }
+    
+    // MARK: - Hints
+    func getHints(for position: MSHintPosition) -> [Int] {
+        switch position {
+        case .top: return getTopHints()
+        case .bottom: return getBottomHints()
+        case .left: return getLeftHints()
+        case .right: return getRightHints()
+        }
+    }
+    
+    func hintRowAction() {
         
     }
     
+    // MARK: - Bottom Actions
     func actionButtonTapped(_ action: MSAction) {
         guard actionsEnabled else { return }
         
@@ -53,16 +74,28 @@ class MSGameVM: ObservableObject {
         case .mine: handleMineAction()
         }
     }
-    
-    func newGame() { }
-    
-    func restartGame() { }
-    
-    func saveGame() { }
 }
 
 private extension MSGameVM {
     
+    // MARK: - Hints
+    func getTopHints() -> [Int] {
+        return []
+    }
+    
+    func getBottomHints() -> [Int] {
+        return []
+    }
+    
+    func getLeftHints() -> [Int] {
+        return []
+    }
+    
+    func getRightHints() -> [Int] {
+        return []
+    }
+    
+    // MARK: - Bottom Actions
     func handleNumberAction() {
         
     }

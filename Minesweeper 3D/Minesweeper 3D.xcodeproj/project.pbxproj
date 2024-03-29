@@ -17,6 +17,7 @@
 		E41FA0F52BB753C900068A94 /* MSLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41FA0F42BB753C900068A94 /* MSLoadingView.swift */; };
 		E41FA0F72BB75ABE00068A94 /* MSAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41FA0F62BB75ABE00068A94 /* MSAction.swift */; };
 		E41FA0F92BB75C0300068A94 /* MSBoardDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41FA0F82BB75C0300068A94 /* MSBoardDivider.swift */; };
+		E41FA0FB2BB7606B00068A94 /* MSHintPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41FA0FA2BB7606B00068A94 /* MSHintPosition.swift */; };
 		E42E84D32BB317D900280DB3 /* Minesweeper_3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84D22BB317D900280DB3 /* Minesweeper_3DApp.swift */; };
 		E42E84D72BB317DA00280DB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E84D62BB317DA00280DB3 /* Assets.xcassets */; };
 		E42E84DB2BB317DA00280DB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E84DA2BB317DA00280DB3 /* Preview Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		E41FA0F42BB753C900068A94 /* MSLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSLoadingView.swift; sourceTree = "<group>"; };
 		E41FA0F62BB75ABE00068A94 /* MSAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSAction.swift; sourceTree = "<group>"; };
 		E41FA0F82BB75C0300068A94 /* MSBoardDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSBoardDivider.swift; sourceTree = "<group>"; };
+		E41FA0FA2BB7606B00068A94 /* MSHintPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSHintPosition.swift; sourceTree = "<group>"; };
 		E42E84CF2BB317D900280DB3 /* Minesweeper 3D debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minesweeper 3D debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42E84D22BB317D900280DB3 /* Minesweeper_3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minesweeper_3DApp.swift; sourceTree = "<group>"; };
 		E42E84D62BB317DA00280DB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				E401EDE42BB433070008A980 /* MSGameStatus.swift */,
 				E401EDE62BB433E80008A980 /* MSGameAlertType.swift */,
 				E41FA0F62BB75ABE00068A94 /* MSAction.swift */,
+				E41FA0FA2BB7606B00068A94 /* MSHintPosition.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E42E84EF2BB3250F00280DB3 /* MSTexts.swift in Sources */,
+				E41FA0FB2BB7606B00068A94 /* MSHintPosition.swift in Sources */,
 				E401EDE72BB433E80008A980 /* MSGameAlertType.swift in Sources */,
 				E41FA0F92BB75C0300068A94 /* MSBoardDivider.swift in Sources */,
 				E42E850E2BB3361800280DB3 /* MSLanguageType.swift in Sources */,
