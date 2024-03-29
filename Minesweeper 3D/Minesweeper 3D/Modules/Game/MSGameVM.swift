@@ -40,6 +40,10 @@ class MSGameVM: ObservableObject {
         }
     }
     
+    func printCurrentFace() {
+        
+    }
+    
     func newGame() { }
     
     func restartGame() { }

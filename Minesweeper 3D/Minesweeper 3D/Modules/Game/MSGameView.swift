@@ -15,8 +15,19 @@ struct MSGameView: View {
     var closeCallback: ((Error?) -> Void)?
     
     var body: some View {
-        VStack {
-            
+        ZStack {
+            VStack {
+                #if DEBUG
+                Button(
+                    action: { gameVM.printCurrentFace() },
+                    label: { Text("print face").foregroundStyle(.red) }
+                )
+                Spacer()
+                #endif
+            }
+            if gameVM.gameStatus == .generating {
+                MSLoadingView().frame(width: 100, height: 100)
+            }
         }
         .onReceive(gameVM.timer) { _ in gameVM.timerAction() }
         .navigationTitle(gameVM.stringTime)
