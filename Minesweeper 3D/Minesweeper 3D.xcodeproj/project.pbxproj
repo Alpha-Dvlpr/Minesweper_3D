@@ -15,6 +15,8 @@
 		E401EDE72BB433E80008A980 /* MSGameAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDE62BB433E80008A980 /* MSGameAlertType.swift */; };
 		E401EDE92BB458140008A980 /* MSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401EDE82BB458140008A980 /* MSUtils.swift */; };
 		E41FA0F52BB753C900068A94 /* MSLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41FA0F42BB753C900068A94 /* MSLoadingView.swift */; };
+		E41FA0F72BB75ABE00068A94 /* MSAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41FA0F62BB75ABE00068A94 /* MSAction.swift */; };
+		E41FA0F92BB75C0300068A94 /* MSBoardDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41FA0F82BB75C0300068A94 /* MSBoardDivider.swift */; };
 		E42E84D32BB317D900280DB3 /* Minesweeper_3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42E84D22BB317D900280DB3 /* Minesweeper_3DApp.swift */; };
 		E42E84D72BB317DA00280DB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E84D62BB317DA00280DB3 /* Assets.xcassets */; };
 		E42E84DB2BB317DA00280DB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E84DA2BB317DA00280DB3 /* Preview Assets.xcassets */; };
@@ -50,6 +52,8 @@
 		E401EDE62BB433E80008A980 /* MSGameAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGameAlertType.swift; sourceTree = "<group>"; };
 		E401EDE82BB458140008A980 /* MSUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSUtils.swift; sourceTree = "<group>"; };
 		E41FA0F42BB753C900068A94 /* MSLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSLoadingView.swift; sourceTree = "<group>"; };
+		E41FA0F62BB75ABE00068A94 /* MSAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSAction.swift; sourceTree = "<group>"; };
+		E41FA0F82BB75C0300068A94 /* MSBoardDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSBoardDivider.swift; sourceTree = "<group>"; };
 		E42E84CF2BB317D900280DB3 /* Minesweeper 3D debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minesweeper 3D debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42E84D22BB317D900280DB3 /* Minesweeper_3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minesweeper_3DApp.swift; sourceTree = "<group>"; };
 		E42E84D62BB317DA00280DB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 				E42E85182BB3372300280DB3 /* MSSettingsImage.swift */,
 				E401EDDD2BB420100008A980 /* MSImageButton.swift */,
 				E41FA0F42BB753C900068A94 /* MSLoadingView.swift */,
+				E41FA0F82BB75C0300068A94 /* MSBoardDivider.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				E42E85002BB32A1800280DB3 /* MSSettings.swift */,
 				E401EDE42BB433070008A980 /* MSGameStatus.swift */,
 				E401EDE62BB433E80008A980 /* MSGameAlertType.swift */,
+				E41FA0F62BB75ABE00068A94 /* MSAction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,11 +332,13 @@
 			files = (
 				E42E84EF2BB3250F00280DB3 /* MSTexts.swift in Sources */,
 				E401EDE72BB433E80008A980 /* MSGameAlertType.swift in Sources */,
+				E41FA0F92BB75C0300068A94 /* MSBoardDivider.swift in Sources */,
 				E42E850E2BB3361800280DB3 /* MSLanguageType.swift in Sources */,
 				E42E85152BB336D900280DB3 /* MSSymbol.swift in Sources */,
 				E42E85052BB32D6300280DB3 /* MSConstants.swift in Sources */,
 				E401EDDE2BB420100008A980 /* MSImageButton.swift in Sources */,
 				E42E850C2BB3360500280DB3 /* MSLanguageDescription.swift in Sources */,
+				E41FA0F72BB75ABE00068A94 /* MSAction.swift in Sources */,
 				E401EDE32BB432DF0008A980 /* MSGameVM.swift in Sources */,
 				E42E85172BB336F900280DB3 /* MSSysImg.swift in Sources */,
 				E42E84D32BB317D900280DB3 /* Minesweeper_3DApp.swift in Sources */,

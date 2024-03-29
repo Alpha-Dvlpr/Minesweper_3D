@@ -11,9 +11,9 @@ class MSGameVM: ObservableObject {
     
     @Published var gameStatus: MSGameStatus = .generating
     @Published var gameTime: Int = 0
+    @Published var actionsEnabled: Bool = false
     @Published var showActionSheet: Bool = false
     @Published var showCloseAlert: Bool = false
-//    @Published var showRanksAlert: Bool = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var stringTime: String { return MSUtils.getStringTime(seconds: gameTime) }
@@ -27,7 +27,7 @@ class MSGameVM: ObservableObject {
         }
     }
     
-    // MARK: - Button Actions
+    // MARK: - Actions
     func timerAction() { gameTime += gameStatus == .running ? 1 : 0 }
     func closeAction() { showCloseAlert = true }
     func menuAction() { showActionSheet = true }
@@ -44,11 +44,34 @@ class MSGameVM: ObservableObject {
         
     }
     
+    func actionButtonTapped(_ action: MSAction) {
+        guard actionsEnabled else { return }
+        
+        switch action {
+        case .number: handleNumberAction()
+        case .flag: handleFlagAction()
+        case .mine: handleMineAction()
+        }
+    }
+    
     func newGame() { }
     
     func restartGame() { }
     
     func saveGame() { }
+}
+
+private extension MSGameVM {
     
-//    func saveRank() { }
+    func handleNumberAction() {
+        
+    }
+    
+    func handleFlagAction() {
+        
+    }
+    
+    func handleMineAction() {
+        
+    }
 }

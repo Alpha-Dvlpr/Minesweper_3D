@@ -24,6 +24,9 @@ struct MSGameView: View {
                 )
                 Spacer()
                 #endif
+                EmptyView()
+                MSBoardDivider(orientation: .horizontal)
+                actionsView()
             }
             if gameVM.gameStatus == .generating {
                 MSLoadingView().frame(width: 100, height: 100)
@@ -113,5 +116,34 @@ private extension MSGameView {
     func close(_ error: Error? = nil) {
         closeCallback?(nil)
         dismiss()
+    }
+    
+    func actionsView() -> some View {
+        HStack(spacing: 15) {
+            Spacer().frame(width: 30)
+            HStack(spacing: 20) {
+                Button(
+                    action: { gameVM.actionButtonTapped(.number) },
+                    label: { getActionImage(.numbers(1)) }
+                )
+                Button(
+                    action: { gameVM.actionButtonTapped(.flag) },
+                    label: { getActionImage(.symbols(.flag)) }
+                )
+                Button(
+                    action: { gameVM.actionButtonTapped(.mine) },
+                    label: { getActionImage(.symbols(.mine)) }
+                )
+            }
+            Spacer().frame(width: 30)
+        }
+    }
+    
+    func getActionImage(_ image: MSImages) -> some View {
+        return image.image
+            .resizable()
+            .frame(width: 60, height: 60)
+            .aspectRatio(1.0, contentMode: .fit)
+            .foregroundStyle(gameVM.actionsEnabled ? .black : .gray)
     }
 }
